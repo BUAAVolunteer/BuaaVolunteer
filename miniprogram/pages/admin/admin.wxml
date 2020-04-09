@@ -1,0 +1,15 @@
+<view class="padding flex flex-direction">
+  <navigator open-type="navigate" hover-class='none' url="../list/list" class="cu-btn bg-blue lg"> 志愿招募预告</navigator>
+</view>
+<view class="padding flex flex-direction">
+  <navigator open-type="navigate" hover-class='none' url="../comment/comment" class="cu-btn bg-green lg">审核志愿者反馈</navigator>
+</view>
+<view class="padding flex flex-direction">
+  <navigator open-type="navigate" hover-class='none' url="../score/score" class="cu-btn bg-pink lg">志愿积分管理</navigator>
+</view>
+<view class="padding flex flex-direction">
+  <navigator open-type="navigate" hover-class='none' url="../add/add" class="cu-btn bg-cyan lg">缺勤者处理</navigator>
+</view>
+<view class="padding flex flex-direction">
+  <button class="cu-btn block line-black lg" bindtap="download">志愿者记录下载</button>
+</view>

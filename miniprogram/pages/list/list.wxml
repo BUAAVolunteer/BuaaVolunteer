@@ -1,0 +1,65 @@
+<view class="bg" style="opacity:{{0.2}}" >
+    <image style="height:111%;" src='../../image/shu.jpg' class="bg-image"/>
+</view>
+<view class="padding flex flex-direction add-but">
+  <button class="cu-btn block line-black lg" style="background-color: var(--cyan);color: white;" bindtap="add">创建一个新志愿</button>
+</view>
+<view style="display:flex;justify-content:center">
+	<image class="title-img" src="../../image/volunteerlist.png" />
+</view>
+<scroll-view scroll-y="{{true}}" class="block scroll-view">
+	
+	<view
+	 wx:for="{{picker}}"
+	 wx:for-item="items"
+	 wx:key="id"
+	 class="items-box"
+	>
+		<view class="items-title" id="{{items.id}}" bindtap="openbutton">
+			<image wx:if="{{items.date>=currenDate && items.edit}}" class="items-titleimg" src="../../icons/yes.png" />
+			<image wx:elif="{{items.date>=currenDate && !items.edit}}" class="items-titleimg" src="../../icons/warning.png" />
+			<image wx:else class="items-titleimg" src="../../icons/stop.png" />
+			{{items.title}}
+			<view class="items-titleimg2" id="{{items.id}}" data-id="{{items.id}}" bindtap="openconfirm">
+				时长确认
+			</view>
+		</view>
+		
+		<view wx:if="{{items.checked}}" class="items-button">
+			<!--按钮一-->
+			<view class="items" bind:tap="opentextarea" id="{{items.id}}">
+				<!--图片-->
+				<image class="items-img" src="../../icons/detail.png" />
+				<!--文字-->
+				<view class="items-text">
+					详细信息
+				</view>
+			</view>
+			
+
+			<!--按钮二-->
+			<view class="items" bind:tap="openedit" id="{{items.id}}">
+				<!--图片-->
+				<image class="items-img" src="../../icons/edit.png" />
+				<!--文字-->
+				<view class="items-text">
+					编辑表单
+				</view>
+			</view>
+
+			<!--按钮三-->
+			<view class="items" bind:tap="opendown" id="{{items.id}}">
+				<!--图片-->
+				<image class="items-img" src="../../icons/down.png" />
+				<!--文字-->
+				<view class="items-text">
+					导出数据
+				</view>
+			</view>
+
+		</view>
+
+	</view>
+</scroll-view>
+
+

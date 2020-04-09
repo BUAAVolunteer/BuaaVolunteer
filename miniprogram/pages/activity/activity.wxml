@@ -1,0 +1,36 @@
+<swiper
+ class="card-swiper {{DotStyle?'square-dot':'round-dot'}}"
+ indicator-dots="true"
+ circular="true"
+ autoplay="true"
+ interval="5000"
+ duration="500"
+ indicator-color="#8799a3"
+ indicator-active-color="#0081ff"
+>
+	<swiper-item wx:for="{{list}}">
+		<view class="swiper-item">
+			<image src="{{item.image}}" mode="aspectFill" />
+		</view>
+	</swiper-item>
+</swiper>
+
+<scroll-view scroll-y="{{true}}">
+	<view class="kind-list">
+		<view
+		 wx:for="{{list}}"
+		 wx:for-item="x"
+		 wx:for-index="i"
+		 wx:key="{{i}}"
+		>
+			<navigator url="../push/push?id={{x.url}}" class="kind-list-item">
+				<view class="kind-list-box">
+					<view class="kind-list-text">{{x.title}}</view>
+					<view class="kind-list-text-small">蓝小咕@北航蓝天志愿者协会</view>
+				</view>
+				<image mode="scaleToFill" class="kind-list-img" src="{{x.image}}" />
+			</navigator>
+		</view>
+	</view>
+</scroll-view>
+

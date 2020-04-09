@@ -1,0 +1,72 @@
+<!-- 下滑刷新块 -->
+<list
+ class="list"
+ refresh-loading="{{refreshLoading}}"
+ loading="{{loading}}"
+ bindrefresh="initList"
+ bindloadmore="loadmore"
+>
+	<view class='reports-container'>
+		<view class="page-top">
+			<view
+			 class="block"
+			 wx:for="{{volunteer_list}}"
+			 wx:for-item="items"
+			 id="{{items.cnt}}"
+			 bindtap="opendetail"
+			>
+				<!--
+				<text wx:if="{{currenDate<items.date || currenTime<items.time}}">预告</text>
+				<text wx:elif="{{currenDate == items.date && currenTime>=items.time}}">招募</text>
+				-->
+				<!--图片组件-->
+				<view class="items">
+					<!--预告-->
+					<image wx:if="{{currenDate<items.date || currenTime<items.time}}" class="items-pic" src='cloud://buaalx-w5aor.6275-buaalx-w5aor-1300053277/volunteer-pre//{{items.title}}.png' />
+					<!--招募-->
+					<image wx:elif="{{currenDate == items.date && currenTime>=items.time}}" class="items-pic" src='cloud://buaalx-w5aor.6275-buaalx-w5aor-1300053277/volunteer-onshow/{{items.title}}.png' />
+				</view>
+			</view>
+		</view>
+
+	</view>
+</list>
+<!--阴影-->
+<view class="page-mask {{open ? '' : 'page-mask-show'}}" bindtap="offcanvas" />
+<!--悬浮窗-->
+<view class="open-page {{open ? 'page-state' : 'page-state-hide'}}">
+	<view class="center" style="height:111rpx;">
+		<text class="top-date">本志愿将于\n{{volunteer_list[id].date}}日{{volunteer_list[id].time}}\n发布招募</text>
+	</view>
+	<scroll-view scroll-y="{{true}}" class="middle">
+		<text class="items-title">○ 活动时间：</text>
+		<text class="texts" >\n{{volunteer_list[id].textarea}}\n</text>
+		<text class="items-title">○ 活动地点：</text>
+		<text class="texts">\n{{volunteer_list[id].place}}\n</text>
+		<text class="items-title">○ 活动内容：</text>
+		<text class="texts">\n{{volunteer_list[id].detail}}</text>
+		<text class="items-title">○ 招募人数：</text>
+		<text class="texts">\n{{volunteer_list[id].people}}</text>
+		<text class="items-title">○ 志愿保障：</text>
+		<text class="texts">\n{{volunteer_list[id].assure}}</text>
+		<text class="items-title">○ 特别提醒：</text>
+		<text class="texts">\n{{volunteer_list[id].require}}</text>
+		<text class="items-title">○ 负责人联系方式：</text>
+		<text class="texts">\n{{volunteer_list[id].response}}</text>
+	</scroll-view>
+	<view class="bottom-but">
+		<!--currenDate是服务器日期，currenTime是服务器时间-->
+		<!--volunteer_list[id].xxx是当前点击的志愿项目的xxx-->
+		<!--admin是管理员权限-->
+		<button wx:if="{{currenDate<volunteer_list[id].date || currenTime<volunteer_list[id].time}}" class="cu-btn bg-grey" hover-class="none">
+			<text class="button-text">等待发布</text>
+		</button>
+		<button wx:elif="{{currenDate == volunteer_list[id].date && currenTime>=volunteer_list[id].time || admin}}" class="cu-btn bg-cyan" bindtap="signup">
+			<text class="button-text">立即报名</text>
+		</button>
+		<button class="cu-btn bg-blue" bindtap="program_open">
+			<text class="button-text">更多信息</text>
+		</button>
+	</view>
+</view>
+

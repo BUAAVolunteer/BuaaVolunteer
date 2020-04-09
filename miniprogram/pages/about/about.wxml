@@ -1,0 +1,147 @@
+<view class="top">
+    <view style="margin-bottom:20rpx;" >
+
+        <!--头像组件-->
+        <view class="center">
+            <button bindtap="program_open" class="userinfo-avatar">
+              <open-data wx:if="{{current==0}}" type="userAvatarUrl"></open-data>
+              <image wx:if="{{current==1}}" class="name-image" mode="widthFix" src="cloud://volunteer-platform-1v92i.766f-volunteer-platform-1v92i-1300053277/蓝小咕.png" />
+            </button> 
+        </view>
+
+        <!--姓名学号组件-->
+        <view  wx:if="{{register==0}}"  class="center" style="height:111rpx;">
+            <text  class="title-name">{{person_list[0].name}}\r\n学号：{{person_list[0].personnum}}</text>
+        </view>
+
+        <!--蓝小咕入口-->
+        <navigator wx:if="{{register==0}}" open-type="redirect" wx:if="{{admin==1}}" open-type="navigate" hover-class='none' url="../admin/admin">
+            <image class="name-image-admin" mode="widthFix" src="../../image/up.png" />
+        </navigator>
+
+        <!--普通蓝小咕-->
+        <view wx:if="{{register==0}}" wx:if="{{admin==0}}">
+            <image class="name-image-admin" mode="widthFix" src="../../image/up.png" />
+        </view>
+
+        <!--个性签名框-->
+        <view wx:if="{{register==0}}" class="center">
+            <view class="kind-list-item" >
+                <view class="text-align">
+                    <text >{{person_list[0].text}}</text>
+                </view>
+            </view>
+        </view>
+        
+
+    </view>
+</view>
+
+<!--虚假的分割线组件-->
+<view wx:if="{{register==0}}" class="separate" style=""></view>
+
+<!--中间块-->
+<view wx:if="{{register==0}}" class="middle">
+
+    <!--志愿历史组件-->
+    <navigator url="../project/project" hover-class="none" class="center">
+        <view  class="middle-item">
+            <!--小图标-->
+            <image mode="widthFix" class="middle-image1" src="../../image/shizhong.png" />
+            <!--文字+颜色-->
+            <view  class="text-left">
+                <text class="text-mid">志愿历史：</text>
+                <text class="middle-font text-orange">{{person_list[0].duration}}\t小时</text>
+            </view>
+
+            <!--右侧小三角-->
+            <image class="jinru" src="../../image/jinru.png" />
+        </view>
+    </navigator>
+
+    <!--志愿积分组件-->
+    <view bindtap="score" class="center">
+        <view class="middle-item">
+            <!--小图标-->
+            <image mode="widthFix" class="middle-image2" src="../../image/star.png" />
+
+            <!--文字+颜色+简单正负判断-->
+            <view class="text-left">
+                <text class="text-mid">志愿积分：</text>
+                <text wx:if="{{totalscore>=0}}" class="middle-font text-blue">+</text>
+                <text wx:if="{{totalscore>=0}}" class="middle-font text-blue">{{totalscore}}\t分</text>
+                <text wx:elif="{{totalscore<0}}" class="middle-font text-red">{{totalscore}}\t分</text>
+            </view>
+
+            <!--右侧小三角-->
+            <image class="jinru" src="../../image/jinru.png" />
+        </view>
+        
+    </view>
+
+    <!--志愿地图组件-->
+    <navigator hover-class="none" url="../map/map" class="map center" >
+        <image class="middle-item-map" mode="widthFix" style="height:135.87rpx;width:706.52rpx;" src="../../image/map.png" />
+    </navigator>
+
+</view>
+
+<!--虚假的分割线2号+黑色上边框-->
+<view wx:if="{{register==0}}" class="border-top separate"></view>
+
+
+<view wx:if="{{register==0}}" class="bottom-part">
+<!--小飞机-->
+<button hover-class="none" bindtap="surprise" class="fly">
+  <image mode="widthFix" src="../../image/fly.png"/>
+</button>
+
+<!--按钮1-->
+<navigator  class="action1" open-type="navigate" url="../person/person" hover-class="navigator-hover">
+    <image class="actionpic" mode="widthFix" src="../../image/action1.png"/>
+    <view class="action-text">
+        编辑资料
+    </view>
+</navigator>
+
+<!--按钮2-->
+<navigator   class="action2" open-type="navigate" url="../us2/us2" hover-class="navigator-hover">
+    <image class="actionpic" mode="widthFix" src="../../image/action2.png"/>
+    <view class="action-text">
+        积分细则
+    </view>
+</navigator>
+
+<!--按钮3-->
+<navigator   class="action3" open-type="navigate" url="../us/us" hover-class="navigator-hover">
+    <image  class="actionpic"mode="widthFix" src="../../image/action3.png">
+    </image>
+    <view class="action-text">
+        点我点我
+    </view>
+</navigator>
+
+<!--底部背景图片-->
+<image  mode="widthFix" class="bottom-img" src="../../image/down.png" />
+</view>
+
+<view wx:if="{{register==1}}" class="no-register" >
+    <view >
+        <text class="no-title">蓝天志愿者协会志愿者信息\n</text>
+        <text class="no-content">还没有成为蓝协志愿者哦\n点击下方按钮完成志愿者注册吧</text>
+    </view>
+    
+    <navigator  class="aaa" open-type="navigate" url="../person/person" hover-class="none">
+        <view class="no-botton">
+            <text class="no-botton-text">点击注册</text>
+        </view>
+    </navigator>
+
+    <view  class="no-separate" style=""></view>
+
+    <image  mode="widthFix" class="no-bottom-img" src="../../image/down.png" />
+
+    <button hover-class="none" bindtap="surprise" class="no-fly">
+        <image mode="widthFix" src="../../image/fly.png"/>
+    </button>
+</view>

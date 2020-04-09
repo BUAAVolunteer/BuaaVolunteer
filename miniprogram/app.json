@@ -1,0 +1,68 @@
+{
+
+    "cloud": true,
+    "pages": [
+        "pages/main/main",
+        "pages/introduction/introduction",
+        "pages/input/input",
+        "pages/detail/detail",
+        "pages/show/show",
+        "pages/about/about",
+        "pages/question/question",
+        "pages/contact/contact",
+        "pages/activity/activity",
+        "pages/project/project",
+        "pages/comment/comment",
+        "pages/volunteer/volunteer",
+        "pages/person/person",
+        "pages/admin/admin",
+        "pages/map/map",
+        "pages/us/us",
+        "pages/score/score",
+        "pages/push/push",
+        "pages/add/add",
+        "pages/us2/us2",
+        "pages/forms/forms",
+        "pages/edit/edit",
+        "pages/list/list",
+        "pages/textarea/textarea",
+        "pages/practice/practice",
+        "pages/signup/signup",
+        "pages/confirm/confirm",
+        "pages/update/update"
+    ],
+    "window": {
+        "backgroundColor": "#F6F6F6",
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#F6F6F6",
+        "navigationBarTitleText": "云开发 QuickStart",
+        "navigationBarTextStyle": "black"
+    },
+    "tabBar": {
+        "color": "#7A7E83",
+        "selectedColor": "#3cc51f",
+        "borderStyle": "black",
+        "backgroundColor": "#ffffff",
+        "list": [{
+                "pagePath": "pages/main/main",
+                "iconPath": "icons/component.png",
+                "selectedIconPath": "icons/component_cur.png",
+                "text": "主页"
+            },
+            {
+                "pagePath": "pages/volunteer/volunteer",
+                "iconPath": "icons/plugin.png",
+                "selectedIconPath": "icons/plugin_cur.png",
+                "text": "志愿招募"
+            },
+            {
+                "pagePath": "pages/about/about",
+                "iconPath": "icons/about.png",
+                "selectedIconPath": "icons/about_cur.png",
+                "text": "我的"
+            }
+        ]
+
+    },
+    "sitemapLocation": "sitemap.json"
+}

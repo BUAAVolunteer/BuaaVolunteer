@@ -1,0 +1,5 @@
+<!--描述文本-->
+<view wx:if="{{forminfo.text.length>0}}" class="form-describe-middle input-all-width">
+	{{forminfo.text}}
+</view>
+

@@ -1,0 +1,151 @@
+view, scroll-view, swiper, button, input, textarea, label, navigator, image {
+  box-sizing: border-box;
+}
+
+page {
+  background-color: white;
+}
+
+.nav-title {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+.logo {
+  position: absolute;
+  top: 334rpx;
+}
+
+.middle-item {
+  box-shadow: 2rpx 5.5rpx 2rpx rgba(0, 0, 0, 0.2);
+  height: 135.87rpx;
+  border-bottom-right-radius: 495.47rpx;
+  border-top-right-radius: 495.47rpx;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.middle1 {
+  margin-top: 92rpx;
+  background-color: #22a2c3;
+  width: 724.64rpx;
+  z-index: 5;
+}
+
+.middle2 {
+  background-color: #5fc1c7;
+  width: 656.64rpx;
+  z-index: 4;
+}
+
+.middle3 {
+  background-color: #f9d770;
+  width: 588.64rpx;
+  z-index: 3;
+}
+
+.middle4 {
+  background-color: #f68c60;
+  width: 520.64rpx;
+  z-index: 2;
+}
+
+.middle5 {
+  background-color: #f07c82;
+  width: 452.64rpx;
+}
+
+.middle-text {
+  font-size: 40rpx;
+  font-family: Microsoft YaHei;
+  color: #464647;
+  margin-left: 25rpx;
+}
+
+.middle-icon {
+  width: 64rpx;
+  height: 64rpx;
+  z-index: 2;
+  margin-left: 30rpx;
+}
+
+.gugugu {
+  height: 240rpx;
+  width: 210rpx;
+  max-width: 100%;
+  position: relative;
+  margin-top: -98rpx;
+  left: 510rpx;
+}
+
+/*指示点总属性*/
+
+swiper .a-swiper-dot {
+  display: inline-block;
+  width: 16rpx;
+  height: 16rpx;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  vertical-align: middle;
+}
+
+swiper[class*="-dot"] .wx-swiper-dots {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+  margin-top: 20rpx;
+}
+
+/*未选中点大小*/
+
+swiper.round-dot .wx-swiper-dot {
+  width: 10px;
+  height: 10px;
+  position: relative;
+  margin: -5rpx 26rpx !important;
+}
+
+/*选中点遮盖大小*/
+
+swiper.round-dot .wx-swiper-dot.wx-swiper-dot-active::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  top: 0rpx;
+  left: 0rpx;
+  right: 0;
+  bottom: 0rpx;
+  margin: auto;
+  background-color: var(--white);
+  border-radius: 20rpx;
+}
+
+/*选中点背景大小*/
+
+swiper.round-dot .wx-swiper-dot.wx-swiper-dot-active {
+  width: 10px;
+  height: 10px;
+}
+
+.screen-swiper {
+  min-height: 375rpx;
+}
+
+.screen-swiper image, .screen-swiper video, .swiper-item image,
+.swiper-item video {
+  width: 84%;
+  display: block;
+  height: 84%;
+  margin-left: 8%;
+  pointer-events: none;
+  border-bottom-left-radius: 7.5%;
+  border-bottom-right-radius: 7.5%;
+}

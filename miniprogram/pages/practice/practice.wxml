@@ -1,0 +1,17 @@
+<view class="right"></view>
+<view>
+    <view wx:for="{{diarydetail}}" wx:for-item="items" class="right-on">
+        <view class="circle">
+            <text>{{items.title}}</text>
+        </view>
+        <view class="content">
+            <view class="date">
+                <text>{{items.date}}</text>
+                <view class="separate" style=""></view>
+            </view>
+            <view class="detail">
+                <text>{{items.text}}</text>
+            </view>
+        </view>
+    </view>
+</view>

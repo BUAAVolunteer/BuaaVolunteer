@@ -1,0 +1,48 @@
+<view class="bg" style="opacity:{{0.2}}">
+	<image style="height:111%;" src='../../image/shu.jpg' class="bg-image" />
+</view>
+
+<scroll-view scroll-y="{{true}}">
+	<view style="width:60%;background-color: var(--greyLight);">
+
+		<view wx:for="{{SignUpList[id].list}}" wx:for-item="items" class="items-content {{open ? '' : 'page-state-hide'}}">
+			<view wx:if="{{FormList[index] != hide1 && FormList[index] != hide2 && FormList[index] != hide3}}" class="title">
+				{{FormList[index]}}
+			</view>
+			<view wx:if="{{FormList[index] != hide1 && FormList[index] != hide2 && FormList[index] != hide3}}" class="text">
+				<view wx:if="{{items}}">
+					{{items}}
+				</view>
+				<view wx:else>
+					此项未提交
+				</view>
+			</view>
+		</view>
+		<view class="bottom-but">
+			<button class="cu-btn bg-blue" bind:tap="next">下一条</button>
+			<button class="cu-btn bg-blue" bindtap="before">上一条</button>
+		</view>
+		<view class="bottom-but">
+			<button class="cu-btn bg-cyan" bind:tap="offcanvas">完成</button>
+			<button class="cu-btn bg-red" data-id="{{items.id}}" bindtap="delete">删除</button>
+		</view>
+	</view>
+	<scroll-view style="height:100%;" scroll-y="{{true}}" class="page-top {{open ? 'page-state' : ''}}">
+		<view
+		 wx:for="{{SignUpList}}"
+		 wx:for-item="items"
+		 wx:key="id"
+		 class="items-box"
+		>
+			<view class="items-title" id="{{items.id}}" bindtap="openbutton">
+				{{items.name}}
+			</view>
+		</view>
+		<view ></view>
+		<view class="padding flex flex-direction add-but">
+			<button class="cu-btn block line-black lg" style="background-color: var(--cyan);color: white;" bindtap="sift">一键筛选</button>
+			<button class="cu-btn block line-black lg" style="background-color: var(--cyan);color: white;" bindtap="download">导出报名数据</button>
+		</view>
+	</scroll-view>
+</scroll-view>
+

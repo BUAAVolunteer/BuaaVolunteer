@@ -1,0 +1,31 @@
+<view class="bg" style="opacity:{{0.2}}" >
+    <image style="height:111%;" src='../../image/shu.jpg' class="bg-image" mode="scaleToFill"/>
+</view>
+<view class="center">
+    <image class="title-img" style="opacity:{{1}}" src="../../image/about1.png" mode="widthFix" lazy-load="false" binderror="" bindload="" />
+</view>
+
+
+<image class="title-img2" src="../../image/about2.png" mode="widthFix" style="opacity:{{1}}"/>
+<view style="text-align:center;margin:40rpx;font-size:35rpx;font-weight:bold;" wx:if="{{volunteer_list.length == 0}}">
+  您还未参加过志愿，快去志愿招募页看看吧！
+</view>
+<view class="item" wx:for="{{volunteer_list}}" >
+    <view style="margin-top:20rpx;" class="padding-xl radius shadow-blur bg-img">
+        <view class="center">
+            <text class="title border-bottom" style="width:400rpx;margin:0;">参与时间：{{item.t}}</text>
+        </view>
+        <text class="title border-bottom-thin">项目名称：{{item.v}}</text>
+        <view class="title border-bottom-thin">
+            <text >志愿得分：</text>
+            <text style="color:var(--orange);">{{item.s}}\t分</text>
+        </view>
+        <view class="title border-bottom-thin">
+            <text >志愿时长：</text>
+            <text style="color:var(--orange);">\t{{item.a}}\th</text>
+        </view>
+    </view>
+</view>
+<view style="text-align:center;margin:40rpx;font-size:25rpx;font-weight:thin;">
+  本记录统计开始时间为：2019-10-27
+</view>
