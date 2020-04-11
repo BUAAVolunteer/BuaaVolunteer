@@ -16,8 +16,9 @@
 	 class="items-box"
 	>
 		<view class="items-title" id="{{items.id}}" bindtap="openbutton">
-			<image wx:if="{{items.date>=currenDate && items.edit}}" class="items-titleimg" src="../../icons/yes.png" />
-			<image wx:elif="{{items.date>=currenDate && !items.edit}}" class="items-titleimg" src="../../icons/warning.png" />
+			<image wx:if="{{items.date > currenDate && items.edit==1 || items.date == currenDate && items.time > currenTime && items.edit==1}}" class="items-titleimg" src="../../icons/yes.png" />
+			<image wx:elif="{{items.date > currenDate && items.edit==0 || items.date == currenDate && items.time > currenTime && items.edit==0}}" class="items-titleimg" src="../../icons/warning.png" />
+			<image wx:elif="{{items.date < currenDate && items.edit==1 || items.date == currenDate && items.time <= currenTime && items.edit==1}}" class="items-titleimg" src="../../icons/working.png" />
 			<image wx:else class="items-titleimg" src="../../icons/stop.png" />
 			{{items.title}}
 			<view class="items-titleimg2" id="{{items.id}}" data-id="{{items.id}}" bindtap="openconfirm">
@@ -26,8 +27,8 @@
 		</view>
 		
 		<view wx:if="{{items.checked}}" class="items-button">
-			<!--按钮一-->
-			<view class="items" bind:tap="opentextarea" id="{{items.id}}">
+			<!--不能打开的按钮一-->
+			<view class="items" bind:tap="warn"  wx:if="{{items.date < currenDate && items.edit==1 || items.date == currenDate && items.time <= currenTime && items.edit==1}}" id="{{items.id}}">
 				<!--图片-->
 				<image class="items-img" src="../../icons/detail.png" />
 				<!--文字-->
@@ -36,9 +37,28 @@
 				</view>
 			</view>
 			
+			<!--按钮一-->
+			<view wx:else class="items" bind:tap="opentextarea" id="{{items.id}}">
+				<!--图片-->
+				<image class="items-img" src="../../icons/detail.png" />
+				<!--文字-->
+				<view class="items-text">
+					详细信息
+				</view>
+			</view>
+
+			<!--不能打开的按钮二-->
+			<view class="items"  bind:tap="warn" wx:if="{{items.date < currenDate && items.edit==1 || items.date == currenDate && items.time <= currenTime && items.edit==1}}" id="{{items.id}}">
+				<!--图片-->
+				<image class="items-img" src="../../icons/edit.png" />
+				<!--文字-->
+				<view class="items-text">
+					编辑表单
+				</view>
+			</view>
 
 			<!--按钮二-->
-			<view class="items" bind:tap="openedit" id="{{items.id}}">
+			<view wx:else class="items" bind:tap="openedit" id="{{items.id}}">
 				<!--图片-->
 				<image class="items-img" src="../../icons/edit.png" />
 				<!--文字-->

@@ -21,7 +21,8 @@ Page({
         refreshLoading: false, //下拉刷新页面的loading
         currenDate: "",
         currenTime: "",
-        admin: 0
+        admin: 0,
+        signup: false
     },
 
     /**
@@ -245,6 +246,9 @@ Page({
                 wx.showToast({
                   title: '请勿重复报名',
                   icon: 'none'
+                })
+                that.setData({
+                    signup:true
                 })
                 return
             }

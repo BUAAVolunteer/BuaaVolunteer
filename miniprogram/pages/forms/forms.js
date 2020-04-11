@@ -374,7 +374,7 @@ Page({
                 })
                 wx.showModal({
                     title: '上传信息错误',
-                    content: '请重新填写或截图反馈管理员',
+                    content: '请检查网络或重新提交',
                     showCancel: false
                 })
                 uplist = [];

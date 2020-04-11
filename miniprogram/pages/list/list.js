@@ -59,6 +59,7 @@ Page({
                     let pickitem = {
                         title: res.result.data[i].title,
                         date: res.result.data[i].date,
+                        time : res.result.data[i].time,
                         qqnum: res.result.data[i].qqnum,
                         checked: false,
                         edit: res.result.data[i].check,
@@ -77,6 +78,13 @@ Page({
         })
 
     },
+    warn: function() {
+        wx.showModal({
+            title: '暂无法操作',
+            content: '志愿已开始招募，等待招募结束后，方可更改',
+            showCancel: false
+        })
+    },
     openbutton: function(e) {
         console.log(e.target.id)
         for (var i = 0; i < max; i++) {
@@ -91,8 +99,6 @@ Page({
                 })
             }
         }
-
-
     },
     openconfirm: function(e) {
         console.log(e)

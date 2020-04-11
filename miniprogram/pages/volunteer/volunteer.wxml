@@ -55,6 +55,9 @@
 		<!--currenDate是服务器日期，currenTime是服务器时间-->
 		<!--volunteer_list[id].xxx是当前点击的志愿项目的xxx-->
 		<!--admin是管理员权限-->
+		<button wx:if="{{signup}}" class="cu-btn bg-grey" hover-class="none">
+			<text class="button-text">无法重填</text>
+		</button>
 		<button wx:if="{{currenDate<volunteer_list[id].date || currenTime<volunteer_list[id].time}}" class="cu-btn bg-grey" hover-class="none">
 			<text class="button-text">等待发布</text>
 		</button>
