@@ -14,11 +14,8 @@
 			 wx:for-item="items"
 			 id="{{items.cnt}}"
 			 bindtap="opendetail"
+			 wx:key="index"
 			>
-				<!--
-				<text wx:if="{{currenDate<items.date || currenTime<items.time}}">预告</text>
-				<text wx:elif="{{currenDate == items.date && currenTime>=items.time}}">招募</text>
-				-->
 				<!--图片组件-->
 				<view class="items">
 					<!--预告-->

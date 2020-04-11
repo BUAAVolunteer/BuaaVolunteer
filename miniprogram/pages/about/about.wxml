@@ -44,7 +44,7 @@
 <view wx:if="{{register==0}}" class="middle">
 
     <!--志愿历史组件-->
-    <navigator url="../project/project" hover-class="none" class="center">
+    <navigator url="../history/history" hover-class="none" class="center">
         <view  class="middle-item">
             <!--小图标-->
             <image mode="widthFix" class="middle-image1" src="../../image/shizhong.png" />

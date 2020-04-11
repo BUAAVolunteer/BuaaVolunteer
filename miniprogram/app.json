@@ -4,14 +4,13 @@
     "pages": [
         "pages/main/main",
         "pages/introduction/introduction",
-        "pages/input/input",
         "pages/detail/detail",
         "pages/show/show",
         "pages/about/about",
         "pages/question/question",
         "pages/contact/contact",
         "pages/activity/activity",
-        "pages/project/project",
+        "pages/history/history",
         "pages/comment/comment",
         "pages/volunteer/volunteer",
         "pages/person/person",
@@ -27,9 +26,9 @@
         "pages/list/list",
         "pages/textarea/textarea",
         "pages/practice/practice",
-        "pages/signup/signup",
         "pages/confirm/confirm",
-        "pages/update/update"
+        "pages/update/update",
+        "pages/download/download"
     ],
     "window": {
         "backgroundColor": "#F6F6F6",

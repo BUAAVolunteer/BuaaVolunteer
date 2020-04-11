@@ -4,7 +4,7 @@
 <view style="text-align:center;margin:40rpx;font-size:35rpx;font-weight:bold;" wx:if="{{comment_list.length == 0}}">
   暂无反馈信息
 </view>
-<view wx:for="{{comment_list}}">
+<view wx:for="{{comment_list}}" wx:key="index">
   <view class="padding-xl radius shadow-warp bg-white margin">
     <view class="title">项目名称：{{item.title}}</view>
     <view class="title">昵称：{{item.name}}</view>

@@ -166,11 +166,11 @@ Page({
                     let tai = ta[i].name;
                     let tal = parseInt(ta[i].limit) ? parseInt(ta[i].limit) : 0;
                     let tad = parseInt(ta[i].duration) ? parseInt(ta[i].duration) : 0;
-                    console.log(ta[i])
+                    //console.log(ta[i])
                     let det = ta[i].detail ? ta[i].detail : "备注";
                     textd = textd ? textd : "";
-                    console.log(textd)
-                    console.log(det)
+                    //console.log(textd)
+                    //console.log(det)
                     if (limit && duration && tai)
                         textarea = textarea + tai + ' ' + tal + ' ' + tad + '\n';
                     else if (limit && tai)
@@ -196,8 +196,8 @@ Page({
                     })
             }
         }
-        console.log(type, ID)
-        console.log(this.data.formList.formInfo[ID].detail)
+        //console.log(type, ID)
+        //console.log(this.data.formList.formInfo[ID].detail)
     },
     enter: function(e) {
         var type = e.currentTarget.id;
@@ -334,7 +334,7 @@ Page({
                     //confirmColor: 'skyblue', //确定文字的颜色{
                 })
             }
-            console.log(dataitem)
+            //console.log(dataitem)
             data.push(dataitem);
         }
         var addList = 'formList.formInfo[' + ID + '].';
@@ -392,7 +392,7 @@ Page({
                 let tal = parseInt(ta[i].limit) ? parseInt(ta[i].limit) : 0;
                 let tad = parseInt(ta[i].duration) ? parseInt(ta[i].duration) : 0;
                 let det = ta[i].detail ? ta[i].detail : "备注";
-                console.log(textd, det)
+                //console.log(textd, det)
                 if (limit && duration && tai)
                     textarea = textarea + tai + ' ' + tal + ' ' + tad + '\n';
                 else if (limit && tai)
@@ -416,7 +416,7 @@ Page({
                     textd: textd
                 })
         }
-        console.log(that.data.page)
+        //console.log(that.data.page)
         that.setData({
             page: 1 - that.data.page
         })
@@ -424,12 +424,12 @@ Page({
     delete: function(e) {
         var that = this;
         let formInfo = that.data.formList.formInfo;
-        console.log('ID', ID, 'cnt', cnt)
+        //console.log('ID', ID, 'cnt', cnt)
         for (var i = ID + 1; i < cnt; i++)
             formInfo[i].id = formInfo[i].id - 1;
         formInfo.splice(ID, 1);
         var addList = 'formList.formInfo';
-        console.log(formInfo);
+        //console.log(formInfo);
         this.setData({
             [addList]: formInfo,
             checked: false,
@@ -450,7 +450,7 @@ Page({
 
     },
     addAll: function(e) {
-        console.log(e.currentTarget.id);
+        //console.log(e.currentTarget.id);
 
         var additem = {
             "label": "",

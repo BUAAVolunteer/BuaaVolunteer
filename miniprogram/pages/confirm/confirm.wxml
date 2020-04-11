@@ -31,7 +31,7 @@
 		 class="middle-item2 flex"
 		 wx:for-item="items"
 		 wx:for="{{volunteer_list}}"
-		 wx:key
+		 wx:key="index"
 		>
 			<view class="{{index%2==0 ? 'bg-white' : 'bg-cyan'}}" wx:if="{{delete}}" id="{{items.id}}" data-id="{{items.id}}" bindtap="delete">
 				<image class="items-titleimg" src="../../icons/delete.png" />

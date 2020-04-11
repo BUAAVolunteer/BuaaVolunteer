@@ -49,7 +49,7 @@ Page({
             success: function(res) {
                 var a = res.data.reverse()
                 console.log(a)
-                // res.data 包含该记录的数据
+                    // res.data 包含该记录的数据
                 that.setData({
                     list: a
                 })
@@ -60,7 +60,7 @@ Page({
                 wx.hideLoading();
                 wx.showModal({
                     title: '错误',
-                    content: '没有找到记录',
+                    content: '没有找到记录，请检查网络或重启小程序',
                     showCancel: false
                 })
             }

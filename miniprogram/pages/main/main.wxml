@@ -1,19 +1,10 @@
+<!--轮播图-->
 <scroll-view scroll-y="{{true}}" class="scrollPage">
-  <!--
-  应传入的参数，为了避免晃来晃去头晕先删除
-  
-	 circular="true"
-	 autoplay="true"
-	 interval="5000"
-	 duration="500"
-  -->
   <swiper class="screen-swiper round-dot" indicator-dots="true" indicator-color="#8cb2d3" indicator-active-color="#8cb2d3" circular="true" autoplay="true" interval="5000" duration="500">
-    <swiper-item wx:for="{{list}}">
+    <swiper-item wx:for="{{list}}" wx:key="index">
       <image src="{{item.image}}" mode="aspectFill" />
     </swiper-item>
   </swiper>
-
-
 </scroll-view>
 
 <!--logo-->

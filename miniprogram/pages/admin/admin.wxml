@@ -10,6 +10,3 @@
 <view class="padding flex flex-direction">
   <navigator open-type="navigate" hover-class='none' url="../add/add" class="cu-btn bg-cyan lg">缺勤者处理</navigator>
 </view>
-<view class="padding flex flex-direction">
-  <button class="cu-btn block line-black lg" bindtap="download">志愿者记录下载</button>
-</view>

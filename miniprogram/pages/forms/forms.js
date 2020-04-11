@@ -358,11 +358,11 @@ Page({
                 } else {
                     wx.showModal({
                         title: '提交成功',
-                        content: '请加入qq群并留意通知消息',
+                        content: '请留意微信消息，并加入对应的qq群以便志愿开展',
                         showCancel: false,
                         success: function() {
                             wx.redirectTo({
-                                url: '../project/project',
+                                url: '../history/history',
                             })
                         },
                     })

@@ -25,16 +25,14 @@ Page({
             name: 'login',
             data: {},
             success: res => {
+                //获取openid并赋值给全局变量
                 app.globalData.openid = res.result.openid
                 console.log(app.globalData)
-
-
+                    //主页轮播图地址
                 db.collection('main')
                     .get({
                         success: function(res) {
-                            //var a = res.data.reverse()
-                            console.log(res.data)
-                                // res.data 包含该记录的数据
+                            //console.log(res.data)
                             that.setData({
                                 list: res.data
                             })
@@ -45,14 +43,14 @@ Page({
                             wx.hideLoading();
                             wx.showModal({
                                 title: '错误',
-                                content: '没有找到记录',
+                                content: '没有找到记录，请检查网络或重启小程序',
                                 showCancel: false
                             })
                         }
                     })
             },
             fail: err => {
-                console.error('[云函数] [login] 调用失败', err)
+                console.error('[云函数] [login] 调用失败，请检查网络或重启小程序', err)
                 wx.hideLoading()
             }
         })

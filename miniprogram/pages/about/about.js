@@ -138,8 +138,8 @@ Page({
     },
     surprise: function() {
         wx.showModal({
-            title: '版本说明',
-            content: '当前版本:1.0\r\n历届开发者:\r\n志愿活动中心小硬币、小红旗\r\nUI设计:\r\n宣传媒体中心李欣悦\r\n友情支持：\r\nColorUI小程序开源项目',
+            title: '这也许是一个彩蛋',
+            content: '隔壁北邮小程序都5.0了\n不开心！(￢︿̫̿￢☆)',
             showCancel: false,
         })
     },

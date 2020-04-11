@@ -17,7 +17,7 @@
 
 .my_title {
     display: flex;
-    align-itmes: center;
+    align-items: center;
     padding: 10rpx;
     background-color: #ffffff;
 }
@@ -40,14 +40,14 @@
     flex: 1;
     display: flex;
     justify-content: center;
-    align-itmes: center;
+    align-items: center;
 }
 
 .user_icon {
     flex: 2;
     display: flex;
     justify-content: center;
-    align-itmes: center;
+    align-items: center;
 }
 
 .video_wrap {

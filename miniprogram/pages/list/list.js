@@ -130,7 +130,7 @@ Page({
         var picker = that.data.picker;
         var title = picker[ID].title;
         wx.navigateTo({
-            url: '../signup/signup?title=' + picker[ID].title + '&date=' + picker[ID].date + '&qqnum=' + picker[ID].qqnum,
+            url: '../download/download?title=' + picker[ID].title + '&date=' + picker[ID].date + '&qqnum=' + picker[ID].qqnum,
         })
     },
     add: function(e) {

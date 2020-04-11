@@ -1,5 +1,0 @@
-<view class="title-name">{{title}}</view>
-<view style="display:flex;justify-content:center;margin-bottom:20rpx;">
-    <image style="width:600rpx;height:300rpx;" mode="widthFix" src="{{imageSrc}}" />
-</view>
-<view style="margin-bottom:20rpx;margin-left:20rpx;margin-right:20rpx;font-size:30rpx;text-indent:60rpx;text-align: left;" class="padding-xl radius shadow-warp bg-white margin-top">{{text}}</view>
