@@ -34,7 +34,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function() {
-        var that = this
+        let that = this
         db.collection('person').where({
                 _openid: app.globalData.openid,
             })
@@ -70,7 +70,7 @@ Page({
                             })
                         }
                     }
-
+                    that.initList();
                 }
             })
     },
