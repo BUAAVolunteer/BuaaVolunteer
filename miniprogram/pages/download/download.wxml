@@ -24,7 +24,7 @@
 		</view>-->
 		<view class="bottom-but">
 			<button class="cu-btn bg-cyan" bind:tap="offcanvas">完成</button>
-			<button class="cu-btn bg-red" data-id="{{items.id}}" bindtap="delete">删除</button>
+			<!--<button class="cu-btn bg-red" data-id="{{items.id}}" bindtap="delete">删除</button>-->
 		</view>
 	</view>
 	<scroll-view style="height:100%;" scroll-y="{{true}}" class="page-top {{open ? 'page-state' : ''}}">

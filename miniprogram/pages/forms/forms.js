@@ -14,6 +14,7 @@ Page({
      */
     data: {
         title: "",
+        stime: "",
         formList: {},
         loading: false
     },
@@ -22,11 +23,13 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
+        console.log(options.title, options.stime)
         wx.showLoading({
             title: '加载中',
         })
         this.setData({
-            title: options.title
+            title: options.title,
+            stime: options.stime
         })
         var that = this;
         var ti = options.title;
@@ -259,9 +262,11 @@ Page({
                 if (v.type === 'div' || v.type === 'describe')
                     continue;
                 else if (v.type === 'radio' || v.type === 'checkbox') {
-                    limit[0] = limit[0].concat(v.choose[0]);
-                    limit[1] = limit[1].concat(v.choose[1]);
-                    limit[2] = limit[2].concat(v.choose[2]);
+                    if (v.limit) {
+                        limit[0] = limit[0].concat(v.choose[0]);
+                        limit[1] = limit[1].concat(v.choose[1]);
+                        limit[2] = limit[2].concat(v.choose[2]);
+                    }
                     if (v.detail) {
                         for (let i = 0; i < l; i++) {
                             limit[3] = limit[3].concat(den);
@@ -340,6 +345,7 @@ Page({
             name: "uploadData",
             data: {
                 title: that.data.title,
+                stime: that.data.stime,
                 list: uplist,
                 limit: limit
             },

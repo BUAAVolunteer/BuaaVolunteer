@@ -8,7 +8,7 @@
 >
 	<view class='reports-container'>
 		<view class="page-top">
-			<view
+		<view
 			 class="block"
 			 wx:for="{{volunteer_list}}"
 			 wx:for-item="items"
@@ -21,9 +21,10 @@
 					<!--预告-->
 					<image wx:if="{{currenDate<items.date || currenTime<items.time}}" class="items-pic" src='cloud://buaalx-w5aor.6275-buaalx-w5aor-1300053277/volunteer-pre//{{items.title}}.png' />
 					<!--招募-->
-					<image wx:elif="{{currenDate == items.date && currenTime>=items.time}}" class="items-pic" src='cloud://buaalx-w5aor.6275-buaalx-w5aor-1300053277/volunteer-onshow/{{items.title}}.png' />
+					<image wx:elif="{{currenDate > items.date ||currenDate == items.date && currenTime>=items.time}}" class="items-pic" src='cloud://buaalx-w5aor.6275-buaalx-w5aor-1300053277/volunteer-onshow/{{items.title}}.png' />
 				</view>
-			</view>
+		</view>
+			
 		</view>
 
 	</view>
@@ -58,10 +59,10 @@
 		<button wx:if="{{signup}}" class="cu-btn bg-grey" hover-class="none">
 			<text class="button-text">无法重填</text>
 		</button>
-		<button wx:if="{{currenDate<volunteer_list[id].date || currenTime<volunteer_list[id].time}}" class="cu-btn bg-grey" hover-class="none">
+		<button wx:elif="{{currenDate<volunteer_list[id].date}}" class="cu-btn bg-grey" hover-class="none">
 			<text class="button-text">等待发布</text>
 		</button>
-		<button wx:elif="{{currenDate == volunteer_list[id].date && currenTime>=volunteer_list[id].time || admin}}" class="cu-btn bg-cyan" bindtap="signup">
+		<button wx:elif="{{currenDate > volunteer_list[id].date || currenDate == volunteer_list[id].date && currenTime>=volunteer_list[id].time || admin}}" class="cu-btn bg-cyan" bindtap="signup">
 			<text class="button-text">立即报名</text>
 		</button>
 		<button class="cu-btn bg-blue" bindtap="program_open">

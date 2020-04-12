@@ -40,23 +40,14 @@ exports.main = async (event, context) => {
       }
     })
 
-    //给用户添加已报名信息，如果不存在词条则添加
-    for (let i = 1; i < event.list.length; i++){
-      let inf = {};
-      inf.t = "待定";
-      inf.v = event.title;
-      inf.a = "待定";
-      inf.s = "待定";
-      inf.st = event.time
-      console.log(inf)
-      let h =db.collection('person').where({
-        phone: event.list[i][1]
-      }).update({
-        data:{
-          history: _.push(inf)
-        }
-      })
-    }
+    //删除project里面的报名信息
+    db.collection('project').where({
+      title: event.title
+    }).update({
+      data:{
+        signuplist: []
+      }
+    })
 
     //将数据添加到excel里
     //1,定义excel表格名

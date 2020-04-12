@@ -5,7 +5,6 @@ const _ = db.command
 
 //请求util.js
 var util = require('../../utils/util.js');
-
 Page({
 
     /**
@@ -120,7 +119,6 @@ Page({
                     });
                     db.collection('project').where({
                             // gte 方法用于指定一个 "大于等于" 条件
-                            date: _.gte(currenDate),
                             check: 1
                         })
                         .get({
@@ -229,6 +227,24 @@ Page({
             current_v: current,
             id: id
         })
+        var id = that.data.id;
+        var l = that.data.volunteer_list[id].signuplist.length;
+        console.log(that.data.volunteer_list[id].signuplist)
+        for (let i = 0; i < l; i++) {
+            if (app.globalData.openid === that.data.volunteer_list[id].signuplist[i]) {
+                wx.showToast({
+                    title: '请勿重复报名',
+                    icon: 'none'
+                })
+                that.setData({
+                    signup: true
+                })
+                return
+            }
+        }
+        that.setData({
+            signup: false
+        })
     },
     //关闭悬浮窗
     offcanvas: function(e) {
@@ -240,19 +256,6 @@ Page({
     //进入报名表单
     signup: function() {
         var that = this;
-        var id = this.data.id;
-        for(let i = 0; i < that.data.volunteer_list[id].signuplist.length; i++){
-            if (app.globalData.openid === that.data.volunteer_list[id].signuplist[i]){
-                wx.showToast({
-                  title: '请勿重复报名',
-                  icon: 'none'
-                })
-                that.setData({
-                    signup:true
-                })
-                return
-            }
-        }
 
         wx.requestSubscribeMessage({
             tmplIds: ["Ynia8PHxf3L_uWFvZxtPiI-V8hE-wcErHpe0Ygh8O9w"],
@@ -261,7 +264,7 @@ Page({
                     var id = that.data.id;
                     var title = that.data.volunteer_list[id].title
                     wx.navigateTo({
-                        url: '../forms/forms?title=' + title,
+                        url: '../forms/forms?title=' + title + '&stime=' + that.data.currenDate,
                     })
                 } else {
                     wx.showToast({
@@ -269,7 +272,6 @@ Page({
                         duration: 1000,
                         success(data) {
                             //成功
-
                         }
                     })
                 }
@@ -312,6 +314,7 @@ Page({
                 }
             })
     },
+
     /*
     loadmore: function() {
         //过长的list需要做二维数组，因为setData一次只能设置1024kb的数据量，如果过大的时候，就会报错
@@ -354,7 +357,10 @@ Page({
      * 生命周期函数--监听页面隐藏
      */
     onHide: function() {
-
+        this.setData({
+            open: false,
+            id: -1
+        })
     },
 
     /**
