@@ -66,26 +66,13 @@ Page({
                             register: 1
                         })
                         console.log("reg", that.data.register)
-
-                        /* wx.showModal({
-                               title: '您尚未注册',
-                               content: '请先填写必要信息后再查看个人信息',
-                               showCancel: false,
-                               success: function() {
-                                   wx.redirectTo({
-                                       url: '../person/person',
-                                   })
-                               },
-
-                           })  */
-
                     } else {
                         that.setData({
                             register: 0
                         })
                         var time = 0
                         var score = 0
-                            /**获取个人信息 */
+                            //管理员判断
                         console.log(score)
                         db.collection('admin').where({
                                 _openid: app.globalData.openid,
@@ -134,6 +121,16 @@ Page({
         var that = this;
         that.setData({
             current: 1 - this.data.current
+        });
+    },
+    secret: function() {
+        wx.navigateTo({
+            url: '../secret/secret',
+            success: (result) => {
+
+            },
+            fail: () => {},
+            complete: () => {}
         });
     },
     surprise: function() {

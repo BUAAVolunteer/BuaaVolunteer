@@ -20,8 +20,8 @@ Page({
         refreshLoading: false, //下拉刷新页面的loading
         currenDate: "",
         currenTime: "",
-        signup: false, //重填标准
-        secret: false //内部名额
+        admin: 0,
+        signup: false
     },
 
     /**
@@ -55,6 +55,7 @@ Page({
 
                         })
                     } else {
+                        //admin集合存储管理员信息
                         console.log(res.data)
                         if (res.data[0].score <= -10) {
                             wx.showModal({
@@ -69,6 +70,25 @@ Page({
 
                             })
                         }
+                        db.collection('admin').where({
+                                _openid: app.globalData.openid,
+                            })
+                            .get({
+                                success: function(res) {
+                                    wx.hideLoading()
+                                    if (res.data.length == 0) {
+                                        that.setData({
+                                            admin: 0
+                                        })
+                                    } else {
+                                        that.setData({
+                                            admin: 1
+                                        })
+                                    }
+                                    //initList是页面下拉刷新函数
+                                    that.initList();
+                                }
+                            })
                     }
 
                 }
@@ -208,7 +228,7 @@ Page({
             id: id
         })
         var id = that.data.id;
-        let l = that.data.volunteer_list[id].signuplist.length;
+        var l = that.data.volunteer_list[id].signuplist.length;
         console.log(that.data.volunteer_list[id].signuplist)
         for (let i = 0; i < l; i++) {
             if (app.globalData.openid === that.data.volunteer_list[id].signuplist[i]) {
@@ -217,27 +237,13 @@ Page({
                     icon: 'none'
                 })
                 that.setData({
-                    signup: true,
-                    secret: false
+                    signup: true
                 })
                 return
             }
         }
         that.setData({
             signup: false
-        })
-        l = that.data.volunteer_list[id].innerList.length;
-
-        for (let i = 0; i < l; i++) {
-            if (app.globalData.openid === that.data.volunteer_list[id].innerList[i]) {
-                that.setData({
-                    secret: true
-                })
-                return
-            }
-        }
-        that.setData({
-            secret: false
         })
     },
     //关闭悬浮窗

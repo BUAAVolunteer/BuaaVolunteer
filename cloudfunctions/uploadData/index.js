@@ -40,7 +40,6 @@ exports.main = async (event, context) => {
 					stop = i+1;
 				}
 			})
-			console.log(await check);
 			console.log(placed)
 			if(placed){
 				break;
@@ -82,7 +81,7 @@ exports.main = async (event, context) => {
 		var l = uplist[0].length - 3
 		var openid = uplist[0][l]
 		console.log(openid)
-		await db.collection('project').where({
+		db.collection('project').where({
 			title: event.title
 		}).update({
 			data:{
@@ -90,25 +89,12 @@ exports.main = async (event, context) => {
 			}
 		})
 
-		//向个人数据中添加报名成功记录
-		let inf = {};
-    inf.t = "待定";
-    inf.v = event.title;
-    inf.a = "待定";
-    inf.s = "待定";
-    inf.st = event.stime
-    console.log(inf)
-    await db.collection('person').where({
-      phone: event.list[1]
-    }).update({
-      data:{
-        history: _.push(inf)
-      }
-		})
+
+
 		
 		//判断是否报名完毕
 		let over = 1;
-		await db.collection('form').where({
+		db.collection('form').where({
 			title: event.title
 		}).field({
 			formInfo: true
@@ -126,26 +112,45 @@ exports.main = async (event, context) => {
 					break;
 				}
 			}
-		})
-		console.log("over:" + over)
-		if (over == 1){
-			await db.collection('project').where({
-				title: event.title
-			}).update({
-				data:{
-					check: -1
-				}
-			})
-		}
-
-		return await db.collection('signUp').where({
-			title: event.title
-		}).update({
-			// data 传入需要局部更新的数据
-			data: {
-				list : _.push(uplist)
+			console.log("over:" + over)
+			if (over == 1){
+				db.collection('project').where({
+					title: event.title
+				}).update({
+					data:{
+						check: -1
+					}
+				})
 			}
 		})
+
+		//向个人数据中添加报名成功记录
+		let inf = {};
+    inf.t = "待定";
+    inf.v = event.title;
+    inf.a = "待定";
+    inf.s = "待定";
+    inf.st = event.stime;
+		console.log(inf)
+		let phone = uplist[0][1];
+		db.collection('person').where({
+			phone: phone
+		}).update({
+			data:{
+				history: _.push(inf)
+			}
+		})
+		
+
+		return await db.collection('signUp').where({
+				title: event.title
+			}).update({
+				// data 传入需要局部更新的数据
+				data: {
+					list : _.push(uplist)
+				}
+			})
+		
 	}catch (e) {
 		console.error(e)
 	}

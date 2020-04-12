@@ -122,7 +122,8 @@
 </navigator>
 
 <!--底部背景图片-->
-<image  mode="widthFix" class="bottom-img" src="../../image/down.png" />
+<image wx:if="{{admin}}" bindtap="secret"  mode="widthFix" class="bottom-img" src="../../image/down.png" />
+<image wx:else  mode="widthFix" class="bottom-img" src="../../image/down.png" />
 </view>
 
 <view wx:if="{{register==1}}" class="no-register" >

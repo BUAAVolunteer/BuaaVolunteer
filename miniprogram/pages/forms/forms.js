@@ -350,6 +350,8 @@ Page({
                 limit: limit
             },
             success: function(res) {
+                console.log(res)
+
                 that.setData({
                     loading: false
                 })
