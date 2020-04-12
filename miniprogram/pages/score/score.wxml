@@ -25,6 +25,11 @@
 
 <view class="margin">奖励积分</view>
 <view class="padding flex flex-wrap justify-around align-center">
+      <button class="cu-btn block line-blue" bindtap="inner" form-type="submit">添加内部名额</button>
+</view>
+
+<view class="margin">奖励积分</view>
+<view class="padding flex flex-wrap justify-around align-center">
       <button class="cu-btn block line-blue" bindtap="plus1" form-type="submit">提交感想</button>
       <button class="cu-btn block line-blue" bindtap="plus2" form-type="submit">优秀感想</button>
       <button class="cu-btn block line-blue" bindtap="plus3" form-type="submit">受到表扬</button>

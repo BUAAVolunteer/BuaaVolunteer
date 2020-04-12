@@ -15,7 +15,7 @@ Page({
         volun_id: "",
         person_list: [{}],
         index: null,
-        picker: ["立水桥站区平安地铁志愿",  "童年一课线上支教",  "鲁迅博物馆讲解",                 "“夕阳再晨”科技助老活动",  "思源楼智能手机教学",                 "科技馆志愿",  "国家图书馆",  "中华世纪坛",                 "花园小课堂",  "昌雨春童康复中心",  "微澜图书馆",                 "小桔灯听障儿童支教",  "咿呀总动员",  "CBA志愿服务",                 "中甲志愿服务",  "天文馆志愿"            ]
+        picker: []
 
     },
 
@@ -23,6 +23,22 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
+        wx.showLoading({
+            mask: true
+        })
+        var picker = [];
+        var that = this;
+        db.collection('project').get({
+            success:function(res){
+                for(let i = 0; i < res.data.length; i++){
+                    picker.push(res.data[i].title)
+                }
+                that.setData({
+                    picker: picker
+                })
+                wx.hideLoading()
+            }
+        })
 
     },
 
@@ -51,22 +67,18 @@ Page({
     },
 
     identify: function(e) {
+        wx.showLoading({
+            mask: true
+        })
         var vtime = "";
         var vscore = "";
         var finding = 0;
         var that = this;
-        var picker = ["立水桥站区平安地铁志愿", "童年一课线上支教", "鲁迅博物馆讲解",
-            "“夕阳再晨”科技助老活动", "思源楼智能手机教学",
-            "科技馆志愿", "国家图书馆", "中华世纪坛",
-            "花园小课堂", "昌雨春童康复中心", "微澜图书馆",
-            "小桔灯听障儿童支教", "咿呀总动员", "CBA志愿服务",
-            "中甲志愿服务", "天文馆志愿"
-        ]
+        var picker = this.data.picker
 
-        db.collection('list').where({
+        db.collection('person').where({
                 //根据电话和项目名称查询志愿
-                p: e.detail.value.phone - '0',
-                v: picker[e.detail.value.title]
+                phone: e.detail.value.phone
             })
             .get({
                 success: function(res) {
@@ -80,13 +92,14 @@ Page({
                         })
                     } else {
                         that.setData({
-                            'volun_name': res.data[res.data.length - 1].v,
-                            'volun_phone': res.data[res.data.length - 1].p,
-                            'volun_time': res.data[res.data.length - 1].a,
-                            'volun_score': res.data[res.data.length - 1].s - '0',
-                            'volun_id': res.data[res.data.length - 1]._id,
+                            'volun_name': res.data[0].name,
+                            'volun_phone': res.data[0].phone,
+                            'volun_time': res.data[0].duration,
+                            'volun_score': res.data[0].score,
+                            'volun_id': res.data[0]._openid,
                         })
                     }
+                    wx.hideLoading()
                 },
                 fail: function(res) {
 
@@ -100,14 +113,15 @@ Page({
             mask: 'true',
         })
         var _id = this.data.volun_id
-        var sc = this.data.volun_score
+        var picker = this.data.picker
+        var title = picker[this.data.index]
         wx.cloud.callFunction({
             // 云函数名称
             name: 'plus',
             // 传给云函数的参数
             data: {
-                id: _id,
-                basic: sc,
+                openid: _id,
+                title: title,
                 p: 0.5
             },
             success: function(res) {
@@ -129,14 +143,15 @@ Page({
             mask: 'true',
         })
         var _id = this.data.volun_id
-        var sc = this.data.volun_score
+        var picker = this.data.picker
+        var title = picker[this.data.index]
         wx.cloud.callFunction({
             // 云函数名称
             name: 'plus',
             // 传给云函数的参数
             data: {
-                id: _id,
-                basic: sc,
+                openid: _id,
+                title: title,
                 p: 1
             },
             success: function(res) {
@@ -158,14 +173,15 @@ Page({
             mask: 'true',
         })
         var _id = this.data.volun_id
-        var sc = this.data.volun_score
+        var picker = this.data.picker
+        var title = picker[this.data.index]
         wx.cloud.callFunction({
             // 云函数名称
             name: 'plus',
             // 传给云函数的参数
             data: {
-                id: _id,
-                basic: sc,
+                openid: _id,
+                title: title,
                 p: 1
             },
             success: function(res) {
@@ -187,14 +203,15 @@ Page({
             mask: 'true',
         })
         var _id = this.data.volun_id
-        var sc = this.data.volun_score - '0'
+        var picker = this.data.picker
+        var title = picker[this.data.index]
         wx.cloud.callFunction({
             // 云函数名称
             name: 'plus',
             // 传给云函数的参数
             data: {
-                id: _id,
-                basic: sc,
+                openid: _id,
+                title: title,
                 p: -5
             },
             success: function(res) {
@@ -216,14 +233,15 @@ Page({
             mask: 'true',
         })
         var _id = this.data.volun_id
-        var sc = this.data.volun_score
+        var picker = this.data.picker
+        var title = picker[this.data.index]
         wx.cloud.callFunction({
             // 云函数名称
             name: 'plus',
             // 传给云函数的参数
             data: {
-                id: _id,
-                basic: sc,
+                openid: _id,
+                title: title,
                 p: -8
             },
             success: function(res) {
@@ -245,14 +263,15 @@ Page({
             mask: 'true',
         })
         var _id = this.data.volun_id
-        var sc = this.data.volun_score
+        var picker = this.data.picker
+        var title = picker[this.data.index]
         wx.cloud.callFunction({
             // 云函数名称
             name: 'plus',
             // 传给云函数的参数
             data: {
-                id: _id,
-                basic: sc,
+                openid: _id,
+                title: title,
                 p: -15
             },
             success: function(res) {
@@ -274,14 +293,15 @@ Page({
             mask: 'true',
         })
         var _id = this.data.volun_id
-        var sc = this.data.volun_score
+        var picker = this.data.picker
+        var title = picker[this.data.index]
         wx.cloud.callFunction({
             // 云函数名称
             name: 'plus',
             // 传给云函数的参数
             data: {
-                id: _id,
-                basic: sc,
+                openid: _id,
+                title: title,
                 p: -4
             },
             success: function(res) {
@@ -303,14 +323,15 @@ Page({
             mask: 'true',
         })
         var _id = this.data.volun_id
-        var sc = this.data.volun_score
+        var picker = this.data.picker
+        var title = picker[this.data.index]
         wx.cloud.callFunction({
             // 云函数名称
             name: 'plus',
             // 传给云函数的参数
             data: {
-                id: _id,
-                basic: sc,
+                openid: _id,
+                title: title,
                 p: -2
             },
             success: function(res) {
@@ -366,6 +387,36 @@ Page({
                 console.log(res)
 
             }
+        })
+
+    },
+
+    inner:function(e){
+        wx.showLoading({
+            title: '请稍后',
+            mask: 'true',
+        })
+        var _id = this.data.volun_id
+        var picker = this.data.picker
+        var title = picker[this.data.index]
+        wx.cloud.callFunction({
+            // 云函数名称
+            name: 'innerSign',
+            // 传给云函数的参数
+            data: {
+                openid: _id,
+                title: title,
+            },
+            success: function(res) {
+                console.log(res)
+                wx.hideLoading()
+                wx.showModal({
+                    title: '内部名额',
+                    content: '内部名额添加成功',
+                    showCancel: false
+                })
+            },
+            fail: console.error
         })
 
     },
