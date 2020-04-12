@@ -172,71 +172,89 @@ Page({
             DownloadList.push(slist[i].list);
         }
         console.log(DownloadList)
-
-        //发送订阅消息
-        for (let i = 1; i < DownloadList.length; i++) {
-            let openid = DownloadList[i][DownloadList[i].length - 3]
-            let date = DownloadList[i][DownloadList[i].length - 1]
-            let detail = "QQ群：" + qqnum
-            console.log(openid, date, detail)
-            wx.cloud.callFunction({
-                name: 'Signup',
-                data: {
-                    title: that.data.title,
-                    openid: openid,
-                    date: date,
-                    detail: detail
-                },
-                success: function(res) {
-                    console.log(res)
-                }
-            })
-        }
-        wx.cloud.callFunction({
-            name: 'DownloadSignUp',
-            data: {
-                title: that.data.title,
-                time: date,
-                list: DownloadList
-            },
-            success: function(res) {
-                console.log(res)
-                wx.cloud.downloadFile({
-                    fileID: res.result.fileID,
-                    success: function(res) {
-                        console.log(res)
-                        wx.saveFile({
-                            tempFilePath: res.tempFilePath,
+        db.collection('project').where({
+            title: that.data.title
+        }).field({
+            check: true
+        }).get({
+            success: function(res){
+                if (res.data[0].check != -1){
+                    wx.showModal({
+                      title: "报名未完成",
+                      content: "报名尚未完成，请等待完成后再导出",
+                      showCancel: false
+                    })
+                    return;
+                }else{
+                    //发送订阅消息
+                    for (let i = 1; i < DownloadList.length; i++) {
+                        let openid = DownloadList[i][DownloadList[i].length - 3]
+                        let date = DownloadList[i][DownloadList[i].length - 1]
+                        let detail = "QQ群：" + qqnum
+                        console.log(openid, date, detail)
+                        wx.cloud.callFunction({
+                            name: 'Signup',
+                            data: {
+                                title: that.data.title,
+                                openid: openid,
+                                date: date,
+                                detail: detail
+                            },
                             success: function(res) {
-                                wx.openDocument({
-                                    filePath: res.savedFilePath,
-                                    success: function() {
-                                        wx.showModal({
-                                            title: "导出成功",
-                                            content: "已成功导出,请在自动打开后尽快另存",
-                                            showCancel: false,
-                                            success: function() {
-                                                wx.redirectTo({
-                                                    url: '../list/list',
-                                                })
-                                            }
-                                        })
-                                    }
-                                })
+                                console.log(res)
                             }
                         })
-                    },
-                    fail: function(res) {
-                        console.log(res)
-                        wx.showModal({
-                            title: "导出失败",
-                            content: "导出失败，请联系管理员",
-                            showCancel: false
-                        })
                     }
-                })
+                    wx.cloud.callFunction({
+                        name: 'DownloadSignUp',
+                        data: {
+                            title: that.data.title,
+                            time: date,
+                            list: DownloadList
+                        },
+                        success: function(res) {
+                            console.log(res)
+                            wx.cloud.downloadFile({
+                                fileID: res.result.fileID,
+                                success: function(res) {
+                                    console.log(res)
+                                    wx.saveFile({
+                                        tempFilePath: res.tempFilePath,
+                                        success: function(res) {
+                                            wx.openDocument({
+                                                filePath: res.savedFilePath,
+                                                success: function() {
+                                                    wx.showModal({
+                                                        title: "导出成功",
+                                                        content: "已成功导出,请在自动打开后尽快另存",
+                                                        showCancel: false,
+                                                        success: function() {
+                                                            wx.redirectTo({
+                                                                url: '../list/list',
+                                                            })
+                                                        }
+                                                    })
+                                                }
+                                            })
+                                        }
+                                    })
+                                },
+                                fail: function(res) {
+                                    console.log(res)
+                                    wx.showModal({
+                                        title: "导出失败",
+                                        content: "导出失败，请联系管理员",
+                                        showCancel: false
+                                    })
+                                }
+                            })
+                        }
+                    })
+                }
             }
         })
+
+        
     },
     sift: function() {
         clearInterval(iv);
