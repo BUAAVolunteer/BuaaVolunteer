@@ -257,8 +257,9 @@ Page({
                 if (res['Ynia8PHxf3L_uWFvZxtPiI-V8hE-wcErHpe0Ygh8O9w'] === 'accept') {
                     var id = that.data.id;
                     var title = that.data.volunteer_list[id].title
+                    var qqnum = that.data.volunteer_list[id].qqnum
                     wx.navigateTo({
-                        url: '../forms/forms?title=' + title + '&stime=' + that.data.currenDate,
+                        url: '../forms/forms?title=' + title + '&stime=' + that.data.currenDate + '&qqnum=' + qqnum,
                     })
                 } else {
                     wx.showToast({

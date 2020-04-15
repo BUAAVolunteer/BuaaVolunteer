@@ -7,6 +7,7 @@ var watcher; //监听事件
 var getname, getphone, getpersonnum, getqqnum, getcampus; //person集合获取的信息
 var uplist = [], //总上传数据
     listitem = []; //一个人的信息
+var qqnum;
 Page({
 
     /**
@@ -24,6 +25,8 @@ Page({
      */
     onLoad: function(options) {
         //console.log(options.title, options.stime)
+        qqnum = options.qqnum
+        console.log(qqnum)
         wx.showLoading({
             title: '加载中',
         })
@@ -366,7 +369,7 @@ Page({
                 } else {
                     wx.showModal({
                         title: '提交成功',
-                        content: '请留意微信消息，并加入对应的qq群以便志愿开展',
+                        content: '请留意微信消息，并加入\nqq群:' + qqnum + '\n以便志愿开展',
                         showCancel: false,
                         success: function() {
                             wx.redirectTo({
