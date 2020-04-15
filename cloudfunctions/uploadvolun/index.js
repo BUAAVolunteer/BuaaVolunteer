@@ -29,7 +29,7 @@ exports.main = async (event, context) => {
 						place: event.place,//志愿地点
 						qqnum: event.qqnum,//qq群号
 						innerList: [],//内部名额
-						signupList: [],//已报名名单
+						signuplist: [],//已报名名单
 						check: 0//检测表单编辑是否完成（与edit页面有关，超纲内容）
 					}
 			}).then(res =>{
@@ -51,7 +51,7 @@ exports.main = async (event, context) => {
 							place: event.place,
 							qqnum: event.qqnum,
 							innerList: [],
-							signupList: [],
+							signuplist: [],
 							check: 0
 					}
 			}).then(res => {
