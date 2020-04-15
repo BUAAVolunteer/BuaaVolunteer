@@ -176,7 +176,7 @@ Page({
     surprise: function() {
         wx.showModal({
             title: '这也许是一个彩蛋',
-            content: '隔壁北邮小程序都5.0了\n不开心！ToT',
+            content: '隔壁北邮小程序都5.0了\n不开心！T_T',
             showCancel: false,
         })
     },

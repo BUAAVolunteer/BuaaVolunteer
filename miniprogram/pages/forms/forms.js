@@ -41,7 +41,7 @@ Page({
             })
             .get({
                 success: function(res) {
-                    //console.log(res);
+                    console.log(res);
                     getname = res.data[0].name;
                     getphone = res.data[0].phone;
                     getpersonnum = res.data[0].personnum;
@@ -58,6 +58,7 @@ Page({
                         })
                         .get({
                             success: function(res) {
+                                console.log(res.data)
                                 wx.hideLoading();
                                 formConfig.push(res.data[0]);
                                 that.setData({
@@ -242,20 +243,23 @@ Page({
 
             let items = forms[key];
             let v = that.selectComponent('#' + items.id);
-            //console.log(v, items.id)
-            let l = v.choose[0].length;
-            if (v.limit && (v.type === 'radio' || v.type === 'checkbox')) //有限制的进行筛选
+            console.log(v, items.id)
+
+            if (v.limit && (v.type === 'radio' || v.type === 'checkbox')) { //有限制的进行筛选
+                let l = v.choose[0].length;
                 for (var i = 0; i < l; i++) {
-                var j = v.choose[0][i];
-                var k = v.choose[1][i]
-                if (that.data.formList.formInfo[j].data[k].limit <= 0) {
-                    v.choose[0].splice(i, 1);
-                    v.choose[1].splice(i, 1);
-                    v.choose[2].splice(i, 1);
-                    v.input_text.splice(i, 1);
+                    var j = v.choose[0][i];
+                    var k = v.choose[1][i]
+                    if (that.data.formList.formInfo[j].data[k].limit <= 0) {
+                        v.choose[0].splice(i, 1);
+                        v.choose[1].splice(i, 1);
+                        v.choose[2].splice(i, 1);
+                        v.input_text.splice(i, 1);
+                    }
                 }
+
             }
-            l = v.choose[0].length;
+
 
             //判断是否必填项为空
             if (that.formValidate(v)) {
@@ -265,6 +269,7 @@ Page({
                 if (v.type === 'div' || v.type === 'describe')
                     continue;
                 else if (v.type === 'radio' || v.type === 'checkbox') {
+                    let l = v.choose[0].length;
                     if (v.limit) {
                         limit[0] = limit[0].concat(v.choose[0]);
                         limit[1] = limit[1].concat(v.choose[1]);
@@ -336,7 +341,7 @@ Page({
         listitem.push(app.globalData.openid)
         listitem.push(duration)
         listitem.push(detail)
-            //console.log(limit)
+        console.log(limit)
             //console.log(listitem)
 
         //uplist = { inf: listitem }
