@@ -8,13 +8,13 @@ Page({
      * 页面的初始数据
      */
     data: {
-        name:"",
-        personnum:"",
-        phone:"",
-        qqnum:"",
-        picker:["南校区","北校区"],
-        text:"",
-        index:0
+        name: "",
+        personnum: "",
+        phone: "",
+        qqnum: "",
+        picker: ["南校区", "北校区"],
+        text: "",
+        index: 0
     },
 
     /**
@@ -25,9 +25,9 @@ Page({
         db.collection('person').where({
             _openid: app.globalData.openid
         }).get({
-            success:function(res){
-                console.log(res)
-                if (res.data.length != 0){
+            success: function(res) {
+                //console.log(res)
+                if (res.data.length != 0) {
                     that.setData({
                         name: res.data[0].name,
                         phone: res.data[0].phone,
@@ -35,32 +35,33 @@ Page({
                         text: res.data[0].text,
                         qqnum: res.data[0].qqnum
                     })
-                    if(res.data[0].campus === "北校区"){
+                    if (res.data[0].campus === "北校区") {
                         that.setData({
                             index: 1
                         })
-                    }else{
+                    } else {
                         that.setData({
                             index: 0
                         })
                     }
                 }
-            },fail:function(res){
+            },
+            fail: function(res) {
                 wx.showToast({
-                  title: '获取信息失败',
+                    title: '获取信息失败',
                 })
             }
         })
 
     },
     PickerChange(e) {
-        console.log(e);
+        //console.log(e);
         this.setData({
             index: e.detail.value
         })
     },
     order_submit: function(e) {
-        var picker = ["南校区","北校区"]
+        var picker = ["南校区", "北校区"]
         if (e.detail.value.name.length >= 2) {
 
         } else {
@@ -108,12 +109,12 @@ Page({
         }
 
         wx.showLoading({
-            title: '请稍后',
-            mask: 'true',
-        })
-        console.log(app.globalData.openid)
-        console.log(e.detail.value.qqnum)
-        console.log(e.detail.value.campus)
+                title: '请稍后',
+                mask: 'true',
+            })
+            //console.log(app.globalData.openid)
+            //console.log(e.detail.value.qqnum)
+            //console.log(e.detail.value.campus)
 
 
         wx.cloud.callFunction({
@@ -130,20 +131,20 @@ Page({
                 campus: picker[e.detail.value.campus]
             },
             success: function(res) {
-                        console.log(res)
-                        wx.hideLoading()
-                        wx.showModal({
-                            title: '信息更新成功',
-                            content: '欢迎加入志愿者大家庭',
-                            showCancel: false,
-                            success: function() {
-                                wx.switchTab({
-                                    url: '../about/about',
-                                })
-                            },
-
+                //console.log(res)
+                wx.hideLoading()
+                wx.showModal({
+                    title: '信息更新成功',
+                    content: '欢迎加入志愿者大家庭',
+                    showCancel: false,
+                    success: function() {
+                        wx.switchTab({
+                            url: '../about/about',
                         })
                     },
+
+                })
+            },
             fail: function() {
                 wx.hideLoading()
                 wx.showModal({

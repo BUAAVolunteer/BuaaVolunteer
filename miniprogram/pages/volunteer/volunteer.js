@@ -40,8 +40,8 @@ Page({
             })
             .get({
                 success: function(res) {
-                    console.log(res)
-                        //未来在这里加入对志愿积分合法性的判断
+                    //console.log(res)
+                    //未来在这里加入对志愿积分合法性的判断
                     if (res.data.length == 0) {
                         wx.showModal({
                             title: '您尚未注册',
@@ -55,7 +55,7 @@ Page({
 
                         })
                     } else {
-                        console.log(res.data)
+                        //console.log(res.data)
                         if (res.data[0].score <= -10) {
                             wx.showModal({
                                 title: '您没有报名权限',
@@ -87,8 +87,8 @@ Page({
             wx.cloud.callFunction({
                 name: 'getTime',
                 success: function(res) {
-                    console.log(res)
-                        //返回值是日期和时间
+                    //console.log(res)
+                    //返回值是日期和时间
                     time = res.result.time.split(" ");
                     var currenTime = time[1];
                     var currenDate = time[0];
@@ -103,8 +103,8 @@ Page({
                         })
                         .get({
                             success: function(res) {
-                                console.log(res)
-                                console.log(res.data)
+                                //console.log(res)
+                                //console.log(res.data)
 
                                 var dat = res.data
                                     //排序函数，按照日期时间排序，从近到远渲染页面
@@ -117,8 +117,8 @@ Page({
                                         return 1;
                                     }
                                 });
-                                console.log('dat', dat)
-                                    //dat是一个对象（类似结构体）
+                                // console.log('dat', dat)
+                                //dat是一个对象（类似结构体）
                                 var ldat = dat.length;
                                 for (var i = 0; i < ldat; i++) {
                                     //计数
@@ -172,16 +172,16 @@ Page({
                                 }
                                 //volunteer_list是页面展示出来的悬浮窗上的数据
                                 that.setData({
-                                    volunteer_list: dat
-                                })
-                                console.log(currenDate);
-                                console.log(currenTime);
+                                        volunteer_list: dat
+                                    })
+                                    // console.log(currenDate);
+                                    //console.log(currenTime);
                                 that.setData({
                                     refreshLoading: false,
                                 })
                             },
                             fail: function(res) {
-                                console.log(res)
+                                //console.log(res)
                                 wx.showModal({
                                     title: '错误',
                                     content: '获取记录失败，请检查网络或联系管理员',
@@ -199,7 +199,7 @@ Page({
     //打开悬浮窗
     opendetail: function(e) {
         var that = this;
-        console.log(e.currentTarget.id)
+        //console.log(e.currentTarget.id)
         var id = e.currentTarget.id;
         var current = that.data.volunteer_list[id];
         that.setData({
@@ -209,7 +209,7 @@ Page({
         })
         var id = that.data.id;
         let l = that.data.volunteer_list[id].signuplist.length;
-        console.log(that.data.volunteer_list[id].signuplist)
+        //console.log(that.data.volunteer_list[id].signuplist)
         for (let i = 0; i < l; i++) {
             if (app.globalData.openid === that.data.volunteer_list[id].signuplist[i]) {
                 wx.showToast({
@@ -290,7 +290,7 @@ Page({
             })
             .get({
                 success: function(res) {
-                    console.log(res)
+                    //console.log(res)
                     wx.hideLoading()
                     var target_id = res.data[0]._id
                     wx.navigateTo({
@@ -299,7 +299,7 @@ Page({
 
                 },
                 fail: function(res) {
-                    console.log(res)
+                    //console.log(res)
                     wx.showModal({
                         title: '错误',
                         content: '获取记录失败',

@@ -14,13 +14,13 @@ Page({
         assurep: "获得在北航学习机会",
         assureList: [],
         detail: "",
-        detailp: "1、参观北航的南校区和北校区。 \n 2、进行入学报到。 \n 3、入住宿舍",
+        detailp: "1、参观北航的南校区和北校区。\n 2、进行入学报到。\n 3、入住宿舍",
         detailList: [],
         response: "",
         responsep: "曹老师 电话：12312312312",
         responseList: [],
         require: "",
-        requirep: "男士请做好安全防护准备",
+        requirep: "1.特别提醒一\n2.特别提醒二\n3.特别提醒三",
         requireList: [],
         people: "",
         peoplep: "全体新生",
@@ -37,15 +37,15 @@ Page({
     onLoad: function(options) {
         var that = this
         this.setData({
-            etitle: options.title
-        })//传参到wxml
+                etitle: options.title
+            }) //传参到wxml
         db.collection('project')
             .where({
                 title: options.title
-            })//查询条件
-            .get({//更新数据库的操作
+            }) //查询条件
+            .get({ //更新数据库的操作
                 success: function(res) {
-                    var download = res.data[0];//把data里的信息赋给download？
+                    var download = res.data[0]; //把data里的信息赋给download？
 
                     var ass = download.assure;
                     var l = ass.length;
@@ -54,7 +54,7 @@ Page({
                         assure = assure + ass[i] + '\n';
                     }
                     l = assure.length;
-                    assure = assure.substr(0, l - 1);//substr获取字符 参数指定的是子串的开始位置和长度(start long)
+                    assure = assure.substr(0, l - 1); //substr获取字符 参数指定的是子串的开始位置和长度(start long)
 
                     var det = download.detail;
                     l = det.length;
@@ -73,7 +73,7 @@ Page({
                     }
                     l = require.length;
                     require = require.substr(0, l - 1);
-                    
+
                     var res = download.response;
                     l = res.length;
                     var response = "";
@@ -82,24 +82,24 @@ Page({
                     }
                     l = response.length;
                     response = response.substr(0, l - 1);
-            
+
                     that.setData({
-                        assureList: download.assure,//一坨数据存在云端
+                        assureList: download.assure, //一坨数据存在云端
                         detailList: download.detail,
                         requireList: download.require,
                         responseList: download.response,
                         time: download.time,
                         date: download.date,
                         textarea: download.textarea,
-                        assure,//拼接的用于屏幕输出的字符串
-                        detail,//同名就不用再写一遍赋值
+                        assure, //拼接的用于屏幕输出的字符串
+                        detail, //同名就不用再写一遍赋值
                         require,
                         response,
                         people: download.people,
                         place: download.place,
                         qqnum: download.qqnum
                     })
-                  
+
                 }
             })
 
@@ -109,7 +109,7 @@ Page({
     */
     TimeChange(e) {
         this.setData({
-            time: e.detail.value//获取对象 被触发
+            time: e.detail.value //获取对象 被触发
         })
     },
     DateChange(e) {
@@ -142,15 +142,15 @@ Page({
     },
     assure: function(e) {
         var tavalue = e.detail.value;
-        var a = tavalue.split('\n');//内容用\n分隔赋值
+        var a = tavalue.split('\n'); //内容用\n分隔赋值
         var la = a.length;
         var data = [];
         for (var i = 0; i < la; i++) {
-            data.push(a[i]);//可向数组的末尾添加一个或多个元素，并返回新的长度
-        }//向data数组赋新的值
+            data.push(a[i]); //可向数组的末尾添加一个或多个元素，并返回新的长度
+        } //向data数组赋新的值
         this.setData({
-            assureList: data
-        })//向assureList赋值
+                assureList: data
+            }) //向assureList赋值
     },
     detail: function(e) {
         var tavalue = e.detail.value;
@@ -175,7 +175,7 @@ Page({
         var addList = 'people';
         this.setData({
             [addList]: data
-        });//setData的特殊用法 如果要将嵌套数据付给字符串则用[]
+        }); //setData的特殊用法 如果要将嵌套数据付给字符串则用[]
         //but马佬说这里没嵌套式写习惯了emmmm
     },
     assure: function(e) {
@@ -215,10 +215,10 @@ Page({
         })
     },
     upload: function(e) {
-        var that = this;
+        let that = this;
 
         //检测信息缺失
-        if (this.data.people === "") {//如果没填人数 则出弹框 下同
+        if (!that.data.people || that.data.people === "") { //如果没填人数 则出弹框 下同
             wx.showModal({
                 title: '缺少信息',
                 content: '请填写招募人数',
@@ -226,7 +226,7 @@ Page({
             })
             return;
         }
-        if (this.data.detailList == []) {
+        if (!that.data.detailList || that.data.detailList == []) {
             wx.showModal({
                 title: '缺少信息',
                 content: '请填写活动内容',
@@ -234,7 +234,7 @@ Page({
             })
             return;
         }
-        if (this.data.responseList == []) {
+        if (!that.data.responseList || that.data.responseList == []) {
             wx.showModal({
                 title: '缺少信息',
                 content: '请填写负责人联系方式',
@@ -242,7 +242,7 @@ Page({
             })
             return;
         }
-        if (this.data.etitle === "发布一个新志愿" && this.data.title === "") {
+        if (that.data.etitle === "发布一个新志愿" && that.data.title === "") {
             wx.showModal({
                 title: '缺少信息',
                 content: '请填写活动名称',
@@ -250,7 +250,7 @@ Page({
             })
             return;
         }
-        if (this.data.etitle === "发布一个新志愿" && this.data.place === "") {
+        if (that.data.etitle === "发布一个新志愿" && that.data.place === "") {
             wx.showModal({
                 title: '缺少信息',
                 content: '请填写活动地点',
@@ -258,7 +258,7 @@ Page({
             })
             return;
         }
-        if (this.data.textarea === "") {
+        if (!that.data.textarea || that.data.textarea === "") {
             wx.showModal({
                 title: '缺少信息',
                 content: '请填写志愿开展日期',
@@ -266,7 +266,8 @@ Page({
             })
             return
         }
-        if (this.data.qqnum === "") {
+        console.log('qqNum', that.data.qqnum)
+        if (!that.data.qqnum || that.data.qqnum === "") {
             wx.showModal({
                 title: '缺少信息',
                 content: '请填写志愿QQ群号',
@@ -276,15 +277,15 @@ Page({
         }
         wx.showLoading({
                 title: '加载中',
-            })//一个延时显示
+            }) //一个延时显示
             //转换日期格式
-        var str = this.data.date.split('-')//date用-分隔
+        var str = this.data.date.split('-') //date用-分隔
         let year = str[0]
         let month = str[1]
-        let day = str[2] 
+        let day = str[2]
         if (month.length == 1) {
             month = '0' + month
-        }//如果month是1-9就要转换 day同理
+        } //如果month是1-9就要转换 day同理
         if (day.length == 1) {
             day = '0' + day
         }
@@ -293,8 +294,8 @@ Page({
 
 
 
-            //上传详细信息
-        wx.cloud.callFunction({//调用这个云函数
+        //上传详细信息
+        wx.cloud.callFunction({ //调用这个云函数
             name: 'uploadvolun',
             data: {
                 etitle: that.data.etitle,
@@ -317,8 +318,8 @@ Page({
                 wx.showModal({
                     title: "发布成功",
                     content: "志愿发布成功，请编辑报名表单",
-                    showCancel: false,//去掉取消按钮
-                    success: function(res) {//如果成功调用showModal成功，则跳转至链接
+                    showCancel: false, //去掉取消按钮
+                    success: function(res) { //如果成功调用showModal成功，则跳转至链接
                         wx.redirectTo({
                             url: '../list/list',
                         })

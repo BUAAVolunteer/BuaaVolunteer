@@ -23,7 +23,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-        console.log(options.title, options.stime)
+        //console.log(options.title, options.stime)
         wx.showLoading({
             title: '加载中',
         })
@@ -218,17 +218,17 @@ Page({
         let detail = "";
         let den = 0;
         formConfig.forEach((item, i) => {
-            result.push(item.formInfo)
-        })
-        console.log('result', result);
+                result.push(item.formInfo)
+            })
+            //console.log('result', result);
 
         let temp = [];
         temp.push(result[0]);
-        console.log('temp', temp);
+        //console.log('temp', temp);
         let forms = temp.reduce((a, b) => {
-            return a.concat(b)
-        })
-        console.log('temp', temp);
+                return a.concat(b)
+            })
+            //console.log('temp', temp);
         let limit = [
             [],
             [],
@@ -340,7 +340,7 @@ Page({
         uplist.push(listitem)
         listitem = [];
         forms = [];
-        console.log(uplist);
+        //console.log(uplist);
         wx.cloud.callFunction({
             name: "uploadData",
             data: {
@@ -350,7 +350,7 @@ Page({
                 limit: limit
             },
             success: function(res) {
-                console.log(res)
+                //console.log(res)
 
                 that.setData({
                     loading: false

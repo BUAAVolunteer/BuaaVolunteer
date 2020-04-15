@@ -40,7 +40,7 @@ Page({
         })
         db.collection('question')
             .get().then(e => {
-                console.log(e.data.title);
+                //console.log(e.data.title);
                 this.setData({
                     comment_list: e.data
                 })

@@ -42,8 +42,8 @@ Page({
                     let admin = 0
                     let score = 0
                         /**获取个人信息 */
-                    console.log(score)
-                    console.log(res.data[0])
+                        //console.log(score)
+                        //console.log(res.data[0])
 
                     score = res.data[0].score.toFixed(1)
                     if (score >= 0 && score <= 10)

@@ -48,7 +48,7 @@ Page({
         db.collection('push').get({
             success: function(res) {
                 var a = res.data.reverse()
-                console.log(a)
+                    //console.log(a)
                     // res.data 包含该记录的数据
                 that.setData({
                     list: a

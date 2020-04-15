@@ -29,8 +29,8 @@ Page({
         var picker = [];
         var that = this;
         db.collection('project').get({
-            success:function(res){
-                for(let i = 0; i < res.data.length; i++){
+            success: function(res) {
+                for (let i = 0; i < res.data.length; i++) {
                     picker.push(res.data[i].title)
                 }
                 that.setData({
@@ -60,7 +60,7 @@ Page({
     },
 
     PickerChange(e) {
-        console.log(e);
+        //console.log(e);
         this.setData({
             index: e.detail.value
         })
@@ -82,7 +82,7 @@ Page({
             })
             .get({
                 success: function(res) {
-                    console.log(res)
+                    //console.log(res)
                     wx.hideLoading()
                     if (res.data.length == 0) {
                         wx.showModal({
@@ -125,7 +125,7 @@ Page({
                 p: 0.5
             },
             success: function(res) {
-                console.log(res)
+                //console.log(res)
                 wx.hideLoading()
                 wx.showModal({
                     title: '增加积分',
@@ -155,7 +155,7 @@ Page({
                 p: 1
             },
             success: function(res) {
-                console.log(res)
+                //console.log(res)
                 wx.hideLoading()
                 wx.showModal({
                     title: '增加积分',
@@ -185,7 +185,7 @@ Page({
                 p: 1
             },
             success: function(res) {
-                console.log(res)
+                //console.log(res)
                 wx.hideLoading()
                 wx.showModal({
                     title: '增加积分',
@@ -215,7 +215,7 @@ Page({
                 p: -5
             },
             success: function(res) {
-                console.log(res)
+                //console.log(res)
                 wx.hideLoading()
                 wx.showModal({
                     title: '扣除积分',
@@ -245,7 +245,7 @@ Page({
                 p: -8
             },
             success: function(res) {
-                console.log(res)
+                //console.log(res)
                 wx.hideLoading()
                 wx.showModal({
                     title: '扣除积分',
@@ -275,7 +275,7 @@ Page({
                 p: -15
             },
             success: function(res) {
-                console.log(res)
+                //console.log(res)
                 wx.hideLoading()
                 wx.showModal({
                     title: '扣除积分',
@@ -305,7 +305,7 @@ Page({
                 p: -4
             },
             success: function(res) {
-                console.log(res)
+                //console.log(res)
                 wx.hideLoading()
                 wx.showModal({
                     title: '扣除积分',
@@ -335,7 +335,7 @@ Page({
                 p: -2
             },
             success: function(res) {
-                console.log(res)
+                //console.log(res)
                 wx.hideLoading()
                 wx.showModal({
                     title: '扣除积分',
@@ -359,7 +359,7 @@ Page({
                     mask: 'true',
                 })
                 pl = 0 - pl - res.tapIndex - 1
-                console.log(pl)
+                    //console.log(pl)
                 wx.cloud.callFunction({
                     // 云函数名称
                     name: 'plus',
@@ -371,7 +371,7 @@ Page({
                     },
                     success: function(res) {
                         wx.hideLoading()
-                        console.log(res)
+                            //console.log(res)
                         wx.showModal({
                             title: '扣除积分',
                             content: '积分扣除成功',
@@ -382,16 +382,16 @@ Page({
                 })
             },
             fail: function(res) {
-                console.log(res.errMsg)
+                //console.log(res.errMsg)
                 wx.hideLoading()
-                console.log(res)
+                    //console.log(res)
 
             }
         })
 
     },
 
-    inner:function(e){
+    inner: function(e) {
         wx.showLoading({
             title: '请稍后',
             mask: 'true',
@@ -408,7 +408,7 @@ Page({
                 title: title,
             },
             success: function(res) {
-                console.log(res)
+                //console.log(res)
                 wx.hideLoading()
                 wx.showModal({
                     title: '内部名额',

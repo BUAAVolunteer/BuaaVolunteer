@@ -28,7 +28,11 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-
+        wx.showModal({
+            title: '这是只有管理员才能进来的页面',
+            content: '暂时可以方便管理员查看功能，请不要报名哦~数据也是互通的',
+            showCancel: false,
+        })
     },
     /**
      * 生命周期函数--监听页面显示

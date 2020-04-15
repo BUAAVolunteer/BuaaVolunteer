@@ -58,14 +58,14 @@ Page({
             })
             .get({
                 success: function(res) {
-                    console.log(res.data)
+                    //console.log(res.data)
                     let data = res.data
                     if (data.length == 0 || !data[0].campus || !data[0].qqnum) {
                         wx.hideLoading()
                         that.setData({
-                            register: 1
-                        })
-                        console.log("reg", that.data.register)
+                                register: 1
+                            })
+                            //console.log("reg", that.data.register)
                     } else {
                         that.setData({
                             register: 0
@@ -73,32 +73,33 @@ Page({
                         var time = 0
                         var score = 0
                             //管理员判断
-                        console.log(score)
-                        db.collection('admin').where({
-                                _openid: app.globalData.openid,
-                            })
-                            .get({
-                                success: function(res) {
-                                    wx.hideLoading()
-                                    if (res.data.length == 0) {
-                                        that.setData({
-                                            admin: 0
-                                        })
-                                    } else {
-                                        that.setData({
-                                            admin: 1
-                                        })
-                                    }
+                            // console.log(score)
+                            // db.collection('admin').where({
+                            //         _openid: app.globalData.openid,
+                            //     })
+                            //     .get({
+                            //         success: function(res) {
+                            //             
+                            //             if (res.data.length == 0) {
+                            //                 that.setData({
+                            //                     admin: 0
+                            //                 })
+                            //             } else {
+                            //                 that.setData({
+                            //                     admin: 1
+                            //                 })
+                            //             }
 
-                                }
-                            })
+                        //         }
+                        //     })
+                        wx.hideLoading()
                         that.setData({
                             person_list: res.data,
                             totalscore: res.data[0].score.toFixed(1),
                             totaltime: res.data[0].time
                         })
 
-                        console.log(res.data[0].phone - '0')
+                        //console.log(res.data[0].phone - '0')
 
 
 
@@ -117,6 +118,30 @@ Page({
 
 
     },
+    admin: function() {
+        db.collection('admin').where({
+                _openid: app.globalData.openid,
+            })
+            .get({
+                success: function(res) {
+                    if (res.data.length == 0) {
+                        wx.showToast({
+                            title: '这里是小咕的秘密基地哦！不能让你进来的啦QAQ',
+                            icon: 'none'
+                        })
+                    } else {
+                        wx.navigateTo({
+                            url: '../admin/admin',
+                            success: (result) => {
+
+                            },
+                            fail: () => {},
+                            complete: () => {}
+                        });
+                    }
+                }
+            })
+    },
     program_open: function() {
         var that = this;
         that.setData({
@@ -124,19 +149,34 @@ Page({
         });
     },
     secret: function() {
-        wx.navigateTo({
-            url: '../secret/secret',
-            success: (result) => {
+        db.collection('admin').where({
+                _openid: app.globalData.openid,
+            })
+            .get({
+                success: function(res) {
+                    if (res.data.length == 0) {
+                        wx.showToast({
+                            title: '这里也是小咕的秘密基地！',
+                            icon: 'none'
+                        })
+                    } else {
+                        wx.navigateTo({
+                            url: '../secret/secret',
+                            success: (result) => {
 
-            },
-            fail: () => {},
-            complete: () => {}
-        });
+                            },
+                            fail: () => {},
+                            complete: () => {}
+                        });
+                    }
+                }
+            })
+
     },
     surprise: function() {
         wx.showModal({
             title: '这也许是一个彩蛋',
-            content: '隔壁北邮小程序都5.0了\n不开心！(￢︿̫̿￢☆)',
+            content: '隔壁北邮小程序都5.0了\n不开心！ToT',
             showCancel: false,
         })
     },

@@ -144,7 +144,7 @@ Page({
         })
     },
     openbutton: function(e) {
-        console.log(this.data.SignUpList[e.target.id].checked)
+        //console.log(this.data.SignUpList[e.target.id].checked)
         for (var i = 0; i < max - 1; i++) {
             let change = 'SignUpList[' + i + '].checked'
             if (i == e.target.id) {
@@ -171,27 +171,27 @@ Page({
         for (let i = 0; i < slist.length; i++) {
             DownloadList.push(slist[i].list);
         }
-        console.log(DownloadList)
+        //console.log(DownloadList)
         db.collection('project').where({
             title: that.data.title
         }).field({
             check: true
         }).get({
-            success: function(res){
-                if (res.data[0].check != -1){
+            success: function(res) {
+                if (res.data[0].check != -1) {
                     wx.showModal({
-                      title: "报名未完成",
-                      content: "报名尚未完成，请等待完成后再导出",
-                      showCancel: false
+                        title: "报名未完成",
+                        content: "报名尚未完成，请等待完成后再导出",
+                        showCancel: false
                     })
                     return;
-                }else{
+                } else {
                     //发送订阅消息
                     for (let i = 1; i < DownloadList.length; i++) {
                         let openid = DownloadList[i][DownloadList[i].length - 3]
                         let date = DownloadList[i][DownloadList[i].length - 1]
                         let detail = "QQ群：" + qqnum
-                        console.log(openid, date, detail)
+                            //console.log(openid, date, detail)
                         wx.cloud.callFunction({
                             name: 'Signup',
                             data: {
@@ -201,7 +201,11 @@ Page({
                                 detail: detail
                             },
                             success: function(res) {
-                                console.log(res)
+                                //console.log(res)
+                                wx.showToast({
+                                    title: '发送成功',
+                                    icon: 'none'
+                                })
                             }
                         })
                     }
@@ -213,11 +217,11 @@ Page({
                             list: DownloadList
                         },
                         success: function(res) {
-                            console.log(res)
+                            //console.log(res)
                             wx.cloud.downloadFile({
                                 fileID: res.result.fileID,
                                 success: function(res) {
-                                    console.log(res)
+                                    //console.log(res)
                                     wx.saveFile({
                                         tempFilePath: res.tempFilePath,
                                         success: function(res) {
@@ -254,7 +258,7 @@ Page({
             }
         })
 
-        
+
     },
     sift: function() {
         clearInterval(iv);

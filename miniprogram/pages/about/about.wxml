@@ -15,14 +15,14 @@
         </view>
 
         <!--蓝小咕入口-->
-        <navigator wx:if="{{register==0}}" open-type="redirect" wx:if="{{admin==1}}" open-type="navigate" hover-class='none' url="../admin/admin">
-            <image class="name-image-admin" mode="widthFix" src="../../image/up.png" />
-        </navigator>
-
-        <!--普通蓝小咕-->
-        <view wx:if="{{register==0}}" wx:if="{{admin==0}}">
+        <view wx:if="{{register==0}}" open-type="navigate" hover-class='none' bind:tap="admin">
             <image class="name-image-admin" mode="widthFix" src="../../image/up.png" />
         </view>
+
+        <!--<!--普通蓝小咕
+        <view wx:if="{{register==0}}" wx:if="{{admin==0}}">
+            <image class="name-image-admin" mode="widthFix" src="../../image/up.png" />
+        </view>-->
 
         <!--个性签名框-->
         <view wx:if="{{register==0}}" class="center">
@@ -122,8 +122,7 @@
 </navigator>
 
 <!--底部背景图片-->
-<image wx:if="{{admin}}" bindtap="secret"  mode="widthFix" class="bottom-img" src="../../image/down.png" />
-<image wx:else  mode="widthFix" class="bottom-img" src="../../image/down.png" />
+<image bindtap="secret" mode="widthFix" class="bottom-img" src="../../image/down.png" />
 </view>
 
 <view wx:if="{{register==1}}" class="no-register" >

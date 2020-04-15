@@ -55,7 +55,7 @@ Page({
                         })
                     } else {
                         /**获取个人信息 */
-                        console.log(res.data[0])
+                        //console.log(res.data[0])
                         wx.hideLoading()
                         var a = res.data[0].history.reverse()
                         that.setData({

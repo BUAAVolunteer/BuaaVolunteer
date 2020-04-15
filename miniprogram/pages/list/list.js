@@ -53,13 +53,13 @@ Page({
         wx.cloud.callFunction({
             name: 'GetProject',
             success: function(res) {
-                console.log(res)
+                //console.log(res)
                 max = res.result.data.length;
                 for (let i = 0; i < max; i++) {
                     let pickitem = {
                         title: res.result.data[i].title,
                         date: res.result.data[i].date,
-                        time : res.result.data[i].time,
+                        time: res.result.data[i].time,
                         qqnum: res.result.data[i].qqnum,
                         checked: false,
                         edit: res.result.data[i].check,
@@ -73,7 +73,13 @@ Page({
                 wx.hideLoading();
             },
             fail: function(res) {
-                console.log(res)
+                //console.log(res)
+                wx.hideLoading();
+                wx.showModal({
+                    title: '错误',
+                    content: '没有找到记录，请检查网络或重启小程序',
+                    showCancel: false
+                })
             }
         })
 
@@ -86,7 +92,7 @@ Page({
         })
     },
     openbutton: function(e) {
-        console.log(e.target.id)
+        //console.log(e.target.id)
         for (var i = 0; i < max; i++) {
             let change = 'picker[' + i + '].checked'
             if (i == e.target.id) {
@@ -101,31 +107,31 @@ Page({
         }
     },
     openconfirm: function(e) {
-        console.log(e)
+        //console.log(e)
         var that = this;
         var ID = e.currentTarget.id;
         var picker = that.data.picker;
-        console.log(picker[ID].title);
+        //console.log(picker[ID].title);
         wx.redirectTo({
             url: '../confirm/confirm?title=' + picker[ID].title,
         });
     },
     openedit: function(e) {
-        console.log(e)
+        //console.log(e)
         var that = this;
         var ID = e.currentTarget.id;
         var picker = that.data.picker;
-        console.log(picker[ID].title);
+        //console.log(picker[ID].title);
         wx.redirectTo({
             url: '../edit/edit?title=' + picker[ID].title,
         });
     },
     opentextarea: function(e) {
-        console.log(e)
+        //console.log(e)
         var that = this;
         var ID = e.currentTarget.id;
         var picker = that.data.picker;
-        console.log(picker[ID].title);
+        //console.log(picker[ID].title);
         wx.redirectTo({
             url: '../textarea/textarea?title=' + picker[ID].title,
         })
@@ -140,7 +146,7 @@ Page({
         })
     },
     add: function(e) {
-        console.log(e)
+        //console.log(e)
         wx.redirectTo({
             url: '../textarea/textarea?title=' + '发布一个新志愿',
         })

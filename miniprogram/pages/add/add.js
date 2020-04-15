@@ -30,13 +30,13 @@ Page({
 
     },
     PickerChange(e) {
-        console.log(e);
+        //console.log(e);
         this.setData({
             index: e.detail.value
         })
     },
     PickerChange2(e) {
-        console.log(e);
+        //console.log(e);
         this.setData({
             index2: e.detail.value
         })
@@ -62,9 +62,9 @@ Page({
         })
     },
     order_submit: function(e) {
-        console.log(e.detail.value)
+        //console.log(e.detail.value)
         if (this.data.index == null) {
-            console.log(e.detail.value.title)
+            //console.log(e.detail.value.title)
             wx.showModal({
                 title: '错误',
                 content: '请选择项目名称',
