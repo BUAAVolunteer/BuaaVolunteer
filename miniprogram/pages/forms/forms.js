@@ -2,12 +2,12 @@
 const db = wx.cloud.database();
 const _ = db.command;
 const app = getApp();
-var formConfig = [];
-var watcher; //监听事件
-var getname, getphone, getpersonnum, getqqnum, getcampus; //person集合获取的信息
-var uplist = [], //总上传数据
+let formConfig = [];
+let watcher = null; //监听事件
+let getname, getphone, getpersonnum, getqqnum, getcampus; //person集合获取的信息
+let uplist = [], //总上传数据
     listitem = []; //一个人的信息
-var qqnum;
+let qqnum;
 Page({
 
     /**
@@ -26,7 +26,7 @@ Page({
     onLoad: function(options) {
         //console.log(options.title, options.stime)
         qqnum = options.qqnum
-        console.log(qqnum)
+            //console.log(qqnum)
         wx.showLoading({
             title: '加载中',
         })
@@ -34,8 +34,8 @@ Page({
             title: options.title,
             stime: options.stime
         })
-        var that = this;
-        var ti = options.title;
+        let that = this;
+        let ti = options.title;
         db.collection('person').where({
                 _openid: app.globalData.openid
             })
@@ -47,10 +47,7 @@ Page({
                     getpersonnum = res.data[0].personnum;
                     getqqnum = res.data[0].qqnum;
                     getcampus = res.data[0].campus;
-                    console.log(getname, getphone, getpersonnum, getqqnum, getcampus);
-
-                    //这里到时候加上合法性的判断
-                    //合法性判断已转移至volunteer
+                    //console.log(getname, getphone, getpersonnum, getqqnum, getcampus);
 
                     db.collection('form')
                         .where({
@@ -64,6 +61,7 @@ Page({
                                 that.setData({
                                     formList: res.data[0]
                                 })
+                                that.watch(); //调用监听方法
                             },
                             fail: function() {
                                 wx.hideLoading();
@@ -72,50 +70,6 @@ Page({
                                     content: '获取记录失败,请检查网络或反馈给管理员',
                                     showCancel: false,
                                 })
-                            }
-                        })
-
-                    //watcher是一个页面监听事件
-                    //目的是实时修改页面中选项的“剩余数量”
-
-                    watcher = db.collection('form')
-                        // 按 progress 降序
-                        //.orderBy('progress', 'desc')
-                        // 取按 orderBy 排序之后的前 10 个
-                        //.limit(10)
-                        .where({
-                            title: ti
-                        })
-                        .watch({
-                            onChange: function(snapshot) {
-                                //console.log('docs\'s changed events', snapshot.docChanges)
-                                //console.log('query result snapshot after the event', snapshot.docs)
-                                //console.log('is init data', snapshot.type === 'init')
-                                var download = snapshot.docs[0];
-                                //console.log('dl', dl)
-                                //修改页面中
-                                var itemi = download.formInfo;
-                                var di = itemi.length;
-                                for (var j = 0; j < di; j++) {
-                                    var itemj = itemi[j];
-                                    if (itemj.limit) {
-                                        var itemk = itemj.data;
-                                        var kl = itemk.length;
-                                        for (var k = 0; k < kl; k++) {
-                                            var limit = itemk[k].limit;
-                                            let target = `formList.formInfo[` + j + `].data[` + k + `].limit`;
-                                            //console.log([target])
-                                            that.setData({
-                                                [target]: limit
-                                            })
-                                        }
-
-                                    }
-                                }
-
-                            },
-                            onError: function(err) {
-                                console.error('the watch closed because of error', err)
                             }
                         })
                 },
@@ -131,27 +85,50 @@ Page({
 
 
     },
-    text: function(e) {
-        let result = [];
-        formConfig.forEach((item, i) => {
-            result.push(item.formInfo)
-        })
-        var forms = result.reduce((a, b) => {
-                return a.concat(b)
+    watch: function() {
+        //watcher是一个页面监听事件
+        //目的是实时修改页面中选项的“剩余数量”
+        let that = this;
+        watcher = db.collection('form')
+            .where({
+                title: that.data.title
             })
-            //console.log('forms', forms);
-        var limit = [
-            [],
-            [],
-            [],
-            []
-        ];
-        for (var key in forms) {
+            .watch({
+                onChange: function(snapshot) {
+                    //console.log('docs\'s changed events', snapshot.docChanges)
+                    //console.log('query result snapshot after the event', snapshot.docs)
+                    //console.log('is init data', snapshot.type === 'init')
+                    let download = snapshot.docs[0];
+                    //console.log('dl', dl)
+                    //修改页面中
+                    let itemi = download.formInfo;
+                    let di = itemi.length;
+                    for (let j = 0; j < di; j++) {
+                        let itemj = itemi[j];
+                        if (itemj.limit) {
+                            let itemk = itemj.data;
+                            let kl = itemk.length;
+                            for (let k = 0; k < kl; k++) {
+                                let limit = itemk[k].limit;
+                                let target = `formList.formInfo[` + j + `].data[` + k + `].limit`;
+                                //console.log([target])
+                                that.setData({
+                                    [target]: limit
+                                })
+                            }
 
-            var items = forms[key];
-            var v = that.selectComponent('#' + items.id);
-            v.show();
-        }
+                        }
+                    }
+
+                },
+                onError: function(err) {
+                    wx.showModal({
+                        title: '错误',
+                        content: '获取记录失败,请检查网络或反馈给管理员',
+                        showCancel: false,
+                    })
+                }
+            })
     },
     formValidate: function(item) {
         if (item.force) {
@@ -162,11 +139,9 @@ Page({
                 value
             } = item.role;
             //console.log('value', value);
-            //console.log('123')
             if (type === 'reg') {
                 //正则表达式
                 value = util.vbind(value)
-                    //console.log('value:::', value);
                 return false;
                 if (value.test(item.input_text)) {
                     return true;
@@ -199,14 +174,15 @@ Page({
                         icon: 'none'
                     })
                     return false;
-                } else {
+                } else
                     return true;
-                }
             }
         }
         return true;
     },
     getInputValue: function() {
+        if (watcher)
+            watcher.close();
         this.setData({
             loading: true
         })
@@ -243,7 +219,7 @@ Page({
 
             let items = forms[key];
             let v = that.selectComponent('#' + items.id);
-            console.log(v, items.id)
+            //console.log(v, items.id)
 
             if (v.limit && (v.type === 'radio' || v.type === 'checkbox')) { //有限制的进行筛选
                 let l = v.choose[0].length;
@@ -259,8 +235,6 @@ Page({
                 }
 
             }
-
-
             //判断是否必填项为空
             if (that.formValidate(v)) {
                 //合法情况
@@ -275,6 +249,7 @@ Page({
                         limit[1] = limit[1].concat(v.choose[1]);
                         limit[2] = limit[2].concat(v.choose[2]);
                     }
+                    //这边是否缺少else？
                     if (v.detail) {
                         for (let i = 0; i < l; i++) {
                             limit[3] = limit[3].concat(den);
@@ -336,6 +311,7 @@ Page({
             })
             listitem = [];
             forms = [];
+            that.watch();
             return;
         }
         listitem.push(app.globalData.openid)
@@ -370,6 +346,7 @@ Page({
                         content: '您所选择的部分名额已满，请重新选择！',
                         showCancel: false,
                     })
+                    that.watch();
                     return;
                 } else {
                     wx.showModal({
@@ -395,6 +372,7 @@ Page({
                 })
                 uplist = [];
                 forms = [];
+                that.watch();
             }
         })
 
