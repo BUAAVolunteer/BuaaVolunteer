@@ -5,13 +5,13 @@ const app = getApp();
 // num表示需要四舍五入的小数
 // s表示需要保留几位小数
 function toFixed(num, s) {
-    var times = Math.pow(10, s);
+    let times = Math.pow(10, s);
     if (num < 0) {
         num = Math.abs(num); //先把负数转为正数，然后四舍五入之后再转为负数
-        var des = parseInt((num * times + 0.5), 10) / times;
+        let des = parseInt((num * times + 0.5), 10) / times;
         return -des;
     } else {
-        var des = parseInt((num * times + 0.5), 10) / times;
+        let des = parseInt((num * times + 0.5), 10) / times;
         return des;
     }
 }

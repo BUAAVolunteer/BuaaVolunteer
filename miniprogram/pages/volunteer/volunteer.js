@@ -264,6 +264,7 @@ Page({
                 } else {
                     wx.showToast({
                         title: '订阅后才能报名志愿~',
+                        icon: 'none',
                         duration: 1000,
                         success(data) {
                             //成功

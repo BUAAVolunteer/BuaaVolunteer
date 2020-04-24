@@ -1,32 +1,28 @@
 <!--components/text-time/text-time.wxml-->
 <view class='reports-form-box form-inner'>
-	<view class='input-all-width'>
-		<view class='form-inputname'>{{forminfo.label}}
-			<text wx:if="{{forminfo.force}}" class="force_text">*</text>
-		</view>
-	</view>
-	<view wx:if="{{forminfo.text.length>0}}" class="form-describe input-all-width">
-		{{forminfo.text}}
-	</view>
-	<radio-group class="block" bindchange="radioChange">
-		<view class="radio-group margin-top">
-			<radio
-			 wx:if="{{forminfo.limit&&item.limit>0 || !forminfo.limit}}"
-			 class="blue"
-			 style="display:flex;"
-			 wx:for-items="{{forminfo.data}}"
-			 value='{{item.name}},{{item.id}},{{item.duration}}'
-			 wx:key="id"
-			>
-				<view class="radio-box">
-					{{item.name}}
-					<text wx:if="{{forminfo.limit}}" class="form-describe" style="margin-left:20rpx;">剩余{{item.limit}}</text>
-					<text wx:if="{{forminfo.duration}}" class="form-describe" style="margin-left:20rpx;">时长{{item.duration}}</text>
-				</view>
-
-			</radio>
-		</view>
-	</radio-group>
+  <view class='input-all-width'>
+    <view class='form-inputname'>{{forminfo.label}}
+      <text wx:if="{{forminfo.force}}" class="force_text">*</text>
+    </view>
+  </view>
+  <view wx:if="{{forminfo.text.length>0}}" class="form-describe input-all-width">
+    {{forminfo.text}}
+  </view>
+  <radio-group class="block" bindchange="radioChange" wx:for-items="{{forminfo.data}}" wx:key="id">
+    <radio class="blue" style="display:flex;" value='{{item.name}},{{item.id}},{{item.duration}}' wx:if="{{forminfo.limit&&item.limit>0 || !forminfo.limit}}">
+      <view class="radio-box">
+        {{item.name}}
+        <text wx:if="{{forminfo.limit}}" class="form-describe" style="margin-left:20rpx;">剩余{{item.limit}}</text>
+        <text wx:if="{{forminfo.duration}}" class="form-describe" style="margin-left:20rpx;">时长{{item.duration}}</text>
+      </view>
+    </radio>
+    <radio class="blue" style="display:flex;" value='{{item.name}},{{item.id}},{{item.duration}}' wx:else disabled="{{true}}">
+      <view class="radio-box">
+        {{item.name}}
+        <text wx:if="{{forminfo.limit}}" class="form-describe" style="margin-left:20rpx;">剩余{{item.limit}}</text>
+        <text wx:if="{{forminfo.duration}}" class="form-describe" style="margin-left:20rpx;">时长{{item.duration}}</text>
+      </view>
+    </radio>
+  </radio-group>
 
 </view>
-

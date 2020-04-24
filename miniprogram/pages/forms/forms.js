@@ -181,8 +181,10 @@ Page({
         return true;
     },
     getInputValue: function() {
-        if (watcher)
+        if (watcher){
             watcher.close();
+        }
+          
         this.setData({
             loading: true
         })
@@ -220,21 +222,21 @@ Page({
             let items = forms[key];
             let v = that.selectComponent('#' + items.id);
             //console.log(v, items.id)
+            console.log(v.choose);
+            // if (v.limit && (v.type === 'radio' || v.type === 'checkbox')) { //有限制的进行筛选
+            //     let l = v.choose[0].length;
+            //     for (var i = 0; i < l; i++) {
+            //         var j = v.choose[0][i];
+            //         var k = v.choose[1][i]
+            //         if (that.data.formList.formInfo[j].data[k].limit <= 0) {
+            //             v.choose[0].splice(i, 1);
+            //             v.choose[1].splice(i, 1);
+            //             v.choose[2].splice(i, 1);
+            //             v.input_text.splice(i, 1);
+            //         }
+            //     }
 
-            if (v.limit && (v.type === 'radio' || v.type === 'checkbox')) { //有限制的进行筛选
-                let l = v.choose[0].length;
-                for (var i = 0; i < l; i++) {
-                    var j = v.choose[0][i];
-                    var k = v.choose[1][i]
-                    if (that.data.formList.formInfo[j].data[k].limit <= 0) {
-                        v.choose[0].splice(i, 1);
-                        v.choose[1].splice(i, 1);
-                        v.choose[2].splice(i, 1);
-                        v.input_text.splice(i, 1);
-                    }
-                }
-
-            }
+            // }
             //判断是否必填项为空
             if (that.formValidate(v)) {
                 //合法情况

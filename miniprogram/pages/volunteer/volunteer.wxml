@@ -19,9 +19,9 @@
 					<!--图片组件-->
 					<view class="items">
 						<!--预告-->
-						<image wx:if="{{currenDate<items.date || currenTime<items.time}}" class="items-pic" src='cloud://buaalx-w5aor.6275-buaalx-w5aor-1300053277/volunteer-pre//{{items.title}}.png' />
+						<image wx:if="{{currenDate<=items.date && currenTime<items.time}}" class="items-pic" src='cloud://buaalx-w5aor.6275-buaalx-w5aor-1300053277/volunteer-pre//{{items.title}}.png' />
 						<!--招募-->
-						<image wx:elif="{{currenDate > items.date ||currenDate == items.date && currenTime>=items.time}}" class="items-pic" src='cloud://buaalx-w5aor.6275-buaalx-w5aor-1300053277/volunteer-onshow/{{items.title}}.png' />
+						<image wx:else class="items-pic" src='cloud://buaalx-w5aor.6275-buaalx-w5aor-1300053277/volunteer-onshow/{{items.title}}.png' />
 					</view>
 			</view>
 			
