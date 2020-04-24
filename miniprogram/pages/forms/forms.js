@@ -41,7 +41,7 @@ Page({
             })
             .get({
                 success: function(res) {
-                    console.log(res);
+                    //console.log(res);
                     getname = res.data[0].name;
                     getphone = res.data[0].phone;
                     getpersonnum = res.data[0].personnum;
@@ -55,7 +55,7 @@ Page({
                         })
                         .get({
                             success: function(res) {
-                                console.log(res.data)
+                                //console.log(res.data)
                                 wx.hideLoading();
                                 formConfig.push(res.data[0]);
                                 that.setData({
@@ -222,7 +222,7 @@ Page({
             let items = forms[key];
             let v = that.selectComponent('#' + items.id);
             //console.log(v, items.id)
-            console.log(v.choose);
+            //console.log(v.choose);
             if (v.limit && (v.type === 'radio' || v.type === 'checkbox')) { //有限制的进行筛选
                 let l = v.choose[0].length;
                 for (var i = 0; i < l; i++) {
