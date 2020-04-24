@@ -71,8 +71,8 @@ Component({
 
             var v = e.detail.value;
             var a = v.split(',');
-            var input_text = a[0];
-
+            var input_text = [];
+            input_text.push(a[0])
             var value = [];
             value.push(parseInt(a[1]));
 
