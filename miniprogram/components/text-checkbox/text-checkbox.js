@@ -87,7 +87,7 @@ Component({
             }
             var choose = [];
             choose.push(id, value, duration)
-            console.log(input_text, choose)
+            //console.log(input_text, choose)
             that.setData({
                 input_text,
                 choose
