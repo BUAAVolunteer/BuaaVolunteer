@@ -181,10 +181,8 @@ Page({
         return true;
     },
     getInputValue: function() {
-        if (watcher){
+        if (watcher)
             watcher.close();
-        }
-          
         this.setData({
             loading: true
         })
@@ -199,183 +197,187 @@ Page({
         let duration = 0;
         let detail = "";
         let den = 0;
-        formConfig.forEach((item, i) => {
-                result.push(item.formInfo)
-            })
-            //console.log('result', result);
+        setTimeout(function(){
+            formConfig.forEach((item, i) => {
+                    result.push(item.formInfo)
+                })
+                //console.log('result', result);
 
-        let temp = [];
-        temp.push(result[0]);
-        //console.log('temp', temp);
-        let forms = temp.reduce((a, b) => {
-                return a.concat(b)
-            })
+            let temp = [];
+            temp.push(result[0]);
             //console.log('temp', temp);
-        let limit = [
-            [],
-            [],
-            [],
-            []
-        ];
-        for (let key in forms) {
+            let forms = temp.reduce((a, b) => {
+                    return a.concat(b)
+                })
+                //console.log('temp', temp);
+            let limit = [
+                [],
+                [],
+                [],
+                []
+            ];
+            for (let key in forms) {
 
-            let items = forms[key];
-            let v = that.selectComponent('#' + items.id);
-            //console.log(v, items.id)
-            //console.log(v.choose);
-            if (v.limit && (v.type === 'radio' || v.type === 'checkbox')) { //有限制的进行筛选
-                let l = v.choose[0].length;
-                for (var i = 0; i < l; i++) {
-                    var j = v.choose[0][i];
-                    var k = v.choose[1][i]
-                    if (that.data.formList.formInfo[j].data[k].limit <= 0) {
-                        v.choose[0].splice(i, 1);
-                        v.choose[1].splice(i, 1);
-                        v.choose[2].splice(i, 1);
-                        v.input_text.splice(i, 1);
-                    }
-                }
-            }
-            //判断是否必填项为空
-            if (that.formValidate(v)) {
-                //合法情况
-                //console.log(v.choose)
-                let input = v.input_text;
-                if (v.type === 'div' || v.type === 'describe')
-                    continue;
-                else if (v.type === 'radio' || v.type === 'checkbox') {
+                let items = forms[key];
+                let v = that.selectComponent('#' + items.id);
+                //console.log(v, items.id)
+                //console.log(v.choose);
+                if (v.limit && (v.type === 'radio' || v.type === 'checkbox')) { //有限制的进行筛选
                     let l = v.choose[0].length;
-                    if (v.limit) {
-                        limit[0] = limit[0].concat(v.choose[0]);
-                        limit[1] = limit[1].concat(v.choose[1]);
-                        limit[2] = limit[2].concat(v.choose[2]);
-                    }
-                    //这边是否缺少else？
-                    if (v.detail) {
-                        for (let i = 0; i < l; i++) {
-                            limit[3] = limit[3].concat(den);
-                            den++;
+                    for (let i = 0; i < l; i++) {
+                        let j = v.choose[0][i];
+                        let k = v.choose[1][i];
+                        if (that.data.formList.formInfo[j].data[k].limit <= 0) {
+                            v.choose[0].splice(i, 1);
+                            v.choose[1].splice(i, 1);
+                            v.choose[2].splice(i, 1);
+                            v.input_text.splice(i, 1);
                         }
-                    } else {
-                        limit[3] = limit[3].concat(0);
                     }
-                    //转化拼接多选
-                    if (v.type === 'checkbox') {
-                        let instr = "";
-                        for (let i = 0; i < input.length; i++) {
-                            instr = instr + input[i] + ";";
+
+                }
+                //判断是否必填项为空
+                if (that.formValidate(v)) {
+                    //合法情况
+                    //console.log(v.choose)
+                    let input = v.input_text;
+                    if (v.type === 'div' || v.type === 'describe')
+                        continue;
+                    else if (v.type === 'radio' || v.type === 'checkbox') {
+                        let l = v.choose[0].length;
+                        if (v.limit) {
+                            limit[0] = limit[0].concat(v.choose[0]);
+                            limit[1] = limit[1].concat(v.choose[1]);
+                            limit[2] = limit[2].concat(v.choose[2]);
                         }
-                        listitem.push(instr)
-                    } else
+                        //这边是否缺少else？
+                        if (v.detail) {
+                            for (let i = 0; i < l; i++) {
+                                limit[3] = limit[3].concat(den);
+                                den++;
+                            }
+                        } else {
+                            limit[3] = limit[3].concat(0);
+                        }
+                        //转化拼接多选
+                        if (v.type === 'checkbox') {
+                            let instr = "";
+                            for (let i = 0; i < input.length; i++) {
+                                instr = instr + input[i] + ";";
+                            }
+                            listitem.push(instr)
+                        } else
+                            listitem.push(input)
+
+                    } else //对于input组件
                         listitem.push(input)
 
-                } else //对于input组件
-                    listitem.push(input)
 
-
-                //计算时长，添加时间备注
-                if (v.duration) {
-                    for (let i = 0; i < v.choose[2].length; i++) {
-                        duration += v.choose[2][i];
+                    //计算时长，添加时间备注
+                    if (v.duration) {
+                        for (let i = 0; i < v.choose[2].length; i++) {
+                            duration += v.choose[2][i];
+                        }
                     }
-                }
 
-                if (v.detail) {
-                    for (let i = 0; i < v.choose[1].length; i++) {
-                        let m = v.choose[1][i];
-                        detail = detail + v.data[m].detail + ";"
+                    if (v.detail) {
+                        for (let i = 0; i < v.choose[1].length; i++) {
+                            let m = v.choose[1][i];
+                            detail = detail + v.data[m].detail + ";"
+                        }
                     }
-                }
 
 
-            } else {
-                //不合法情况
-                //页面初始化
-                that.setData({
-                    loading: false
-                })
-                forms = [];
-                listitem = [];
-                return 0;
-            }
-        }
-        //合法性检验完毕
-        //本地防线，如果没有时长则不允许提交
-        if (duration == 0) {
-            that.setData({
-                loading: false
-            })
-            wx.showModal({
-                title: '错误',
-                content: '您所选择的部分选项已满，请重新选择！',
-                showCancel: false,
-            })
-            listitem = [];
-            forms = [];
-            that.watch();
-            return;
-        }
-        listitem.push(app.globalData.openid)
-        listitem.push(duration)
-        listitem.push(detail)
-        console.log(limit)
-            //console.log(listitem)
-
-        //uplist = { inf: listitem }
-        uplist.push(listitem)
-        listitem = [];
-        forms = [];
-        //console.log(uplist);
-        wx.cloud.callFunction({
-            name: "uploadData",
-            data: {
-                title: that.data.title,
-                stime: that.data.stime,
-                list: uplist,
-                limit: limit
-            },
-            success: function(res) {
-                //console.log(res)
-
-                that.setData({
-                    loading: false
-                })
-                uplist = [];
-                if (res.result === "error") {
-                    wx.showModal({
-                        title: '错误',
-                        content: '您所选择的部分名额已满，请重新选择！',
-                        showCancel: false,
-                    })
-                    that.watch();
-                    return;
                 } else {
-                    wx.showModal({
-                        title: '提交成功',
-                        content: '请留意微信消息，并加入\nqq群:' + qqnum + '\n以便志愿开展',
-                        showCancel: false,
-                        success: function() {
-                            wx.redirectTo({
-                                url: '../history/history',
-                            })
-                        },
+                    //不合法情况
+                    //页面初始化
+                    that.setData({
+                        loading: false
                     })
+                    forms = [];
+                    listitem = [];
+                    return 0;
                 }
-            },
-            fail: function() {
+            }
+            //合法性检验完毕
+            //本地防线，如果没有时长则不允许提交
+            if (duration == 0) {
                 that.setData({
                     loading: false
                 })
                 wx.showModal({
-                    title: '上传信息错误',
-                    content: '请检查网络或重新提交',
-                    showCancel: false
+                    title: '错误',
+                    content: '您所选择的部分选项已满，请重新选择！',
+                    showCancel: false,
                 })
-                uplist = [];
+                listitem = [];
                 forms = [];
                 that.watch();
+                return;
             }
-        })
+            listitem.push(app.globalData.openid)
+            listitem.push(duration)
+            listitem.push(detail)
+            console.log(limit)
+                //console.log(listitem)
+
+            //uplist = { inf: listitem }
+            uplist.push(listitem)
+            listitem = [];
+            forms = [];
+            //console.log(uplist);
+            wx.cloud.callFunction({
+                name: "uploadData",
+                data: {
+                    title: that.data.title,
+                    stime: that.data.stime,
+                    list: uplist,
+                    limit: limit
+                },
+                success: function(res) {
+                    //console.log(res)
+
+                    that.setData({
+                        loading: false
+                    })
+                    uplist = [];
+                    if (res.result === "error") {
+                        wx.showModal({
+                            title: '错误',
+                            content: '您所选择的部分名额已满，请重新选择！',
+                            showCancel: false,
+                        })
+                        that.watch();
+                        return;
+                    } else {
+                        wx.showModal({
+                            title: '提交成功',
+                            content: '请留意微信消息，并加入\nqq群:' + qqnum + '\n以便志愿开展',
+                            showCancel: false,
+                            success: function() {
+                                wx.redirectTo({
+                                    url: '../history/history',
+                                })
+                            },
+                        })
+                    }
+                },
+                fail: function() {
+                    that.setData({
+                        loading: false
+                    })
+                    wx.showModal({
+                        title: '上传信息错误',
+                        content: '请检查网络或重新提交',
+                        showCancel: false
+                    })
+                    uplist = [];
+                    forms = [];
+                    that.watch();
+                }
+            })
+        },100)
+        
 
     },
     /**
