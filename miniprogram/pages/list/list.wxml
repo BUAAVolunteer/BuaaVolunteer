@@ -16,9 +16,13 @@
 	 class="items-box"
 	>
 		<view class="items-title" id="{{items.id}}" bindtap="openbutton">
+			<!--准备发布-->
 			<image wx:if="{{items.date > currenDate && items.edit==1 || items.date == currenDate && items.time > currenTime && items.edit==1}}" class="items-titleimg" src="../../icons/yes.png" />
-			<image wx:elif="{{items.date > currenDate && items.edit==0 || items.date == currenDate && items.time > currenTime && items.edit==0}}" class="items-titleimg" src="../../icons/warning.png" />
+			<!--正在招募-->
 			<image wx:elif="{{items.date < currenDate && items.edit==1 || items.date == currenDate && items.time <= currenTime && items.edit==1}}" class="items-titleimg" src="../../icons/working.png" />
+			<!--表单待编辑-->
+			<image wx:elif="{{items.edit==0}}" class="items-titleimg" src="../../icons/warning.png" />
+			<!--招募结束/为编辑详细信息-->
 			<image wx:else class="items-titleimg" src="../../icons/stop.png" />
 			{{items.title}}
 			<view class="items-titleimg2" id="{{items.id}}" data-id="{{items.id}}" bindtap="openconfirm">
