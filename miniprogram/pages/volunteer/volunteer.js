@@ -123,20 +123,20 @@ Page({
                                     dat[i].cnt = i;
                                     //底下几个实际上都是重复的，是字符串的拼接
                                     //目的是把数组中的各个字符串拼起来，并且加入换行符
-                                    dat[i].assure = dat[i].assure.reduce(function (preVlaue, n) {
-                                        return preVlaue + n + '\n';
+                                    dat[i].assure = dat[i].assure.reduce(function (preValue, n) {
+                                        return preValue + n + '\n';
                                     }, "")
-                                    dat[i].detail = dat[i].detail.reduce(function (preVlaue, n) {
-                                        return preVlaue + n + '\n';
+                                    dat[i].detail = dat[i].detail.reduce(function (preValue, n) {
+                                        return preValue + n + '\n';
                                     }, "")
-                                    dat[i].require = dat[i].require.reduce(function (preVlaue, n) {
-                                        return preVlaue + n + '\n';
+                                    dat[i].require = dat[i].require.reduce(function (preValue, n) {
+                                        return preValue + n + '\n';
                                     }, "")
-                                    dat[i].response = dat[i].response.reduce(function (preVlaue, n) {
-                                        return preVlaue + n + '\n';
+                                    dat[i].response = dat[i].response.reduce(function (preValue, n) {
+                                        return preValue + n + '\n';
                                     }, "")
-                                    dat[i].people = dat[i].people.reduce(function (preVlaue, n) {
-                                        return preVlaue + n + '\n';
+                                    dat[i].people = dat[i].people.reduce(function (preValue, n) {
+                                        return preValue + n + '\n';
                                     }, "")
                                 }
                                 //volunteer_list是页面展示出来的悬浮窗上的数据
