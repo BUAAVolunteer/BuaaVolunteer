@@ -112,7 +112,6 @@
     </view>
     <textarea class="block border edit-textarea" model:value="{{qqnum}}" placeholder="{{qqnump}}" maxlength="-1"/>
 </view>
-{{qqnum}}
 <view class="padding-xl">
    <button class="cu-btn block line-blue lg" bindtap="upload">已确认信息，发布志愿</button>
 </view>

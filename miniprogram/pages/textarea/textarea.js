@@ -20,36 +20,31 @@ Page({
                 type: 'detail',
                 content: "活动内容",
                 data: "",
-                placeholder: "1、参观北航的南校区和北校区。\n 2、进行入学报到。\n 3、入住宿舍",
-                list: []
+                placeholder: "1、参观北航的南校区和北校区。\n 2、进行入学报到。\n 3、入住宿舍"
             },
             people: {
                 type: 'people',
                 content: "招募人数",
                 data: "",
-                placeholder: "全体新生",
-                list: []
+                placeholder: "全体新生"
             },
             assure: {
                 type: 'assure',
                 content: "志愿者保障",
                 data: "",
-                placeholder: "获得在北航学习机会",
-                list: []
+                placeholder: "获得在北航学习机会"
             },
             require: {
                 type: 'require',
                 content: "特别提醒",
                 data: "",
-                placeholder: "1.特别提醒一\n2.特别提醒二\n3.特别提醒三",
-                list: []
+                placeholder: "1.特别提醒一\n2.特别提醒二\n3.特别提醒三"
             },
             response: {
                 type: 'response',
                 content: "负责人联系方式",
                 data: "",
-                placeholder: "曹老师 电话：12312312312",
-                list: []
+                placeholder: "曹老师 电话：12312312312"
             }
         }
     },
@@ -91,23 +86,13 @@ Page({
                         return preValue + n + '\n';
                     }, "").slice(0, -1)
 
-                    let assureList = 'array.assure.list'
                     let assureData = 'array.assure.data'
-                    let requireList = 'array.require.list'
                     let requireData = 'array.require.data'
-                    let detailList = 'array.detail.list'
                     let detailData = 'array.detail.data'
-                    let responseList = 'array.response.list'
                     let responseData = 'array.response.data'
-                    let peopleList = 'array.people.list'
                     let peopleData = 'array.people.data'
                     that.setData({
-                        [assureList]: download.assure, //一坨数据存在云端
-                        [detailList]: download.detail,
-                        [requireList]: download.require,
-                        [responseList]: download.response,
-                        [peopleList]: download.people,
-                        time: download.time,
+                        time: download.time,//一坨数据存在云端
                         date: download.date,
                         textarea: download.textarea,
                         [assureData]: assure, //拼接的用于屏幕输出的字符串
@@ -129,9 +114,15 @@ Page({
     enterTextarea: function (e) {
         let type = e.currentTarget.id;
         console.log('type',type)
-        let value = e.detail.value.split('\n');
+        // let value = e.detail.value.split('\n');
+        // console.log(value)
+        // let addList = 'array.' + type + '.list'
+        // this.setData({
+        //     [addList] : value
+        // })
+        let value = e.detail.value;
         console.log(value)
-        let addList = 'array.' + type + '.list'
+        let addList = 'array.' + type + '.data'
         this.setData({
             [addList] : value
         })
@@ -141,8 +132,8 @@ Page({
         let array = this.data.array;
         //检测信息缺失
         for (let i in array){
-            console.log(array[i])
-            if (!array[i].list || array[i].list == []) {
+            let addList = 'array.' + array[i].type + '.list'
+            if (!array[i].data || array[i].list == "") {
                 wx.showModal({
                     title: '缺少信息',
                     content: '请填写' + array[i].content,
@@ -210,12 +201,12 @@ Page({
                 time: that.data.time,
                 textarea: that.data.textarea,
                 place: that.data.place,
-                people: array.people.list,
-                requireList: array.require.list,
-                assureList:  array.assure.list,
-                detailList:  array.detail.list,
-                requireList: array.require.list,
-                responseList:array.response.list,
+                people: array.people.data.split('\n'),
+                requireList: array.require.data.split('\n'),
+                assureList:  array.assure.data.split('\n'),
+                detailList:  array.detail.data.split('\n'),
+                requireList: array.require.data.split('\n'),
+                responseList:array.response.data.split('\n'),
                 innerList: [],
                 signuplist: [],
                 qqnum: that.data.qqnum
