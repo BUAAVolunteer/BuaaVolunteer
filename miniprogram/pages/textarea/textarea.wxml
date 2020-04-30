@@ -92,70 +92,20 @@
 		<input style="width:90%;" model:value="{{place}}" />
 	</view>
 </view>
-<view class='edit-form-box form-inner'>
+<view wx:for="{{array}}" wx:for-item="item" wx:key="index" class='edit-form-box form-inner'>
 	<view class='edit-title'>
-		活动内容
+		{{item.content}}
 	</view>
 	<textarea
 	 auto-height="{{false}}"
 	 class="block border edit-textarea"
-	 bindinput="detail"
-	 value="{{detail}}"
-	 placeholder="{{detailp}}"
+	 bindinput="enterTextarea"
+	 id="{{item.type}}"
+	 value="{{item.data}}"
+	 placeholder="{{item.placeholder}}"
 	 maxlength="-1"
 	/>
 </view>
-
-<view class='edit-form-box form-inner'>
-    <view class='edit-title'>
-        招募人数
-    </view>
-    <textarea class="block border edit-textarea" bindinput='entertext' value="{{people}}" placeholder="{{peoplep}}" maxlength="-1"/>
-</view>
-
-<view class='edit-form-box form-inner'>
-	<view class='edit-title'>
-		志愿者保障
-	</view>
-	<textarea
-	 auto-height="{{false}}"
-	 class="block border edit-textarea"
-	 bindinput="assure"
-	 value="{{assure}}"
-	 id="assure"
-	 placeholder="{{assurep}}"
-	 maxlength="-1"
-	/>
-</view>
-
-<view class='edit-form-box form-inner'>
-	<view class='edit-title'>
-		特别提醒
-	</view>
-	<textarea
-	 auto-height="{{false}}"
-	 class="block border edit-textarea"
-	 bindinput="require"
-	 value="{{require}}"
-	 placeholder="{{requirep}}"
-	 maxlength="-1"
-	/>
-</view>
-
-<view class='edit-form-box form-inner'>
-	<view class='edit-title'>
-		负责人联系方式
-	</view>
-	<textarea
-	 auto-height="{{false}}"
-	 class="block border edit-textarea"
-	 bindinput="response"
-	 value="{{response}}"
-	 placeholder="{{responsep}}"
-	 maxlength="-1"
-	/>
-</view>
-
 <view class='edit-form-box form-inner'>
     <view class='edit-title'>
         qq群号

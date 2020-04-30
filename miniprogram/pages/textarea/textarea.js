@@ -10,25 +10,48 @@ Page({
     data: {
         title: "",
         etitle: "北航一日游",
-        assure: "",
-        assurep: "获得在北航学习机会",
-        assureList: [],
-        detail: "",
-        detailp: "1、参观北航的南校区和北校区。\n 2、进行入学报到。\n 3、入住宿舍",
-        detailList: [],
-        response: "",
-        responsep: "曹老师 电话：12312312312",
-        responseList: [],
-        require: "",
-        requirep: "1.特别提醒一\n2.特别提醒二\n3.特别提醒三",
-        requireList: [],
-        people: "",
-        peoplep: "全体新生",
         place: "",
         placep: "北京航空航天大学东南西北校区",
         time: "12:00",
         date: "2020-1-1",
-        qqnum: ""
+        qqnum: "",
+        array: {
+            detail: {
+                type: 'detail',
+                content: "活动内容",
+                data: "",
+                placeholder: "1、参观北航的南校区和北校区。\n 2、进行入学报到。\n 3、入住宿舍",
+                list: []
+            },
+            people: {
+                type: 'people',
+                content: "招募人数",
+                data: "",
+                placeholder: "全体新生",
+                list: []
+            },
+            assure: {
+                type: 'assure',
+                content: "志愿者保障",
+                data: "",
+                placeholder: "获得在北航学习机会",
+                list: []
+            },
+            require: {
+                type: 'require',
+                content: "特别提醒",
+                data: "",
+                placeholder: "1.特别提醒一\n2.特别提醒二\n3.特别提醒三",
+                list: []
+            },
+            response: {
+                type: 'response',
+                content: "负责人联系方式",
+                data: "",
+                placeholder: "曹老师 电话：12312312312",
+                list: []
+            }
+        }
     },
 
     /**
@@ -46,57 +69,52 @@ Page({
             }) //查询条件
             .get({ //更新数据库的操作
                 success: function (res) {
-                    var download = res.data[0]; //把data里的信息赋给download？
+                    let download = res.data[0]; //把data里的信息赋给download？
 
-                    var ass = download.assure;
-                    var l = ass.length;
-                    var assure = "";
-                    for (var i = 0; i < l; i++) {
-                        assure = assure + ass[i] + '\n';
-                    }
-                    l = assure.length;
-                    assure = assure.substr(0, l - 1); //substr获取字符 参数指定的是子串的开始位置和长度(start long)
+                    let assure = download.assure.reduce(function (preValue, n) {
+                        return preValue + n + '\n';
+                    }, "").slice(0, -1)
 
-                    var det = download.detail;
-                    l = det.length;
-                    var detail = "";
-                    for (var i = 0; i < l; i++) {
-                        detail = detail + det[i] + '\n';
-                    }
-                    l = detail.length;
-                    detail = detail.substr(0, l - 1);
+                    let detail = download.detail.reduce(function (preValue, n) {
+                        return preValue + n + '\n';
+                    }, "").slice(0, -1)
 
-                    var req = download.require;
-                    l = req.length;
-                    var require = "";
-                    for (var i = 0; i < l; i++) {
-                        require = require + req[i] + '\n';
-                    }
-                    l = require.length;
-                    require = require.substr(0, l - 1);
+                    let require = download.require.reduce(function (preValue, n) {
+                        return preValue + n + '\n';
+                    }, "").slice(0, -1)
 
-                    var res = download.response;
-                    l = res.length;
-                    var response = "";
-                    for (var i = 0; i < l; i++) {
-                        response = response + res[i] + '\n';
-                    }
-                    l = response.length;
-                    response = response.substr(0, l - 1);
+                    let response = download.response.reduce(function (preValue, n) {
+                        return preValue + n + '\n';
+                    }, "").slice(0, -1)
 
+                    let people = download.people.reduce(function (preValue, n) {
+                        return preValue + n + '\n';
+                    }, "").slice(0, -1)
+
+                    let assureList = 'array.assure.list'
+                    let assureData = 'array.assure.data'
+                    let requireList = 'array.require.list'
+                    let requireData = 'array.require.data'
+                    let detailList = 'array.detail.list'
+                    let detailData = 'array.detail.data'
+                    let responseList = 'array.response.list'
+                    let responseData = 'array.response.data'
+                    let peopleList = 'array.people.list'
+                    let peopleData = 'array.people.data'
                     that.setData({
-                        assureList: download.assure, //一坨数据存在云端
-                        detailList: download.detail,
-                        requireList: download.require,
-                        responseList: download.response,
+                        [assureList]: download.assure, //一坨数据存在云端
+                        [detailList]: download.detail,
+                        [requireList]: download.require,
+                        [responseList]: download.response,
+                        [peopleList]: download.people,
                         time: download.time,
                         date: download.date,
                         textarea: download.textarea,
-                        assure, //拼接的用于屏幕输出的字符串
-                        detail, //同名就不用再写一遍赋值
-                        require,
-                        response,
-                        people: download.people,
+                        [assureData]: assure, //拼接的用于屏幕输出的字符串
+                        [detailData]: detail, //同名就不用再写一遍赋值
+                        [requireData]: require,
+                        [responseData]: response,
+                        [peopleData]: people,
                         place: download.place,
                         qqnum: download.qqnum
                     })
@@ -108,99 +126,32 @@ Page({
     /*bindchange=  --->current 改变时会触发change事件
     我觉得是 相当于 弹出picker选定时间或输入框内容改变 value获取的input对象 然后可以成功触发 改变对应的值
     */
-    assure: function (e) {
-        console.log('run')
-        var tavalue = e.detail.value;
-        var a = tavalue.split('\n'); //内容用\n分隔赋值
-        var la = a.length;
-        var data = [];
-        for (var i = 0; i < la; i++) {
-            data.push(a[i]); //可向数组的末尾添加一个或多个元素，并返回新的长度
-        } //向data数组赋新的值
+    enterTextarea: function (e) {
+        let type = e.currentTarget.id;
+        console.log('type',type)
+        let value = e.detail.value.split('\n');
+        console.log(value)
+        let addList = 'array.' + type + '.list'
         this.setData({
-            assureList: data
-        }) //向assureList赋值
-        console.log('assurelist:', this.data.assureList)
-
-    },
-    detail: function (e) {
-        var tavalue = e.detail.value;
-        var a = tavalue.split('\n');
-        var la = a.length;
-        var data = [];
-        for (var i = 0; i < la; i++) {
-            data.push(a[i]);
-        }
-        this.setData({
-            detailList: data
-        })
-    },
-    entertext: function (e) {
-        var tavalue = e.detail.value;
-        var a = tavalue.split('\n');
-        var la = a.length;
-        var data = [];
-        for (var i = 0; i < la; i++) {
-            data.push(a[i]);
-        }
-        var addList = 'people';
-        this.setData({
-            [addList]: data
-        }); //setData的特殊用法 如果要将嵌套数据付给字符串则用[]
-        //but马佬说这里没嵌套式写习惯了emmmm
-    },
-    require: function (e) {
-        var tavalue = e.detail.value;
-        var a = tavalue.split('\n');
-        var la = a.length;
-        var data = [];
-        for (var i = 0; i < la; i++) {
-            data.push(a[i]);
-        }
-        this.setData({
-            requireList: data
-        })
-    },
-    response: function (e) {
-        var tavalue = e.detail.value;
-        var a = tavalue.split('\n');
-        var la = a.length;
-        var data = [];
-        for (var i = 0; i < la; i++) {
-            data.push(a[i]);
-        }
-        this.setData({
-            responseList: data
+            [addList] : value
         })
     },
     upload: function (e) {
         let that = this;
-
+        let array = this.data.array;
         //检测信息缺失
-        if (!that.data.people || that.data.people === "") { //如果没填人数 则出弹框 下同
-            wx.showModal({
-                title: '缺少信息',
-                content: '请填写招募人数',
-                showCancel: false,
-            })
-            return;
+        for (let i in array){
+            console.log(array[i])
+            if (!array[i].list || array[i].list == []) {
+                wx.showModal({
+                    title: '缺少信息',
+                    content: '请填写' + array[i].content,
+                    showCancel: false,
+                })
+                return;
+            }
         }
-        if (!that.data.detailList || that.data.detailList == []) {
-            wx.showModal({
-                title: '缺少信息',
-                content: '请填写活动内容',
-                showCancel: false,
-            })
-            return;
-        }
-        if (!that.data.responseList || that.data.responseList == []) {
-            wx.showModal({
-                title: '缺少信息',
-                content: '请填写负责人联系方式',
-                showCancel: false,
-            })
-            return;
-        }
+            
         if (that.data.etitle === "发布一个新志愿" && that.data.title === "") {
             wx.showModal({
                 title: '缺少信息',
@@ -248,11 +199,7 @@ Page({
         if (day.length == 1) {
             day = '0' + day
         }
-        var date3 = year + '-' + month + '-' + day
-
-
-
-
+        let date3 = year + '-' + month + '-' + day
         //上传详细信息
         wx.cloud.callFunction({ //调用这个云函数
             name: 'uploadvolun',
@@ -263,12 +210,12 @@ Page({
                 time: that.data.time,
                 textarea: that.data.textarea,
                 place: that.data.place,
-                requireList: that.data.requireList,
-                people: that.data.people,
-                assureList: that.data.assureList,
-                detailList: that.data.detailList,
-                requireList: that.data.requireList,
-                responseList: that.data.responseList,
+                people: array.people.list,
+                requireList: array.require.list,
+                assureList:  array.assure.list,
+                detailList:  array.detail.list,
+                requireList: array.require.list,
+                responseList:array.response.list,
                 innerList: [],
                 signuplist: [],
                 qqnum: that.data.qqnum

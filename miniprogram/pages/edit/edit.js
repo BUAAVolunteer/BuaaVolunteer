@@ -451,7 +451,6 @@ Page({
     },
     addAll: function(e) {
         //console.log(e.currentTarget.id);
-
         var additem = {
             "label": "",
             "type": "",
