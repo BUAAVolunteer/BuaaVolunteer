@@ -14,7 +14,6 @@ Page({
         volunteer_list: [],
         openid: "",
         open: false,
-        current_v: {},
         id: -1,
         loading: false, //上拉加载更多的loading
         refreshLoading: false, //下拉刷新页面的loading
@@ -167,16 +166,14 @@ Page({
     },
     //打开悬浮窗
     opendetail: function (e) {
-        var that = this;
+        let that = this;
         //console.log(e.currentTarget.id)
-        var id = e.currentTarget.id;
-        var current = that.data.volunteer_list[id];
+        let id = e.currentTarget.id;
+        let current = that.data.volunteer_list[id];
         that.setData({
             open: true,
-            current_v: current,
             id: id
         })
-        var id = that.data.id;
         let l = that.data.volunteer_list[id].signuplist.length;
         //console.log(that.data.volunteer_list[id].signuplist)
         for (let i = 0; i < l; i++) {
@@ -218,15 +215,15 @@ Page({
     },
     //进入报名表单
     signup: function () {
-        var that = this;
+        let that = this;
 
         wx.requestSubscribeMessage({
             tmplIds: ["Ynia8PHxf3L_uWFvZxtPiI-V8hE-wcErHpe0Ygh8O9w"],
             success: (res) => {
                 if (res['Ynia8PHxf3L_uWFvZxtPiI-V8hE-wcErHpe0Ygh8O9w'] === 'accept') {
-                    var id = that.data.id;
-                    var title = that.data.volunteer_list[id].title
-                    var qqnum = that.data.volunteer_list[id].qqnum
+                    let id = that.data.id;
+                    let title = that.data.volunteer_list[id].title
+                    let qqnum = that.data.volunteer_list[id].qqnum
                     wx.navigateTo({
                         url: '../forms/forms?title=' + title + '&stime=' + that.data.currenDate + '&qqnum=' + qqnum,
                     })
@@ -251,9 +248,9 @@ Page({
     },
     //进入更多信息页面
     program_open: function (event) {
-        var that = this;
-        var id = that.data.id;
-        var title = that.data.volunteer_list[id].title
+        let that = this;
+        let id = that.data.id;
+        let title = that.data.volunteer_list[id].title
 
         //从test中找到项目名称相同的对象
         db.collection('test').where({
@@ -263,7 +260,7 @@ Page({
                 success: function (res) {
                     //console.log(res)
                     wx.hideLoading()
-                    var target_id = res.data[0]._id
+                    let target_id = res.data[0]._id
                     wx.navigateTo({
                         url: '../detail/detail?id=' + target_id,
                     })

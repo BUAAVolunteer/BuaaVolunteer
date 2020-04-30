@@ -1,5 +1,5 @@
 <view class="title flex">
-	详细信息
+	{{title}}
 </view>
 <view class="describe block">
 	这里是详细信息的编辑页面，请大家参照自己标准的招募信息进行编辑。
@@ -30,7 +30,7 @@
 		活动名称
 	</view>
 	<view class='edit-form-input border'>
-		<input style="width:90%;" bindinput='entertitle' value="{{title}}" />
+		<input style="width:90%;" model:value="{{title}}" />
 	</view>
 </view>
 
@@ -41,8 +41,7 @@
 	<picker
 	 name="bd"
 	 mode="date"
-	 value="{{date}}"
-	 bindchange="DateChange"
+	 model:value="{{date}}"
 	 class="block border edit-picker"
 	>
 		<view class="picker">
@@ -50,7 +49,6 @@
 		</view>
 	</picker>
 </view>
-
 <view class='edit-form-box form-inner'>
 	<view class='edit-title'>
 		招募发布时间
@@ -58,8 +56,7 @@
 	<picker
 	 name="time"
 	 mode="time"
-	 value="{{time}}"
-	 bindchange="TimeChange"
+	 model:value="{{time}}"
 	 class="block border edit-picker"
 	>
 		<view class="picker">
@@ -67,7 +64,6 @@
 		</view>
 	</picker>
 </view>
-
 <view class='edit-form-box form-inner'>
 	<view class='edit-title'>
 		志愿开展日期
@@ -76,13 +72,11 @@
 		<input
 		 style="width:90%;"
 		 maxlength="-1"
-		 bindinput='textareaBInput'
-		 value="{{textarea}}"
+		 model:value="{{textarea}}"
 		 placeholder="请输入志愿活动时间，如：11月9日至11月10日"
 		/>
 	</view>
 </view>
-
 <view class="block">
 	<view class='reports-header'>
 		<view class='reports-header-line' />
@@ -95,10 +89,9 @@
 		活动地点
 	</view>
 	<view class='edit-form-input border'>
-		<input style="width:90%;" bindinput='enterplace' value="{{place}}" />
+		<input style="width:90%;" model:value="{{place}}" />
 	</view>
 </view>
-
 <view class='edit-form-box form-inner'>
 	<view class='edit-title'>
 		活动内容
@@ -111,7 +104,7 @@
 	 placeholder="{{detailp}}"
 	 maxlength="-1"
 	/>
-	</view>
+</view>
 
 <view class='edit-form-box form-inner'>
     <view class='edit-title'>
@@ -167,10 +160,10 @@
     <view class='edit-title'>
         qq群号
     </view>
-    <textarea class="block border edit-textarea" bindinput='enterqq' value="{{qqnum}}" placeholder="{{qqnump}}" maxlength="-1"/>
+    <textarea class="block border edit-textarea" model:value="{{qqnum}}" placeholder="{{qqnump}}" maxlength="-1"/>
 </view>
-
-	<view class="padding-xl">
-    <button class="cu-btn block line-blue lg" bindtap="upload">已确认信息，发布志愿</button>
-  </view>
+{{qqnum}}
+<view class="padding-xl">
+   <button class="cu-btn block line-blue lg" bindtap="upload">已确认信息，发布志愿</button>
+</view>
 
