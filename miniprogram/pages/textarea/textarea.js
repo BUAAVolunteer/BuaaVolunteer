@@ -113,15 +113,9 @@ Page({
     */
     enterTextarea: function (e) {
         let type = e.currentTarget.id;
-        console.log('type',type)
-        // let value = e.detail.value.split('\n');
-        // console.log(value)
-        // let addList = 'array.' + type + '.list'
-        // this.setData({
-        //     [addList] : value
-        // })
+        // console.log('type',type)
         let value = e.detail.value;
-        console.log(value)
+        // console.log(value)
         let addList = 'array.' + type + '.data'
         this.setData({
             [addList] : value
