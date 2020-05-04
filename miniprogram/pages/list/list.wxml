@@ -4,6 +4,7 @@
 <view class="padding flex flex-direction add-but">
   <button class="cu-btn block line-black lg" style="background-color: var(--cyan);color: white;" bindtap="add">创建一个新志愿</button>
 </view>
+<!-- 标题图片 -->
 <view style="display:flex;justify-content:center">
 	<image class="title-img" src="../../image/volunteerlist.png" />
 </view>
@@ -16,9 +17,13 @@
 	 class="items-box"
 	>
 		<view class="items-title" id="{{items.id}}" bindtap="openbutton">
-			<image wx:if="{{items.date > currenDate && items.edit==1 || items.date == currenDate && items.time > currenTime && items.edit==1}}" class="items-titleimg" src="../../icons/yes.png" />
-			<image wx:elif="{{items.date > currenDate && items.edit==0 || items.date == currenDate && items.time > currenTime && items.edit==0}}" class="items-titleimg" src="../../icons/warning.png" />
-			<image wx:elif="{{items.date < currenDate && items.edit==1 || items.date == currenDate && items.time <= currenTime && items.edit==1}}" class="items-titleimg" src="../../icons/working.png" />
+			<!--准备发布-->
+			<image wx:if="{{currenDate < items.date && items.edit==1 || currenDate == items.date && currenTime < items.time && items.edit==1}}" class="items-titleimg" src="../../icons/yes.png" />
+			<!--正在招募-->
+			<image wx:elif="{{currenDate > items.date && items.edit==1 || currenDate == items.date && currenTime >= items.time && items.edit==1}}" class="items-titleimg" src="../../icons/working.png" />
+			<!--表单待编辑-->
+			<image wx:elif="{{items.edit==0}}" class="items-titleimg" src="../../icons/warning.png" />
+			<!--招募结束/为编辑详细信息-->
 			<image wx:else class="items-titleimg" src="../../icons/stop.png" />
 			{{items.title}}
 			<view class="items-titleimg2" id="{{items.id}}" data-id="{{items.id}}" bindtap="openconfirm">

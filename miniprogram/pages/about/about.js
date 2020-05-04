@@ -25,7 +25,6 @@ Page({
         person_list: [{}],
         volunteer_list: [{}],
         admin: 0,
-        totaltime: 0,
         totalscore: 0,
         current: 0,
         register: 0
@@ -70,41 +69,12 @@ Page({
                         that.setData({
                             register: 0
                         })
-                        var time = 0
-                        var score = 0
-                            //管理员判断
-                            // console.log(score)
-                            // db.collection('admin').where({
-                            //         _openid: app.globalData.openid,
-                            //     })
-                            //     .get({
-                            //         success: function(res) {
-                            //             
-                            //             if (res.data.length == 0) {
-                            //                 that.setData({
-                            //                     admin: 0
-                            //                 })
-                            //             } else {
-                            //                 that.setData({
-                            //                     admin: 1
-                            //                 })
-                            //             }
-
-                        //         }
-                        //     })
                         wx.hideLoading()
                         that.setData({
                             person_list: res.data,
-                            totalscore: res.data[0].score.toFixed(1),
-                            totaltime: res.data[0].time
+                            totalscore: res.data[0].score.toFixed(1)
                         })
-
-                        //console.log(res.data[0].phone - '0')
-
-
-
                     }
-
                 },
                 fail: function(res) {
                     wx.hideLoading()

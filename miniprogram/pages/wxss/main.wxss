@@ -17,7 +17,7 @@ page {
     --mauve: #9c26b0;
     --pink: #e03997;
     --brown: #a5673f;
-    --grey: #8799a3;
+    --grey: rgba(225,225,225);
     --black: #333333;
     --darkGray: #666666;
     --gray: #aaaaaa;
