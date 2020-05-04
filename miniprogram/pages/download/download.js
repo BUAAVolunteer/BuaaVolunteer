@@ -186,29 +186,7 @@ Page({
                     })
                     return;
                 } else {
-                    //发送订阅消息
-                    for (let i = 1; i < DownloadList.length; i++) {
-                        let openid = DownloadList[i][DownloadList[i].length - 3]
-                        let date = DownloadList[i][DownloadList[i].length - 1]
-                        let detail = "QQ群：" + qqnum
-                            //console.log(openid, date, detail)
-                        wx.cloud.callFunction({
-                            name: 'Signup',
-                            data: {
-                                title: that.data.title,
-                                openid: openid,
-                                date: date,
-                                detail: detail
-                            },
-                            success: function(res) {
-                                //console.log(res)
-                                wx.showToast({
-                                    title: '发送成功',
-                                    icon: 'none'
-                                })
-                            }
-                        })
-                    }
+                    //下载导出数据
                     wx.cloud.callFunction({
                         name: 'DownloadSignUp',
                         data: {

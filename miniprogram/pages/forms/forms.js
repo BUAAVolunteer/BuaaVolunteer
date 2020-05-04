@@ -350,16 +350,31 @@ Page({
                         that.watch();
                         return;
                     } else {
-                        wx.showModal({
-                            title: '提交成功',
-                            content: '请留意微信消息，并加入\nqq群:' + qqnum + '\n以便志愿开展',
-                            showCancel: false,
-                            success: function() {
-                                wx.redirectTo({
-                                    url: '../history/history',
-                                })
+                        //发送订阅消息
+                        wx.cloud.callFunction({
+                            name: 'Signup',
+                            data: {
+                                title: that.data.title,
+                                openid: app.globalData.openid,
+                                date: detail,
+                                detail: 'QQ群' + qqnum
                             },
+                            success: function(res) {
+                                //成功提示
+                                wx.showModal({
+                                    title: '提交成功',
+                                    content: '请留意微信消息，并加入\nqq群:' + qqnum + '\n以便志愿开展',
+                                    showCancel: false,
+                                    success: function() {
+                                        wx.redirectTo({
+                                            url: '../history/history',
+                                        })
+                                    },
+                                })
+                            }
                         })
+                        
+
                     }
                 },
                 fail: function() {
