@@ -5,7 +5,6 @@ const app = getApp();
 var formConfig;
 var cnt = 0; //index plus with item grow
 var ID, IDitem; //index of change item
-var tavalue; //textarea value
 Page({
 
     /**
@@ -31,7 +30,7 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function(options) {
+    onLoad: function (options) {
         wx.showLoading({
             title: '加载中',
         })
@@ -41,14 +40,14 @@ Page({
         })
         db.collection('form')
             .where(_.or([{
-                    title: options.title
-                },
-                {
-                    title: "发布一个新志愿"
-                }
+                title: options.title
+            },
+            {
+                title: "发布一个新志愿"
+            }
             ]))
             .get({
-                success: function(res) {
+                success: function (res) {
                     let download = {};
                     if (res.data.length == 1) {
                         download = res.data[0];
@@ -58,13 +57,13 @@ Page({
                                 title: options.title,
                                 fieldName: options.title
                             },
-                            success: function(res) {
+                            success: function (res) {
                                 db.collection('signUp').add({
                                     data: {
                                         title: options.title,
                                         list: []
                                     },
-                                    success: function(res) {
+                                    success: function (res) {
                                         wx.hideLoading();
                                         let addList = `formList.fieldName`;
                                         that.setData({
@@ -84,7 +83,7 @@ Page({
                         db.collection('signUp').where({
                             title: options.title
                         }).get({
-                            success: function(res) {
+                            success: function (res) {
                                 wx.hideLoading()
                                 if (res.data.length == 0) {
                                     db.collection('signUp').add({
@@ -114,7 +113,7 @@ Page({
     },
 
     //左侧导航的开关函数
-    offCanvas: function(e) {
+    offCanvas: function (e) {
         //console.log(e.currentTarget.id);
         if (e.currentTarget.id == -1) {
             ID = parseInt(e.currentTarget.id);
@@ -125,8 +124,7 @@ Page({
             })
             return;
         }
-        var type, label, text, limit, duration, detail, textarea = "",
-            textd = "",
+        let type, label, text, limit, duration, detail,
             force,
             flag_d = 0;
         if (this.data.open) {
@@ -151,74 +149,68 @@ Page({
             duration = this.data.formList.formInfo[ID].duration;
             detail = this.data.formList.formInfo[ID].detail;
             this.setData({
-                type: type,
+                type,
                 label,
                 text,
                 force,
                 detail,
                 page: 0
             })
-            textd = ""
             if (type == 'radio' || type == 'checkbox') {
-                let ta = this.data.formList.formInfo[ID].data;
-                let lta = ta.length;
-                for (var i = 0; i < lta; i++) {
-                    let tai = ta[i].name;
-                    let tal = parseInt(ta[i].limit) ? parseInt(ta[i].limit) : 0;
-                    let tad = parseInt(ta[i].duration) ? parseInt(ta[i].duration) : 0;
-                    //console.log(ta[i])
-                    let det = ta[i].detail ? ta[i].detail : "备注";
-                    textd = textd ? textd : "";
-                    //console.log(textd)
-                    //console.log(det)
-                    if (limit && duration && tai)
-                        textarea = textarea + tai + ' ' + tal + ' ' + tad + '\n';
-                    else if (limit && tai)
-                        textarea = textarea + tai + ' ' + tal + '\n';
-                    else
-                        textarea = textarea + tai + '\n';
-                    if (detail) {
-                        textd = textd + det + '\n';
-                        flag_d = 1
-                    }
-
-                }
-                lta = textarea.length;
-                textarea = textarea.substr(0, lta - 1);
-                lta = textd.length;
-                textd = textd.substr(0, lta - 1);
+                //拼接两个textarea框
+                let data = this.data.formList.formInfo[ID].data;
+                let texta = data.reduce(
+                    function (preValue, n) {
+                        //preValue代表当前累计值，n为正要处理的数组元素
+                        preValue += n.name;
+                        //不会出现有duration无limit情况，两种同时出现按顺序拼接
+                        if (limit)
+                            preValue += (' ' + n.limit);
+                        if (duration)
+                            preValue += (' ' + n.duration);
+                        preValue += '\n';
+                        return preValue;
+                    }, ""
+                ).slice(0, -1);
                 this.setData({
-                    texta: textarea
+                    texta,
+                    la: data.length
                 })
-                if (flag_d)
+                if (detail) {
+                    let textd = data.reduce(function (preValue, n) {
+                        //若存在备注则拼接
+                        preValue += (n.detail ? n.detail : "备注");
+                        preValue += '\n';
+                        return preValue;
+                    }, "").slice(0, -1);
                     this.setData({
-                        textd: textd
+                        textd
                     })
+                }
             }
         }
         //console.log(type, ID)
         //console.log(this.data.formList.formInfo[ID].detail)
     },
-    enter: function(e) {
-        var type = e.currentTarget.id;
-        var addList = 'formList.formInfo[' + ID + ']'
-        if (type == "title") {
-            //组件标题的修改
+    enter: function (e) {
+        let type = e.currentTarget.id;
+        let addList = 'formList.formInfo[' + ID + ']'
+        if (type == "title")  //组件标题的修改
             addList = (ID == -1 ? 'formList.fieldName' : 'formList.formInfo[' + ID + '].label')
-        } else if (type == "text") {
-            //组件提示的修改
+        else if (type == "text") //组件提示的修改
             addList = addList + '.text';
-        } else if (type == "force") {
+        else if (type == "force") {
             //必填项的添加
             //title是为了构造合法性检验时的提示
-            var title = this.data.formList.formInfo[ID].label;
-            var l = e.detail.value.length;
-            var role = {
+            let title = this.data.formList.formInfo[ID].label;
+            let l = e.detail.value.length;
+            let role = {
                 "msg": "",
                 "type": "",
                 "value": ""
             }
-            var addl = addList + '.force'
+            let addl = addList + '.force'
+            //l=1说明选中
             if (l == 1) {
                 this.setData({
                     [addl]: true
@@ -264,12 +256,11 @@ Page({
                 [addList]: e.detail.value
             });
     },
-    entertd: function(e) {
-        var that = this
-        tavalue = e.detail.value;
-        var a = tavalue.split('\n');
-        var la = a.length;
-        if (la > that.data.la) {
+    entertd: function (e) {
+        let that = this
+        let detail = e.detail.value;
+        let detLength = detail.split('\n').length;
+        if (detLength > that.data.la) {
             wx.showModal({
                 title: '错误提示',
                 content: '请确保备注个数不要大于选项个数相同，换行即为分隔',
@@ -285,24 +276,24 @@ Page({
         for (var i = 0; i < la; i++) {
             var addl = addList + '[' + i + '].detail'
             that.setData({
-                [addl]: a[i]
+                [addl]: detail[i]
             })
         }
     },
-    enterta: function(e) {
+    enterta: function (e) {
         //console.log(e.detail.value)
-        tavalue = e.detail.value;
-        var a = tavalue.split('\n');
-        var la = a.length;
+        let a = e.detail.value.split('\n');
+        let la = a.length;
         this.setData({
-            la: la
+            la
         })
-        var data = [],
-            flagl = 0,
-            flagd = 0;
-        for (var i = 0; i < la; i++) {
+        let pattern = /(( +)\d+)/g; //用于全局匹配数字
+        let pattern2 = /^([\u4e00-\u9fa5a-zA-Z0-9]+)( +)(\d+)( +)?$/; //用于匹配包含选项名和限额的情况
+        let pattern3 = /^([\u4e00-\u9fa5a-zA-Z0-9]+)( +)(\d+)( +)(\d+)( +)?$/; //用于匹配包含选项名，限额和时长的情况
+        let id = 0, flagl = 0, flagd = 0;
+        let data = a.reduce(function(preValue,n){//reduce拼接数组
             let dataitem = {
-                id: i,
+                id,
                 checked: false,
                 limit: 0,
                 name: "",
@@ -310,39 +301,43 @@ Page({
                 detail: "",
                 bookingNum: 0
             }
-            let ai = a[i].split(' ')
-            if (ai.length === 1) {
-                dataitem.name = ai[0];
-            } else if (ai.length === 2) {
-                dataitem.name = ai[0];
-                dataitem.limit = parseInt(ai[1]);
+            id += 1;
+            let ni = n.split(' ');
+            dataitem.name = ni[0];
+            if (pattern2.test(n)){
+                dataitem.limit = parseInt(n.match(pattern)[0].replace(' ',''));
                 flagl = 1;
-            } else if (ai.length === 3) {
-                dataitem.name = ai[0];
-                dataitem.limit = parseInt(ai[1]);
-                dataitem.duration = parseInt(ai[2]);
+            }
+            else if (pattern3.test(n)){
+                dataitem.limit = parseInt(n.match(pattern)[0].replace(' ',''));
+                dataitem.duration = parseInt(n.match(pattern)[1].replace(' ',''));
                 flagl = 1;
                 flagd = 1;
-            } else {
-                wx.showModal({
-                    title: '错误提示',
-                    content: '请确保选项内容与限额间，限额与时长间都只有一个空格',
-                    showCancel: false, //是否显示取消按钮
-                    //cancelText: "否", //默认是“取消”
-                    //cancelColor: 'skyblue', //取消文字的颜色
-                    confirmText: "我知道了", //默认是“确定”
-                    //confirmColor: 'skyblue', //确定文字的颜色{
-                })
             }
-            //console.log(dataitem)
-            data.push(dataitem);
-        }
-        var addList = 'formList.formInfo[' + ID + '].';
-        let addl = addList + 'data';
+            //错误输出暂时注释
+            // else{
+            //     console.log('n:',n,'匹配4')
+            //     wx.showModal({
+            //         title: '错误提示',
+            //         content: '请确保选项内容与限额间，限额与时长间都只有一个空格',
+            //         showCancel: false, //是否显示取消按钮
+            //         //cancelText: "否", //默认是“取消”
+            //         //cancelColor: 'skyblue', //取消文字的颜色
+            //         confirmText: "我知道了", //默认是“确定”
+            //         //confirmColor: 'skyblue', //确定文字的颜色{
+            //     })
+            // }
+            preValue.push(dataitem);
+            return preValue;
+        },[])
+        //console.log(data)
+        
+        let addList = 'formList.formInfo[' + ID + '].';
+        addl = addList + 'data';
         this.setData({
             [addl]: data
         })
-        addl = addList + 'limit';
+        let addl = addList + 'limit';
         if (flagl)
             this.setData({
                 [addl]: true
@@ -361,67 +356,12 @@ Page({
                 [addl]: false
             })
     },
-    change: function(e) {
-        var that = this
-        var ID = that.data.ID
-        var type, label, text, limit, duration, detail, textarea = "",
-            textd = "",
-            force,
-            flag_d = 0;
-        type = this.data.formList.formInfo[ID].type;
-        label = this.data.formList.formInfo[ID].label;
-        text = this.data.formList.formInfo[ID].text;
-        force = this.data.formList.formInfo[ID].force;
-        limit = this.data.formList.formInfo[ID].limit;
-        duration = this.data.formList.formInfo[ID].duration;
-        detail = this.data.formList.formInfo[ID].detail;
-        that.setData({
-            type: type,
-            label,
-            text,
-            force,
-            detail
-        })
-        if (type == 'radio' || type == 'checkbox') {
-            let ta = that.data.formList.formInfo[ID].data;
-            let lta = ta.length;
-            flag_d = 0;
-            for (var i = 0; i < lta; i++) {
-
-                let tai = ta[i].name;
-                let tal = parseInt(ta[i].limit) ? parseInt(ta[i].limit) : 0;
-                let tad = parseInt(ta[i].duration) ? parseInt(ta[i].duration) : 0;
-                let det = ta[i].detail ? ta[i].detail : "备注";
-                //console.log(textd, det)
-                if (limit && duration && tai)
-                    textarea = textarea + tai + ' ' + tal + ' ' + tad + '\n';
-                else if (limit && tai)
-                    textarea = textarea + tai + ' ' + tal + '\n';
-                else
-                    textarea = textarea + tai + '\n';
-                if (detail) {
-                    textd = textd + det + '\n';
-                    flag_d = 1
-                }
-            }
-            lta = textarea.length;
-            textarea = textarea.substr(0, lta - 1);
-            lta = textd.length;
-            textd = textd.substr(0, lta - 1);
-            that.setData({
-                texta: textarea
-            })
-            if (flag_d)
-                that.setData({
-                    textd: textd
-                })
-        }
-        //console.log(that.data.page)
-        that.setData({
+    change: function (e) {
+        this.setData({
             page: 1 - that.data.page
         })
     },
-    delete: function(e) {
+    delete: function (e) {
         var that = this;
         let formInfo = that.data.formList.formInfo;
         //console.log('ID', ID, 'cnt', cnt)
@@ -441,15 +381,15 @@ Page({
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
-    onReady: function() {},
+    onReady: function () { },
 
     /**
      * 生命周期函数--监听页面显示
      */
-    onShow: function() {
+    onShow: function () {
 
     },
-    addAll: function(e) {
+    addAll: function (e) {
         //console.log(e.currentTarget.id);
         var additem = {
             "label": "",
@@ -514,15 +454,15 @@ Page({
      * 生命周期函数--监听页面隐藏
      */
 
-    onHide: function() {
+    onHide: function () {
 
     },
-    add: function() {
+    add: function () {
         this.setData({
             checked: !this.data.checked
         })
     },
-    submit: function() {
+    submit: function () {
 
         var that = this;
         wx.showModal({
@@ -533,7 +473,7 @@ Page({
             //cancelColor: 'skyblue', //取消文字的颜色
             confirmText: "是", //默认是“确定”
             //confirmColor: 'skyblue', //确定文字的颜色
-            success: function(res) {
+            success: function (res) {
                 if (res.cancel) {
                     //点击取消,默认隐藏弹框
                 } else {
@@ -557,7 +497,7 @@ Page({
                     inlist[0].push("openid")
                     inlist[0].push("志愿时长")
                     inlist[0].push("备注")
-                        //console.log(inlist)
+                    //console.log(inlist)
                     wx.cloud.callFunction({
                         name: "uploadform",
                         data: {
@@ -565,7 +505,7 @@ Page({
                             title: that.data.title,
                             fieldName: that.data.formList.fieldName
                         },
-                        success: function(res) {
+                        success: function (res) {
                             //console.log(res)
                             wx.cloud.callFunction({
                                 name: "InitSignUp",
@@ -573,20 +513,20 @@ Page({
                                     title: that.data.title,
                                     list: inlist,
                                 },
-                                success: function(res) {
+                                success: function (res) {
                                     wx.hideLoading();
                                     wx.showModal({
                                         title: "发布成功",
                                         content: "成功发布表单",
                                         showCancel: false,
-                                        success: function(res) {
+                                        success: function (res) {
                                             wx.redirectTo({
                                                 url: '../list/list',
                                             })
                                         }
                                     })
                                 },
-                                fail: function(res) {
+                                fail: function (res) {
                                     wx.hideLoading();
                                     wx.showModal({
                                         title: "发布失败",
@@ -599,8 +539,8 @@ Page({
                     })
                 }
             },
-            fail: function(res) {}, //接口调用失败的回调函数
-            complete: function(res) {}, //接口调用结束的回调函数（调用成功、失败都会执行）
+            fail: function (res) { }, //接口调用失败的回调函数
+            complete: function (res) { }, //接口调用结束的回调函数（调用成功、失败都会执行）
         })
 
 
@@ -608,28 +548,28 @@ Page({
     /**
      * 生命周期函数--监听页面卸载
      */
-    onUnload: function() {
+    onUnload: function () {
 
     },
 
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
-    onPullDownRefresh: function() {
+    onPullDownRefresh: function () {
 
     },
 
     /**
      * 页面上拉触底事件的处理函数
      */
-    onReachBottom: function() {
+    onReachBottom: function () {
 
     },
 
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function() {
+    onShareAppMessage: function () {
 
     }
 })
