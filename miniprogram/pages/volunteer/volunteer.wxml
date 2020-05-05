@@ -62,11 +62,11 @@
 		<button wx:elif="{{secret}}" class="cu-btn bg-cyan" bindtap="signup">
 			<text class="button-text">立即报名</text>
 		</button>
-		<button wx:elif="{{currenDate < volunteer_list[id].date || currenDate == volunteer_list[id].date && currenTime<items.time}}" class="cu-btn bg-grey" hover-class="none">
-			<text class="button-text">等待发布</text>
-		</button>
 		<button wx:elif="{{currenDate > volunteer_list[id].date || currenDate == volunteer_list[id].date && currenTime>=volunteer_list[id].time}}" class="cu-btn bg-cyan" bindtap="signup">
 			<text class="button-text">立即报名</text>
+		</button>
+		<button wx:elif="{{currenDate < volunteer_list[id].date || currenDate == volunteer_list[id].date && currenTime < volunteer_list[id].time}}" class="cu-btn bg-grey" hover-class="none">
+			<text class="button-text">等待发布</text>
 		</button>
 		<button class="cu-btn bg-blue" bindtap="program_open">
 			<text class="button-text">更多信息</text>
