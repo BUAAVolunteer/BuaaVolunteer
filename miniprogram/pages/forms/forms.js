@@ -2,7 +2,6 @@
 const db = wx.cloud.database();
 const _ = db.command;
 const app = getApp();
-let formConfig = [];
 let watcher = null; //监听事件
 let getname, getphone, getpersonnum, getqqnum, getcampus; //person集合获取的信息
 let uplist = [], //总上传数据
@@ -57,7 +56,10 @@ Page({
                             success: function(res) {
                                 //console.log(res.data)
                                 wx.hideLoading();
-                                formConfig.push(res.data[0]);
+                                //formConfig.push(res.data[0]);
+                                let formList = res.data[0];
+                                formList.choose = [[],[],[]];
+                                formList.input_text = [];
                                 that.setData({
                                     formList: res.data[0]
                                 })
@@ -95,11 +97,7 @@ Page({
             })
             .watch({
                 onChange: function(snapshot) {
-                    //console.log('docs\'s changed events', snapshot.docChanges)
-                    //console.log('query result snapshot after the event', snapshot.docs)
-                    //console.log('is init data', snapshot.type === 'init')
                     let download = snapshot.docs[0];
-                    //console.log('dl', dl)
                     //修改页面中
                     let itemi = download.formInfo;
                     let di = itemi.length;
@@ -111,7 +109,6 @@ Page({
                             for (let k = 0; k < kl; k++) {
                                 let limit = itemk[k].limit;
                                 let target = `formList.formInfo[` + j + `].data[` + k + `].limit`;
-                                //console.log([target])
                                 that.setData({
                                     [target]: limit
                                 })
@@ -180,6 +177,24 @@ Page({
         }
         return true;
     },
+    childChange:function(e){
+        console.log(e)
+        let type = e.detail.type;
+        let input_text = e.detail.input_text;
+        let ID = e.detail.ID;
+        let addList = 'formList.formInfo[' + ID + '].'
+        if (type == 'checkbox' || type == 'radio'){
+            let choose = e.detail.choose;
+            let addl = addList + 'choose';
+            this.setData({
+                [addl]:choose
+            })
+        }
+        let addl = addList + 'input_text';
+        this.setData({
+            [addl]:input_text
+        })
+    },
     getInputValue: function() {
         if (watcher)
             watcher.close();
@@ -193,48 +208,29 @@ Page({
         listitem.push(getcampus);
 
         let that = this;
-        let result = [];
         let duration = 0;
         let detail = "";
         let den = 0;
-        setTimeout(function(){
-            formConfig.forEach((item, i) => {
-                    result.push(item.formInfo)
-                })
-                //console.log('result', result);
-
-            let temp = [];
-            temp.push(result[0]);
-            //console.log('temp', temp);
-            let forms = temp.reduce((a, b) => {
-                    return a.concat(b)
-                })
-                //console.log('temp', temp);
+        
             let limit = [
                 [],
                 [],
                 [],
                 []
             ];
-            for (let key in forms) {
-
-                let items = forms[key];
-                let v = that.selectComponent('#' + items.id);
-                //console.log(v, items.id)
-                //console.log(v.choose);
+            for (let key in that.data.formList.formInfo) {
+                let v = that.data.formList.formInfo[key];
                 if (v.limit && (v.type === 'radio' || v.type === 'checkbox')) { //有限制的进行筛选
                     let l = v.choose[0].length;
                     for (let i = 0; i < l; i++) {
-                        let j = v.choose[0][i];
                         let k = v.choose[1][i];
-                        if (that.data.formList.formInfo[j].data[k].limit <= 0) {
+                        if (v.data[k].limit <= 0) {
                             v.choose[0].splice(i, 1);
                             v.choose[1].splice(i, 1);
                             v.choose[2].splice(i, 1);
                             v.input_text.splice(i, 1);
                         }
                     }
-
                 }
                 //判断是否必填项为空
                 if (that.formValidate(v)) {
@@ -250,7 +246,6 @@ Page({
                             limit[1] = limit[1].concat(v.choose[1]);
                             limit[2] = limit[2].concat(v.choose[2]);
                         }
-                        //这边是否缺少else？
                         if (v.detail) {
                             for (let i = 0; i < l; i++) {
                                 limit[3] = limit[3].concat(den);
@@ -294,7 +289,6 @@ Page({
                     that.setData({
                         loading: false
                     })
-                    forms = [];
                     listitem = [];
                     return 0;
                 }
@@ -311,7 +305,6 @@ Page({
                     showCancel: false,
                 })
                 listitem = [];
-                forms = [];
                 that.watch();
                 return;
             }
@@ -324,7 +317,6 @@ Page({
             //uplist = { inf: listitem }
             uplist.push(listitem)
             listitem = [];
-            forms = [];
             //console.log(uplist);
             wx.cloud.callFunction({
                 name: "uploadData",
@@ -387,11 +379,9 @@ Page({
                         showCancel: false
                     })
                     uplist = [];
-                    forms = [];
                     that.watch();
                 }
             })
-        },100)
         
 
     },

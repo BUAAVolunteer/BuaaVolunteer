@@ -35,24 +35,10 @@ Component({
             []
         ]
     },
-    export () {
-        return {
-            choose: this.data.choose,
-            input_text: this.data.input_text,
-            force: this.properties.forminfo.force,
-            role: this.properties.forminfo.role,
-            limit: this.properties.forminfo.limit,
-            label: this.properties.forminfo.label,
-            type: this.properties.forminfo.type,
-            duration: this.properties.forminfo.duration,
-            detail: this.properties.forminfo.detail,
-            data: this.properties.forminfo.data
-        }
-    },
     /**
      * 组件的方法列表
      */
-    ready: function() {
+    ready: function () {
         console.log(this.properties.forminfo);
         var id = parseInt(this.properties.forminfo.id)
         this.setData({
@@ -61,38 +47,37 @@ Component({
         })
     },
     methods: {
-        radioChange: function(e) {
+        radioChange: function (e) {
             //返回一个二维数组
             //第一行是组件id，第二行是选项数组
             //第三行是时长
-            var ID = parseInt(this.properties.forminfo.id.substr(1))
-
-            var that = this
-
-            var v = e.detail.value;
-            var a = v.split(',');
-            var input_text = [];
+            let ID = parseInt(this.properties.forminfo.id.substr(1))
+            let that = this
+            let v = e.detail.value;
+            let a = v.split(',');
+            let input_text = [];
             input_text.push(a[0])
-            var value = [];
+            let value = [];
             value.push(parseInt(a[1]));
 
-            var id = [];
+            let id = [];
             id.push(ID);
 
-            var duration = [];
+            let duration = [];
             if (parseInt(a[2]))
                 duration.push(parseInt(a[2]))
             else
                 duration.push(0)
-            var choose = [];
+            let choose = [];
             choose.push(id, value, duration);
 
-            console.log('ID', ID, input_text, choose)
-
-            that.setData({
+            //console.log('ID', ID, input_text, choose)
+            this.triggerEvent('radio', {
+                type: 'radio',
+                ID,
                 input_text,
                 choose
-            });
+            })
         },
     }
 })

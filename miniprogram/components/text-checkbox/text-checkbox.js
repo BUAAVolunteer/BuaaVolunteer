@@ -35,45 +35,30 @@ Component({
             []
         ]
     },
-    export () {
-        return {
-            choose: this.data.choose,
-            input_text: this.data.input_text,
-            force: this.properties.forminfo.force,
-            limit: this.properties.forminfo.limit,
-            role: this.properties.forminfo.role,
-            label: this.properties.forminfo.label,
-            type: this.properties.forminfo.type,
-            duration: this.properties.forminfo.duration,
-            detail: this.properties.forminfo.detail,
-            data: this.properties.forminfo.data
-        }
-    },
     /**
      * 组件的方法列表
      */
-    ready: function() {
+    ready: function () {
         //console.log(this.properties.forminfo);
         this.setData({
             items: this.properties.forminfo.data
         })
     },
     methods: {
-        checkboxChange: function(e) {
+        checkboxChange: function (e) {
             //返回一个二维数组
             //第一行是组件id，第二行是选项数组
             //第三行是时长
             console.log(e);
-            var ID = parseInt(this.properties.forminfo.id.substr(1))
+            let ID = parseInt(this.properties.forminfo.id.substr(1))
             console.log('ID', ID)
-            var that = this
-            var v = e.detail.value;
-            var l = v.length;
-            var input_text = [];
-
-            var value = [];
-            var id = [];
-            var duration = [];
+            let that = this
+            let v = e.detail.value;
+            let l = v.length;
+            let input_text = [];
+            let value = [];
+            let id = [];
+            let duration = [];
             for (var i = 0; i < l; i++) {
                 let a = v[i].split(',');
 
@@ -85,13 +70,14 @@ Component({
                 else
                     duration.push(0)
             }
-            var choose = [];
+            let choose = [];
             choose.push(id, value, duration)
-            //console.log(input_text, choose)
-            that.setData({
+            this.triggerEvent('checkbox', {
+                type: 'checkbox',
+                ID,
                 input_text,
                 choose
-            });
+            })
         }
     }
 })

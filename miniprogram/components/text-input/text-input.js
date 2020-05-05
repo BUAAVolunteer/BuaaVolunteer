@@ -28,16 +28,6 @@ Component({
         input_text: '',
     },
     behaviors: ['wx://component-export'],
-    //组件最终对外导出的数据
-    export () {
-        return {
-            input_text: this.data.input_text,
-            force: this.properties.forminfo.force,
-            role: this.properties.forminfo.role,
-            label: this.properties.forminfo.label,
-            type: this.properties.forminfo.type
-        }
-    },
     /**
      * 组件的方法列表
      */
@@ -46,10 +36,14 @@ Component({
     },
     methods: {
         enterValue: function(e) {
-            console.log(e.detail.value);
-            this.setData({
-                input_text: e.detail.value
-            });
+            //console.log(e.detail.value);
+            let input_text = e.detail.value;
+            let ID = parseInt(this.properties.forminfo.id.substr(1));
+            this.triggerEvent('input', {
+                type: 'input',
+                ID,
+                input_text
+            })
         }
     }
 })
