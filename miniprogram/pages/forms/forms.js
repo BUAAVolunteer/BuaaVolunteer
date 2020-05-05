@@ -255,7 +255,7 @@ Page({
                             limit[3] = limit[3].concat(0);
                         }
                         //转化拼接多选
-                        if (v.type === 'checkbox') {
+                        if (v.type === 'checkbox'||v.type === 'radio') {
                             let instr = "";
                             for (let i = 0; i < input.length; i++) {
                                 instr = instr + input[i] + ";";
