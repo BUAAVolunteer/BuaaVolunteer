@@ -55,23 +55,16 @@ Component({
             let that = this
             let v = e.detail.value;
             let a = v.split(',');
-            let input_text = [];
-            input_text.push(a[0])
-            let value = [];
-            value.push(parseInt(a[1]));
-
-            let id = [];
-            id.push(ID);
-
-            let duration = [];
-            if (parseInt(a[2]))
-                duration.push(parseInt(a[2]))
-            else
-                duration.push(0)
             let choose = [];
-            choose.push(id, value, duration);
-
-            //console.log('ID', ID, input_text, choose)
+            let chooseItem = {};
+            let input_text = [];
+            input_text.push(a[0]);
+            chooseItem.input_text = a[0];
+            chooseItem.value = parseInt(a[1]);
+            chooseItem.id = ID;
+            chooseItem.duration = parseInt(a[2])?parseInt(a[2]):0;
+            choose.push(chooseItem);
+            console.log('ID', ID, input_text, choose)
             this.triggerEvent('radio', {
                 type: 'radio',
                 ID,

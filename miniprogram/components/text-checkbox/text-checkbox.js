@@ -52,26 +52,21 @@ Component({
             console.log(e);
             let ID = parseInt(this.properties.forminfo.id.substr(1))
             console.log('ID', ID)
-            let that = this
             let v = e.detail.value;
             let l = v.length;
             let input_text = [];
-            let value = [];
-            let id = [];
-            let duration = [];
-            for (var i = 0; i < l; i++) {
-                let a = v[i].split(',');
-
-                input_text.push(a[0]);
-                id.push(ID)
-                value.push(parseInt(a[1]));
-                if (parseInt(a[2]))
-                    duration.push(parseInt(a[2]))
-                else
-                    duration.push(0)
-            }
             let choose = [];
-            choose.push(id, value, duration)
+            for (var i = 0; i < l; i++) {
+                let chooseItem = {};
+                let a = v[i].split(',');
+                input_text.push(a[0]);
+                chooseItem.id = ID;
+                chooseItem.input_text = a[0];
+                chooseItem.value = parseInt(a[1]);
+                chooseItem.duration = parseInt(a[2])?parseInt(a[2]):0;
+                choose.push(chooseItem);
+            }
+            console.log(choose)
             this.triggerEvent('checkbox', {
                 type: 'checkbox',
                 ID,
