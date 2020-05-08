@@ -25,22 +25,23 @@ exports.main = async (event, context) => {
 			})
 			if((await upd).stats.updated == 0){
 				placed = 1;
-				stop = i+1;
+				stop = i;
 			}
-
-			let check = db.collection('form').where({
-				title: event.title
-			}).field({
-				formInfo: true
-			}).get().then(res => {
-				let temp = res.data[0].formInfo[event.limit[0][i]].data[event.limit[1][i]].bookingNum;
-				let limit = res.data[0].formInfo[event.limit[0][i]].data[event.limit[1][i]].limit;
-				if (temp > limit){
-					placed = 1;
-					stop = i+1;
-				}
-			})
-			console.log(placed)
+			
+			if (!placed){
+				let check = db.collection('form').where({
+					title: event.title
+				}).field({
+					formInfo: true
+				}).get().then(res => {
+					let temp = res.data[0].formInfo[event.limit[0][i]].data[event.limit[1][i]].bookingNum;
+					let limit = res.data[0].formInfo[event.limit[0][i]].data[event.limit[1][i]].limit;
+					if (temp > limit){
+						placed = 1;
+						stop = i+1;
+					}
+				})
+			}
 			if(placed){
 				break;
 			}
