@@ -58,8 +58,8 @@ Page({
                                 wx.hideLoading();
                                 //formConfig.push(res.data[0]);
                                 let formList = res.data[0];
-                                formList.choose = [[], [], []];
-                                formList.input_text = [];
+                                res.data[0].choose = [];
+                                res.data[0].input_text = [];
                                 that.setData({
                                     formList: res.data[0]
                                 })
