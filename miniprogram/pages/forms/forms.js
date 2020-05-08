@@ -210,10 +210,8 @@ Page({
         let that = this;
         let duration = 0;
         let detail = "";
-        let den = 0;
 
         let limit = [
-            [],
             [],
             [],
             []
@@ -221,24 +219,11 @@ Page({
         for (let key in that.data.formList.formInfo) {
             let v = that.data.formList.formInfo[key];
             console.log('v', v);
-            if (v.limit && (v.type === 'radio' || v.type === 'checkbox')) { //有限制的进行筛选
-                v.choose = v.choose.filter(
-                    function (n) {
+            if (v.limit && (v.type === 'radio' || v.type === 'checkbox')) //有限制的进行筛选
+                v.choose = v.choose.filter(function (n) {
                         let k = n.value;
                         return v.data[k].limit > 0;
-                    }
-                )
-                // let l = v.choose[0].length;
-                // for (let i = 0; i < l; i++) {
-                //     let k = v.choose[1][i];
-                //     if (v.data[k].limit <= 0) {
-                //         v.choose[0].splice(i, 1);
-                //         v.choose[1].splice(i, 1);
-                //         v.choose[2].splice(i, 1);
-                //         v.input_text.splice(i, 1);
-                //     }
-                // }
-            }
+                })
             //判断是否必填项为空
             if (that.formValidate(v)) {
                 //合法情况
@@ -247,19 +232,20 @@ Page({
                 if (v.type === 'div' || v.type === 'describe')
                     continue;
                 else if (v.type === 'radio' || v.type === 'checkbox') {
-                    let l = v.choose[0].length;
+                    let l = v.choose.length;
                     if (v.limit) {
-                        limit[0] = limit[0].concat(v.choose.id);
-                        limit[1] = limit[1].concat(v.choose.value);
-                        limit[2] = limit[2].concat(v.choose.duration);
-                    }
-                    if (v.detail) {
-                        for (let i = 0; i < l; i++) {
-                            limit[3] = limit[3].concat(den);
-                            den++;
-                        }
-                    } else {
-                        limit[3] = limit[3].concat(0);
+                        limit[0] = v.choose.reduce(function (preValue, n) {
+                            preValue.push(n.id);
+                            return preValue;
+                        }, [])
+                        limit[1] = v.choose.reduce(function (preValue, n) {
+                            preValue.push(n.value);
+                            return preValue;
+                        }, [])
+                        limit[2] = v.choose.reduce(function (preValue, n) {
+                            preValue.push(n.duration);
+                            return preValue;
+                        }, [])
                     }
                     //转化拼接多选
                     if (v.type === 'checkbox' || v.type === 'radio') {
@@ -268,19 +254,16 @@ Page({
                             instr = instr + input[i] + ";";
                         }
                         listitem.push(instr)
-                    } else
-                        listitem.push(input)
-
+                    }
                 } else //对于input组件
                     listitem.push(input)
 
 
                 //计算时长，添加时间备注
                 if (v.duration)
-                    duration = v.choose.reduce(
-                        function (preVlaue, n) {
-                            return preVlaue + n.duration;
-                        }, 0)
+                    duration = v.choose.reduce(function (preVlaue, n) {
+                        return preVlaue + n.duration;
+                    }, 0)
 
 
                 if (v.detail)
@@ -288,6 +271,9 @@ Page({
                         let m = v.choose[i].value;
                         detail = detail + v.data[m].detail + ";"
                     }
+                    // detail = v.choose.reduce(function(preValue,n){
+                    //     return preValue + v.data[n.value].detail + ";";
+                    // },"");
 
             } else {
                 //不合法情况
@@ -317,7 +303,7 @@ Page({
         listitem.push(app.globalData.openid)
         listitem.push(duration)
         listitem.push(detail)
-        console.log(limit)
+        // console.log(limit)
         //console.log(listitem)
 
         //uplist = { inf: listitem }
