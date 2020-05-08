@@ -219,6 +219,7 @@ Page({
         for (let key in that.data.formList.formInfo) {
             let v = that.data.formList.formInfo[key];
             console.log('v', v);
+            console.log(v.choose);
             if (v.limit && (v.type === 'radio' || v.type === 'checkbox')) //有限制的进行筛选
                 v.choose = v.choose.filter(function (n) {
                         let k = n.value;
@@ -249,10 +250,9 @@ Page({
                     }
                     //转化拼接多选
                     if (v.type === 'checkbox' || v.type === 'radio') {
-                        let instr = "";
-                        for (let i = 0; i < input.length; i++) {
-                            instr = instr + input[i] + ";";
-                        }
+                        let instr = v.choose.reduce(function(preValue,n){
+                            return preValue + n.input_text + ';';
+                        },"")
                         listitem.push(instr)
                     }
                 } else //对于input组件
@@ -263,7 +263,7 @@ Page({
                 if (v.duration)
                     duration = v.choose.reduce(function (preVlaue, n) {
                         return preVlaue + n.duration;
-                    }, 0)
+                    }, 0);
 
 
                 if (v.detail)
