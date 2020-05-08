@@ -320,16 +320,17 @@ Page({
             },
             success: function (res) {
                 //console.log(res)
-
-                that.setData({
-                    loading: false
-                })
                 uplist = [];
                 if (res.result === "error") {
                     wx.showModal({
                         title: '错误',
                         content: '您所选择的部分名额已满，请重新选择！',
                         showCancel: false,
+                        success:function(res){
+                            that.setData({
+                                loading: false
+                            })
+                        }
                     })
                     that.watch();
                     return;
@@ -344,6 +345,9 @@ Page({
                             detail: 'QQ群' + qqnum
                         },
                         success: function (res) {
+                            that.setData({
+                                loading: false
+                            })
                             //成功提示
                             wx.showModal({
                                 title: '提交成功',

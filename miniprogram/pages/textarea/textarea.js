@@ -2,6 +2,8 @@
 const db = wx.cloud.database();
 const _ = db.command;
 const app = getApp();
+//请求util.js
+var util = require('../../utils/util.js');
 Page({
 
     /**
@@ -54,6 +56,7 @@ Page({
      */
     onLoad: function (options) {
         var that = this
+        wx.showLoading()
         this.setData({
             title: options.title,
             etitle: options.title
@@ -103,7 +106,7 @@ Page({
                         place: download.place,
                         qqnum: download.qqnum
                     })
-
+                    wx.hideLoading()
                 }
             })
 
@@ -170,63 +173,69 @@ Page({
             })
             return
         }
-        wx.showLoading({
-            title: '加载中',
-        }) //一个延时显示
-        //转换日期格式
-        var str = this.data.date.split('-') //date用-分隔
-        let year = str[0]
-        let month = str[1]
-        let day = str[2]
-        if (month.length == 1) {
-            month = '0' + month
-        } //如果month是1-9就要转换 day同理
-        if (day.length == 1) {
-            day = '0' + day
-        }
-        let date3 = year + '-' + month + '-' + day
-        //上传详细信息
-        wx.cloud.callFunction({ //调用这个云函数
-            name: 'uploadvolun',
-            data: {
-                etitle: that.data.etitle,
-                title: that.data.title,
-                date: date3,
-                time: that.data.time,
-                textarea: that.data.textarea,
-                place: that.data.place,
-                people: array.people.data.split('\n'),
-                requireList: array.require.data.split('\n'),
-                assureList:  array.assure.data.split('\n'),
-                detailList:  array.detail.data.split('\n'),
-                requireList: array.require.data.split('\n'),
-                responseList:array.response.data.split('\n'),
-                innerList: [],
-                signuplist: [],
-                qqnum: that.data.qqnum
-            },
-            success: function (e) {
-                console.log(e)
-                wx.hideLoading();
-                wx.showModal({
-                    title: "发布成功",
-                    content: "志愿发布成功，请编辑报名表单",
-                    showCancel: false, //去掉取消按钮
-                    success: function (res) { //如果成功调用showModal成功，则跳转至链接
-                        wx.redirectTo({
-                            url: '../list/list',
+        wx.cloud.callFunction({
+            name: 'getTime',
+            success: function (res) {
+                //console.log(res)
+                //返回值是日期和时间
+                var time = res.result.time.split(" ");
+                var currenTime = time[1];
+                var currenDate = time[0];
+                if (currenDate>that.data.date || currenDate == that.data.date && currenTime>that.data.items.time){
+                    wx.showModal({
+                        title: '信息错误',
+                        content: '志愿发布时间不能在当前时间之前',
+                        showCancel: false,
+                    })
+                    return
+                }
+                wx.showLoading({
+                    title: '加载中',
+                }) //一个延时显示
+                //上传详细信息
+                wx.cloud.callFunction({ //调用这个云函数
+                    name: 'uploadvolun',
+                    data: {
+                        etitle: that.data.etitle,
+                        title: that.data.title,
+                        date: that.data.date,
+                        time: that.data.time,
+                        textarea: that.data.textarea,
+                        place: that.data.place,
+                        people: array.people.data.split('\n'),
+                        requireList: array.require.data.split('\n'),
+                        assureList:  array.assure.data.split('\n'),
+                        detailList:  array.detail.data.split('\n'),
+                        requireList: array.require.data.split('\n'),
+                        responseList:array.response.data.split('\n'),
+                        innerList: [],
+                        signuplist: [],
+                        qqnum: that.data.qqnum
+                    },
+                    success: function (e) {
+                        console.log(e)
+                        wx.hideLoading();
+                        wx.showModal({
+                            title: "发布成功",
+                            content: "志愿发布成功，请编辑报名表单",
+                            showCancel: false, //去掉取消按钮
+                            success: function (res) { //如果成功调用showModal成功，则跳转至链接
+                                wx.redirectTo({
+                                    url: '../list/list',
+                                })
+                            }
+                        })
+        
+                    },
+                    fail: function (e) {
+                        wx.hideLoading();
+                        console.log(e)
+                        wx.showModal({
+                            title: "发布失败",
+                            content: "有错误发生，发布失败",
+                            showCancel: false
                         })
                     }
-                })
-
-            },
-            fail: function (e) {
-                wx.hideLoading();
-                console.log(e)
-                wx.showModal({
-                    title: "发布失败",
-                    content: "有错误发生，发布失败",
-                    showCancel: false
                 })
             }
         })
