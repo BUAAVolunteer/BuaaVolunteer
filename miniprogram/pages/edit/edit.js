@@ -358,7 +358,7 @@ Page({
     },
     change: function (e) {
         this.setData({
-            page: 1 - that.data.page
+            page: 1 - this.data.page
         })
     },
     delete: function (e) {

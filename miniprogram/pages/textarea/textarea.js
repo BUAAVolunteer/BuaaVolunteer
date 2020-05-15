@@ -181,7 +181,7 @@ Page({
                 var time = res.result.time.split(" ");
                 var currenTime = time[1];
                 var currenDate = time[0];
-                if (currenDate>that.data.date || currenDate == that.data.date && currenTime>that.data.items.time){
+                if (currenDate>that.data.date || currenDate == that.data.date && currenTime>that.data.time){
                     wx.showModal({
                         title: '信息错误',
                         content: '志愿发布时间不能在当前时间之前',

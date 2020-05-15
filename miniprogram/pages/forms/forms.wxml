@@ -2,7 +2,7 @@
 <view class='reports-container'>
 
 	<view class='reports-header input-all-width'>
-		{{formList.fieldName}}
+		{{formList.title}}
 	</view>
 	<view class='reports-form'>
 		<block

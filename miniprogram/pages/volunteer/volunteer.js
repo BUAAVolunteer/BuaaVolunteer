@@ -55,7 +55,22 @@ Page({
                         })
                     } else {
                         //console.log(res.data)
-                        if (res.data[0].score <= -10) {
+                        let flag = 0;
+                        if (!res.campus || !res.qqnum){
+                            flag = 1;
+                            wx.showModal({
+                                title: '请先完成信息',
+                                content: '请先前往个人页面完善信息后，再来报名呀~',
+                                showCancel: false,
+                                success: function () {
+                                    wx.switchTab({
+                                        url: '../about/about',
+                                    })
+                                },
+
+                            })
+                        }
+                        if (flag == 0 && res.data[0].score <= -10) {
                             wx.showModal({
                                 title: '您没有报名权限',
                                 content: '您的积分已达到惩罚线，6个月内无法继续参与蓝协志愿。',
@@ -65,7 +80,6 @@ Page({
                                         url: '../about/about',
                                     })
                                 },
-
                             })
                         }
                     }

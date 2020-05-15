@@ -30,62 +30,56 @@ Page({
             title: '加载中',
         })
         this.setData({
-            title: options.title,
             stime: options.stime
         })
         let that = this;
         let ti = options.title;
         db.collection('person').where({
             _openid: app.globalData.openid
-        })
-            .get({
-                success: function (res) {
-                    //console.log(res);
-                    getname = res.data[0].name;
-                    getphone = res.data[0].phone;
-                    getpersonnum = res.data[0].personnum;
-                    getqqnum = res.data[0].qqnum;
-                    getcampus = res.data[0].campus;
-                    //console.log(getname, getphone, getpersonnum, getqqnum, getcampus);
+        }).get({
+            success: function (res) {
+                //console.log(res);
+                getname = res.data[0].name;
+                getphone = res.data[0].phone;
+                getpersonnum = res.data[0].personnum;
+                getqqnum = res.data[0].qqnum;
+                getcampus = res.data[0].campus;
+                //console.log(getname, getphone, getpersonnum, getqqnum, getcampus);
 
-                    db.collection('form')
-                        .where({
-                            title: ti
-                        })
-                        .get({
-                            success: function (res) {
-                                //console.log(res.data)
-                                wx.hideLoading();
-                                //formConfig.push(res.data[0]);
-                                let formList = res.data[0];
-                                res.data[0].choose = [];
-                                res.data[0].input_text = [];
-                                that.setData({
-                                    formList: res.data[0]
-                                })
-                                that.watch(); //调用监听方法
-                            },
-                            fail: function () {
-                                wx.hideLoading();
-                                wx.showModal({
-                                    title: '错误',
-                                    content: '获取记录失败,请检查网络或反馈给管理员',
-                                    showCancel: false,
-                                })
-                            }
-                        })
-                },
-                fail: function () {
-                    wx.hideLoading();
-                    wx.showModal({
-                        title: '错误',
-                        content: '获取记录失败,请检查网络或反馈给管理员',
-                        showCancel: false,
+                db.collection('form')
+                    .where({
+                        title: ti
                     })
-                }
-            })
-
-
+                    .get({
+                        success: function (res) {
+                            //console.log(res.data)
+                            wx.hideLoading();
+                            res.data[0].choose = [];
+                            res.data[0].input_text = [];
+                            that.setData({
+                                formList: res.data[0]
+                            })
+                            that.watch(); //调用监听方法
+                        },
+                        fail: function () {
+                            wx.hideLoading();
+                            wx.showModal({
+                                title: '错误',
+                                content: '获取记录失败,请检查网络或反馈给管理员',
+                                showCancel: false,
+                            })
+                        }
+                    })
+            },
+            fail: function () {
+                wx.hideLoading();
+                wx.showModal({
+                    title: '错误',
+                    content: '获取记录失败,请检查网络或反馈给管理员',
+                    showCancel: false,
+                })
+            }
+        })
     },
     watch: function () {
         //watcher是一个页面监听事件
@@ -93,7 +87,7 @@ Page({
         let that = this;
         watcher = db.collection('form')
             .where({
-                title: that.data.title
+                title: that.data.formList.title
             })
             .watch({
                 onChange: function (snapshot) {
@@ -157,8 +151,8 @@ Page({
                     return false;
                 }
             }
+            //目前只会判断非空，此时input_text格外有用
             if (type === 'notnull') {
-                //console.log('item.input_text', item.input_text)
                 if (item.input_text.length == 0) {
                     let {
                         msg
@@ -222,9 +216,9 @@ Page({
             console.log(v.choose);
             if (v.limit && (v.type === 'radio' || v.type === 'checkbox')) //有限制的进行筛选
                 v.choose = v.choose.filter(function (n) {
-                        let k = n.value;
-                        return v.data[k].limit > 0;
-                })
+                    let k = n.value;
+                    return v.data[k].limit > 0;
+                });
             //判断是否必填项为空
             if (that.formValidate(v)) {
                 //合法情况
@@ -233,7 +227,6 @@ Page({
                 if (v.type === 'div' || v.type === 'describe')
                     continue;
                 else if (v.type === 'radio' || v.type === 'checkbox') {
-                    let l = v.choose.length;
                     if (v.limit) {
                         limit[0] = v.choose.reduce(function (preValue, n) {
                             preValue.push(n.id);
@@ -250,9 +243,9 @@ Page({
                     }
                     //转化拼接多选
                     if (v.type === 'checkbox' || v.type === 'radio') {
-                        let instr = v.choose.reduce(function(preValue,n){
+                        let instr = v.choose.reduce(function (preValue, n) {
                             return preValue + n.input_text + ';';
-                        },"")
+                        }, "");
                         listitem.push(instr)
                     }
                 } else //对于input组件
@@ -271,9 +264,6 @@ Page({
                         let m = v.choose[i].value;
                         detail = detail + v.data[m].detail + ";"
                     }
-                    // detail = v.choose.reduce(function(preValue,n){
-                    //     return preValue + v.data[n.value].detail + ";";
-                    // },"");
 
             } else {
                 //不合法情况
@@ -305,8 +295,6 @@ Page({
         listitem.push(detail)
         // console.log(limit)
         //console.log(listitem)
-
-        //uplist = { inf: listitem }
         uplist.push(listitem)
         listitem = [];
         //console.log(uplist);
@@ -326,7 +314,7 @@ Page({
                         title: '错误',
                         content: '您所选择的部分名额已满，请重新选择！',
                         showCancel: false,
-                        success:function(res){
+                        success: function (res) {
                             that.setData({
                                 loading: false
                             })
