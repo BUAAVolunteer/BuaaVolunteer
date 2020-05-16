@@ -175,7 +175,7 @@ Page({
         return true;
     },
     childChange: function (e) {
-        console.log(e)
+        //console.log(e)
         let type = e.detail.type;
         let input_text = e.detail.input_text;
         let ID = e.detail.ID;
@@ -304,7 +304,7 @@ Page({
         wx.cloud.callFunction({
             name: "uploadData",
             data: {
-                title: that.data.title,
+                title: that.data.formList.title,
                 stime: that.data.stime,
                 list: uplist,
                 limit: limit
