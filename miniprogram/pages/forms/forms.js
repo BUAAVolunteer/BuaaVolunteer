@@ -54,8 +54,11 @@ Page({
                         success: function (res) {
                             //console.log(res.data)
                             wx.hideLoading();
-                            res.data[0].choose = [];
-                            res.data[0].input_text = [];
+                            res.data[0].formInfo = res.data[0].formInfo.map(function(n){
+                                n.choose = [];
+                                n.input_text = [];
+                                return n;
+                            })
                             that.setData({
                                 formList: res.data[0]
                             })
@@ -212,8 +215,8 @@ Page({
         ];
         for (let key in that.data.formList.formInfo) {
             let v = that.data.formList.formInfo[key];
-            console.log('v', v);
-            console.log(v.choose);
+            // console.log('v', v);
+            // console.log(v.choose);
             if (v.limit && (v.type === 'radio' || v.type === 'checkbox')) //有限制的进行筛选
                 v.choose = v.choose.filter(function (n) {
                     let k = n.value;
@@ -242,7 +245,7 @@ Page({
                         }, [])
                     }
                     //转化拼接多选
-                    if (v.type === 'checkbox' || v.type === 'radio') {
+                    if (v.choose && (v.type === 'checkbox' || v.type === 'radio')) {
                         let instr = v.choose.reduce(function (preValue, n) {
                             return preValue + n.input_text + ';';
                         }, "");
@@ -312,7 +315,7 @@ Page({
                 if (res.result === "error") {
                     wx.showModal({
                         title: '错误',
-                        content: '您所选择的部分名额已满，请重新选择！',
+                        content: '您所选择的部分名额已满，请重新选择！！',
                         showCancel: false,
                         success: function (res) {
                             that.setData({
