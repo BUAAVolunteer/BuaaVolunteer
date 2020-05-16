@@ -54,9 +54,9 @@ Page({
 
                         })
                     } else {
-                        //console.log(res.data)
+                        console.log(res.data)
                         let flag = 0;
-                        if (!res.campus || !res.qqnum){
+                        if (!res.data[0].campus || !res.data[0].qqnum){
                             flag = 1;
                             wx.showModal({
                                 title: '请先完成信息',
