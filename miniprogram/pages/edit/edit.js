@@ -258,8 +258,8 @@ Page({
     },
     entertd: function (e) {
         let that = this
-        let detail = e.detail.value;
-        let detLength = detail.split('\n').length;
+        let detail = e.detail.value.split('\n');
+        let detLength = detail.length;
         if (detLength > that.data.la) {
             wx.showModal({
                 title: '错误提示',
@@ -273,7 +273,7 @@ Page({
             return
         }
         var addList = 'formList.formInfo[' + ID + '].data'
-        for (var i = 0; i < la; i++) {
+        for (var i = 0; i < detLength; i++) {
             var addl = addList + '[' + i + '].detail'
             that.setData({
                 [addl]: detail[i]
@@ -282,8 +282,8 @@ Page({
     },
     enterta: function (e) {
         //console.log(e.detail.value)
-        let a = e.detail.value.split('\n');
-        let la = a.length;
+        let chooseDetail = e.detail.value.split('\n');
+        let la = chooseDetail.length;
         this.setData({
             la
         })
@@ -291,7 +291,7 @@ Page({
         let pattern2 = /^([\u3002\uff1b\uff0c\uff1a\u201c\u201d\uff08\uff09\u3001\uff1f\u300a\u300b\u4e00-\u9fa5a-zA-Z0-9]+)( +)(\d+)( +)?$/; //用于匹配包含选项名和限额的情况
         let pattern3 = /^([\u3002\uff1b\uff0c\uff1a\u201c\u201d\uff08\uff09\u3001\uff1f\u300a\u300b\u4e00-\u9fa5a-zA-Z0-9]+)( +)(\d+)( +)(\d+)( +)?$/; //用于匹配包含选项名，限额和时长的情况
         let id = 0, flagl = 0, flagd = 0;
-        let data = a.reduce(function(preValue,n){//reduce拼接数组
+        let data = chooseDetail.reduce(function(preValue,n){//reduce拼接数组
             let dataitem = {
                 id,
                 checked: false,

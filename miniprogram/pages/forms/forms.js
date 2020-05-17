@@ -215,13 +215,14 @@ Page({
         ];
         for (let key in that.data.formList.formInfo) {
             let v = that.data.formList.formInfo[key];
-            // console.log('v', v);
-            //console.log('choose', v.choose);
+            console.log('v', v);
+            console.log('choose', v.choose);
             if (v.limit && (v.type === 'radio' || v.type === 'checkbox')) //有限制的进行筛选
                 v.choose = v.choose.filter(function (n) {
                     let k = n.value;
                     return v.data[k].limit > 0;
                 });
+            console.log('choose', v.choose);
             //判断是否必填项为空
             if (that.formValidate(v)) {
                 //合法情况
@@ -231,18 +232,18 @@ Page({
                     continue;
                 else if (v.type === 'radio' || v.type === 'checkbox') {
                     if (v.limit) {
-                        limit[0] = v.choose.reduce(function (preValue, n) {
+                        limit[0] = limit[0].concat(v.choose.reduce(function (preValue, n) {
                             preValue.push(n.id);
                             return preValue;
-                        }, [])
-                        limit[1] = v.choose.reduce(function (preValue, n) {
+                        }, []))
+                        limit[1] = limit[1].concat(v.choose.reduce(function (preValue, n) {
                             preValue.push(n.value);
                             return preValue;
-                        }, [])
-                        limit[2] = v.choose.reduce(function (preValue, n) {
+                        }, []))
+                        limit[2] = limit[2].concat(v.choose.reduce(function (preValue, n) {
                             preValue.push(n.duration);
                             return preValue;
-                        }, [])
+                        }, []))
                     }
                     //转化拼接多选
                     if (v.choose && (v.type === 'checkbox' || v.type === 'radio')) {
@@ -296,11 +297,11 @@ Page({
         listitem.push(app.globalData.openid)
         listitem.push(duration)
         listitem.push(detail)
-        // console.log(limit)
-        //console.log(listitem)
+        console.log(limit)
+        console.log(listitem)
         uplist.push(listitem)
         listitem = [];
-        //console.log(uplist);
+        console.log(uplist);
         wx.cloud.callFunction({
             name: "uploadData",
             data: {
