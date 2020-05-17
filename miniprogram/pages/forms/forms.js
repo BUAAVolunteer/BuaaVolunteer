@@ -54,7 +54,7 @@ Page({
                         success: function (res) {
                             //console.log(res.data)
                             wx.hideLoading();
-                            res.data[0].formInfo = res.data[0].formInfo.map(function(n){
+                            res.data[0].formInfo = res.data[0].formInfo.map(function (n) {
                                 n.choose = [];
                                 n.input_text = [];
                                 return n;
@@ -193,8 +193,8 @@ Page({
         })
     },
     getInputValue: function () {
-        if (watcher)
-            watcher.close();
+        // if (watcher)
+        //     watcher.close();
         this.setData({
             loading: true
         })
@@ -216,7 +216,7 @@ Page({
         for (let key in that.data.formList.formInfo) {
             let v = that.data.formList.formInfo[key];
             // console.log('v', v);
-            // console.log(v.choose);
+            //console.log('choose', v.choose);
             if (v.limit && (v.type === 'radio' || v.type === 'checkbox')) //有限制的进行筛选
                 v.choose = v.choose.filter(function (n) {
                     let k = n.value;
@@ -290,7 +290,7 @@ Page({
                 showCancel: false,
             })
             listitem = [];
-            that.watch();
+            //that.watch();
             return;
         }
         listitem.push(app.globalData.openid)
@@ -323,14 +323,14 @@ Page({
                             })
                         }
                     })
-                    that.watch();
+                    //that.watch();
                     return;
                 } else {
                     //发送订阅消息
                     wx.cloud.callFunction({
                         name: 'Signup',
                         data: {
-                            title: that.data.title,
+                            title: that.data.formList.title,
                             openid: app.globalData.openid,
                             date: detail,
                             detail: 'QQ群' + qqnum
@@ -366,7 +366,7 @@ Page({
                     showCancel: false
                 })
                 uplist = [];
-                that.watch();
+                //that.watch();
             }
         })
 
