@@ -2,10 +2,7 @@
 const cloud = require('wx-server-sdk')
 
 //云函数初始化
-cloud.init({
-	traceUser:true,
-	env:"buaalx-w5aor"//环境ID
-})
+cloud.init()
 
 const db = cloud.database();
 const _ = db.command;

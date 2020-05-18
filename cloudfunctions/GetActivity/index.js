@@ -3,10 +3,7 @@ const cloud = require('wx-server-sdk')
 //请求request以访问http协议
 const request = require('request')
 
-cloud.init({
-		traceUser:true,
-		env:"buaalx-w5aor",
-})
+cloud.init()
 // 云函数入口函数
 const db = cloud.database()
 exports.main = async (event, context) => {
