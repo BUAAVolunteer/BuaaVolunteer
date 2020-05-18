@@ -1,8 +1,5 @@
 const cloud = require('wx-server-sdk')
-cloud.init({
-	traceUser:true,
-	env:"buaalx-w5aor"
-})
+cloud.init()
 const db = cloud.database()
 const _ = db.command
 exports.main = async (event, context) => {
