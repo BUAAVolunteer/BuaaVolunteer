@@ -57,7 +57,7 @@ Page({
             })
             .get({
                 success: function(res) {
-                    //console.log(res.data)
+                    console.log(res.data)
                     let data = res.data
                     if (data.length == 0 || !data[0].campus || !data[0].qqnum) {
                         wx.hideLoading()

@@ -115,7 +115,7 @@ Page({
                     }).get({
                             success: function (res) {
                                 //console.log(res)
-                                //console.log(res.data)
+                                console.log(res.data)
 
                                 let dat = res.data
                                 //排序函数，按照日期时间排序，从近到远渲染页面
@@ -128,7 +128,7 @@ Page({
                                         return 1;
                                     }
                                 });
-                                // console.log('dat', dat)
+                                 console.log('dat', dat)
                                 //dat是一个对象（类似结构体）
                                 let ldat = dat.length;
                                 for (let i = 0; i < ldat; i++) {
@@ -153,6 +153,7 @@ Page({
                                     }, "")
                                 }
                                 //volunteer_list是页面展示出来的悬浮窗上的数据
+                                console.log(dat)
                                 that.setData({
                                     volunteer_list: dat
                                 })
