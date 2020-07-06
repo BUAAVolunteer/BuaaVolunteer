@@ -1,3 +1,4 @@
+<!--pages/PersonMain/PersonMain.wxml-->
 <view class="top">
     <view style="margin-bottom:20rpx;" >
 
@@ -145,3 +146,4 @@
         <image mode="widthFix" src="../../image/fly.png"/>
     </button>
 </view>
+

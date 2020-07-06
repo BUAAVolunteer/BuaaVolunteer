@@ -1,68 +1,67 @@
 {
-
-    "cloud": true,
-    "pages": [
-        "pages/main/main",
-        "pages/introduction/introduction",
-        "pages/detail/detail",
-        "pages/show/show",
-        "pages/about/about",
-        "pages/question/question",
-        "pages/contact/contact",
-        "pages/activity/activity",
-        "pages/history/history",
-        "pages/comment/comment",
-        "pages/volunteer/volunteer",
-        "pages/person/person",
-        "pages/admin/admin",
-        "pages/map/map",
-        "pages/us/us",
-        "pages/score/score",
-        "pages/push/push",
-        "pages/add/add",
-        "pages/us2/us2",
-        "pages/forms/forms",
-        "pages/edit/edit",
-        "pages/list/list",
-        "pages/textarea/textarea",
-        "pages/practice/practice",
-        "pages/confirm/confirm",
-        "pages/update/update",
-        "pages/download/download",
-        "pages/secret/secret"
-    ],
-    "window": {
-        "backgroundColor": "#F6F6F6",
-        "backgroundTextStyle": "light",
-        "navigationBarBackgroundColor": "#F6F6F6",
-        "navigationBarTitleText": "云开发 QuickStart",
-        "navigationBarTextStyle": "black"
-    },
-    "tabBar": {
-        "color": "#7A7E83",
-        "selectedColor": "#3cc51f",
-        "borderStyle": "black",
-        "backgroundColor": "#ffffff",
-        "list": [{
-                "pagePath": "pages/main/main",
-                "iconPath": "icons/component.png",
-                "selectedIconPath": "icons/component_cur.png",
-                "text": "主页"
-            },
-            {
-                "pagePath": "pages/volunteer/volunteer",
-                "iconPath": "icons/plugin.png",
-                "selectedIconPath": "icons/plugin_cur.png",
-                "text": "志愿招募"
-            },
-            {
-                "pagePath": "pages/about/about",
-                "iconPath": "icons/about.png",
-                "selectedIconPath": "icons/about_cur.png",
-                "text": "我的"
-            }
-        ]
-
-    },
-    "sitemapLocation": "sitemap.json"
+  "cloud": true,
+  "pages": [
+    "pages/Main/Main",
+    "pages/Main/Activity/Activity",
+    "pages/Main/Feedback/Feedback",
+    "pages/Main/UpdateLog/UpdateLog",
+    "pages/Recruit/Recruit",
+    "pages/Recruit/Form/Form",
+    "pages/PersonMain/PersonMain",
+    "pages/PersonMain/History/History",
+    "pages/PersonMain/Map/Map",
+    "pages/PersonMain/PersonEdit/PersonEdit",
+    "pages/Admin/Admin",
+    "pages/Admin/FeedbackComment/FeedbackComment",
+    "pages/Admin/Score/Score",
+    "pages/Admin/Absence/Absence",
+    "pages/Manage/Manage",
+    "pages/Manage/FormEdit/FormEdit",
+    "pages/Manage/Detail/Detail",
+    "pages/Manage/Confirm/Confirm",
+    "pages/Manage/DataExport/DataExport",
+    "pages/Introduction/Introduction",
+    "pages/Introduction/VolunteerMain/VolunteerMain",
+    "pages/show/show",
+    "pages/contact/contact",
+    "pages/us/us",
+    "pages/push/push",
+    "pages/us2/us2",
+    "pages/practice/practice",
+    "pages/secret/secret"
+  ],
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#F6F6F6",
+    "navigationBarTitleText": "云开发 QuickStart",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#3cc51f",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/Main/Main",
+        "iconPath": "assests/icons/component.png",
+        "selectedIconPath": "assests/icons/component_cur.png",
+        "text": "主页"
+      },
+      {
+        "pagePath": "pages/Recuit/Recuit",
+        "iconPath": "assests/icons/plugin.png",
+        "selectedIconPath": "assests/icons/plugin_cur.png",
+        "text": "志愿招募"
+      },
+      {
+        "pagePath": "pages/PersonMain/PersonMain",
+        "iconPath": "assests/icons/about.png",
+        "selectedIconPath": "assests/icons/about_cur.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
 }

@@ -1,0 +1,160 @@
+/* pages/Recuit/Recuit.wxss */
+page {
+  background-color: var(--blueLignt);
+}
+
+.items {
+  display: flex;
+  justify-content: center;
+}
+
+
+/*0rpx 0rpx 10rpx 8rpx rgba(0, 0, 0, 0.2)*/
+
+.items-pic {
+  width: 650rpx;
+  height: 450rpx;
+  border-radius: 5%;
+  box-shadow: 5rpx 5rpx 18rpx 9rpx rgba(0, 0, 0, 0.2);
+  margin-bottom: 50rpx;
+  margin-top: 40rpx;
+  z-index: -1;
+}
+
+
+/*左侧展示层  */
+
+.page-top {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 750rpx;
+  height: 100%;
+  background-color: white;
+  z-index: 2;
+}
+
+
+/*transform三参数：旋转，缩放，x/y平移transform: rotate(0deg) scale(1) translate(110%, 0%);
+  -webkit-transform: rotate(0deg) scale(1) translate(90%, 0%);*/
+
+.page-state {
+  z-index: 4;
+}
+
+.open {
+  width: 60%;
+  background-color: var(--greyLight);
+  position: fixed;
+}
+
+.page-state-hide {
+  display: none;
+}
+
+.imgw {
+  width: 100%;
+}
+
+
+/*右侧遮罩层  */
+
+.page-mask {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.page-mask-show {
+  display: none;
+}
+
+
+/*悬浮窗*/
+
+.open-page {
+  width: 80%;
+  background-color: var(--greyLight);
+  border-radius: 3.2%;
+  margin: 30% 10%;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.middle {
+  height: 500rpx;
+  background-color: #bfe6e9;
+  border-radius: 5%;
+  width: 85%;
+  margin: 20rpx 5%;
+  margin-bottom: 15rpx;
+  padding: 15rpx;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+.bottom-but {
+  justify-content: space-around;
+  display: flex;
+}
+
+.top-date {
+  display: flex;
+  text-align: center;
+  font-weight: bold;
+  margin-top: 15rpx;
+  font-family: Microsoft YaHei;
+  line-height: 35rpx;
+  font-size: 26rpx;
+}
+
+.items-title {
+  font-weight: bold;
+  font-family: Microsoft YaHei;
+}
+
+.texts {
+  font-weight: normal;
+  font-family: Microsoft YaHei;
+  line-height: 30rpx;
+}
+
+.button-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bolder;
+  font-family: Microsoft YaHei;
+  font-size: 30rpx;
+}
+
+.bg-cyan {
+  background-color: rgb(61, 172, 194);
+  border-radius: 10rpx;
+  width: 180rpx;
+  height: 70rpx;
+  margin-left: 10rpx;
+}
+
+.bg-grey {
+  background-color: #858585;
+  border-radius: 10rpx;
+  width: 180rpx;
+  height: 70rpx;
+  margin-left: 10rpx;
+}
+
+.bg-blue {
+  background-color: #5fc1c7;
+  border-radius: 10rpx;
+  width: 180rpx;
+  height: 70rpx;
+  margin-right: 10rpx;
+}

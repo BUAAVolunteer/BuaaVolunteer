@@ -1,4 +1,4 @@
-// pages/about/about.js
+// pages/PersonMain/PersonMain.js
 const db = wx.cloud.database();
 const _ = db.command;
 const app = getApp();

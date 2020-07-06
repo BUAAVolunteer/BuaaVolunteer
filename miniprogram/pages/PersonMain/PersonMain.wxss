@@ -1,3 +1,4 @@
+/* pages/PersonMain/PersonMain.wxss */
 page {
     height: 80%;
     background-color: #b5e9f4;
@@ -50,7 +51,7 @@ page {
 
 .map {
     top: 12.68rpx;
-    margin-bottom: 40rpx；
+    margin-bottom: 40rpxï¼›
 }
 
 .middle-item-map {

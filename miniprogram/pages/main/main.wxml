@@ -9,7 +9,7 @@
 
 <!--logo-->
 <view class="logo">
-  <image mode="widthFix" style="width:750rpx; height:97rpx;" src="../../image/logo.png" />
+  <image mode="widthFix" style="width:750rpx; height:97rpx;" src="../../assests/image/logo.png" />
 </view>
 
 <!--中间模块-->

@@ -1,4 +1,4 @@
-// pages/volunteer/volunteer.js
+// pages/Recuit/Recuit.js
 var app = getApp();
 const db = wx.cloud.database()
 const _ = db.command

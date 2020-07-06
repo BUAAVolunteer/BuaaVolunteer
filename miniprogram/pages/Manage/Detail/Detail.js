@@ -3,7 +3,7 @@ const db = wx.cloud.database();
 const _ = db.command;
 const app = getApp();
 //请求util.js
-var util = require('../../utils/util.js');
+var util = require('../../../utils/util.js');
 Page({
 
     /**
