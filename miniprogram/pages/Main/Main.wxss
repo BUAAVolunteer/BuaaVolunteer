@@ -1,0 +1,16 @@
+page {
+  background-color: white;
+}
+
+.logo {
+  margin-top: -35rpx;
+}
+
+.gugugu {
+  height: 240rpx;
+  width: 210rpx;
+  max-width: 100%;
+  position: relative;
+  margin-top: -98rpx;
+  left: 510rpx;
+}

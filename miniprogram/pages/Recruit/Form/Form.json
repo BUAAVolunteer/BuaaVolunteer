@@ -1,0 +1,10 @@
+{
+    "usingComponents": {
+        "text-input": "/components/text-input/text-input",
+        "text-radio": "/components/text-radio/text-radio",
+        "text-describe": "/components/text-describe/text-describe",
+        "text-div": "/components/text-div/text-div",
+        "text-checkbox": "/components/text-checkbox/text-checkbox"
+    },
+    "navigationBarTitleText": "报名表单"
+}

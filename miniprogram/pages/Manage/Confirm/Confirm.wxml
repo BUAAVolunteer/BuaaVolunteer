@@ -1,0 +1,103 @@
+<view class="bg" style="opacity:{{0.2}}">
+	<image style="height:111%;" src='../../image/shu.jpg' class="bg-image" />
+</view>
+<view class="title">
+	{{title}}
+</view>
+<view class="instruction">
+	<text class="ins-text">○  使用说明</text>
+	<text class="ins-text">\n可以给每个人单独备注，或删除某条记录。替换志愿者时请更改手机号并查找。</text>
+	<text class="ins-text"></text>
+</view>
+<view class="middle">
+	<view class="middle-item flex">
+		<view class="name">
+			姓名
+		</view>
+		<view class="phone">
+			手机
+		</view>
+		<view class="duration">
+			时长
+		</view>
+		<view class="note">
+			备注
+		</view>
+	</view>
+	<view class="separate" style="" />
+
+	<scroll-view scroll-y="{{true}}" class="middle-item233">
+		<scroll-view
+		 class="middle-item2 flex"
+		 wx:for-item="items"
+		 wx:for="{{volunteer_list}}"
+		 wx:key="index"
+		>
+			<view class="{{index%2==0 ? 'bg-white' : 'bg-cyan'}}" wx:if="{{delete}}" id="{{items.id}}" data-id="{{items.id}}" bindtap="delete">
+				<image class="items-titleimg" src="../../icons/delete.png" />
+			</view>
+			<view class="{{index%2==0 ? 'uneven' : 'even'}} {{delete ? 'page-state' : ''}}" >
+				<view class="name items-input">
+					<input
+					 class="name-input"
+					 value="{{items.name}}"
+					 data-type="name"
+					 data-id="{{items.id}}"
+					 bindinput="input"
+					 disabled="{{items.d}}"
+					/>
+				</view>
+				<view class="phone items-input">
+					<input
+					 class="phone-input"
+					 value="{{items.phone}}"
+					 data-type="phone"
+					 data-id="{{items.id}}"
+					 bindinput="input"
+					/>
+				</view>
+				<view class="mid-botton">
+					<image
+					 class="searchbot"
+					 src="../../icons/search.png"
+					 data-id="{{items.id}}"
+					 bind:tap="search"
+					/>
+				</view>
+				<view class="duration items-input">
+					<input
+					 type="number"
+					 class="duration-input"
+					 value="{{items.duration}}"
+					 data-type="duration"
+					 data-id="{{items.id}}"
+					 bindinput="input"
+					/>
+				</view>
+				<view class="note items-input">
+					<input
+					 class="note-input"
+					 value="{{items.note}}"
+					 data-type="note"
+					 data-id="{{items.id}}"
+					 bindinput="input"
+					/>
+				</view>
+			</view>
+
+
+		</scroll-view>
+	</scroll-view>
+</view>
+<view class="center">
+	<view class="add-but">
+		<view class="bottom-but">
+			<button class="cu-btn block line-black lg" style="background-color: var(--cyan);color: white;" bindtap="add">添加记录</button>
+			<button wx:if="{{delete}}" class="cu-btn block line-black lg" style="background-color: var(--orange);color: white;" bindtap="opendel">退出编辑</button>
+			<button wx:else class="cu-btn block line-black lg" style="background-color: var(--red);color: white;" bindtap="opendel">删除记录</button>
+		</view>
+		<button class="cu-btn block line-black lg" style="background-color: var(--cyan);color: white;" bindtap="download">确认志愿并导出报名表单</button>
+	</view>
+</view>
+
+

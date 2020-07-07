@@ -1,0 +1,118 @@
+<view class="title flex">
+	{{title}}
+</view>
+<view class="describe block">
+	这里是详细信息的编辑页面，请大家参照自己标准的招募信息进行编辑。
+	<text class="red">
+        请注意同一门类下换行即视为分点!
+    </text>
+</view>
+
+<!--
+<view class='edit-form-box form-inner'>
+    <view class='edit-title'>
+        活动时间
+    </view>
+    <view class='edit-form-input'>
+    <input style="width:90%;" bindinput='people' value="{{people}}" />
+    </view>
+</view>
+-->
+<view class="block">
+	<view class='reports-header'>
+		<view class='reports-header-line' />
+		<view class='reports-header-name'>招募信息</view>
+	</view>
+</view>
+
+<view wx:if="{{etitle==='发布一个新志愿'}}" class='edit-form-box form-inner'>
+	<view class='edit-title'>
+		活动名称
+	</view>
+	<view class='edit-form-input border'>
+		<input style="width:90%;" model:value="{{title}}" />
+	</view>
+</view>
+
+<view class='edit-form-box form-inner'>
+	<view class='edit-title'>
+		招募日期
+	</view>
+	<picker
+	 name="bd"
+	 mode="date"
+	 model:value="{{date}}"
+	 class="block border edit-picker"
+	>
+		<view class="picker">
+			{{date}}
+		</view>
+	</picker>
+</view>
+<view class='edit-form-box form-inner'>
+	<view class='edit-title'>
+		招募发布时间
+	</view>
+	<picker
+	 name="time"
+	 mode="time"
+	 model:value="{{time}}"
+	 class="block border edit-picker"
+	>
+		<view class="picker">
+			{{time}}
+		</view>
+	</picker>
+</view>
+<view class='edit-form-box form-inner'>
+	<view class='edit-title'>
+		志愿开展日期
+	</view>
+	<view class='edit-form-input border'>
+		<input
+		 style="width:90%;"
+		 maxlength="-1"
+		 model:value="{{textarea}}"
+		 placeholder="请输入志愿活动时间，如：11月9日至11月10日"
+		/>
+	</view>
+</view>
+<view class="block">
+	<view class='reports-header'>
+		<view class='reports-header-line' />
+		<view class='reports-header-name'>志愿详细信息</view>
+	</view>
+</view>
+
+<view class='edit-form-box form-inner'>
+	<view class='edit-title'>
+		活动地点
+	</view>
+	<view class='edit-form-input border'>
+		<input style="width:90%;" model:value="{{place}}" />
+	</view>
+</view>
+<view wx:for="{{array}}" wx:for-item="item" wx:key="index" class='edit-form-box form-inner'>
+	<view class='edit-title'>
+		{{item.content}}
+	</view>
+	<textarea
+	 auto-height="{{false}}"
+	 class="block border edit-textarea"
+	 bindinput="enterTextarea"
+	 id="{{item.type}}"
+	 value="{{item.data}}"
+	 placeholder="{{item.placeholder}}"
+	 maxlength="-1"
+	/>
+</view>
+<view class='edit-form-box form-inner'>
+    <view class='edit-title'>
+        qq群号
+    </view>
+    <textarea class="block border edit-textarea" model:value="{{qqnum}}" placeholder="{{qqnump}}" maxlength="-1"/>
+</view>
+<view class="padding-xl">
+   <button class="cu-btn block line-blue lg" bindtap="upload">已确认信息，发布志愿</button>
+</view>
+

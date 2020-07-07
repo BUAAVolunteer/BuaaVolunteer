@@ -1,0 +1,12 @@
+<view class="padding flex flex-direction">
+  <navigator open-type="navigate" hover-class='none' url="../list/list" class="cu-btn bg-blue lg"> 发布志愿招募</navigator>
+</view>
+<view class="padding flex flex-direction">
+  <navigator open-type="navigate" hover-class='none' url="../comment/comment" class="cu-btn bg-green lg">审核志愿者反馈</navigator>
+</view>
+<view class="padding flex flex-direction">
+  <navigator open-type="navigate" hover-class='none' url="../score/score" class="cu-btn bg-pink lg">管理志愿积分</navigator>
+</view>
+<view class="padding flex flex-direction">
+  <navigator open-type="navigate" hover-class='none' url="../add/add" class="cu-btn bg-cyan lg">处理缺勤者</navigator>
+</view>

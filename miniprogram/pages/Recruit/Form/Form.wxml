@@ -1,0 +1,46 @@
+<!--pages/forms/forms.wxml-->
+<view class='reports-container'>
+
+	<view class='reports-header input-all-width'>
+		{{formList.title}}
+	</view>
+	<view class='reports-form'>
+		<block
+		 wx:for="{{formList.formInfo}}"
+		 wx:for-index="idx"
+		 wx:for-item="items"
+		 wx:key="id"
+		>
+			<!-- 输入框组件 -->
+			<block wx:if="{{items.type=='text'}}">
+				<text-input id="{{items.id}}" role="{{items.role}}" forminfo="{{items}}" bindinput="childChange"/>
+			</block>
+
+			<!-- 描述文本组件 -->
+			<block wx:if="{{items.type=='describe'}}">
+				<text-describe id="{{items.id}}" forminfo="{{items}}" />
+			</block>
+			<!-- 单选组件 -->
+			<block wx:if="{{items.type=='radio'}}">
+				<text-radio id="{{items.id}}" forminfo="{{items}}" bindradio="childChange"/>
+			</block>
+			<!-- 多选组件 -->
+			<block wx:if="{{items.type=='checkbox'}}">
+				<text-checkbox id="{{items.id}}" forminfo="{{items}}" bindcheckbox="childChange"/>
+			</block>
+			<!-- 分割线组件 -->
+			<block wx:if="{{items.type=='div'}}">
+				<text-div id="{{items.id}}" forminfo="{{items}}" />
+			</block>
+
+		</block>
+	</view>
+
+	<view class='reports-form form-center'>
+		<!-- 并提交订单 -->
+		<button wx:if="{{loading}}" loading="{{true}}" style="background-color: var(--grey);" hover-class="none" class='reports-form-btn'></button>
+		<button wx:else bindtap='getInputValue' class='reports-form-btn'>提交</button>
+	</view>
+
+</view>
+

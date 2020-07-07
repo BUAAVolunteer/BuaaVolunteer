@@ -1,0 +1,15 @@
+<!-- 轮播图组件 -->
+<main-swiper></main-swiper>
+<!-- logo -->
+<main-logo logo-position="logo"></main-logo>
+<!-- 中间模块 -->
+<view class="middle">
+  <!-- 遍历展示组件，子组件仅包含按钮功能，数据由main.js传入 -->
+  <block wx:for="{{mainIcon}}" wx:key="index">
+    <main-icon iconInf="{{item}}"></main-icon>
+  </block>
+  <!-- 蓝小咕咕咕咕 -->
+  <navigator url="/pages/Main/UpdateLog/UpdateLog" open-type="navigate" hover-class="none">
+    <image class="gugugu" mode="aspectFit" src="/assests/image/gu.png" />
+  </navigator>
+</view>

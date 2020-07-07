@@ -1,0 +1,262 @@
+/*分栏界面*/
+
+.video_wrap {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 5rpx;
+    justify-content: space-between;
+}
+
+.video_item {
+    width: 48%;
+    margin-bottom: 20rpx;
+}
+
+.video_img image {
+    width: 100%;
+}
+
+.video_img {
+    position: relative;
+}
+
+.video_title {
+    font-size: 28rpx;
+    display: -webkit-box;
+    white-space: space normal;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+
+/*新轮播图*/
+
+.slids {
+    margin-top: 10rpx;
+}
+
+.slides .swiper {
+    height: 220rpx;
+}
+
+.slides .navigator {
+    width: 100%;
+    height: 100%;
+}
+
+.slides image {
+    width: 100%;
+    height: 100%;
+}
+
+
+/*推送界面*/
+
+.p-top {
+    padding-bottom: 15rpx;
+}
+
+.kind-list {
+    height: auto;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.kind-list-item {
+    height: 140rpx;
+    display: flex;
+    background-color: #FFFFFF;
+    border-radius: 13rpx;
+    padding: 20rpx;
+    margin: 20rpx;
+    overflow: hidden;
+    align-items: center;
+    transition: opacity .3s;
+}
+
+.kind-list-item:first-child {
+    margin-top: 15rpx;
+}
+
+.kind-list-box {
+    height: 150rpx;
+    display: block;
+    width: 450rpx;
+    flex-basis: 80%;
+}
+
+.text {
+    flex: 1;
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    word-break: break-all;
+    color: #8f9194;
+}
+
+.kind-list-text {
+    text-align: justify;
+    height: 82rpx;
+    width: 360rpx;
+    color: #353535;
+    font-size: 30rpx;
+    display: -webkit-box;
+    white-space: space normal;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.kind-list-text-small {
+    height: 27rpx;
+    left: 0;
+    bottom: 10;
+    text-align: left;
+    font-size: 20rpx;
+    color: var(--blue);
+    margin-top: 16px;
+}
+
+.kind-list-img {
+    width: 300rpx;
+    height: 150rpx;
+    flex-basis: 60%;
+}
+
+.kind-list-item-bd {
+    height: 0;
+    overflow: hidden;
+}
+
+.kind-list-item-bd-show {
+    height: auto;
+}
+
+.index-hd {
+    padding: 80rpx 80rpx 80rpx 80rpx;
+    text-align: center;
+}
+
+.index-bd {
+    padding: 0 30rpx 40rpx;
+}
+
+.index-ft {
+    padding-bottom: 20rpx;
+    text-align: center;
+}
+
+.index-logo {
+    width: 86rpx;
+    height: 86rpx;
+}
+
+.index-desc {
+    margin-top: 20rpx;
+    color: #888888;
+    font-size: 28rpx;
+}
+
+.navigator-box {
+    opacity: 0;
+    position: relative;
+    background-color: #FFFFFF;
+    line-height: 1.41176471;
+    font-size: 34rpx;
+    transform: translateY(-50%);
+    transition: .3s;
+}
+
+.navigator-box-show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.navigator {
+    padding: 20rpx 30rpx;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.navigator:before {
+    content: " ";
+    position: absolute;
+    left: 30rpx;
+    top: 0;
+    right: 30rpx;
+    height: 1px;
+    border-top: 1rpx solid #D8D8D8;
+    color: #D8D8D8;
+}
+
+.navigator:first-child:before {
+    display: none;
+}
+
+.navigator-text {
+    flex: 1;
+}
+
+.navigator-arrow {
+    padding-right: 26rpx;
+    position: relative;
+}
+
+.navigator-arrow:after {
+    content: " ";
+    display: inline-block;
+    height: 18rpx;
+    width: 18rpx;
+    border-width: 2rpx 2rpx 0 0;
+    border-color: #888888;
+    border-style: solid;
+    transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+    position: absolute;
+    top: 50%;
+    margin-top: -8rpx;
+    right: 28rpx;
+}
+
+.kind-list {
+    height: 1360rpx;
+    overflow: hidden;
+}
+
+
+.kind-list-item:first-child {
+    margin-top: 0;
+}
+
+.kind-list-text {
+    flex: 1;
+    padding-right: 100rpx;
+}
+
+.kind-list-item-hd {
+    padding: 30rpx;
+    display: flex;
+    align-items: center;
+    transition: opacity .3s;
+}
+
+.kind-list-item-hd-show {
+    opacity: .2;
+}
+
+.kind-list-item-bd {
+    height: 0;
+    overflow: hidden;
+}
+
+.kind-list-item-bd-show {
+    height: auto;
+}
+
+.weui-agree__link {
+    display: inline;
+    color: #586c94;
+}
