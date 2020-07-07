@@ -1,0 +1,30 @@
+<view class="right"></view>
+<view>
+    <view wx:for="{{diarydetail}}" wx:for-item="items" class="right-on" wx:key="index">
+        <view class="circle">
+            <text>{{items.title}}</text>
+        </view>
+        <view class="content">
+            <view class="date">
+                <text>{{items.date}}</text>
+                <view class="separate" style=""></view>
+            </view>
+            <view class="detail">
+                <text>{{items.text}}</text>
+            </view>
+        </view>
+    </view>
+    <view class="right-on">
+        <view class="circle">
+            <text>开发\n者们</text>
+        </view>
+        <view class="content">
+            <view class="date">
+                <text>{{items.date}}</text>
+            </view>
+            <view class="detail">
+                <text>马瀚元，柯瑞奇，何梓心，朴宣夷\n设计：小李同学</text>
+            </view>
+        </view>
+    </view>
+</view>
