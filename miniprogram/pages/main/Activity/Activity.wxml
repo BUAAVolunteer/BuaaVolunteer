@@ -23,7 +23,7 @@
 		 wx:for-index="i"
 		 wx:key="index"
 		>
-			<navigator url="../push/push?id={{x.url}}" class="kind-list-item">
+			<navigator url="/pages/OuterLink/OuterLink?url={{x.url}}" class="kind-list-item">
 				<view class="kind-list-box">
 					<view class="kind-list-text">{{x.title}}</view>
 					<view class="kind-list-text-small">蓝小咕@北航蓝天志愿者协会</view>

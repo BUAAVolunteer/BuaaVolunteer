@@ -1,8 +1,8 @@
-@import "pages/wxss/index.wxss";
-@import "pages/wxss/page.wxss";
-@import "pages/wxss/row.wxss";
-@import "pages/wxss/icon.wxss";
-@import "pages/wxss/main.wxss";
+@import "/assests/wxss/index.wxss";
+@import "/assests/wxss/page.wxss";
+@import "/assests/wxss/row.wxss";
+@import "/assests/wxss/icon.wxss";
+@import "/assests/wxss/main.wxss";
 .scrollPage {
     height: auto;
 }

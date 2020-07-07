@@ -5,30 +5,30 @@
     "pages/Main/Activity/Activity",
     "pages/Main/Feedback/Feedback",
     "pages/Main/UpdateLog/UpdateLog",
+
     "pages/Recruit/Recruit",
     "pages/Recruit/Form/Form",
-    "pages/PersonMain/PersonMain",
-    "pages/PersonMain/History/History",
-    "pages/PersonMain/Map/Map",
-    "pages/PersonMain/PersonEdit/PersonEdit",
+
+    "pages/Profile/Profile",
+    "pages/Profile/History/History",
+    "pages/Profile/Map/Map",
+    "pages/Profile/PersonEdit/PersonEdit",
+
     "pages/Admin/Admin",
     "pages/Admin/FeedbackComment/FeedbackComment",
     "pages/Admin/Score/Score",
     "pages/Admin/Absence/Absence",
+
     "pages/Manage/Manage",
     "pages/Manage/FormEdit/FormEdit",
     "pages/Manage/Detail/Detail",
     "pages/Manage/Confirm/Confirm",
     "pages/Manage/DataExport/DataExport",
+
     "pages/Introduction/Introduction",
     "pages/Introduction/VolunteerMain/VolunteerMain",
-    "pages/show/show",
-    "pages/contact/contact",
-    "pages/us/us",
-    "pages/push/push",
-    "pages/us2/us2",
-    "pages/practice/practice",
-    "pages/secret/secret"
+
+    "pages/OuterLink/OuterLink"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -50,13 +50,13 @@
         "text": "主页"
       },
       {
-        "pagePath": "pages/Recuit/Recuit",
+        "pagePath": "pages/Recruit/Recruit",
         "iconPath": "assests/icons/plugin.png",
         "selectedIconPath": "assests/icons/plugin_cur.png",
         "text": "志愿招募"
       },
       {
-        "pagePath": "pages/PersonMain/PersonMain",
+        "pagePath": "pages/Profile/Profile",
         "iconPath": "assests/icons/about.png",
         "selectedIconPath": "assests/icons/about_cur.png",
         "text": "我的"

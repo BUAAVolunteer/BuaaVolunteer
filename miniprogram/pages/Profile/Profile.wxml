@@ -106,7 +106,7 @@
 </navigator>
 
 <!--按钮2-->
-<navigator   class="action2" open-type="navigate" url="../us2/us2" hover-class="navigator-hover">
+<navigator   class="action2" open-type="navigate" url="/pages/OuterLink/OuterLink?url=https://mp.weixin.qq.com/s/YDKfJv7ZASCAnOH3vgNoNw" hover-class="navigator-hover">
     <image class="actionpic" mode="widthFix" src="../../image/action2.png"/>
     <view class="action-text">
         积分细则
@@ -114,7 +114,7 @@
 </navigator>
 
 <!--按钮3-->
-<navigator   class="action3" open-type="navigate" url="../us/us" hover-class="navigator-hover">
+<navigator   class="action3" open-type="navigate" url="/pages/OuterLink/OuterLink?url=https://mp.weixin.qq.com/s/8u9xyOdHvEQO2m2BLyUWNg" hover-class="navigator-hover">
     <image  class="actionpic"mode="widthFix" src="../../image/action3.png">
     </image>
     <view class="action-text">

@@ -1,118 +1,86 @@
 // pages/main/main.js
-var app = getApp();
-const db = wx.cloud.database();
 Page({
+  /**
+   * 页面的初始数据
+   *
+   */
 
-    /**
-     * 页面的初始数据
-     * 
-     */
+  data: {
+    // 页面按钮跳转相关信息存储
+    mainIcon: [
+      {
+        navigateUrl: "/pages/Main/Activity/Activity",
+        iconSrc: "/assests/icons/1.png",
+        iconText: "近期活动",
+        iconClass: "middle1",
+      },
+      {
+        navigateUrl: "/pages/Introduction/Introduction",
+        iconSrc: "/assests/icons/2.png",
+        iconText: "近期活动",
+        iconClass: "middle2",
+      },
+      {
+        navigateUrl: "/pages/Main/FeedBack/FeedBack",
+        iconSrc: "/assests/icons/3.png",
+        iconText: "问题反馈",
+        iconClass: "middle3",
+      },
+      {
+        navigateUrl:
+          "/pages/OuterLink/OuterLink?url=https://mp.weixin.qq.com/s/5bqJNvDXhH8j9iGZ5diyMw",
+        iconSrc: "/assests/icons/4.png",
+        iconText: "蓝协介绍",
+        iconClass: "middle4",
+      },
+      {
+        navigateUrl:
+          "/pages/OuterLink/OuterLink?url=https://mp.weixin.qq.com/s/cgU6BbeFxHXXsWwl5wePTw",
+        iconSrc: "/assests/icons/5.png",
+        iconText: "联系我们",
+        iconClass: "middle5",
+      },
+    ]
+  },
 
-    data: {
-        list: []
-    },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    
+  },
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {},
 
-    /**
-     * 生命周期函数--监听页面加载
-     */
-    onLoad: function(options) {
-        var that = this
-        wx.showLoading({
-            title: '请稍后',
-            mask: true,
-        })
-        wx.cloud.callFunction({
-            name: 'login',
-            data: {},
-            success: res => {
-                //获取openid并赋值给全局变量
-                app.globalData.openid = res.result.openid
-                console.log(app.globalData)
-                    //主页轮播图地址
-                db.collection('main')
-                    .get({
-                        success: function(res) {
-                            //console.log(res.data)
-                            that.setData({
-                                list: res.data
-                            })
-                            wx.hideLoading()
-                        },
-                        //  未查到数据时调用
-                        fail: function(res) {
-                            wx.hideLoading();
-                            wx.showModal({
-                                title: '错误',
-                                content: '没有找到记录，请检查网络或重启小程序',
-                                showCancel: false
-                            })
-                        }
-                    })
-            },
-            fail: err => {
-                console.error('[云函数] [login] 调用失败，请检查网络或重启小程序', err)
-                wx.hideLoading()
-            }
-        })
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {},
 
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {},
 
-    },
-    update: function(e) {
-        wx.navigateTo({
-            url: '../update/update',
-            success: (result) => {
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {},
 
-            },
-            fail: () => {},
-            complete: () => {}
-        });
-    },
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function() {
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {},
 
-    },
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {},
 
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function() {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function() {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function() {
-
-    },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function() {
-
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function() {
-
-    },
-
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function() {
-
-    }
-})
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {},
+});

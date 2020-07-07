@@ -1,46 +1,17 @@
-<!--轮播图-->
-<scroll-view scroll-y="{{true}}" class="scrollPage">
-  <swiper class="screen-swiper round-dot" indicator-dots="true" indicator-color="#8cb2d3" indicator-active-color="#8cb2d3" circular="true" autoplay="true" interval="5000" duration="500">
-    <swiper-item wx:for="{{list}}" wx:key="index">
-      <image src="{{item.image}}" mode="aspectFill" />
-    </swiper-item>
-  </swiper>
-</scroll-view>
-
-<!--logo-->
+<!-- 轮播图组件 -->
+<main-swiper></main-swiper>
+<!-- logo -->
 <view class="logo">
-  <image mode="widthFix" style="width:750rpx; height:97rpx;" src="../../assests/image/logo.png" />
+  <image mode="widthFix" src="/assests/image/logo.png" />
 </view>
-
-<!--中间模块-->
+<!-- 中间模块 -->
 <view class="middle">
-
-  <navigator class="middle1 middle-item" open-type="navigate" url="../activity/activity" hover-class="navigator-hover">
-    <image class="middle-icon" mode="widthFix" src="../../icons/1.png" />
-    <text class="middle-text">近期活动</text>
+  <!-- 遍历展示组件，子组件仅包含按钮功能，数据由main.js传入 -->
+  <block wx:for="{{mainIcon}}" wx:key="index">
+    <main-icon navigateUrl="{{item.navigateUrl}}" iconSrc="{{item.iconSrc}}" iconText="{{item.iconText}}" iconClass="{{item.iconClass}}"></main-icon>
+  </block>
+  <!-- 蓝小咕咕咕咕 -->
+  <navigator bindtap="update">
+    <image class="gugugu" mode="aspectFit" src="/assests/image/gu.png" />
   </navigator>
-
-  <navigator class="middle2 middle-item" open-type="navigate" url="../introduction/introduction" hover-class="navigator-hover">
-    <image class="middle-icon" mode="widthFix" src="../../icons/2.png" />
-    <text class="middle-text">志愿项目</text>
-  </navigator>
-
-  <navigator class="middle3 middle-item" open-type="navigate" url="../question/question" hover-class="navigator-hover">
-    <image class="middle-icon" mode="widthFix" src="../../icons/3.png" />
-    <text class="middle-text">问题反馈</text>
-  </navigator>
-
-  <navigator class="middle4 middle-item" open-type="navigate" url="../show/show" hover-class="navigator-hover">
-    <image class="middle-icon" mode="widthFix" src="../../icons/4.png" />
-    <text class="middle-text">蓝协介绍</text>
-  </navigator>
-
-  <navigator class="middle5 middle-item" open-type="navigate" url="../contact/contact" hover-class="navigator-hover">
-    <image class="middle-icon" mode="widthFix" src="../../icons/5.png" />
-    <text class="middle-text">联系我们</text>
-  </navigator>
-  <!--蓝小咕咕咕咕-->
-  <view bindtap="update">
-    <image class="gugugu" mode="aspectFit" src="../../image/gu.png" />
-  </view>
 </view>

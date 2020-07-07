@@ -1,4 +1,7 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "main-icon":"./childCpn/main-icon/main-icon",
+    "main-swiper":"./childCpn/main-swiper/main-swiper"
+  },
   "navigationBarTitleText": "北航蓝天志愿者协会"
 }
