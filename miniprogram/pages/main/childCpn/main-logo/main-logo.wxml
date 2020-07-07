@@ -1,4 +1,0 @@
-<!-- 首页页面logo -->
-<view class="logo-position">
-  <image mode="widthFix" src="/assests/image/logo.png" />
-</view>

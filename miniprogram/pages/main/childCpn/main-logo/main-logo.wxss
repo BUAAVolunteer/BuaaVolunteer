@@ -1,9 +1,0 @@
-/* pages/Main/childCpn/main-logo/main-logo.wxss */
-.logo {
-  margin-top: -35rpx;
-}
-
-image {
-  width: 750rpx;
-  height: 97rpx;
-}

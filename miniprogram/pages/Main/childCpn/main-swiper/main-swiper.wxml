@@ -1,6 +1,0 @@
-<!-- 轮播图 -->
-<swiper class="screen-swiper round-dot" indicator-dots="true" indicator-color="#8cb2d3" indicator-active-color="#8cb2d3" circular="true" autoplay="true" interval="5000" duration="500">
-  <swiper-item wx:for="{{imageList}}" wx:key="index">
-    <image src="{{item.image}}" mode="aspectFill" />
-  </swiper-item>
-</swiper>

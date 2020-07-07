@@ -1,4 +1,0 @@
-<navigator class="middle-item {{iconInf.iconClass}}" open-type="navigate" url="{{iconInf.navigateUrl}}" hover-class="navigator-hover">
-    <image class="middle-icon" mode="widthFix" src="{{iconInf.iconSrc}}" />
-    <text class="middle-text">{{iconInf.iconText}}</text>
-</navigator>
