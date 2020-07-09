@@ -1,4 +1,5 @@
-<navigator class="middle-item {{iconInf.iconClass}}" open-type="navigate" url="{{iconInf.navigateUrl}}" hover-class="navigator-hover">
-    <image class="middle-icon" mode="widthFix" src="{{iconInf.iconSrc}}" />
-    <text class="middle-text">{{iconInf.iconText}}</text>
+<!-- 自带阴影和右边圆角的按钮 其余属性由传入参数确定 -->
+<navigator class="middle-item" style="background-color:{{iconInf.backgroundColor}};width:{{iconInf.width}};z-index:{{iconInf.zIndex}}" open-type="navigate" url="{{iconInf.navigateUrl}}" hover-class="navigator-hover">
+  <image class="middle-icon" mode="widthFix" src="{{iconInf.iconSrc}}" />
+  <text class="middle-text">{{iconInf.iconText}}</text>
 </navigator>

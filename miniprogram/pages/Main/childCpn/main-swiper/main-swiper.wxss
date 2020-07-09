@@ -1,67 +1,62 @@
+/* 轮播图居中 */
+swiper {
+  height: 390rpx;
+}
 
-/*指示点总属性*/
+swiper-item {
+  display: flex;
+  justify-content: center;
+}
 
-swiper .a-swiper-dot {
-    display: inline-block;
+/* 轮播图宽高调整 */
+swiper-item image {
+  width: 630rpx;
+  height: 390rpx;
+  border-bottom-left-radius: 7.5%;
+  border-bottom-right-radius: 7.5%;
+}
+
+/* 指示点布局 包括：宽、高、间距 */
+
+.dot-display {
+  width: 290rpx;
+  height: 20rpx;
+  display: flex;
+  justify-content: space-around;
+  margin: 23rpx auto;
+}
+
+.dot {
+  width: 20rpx;
+  height: 20rpx;
+  background-color: #8cb2d3;
+  border-radius: 50%;
+}
+
+/* 切换的动画效果：animation（选用名为dotActive的动画，
+执行时间0.3s，动画曲线ease，停留在结束前一帧forwards） */
+
+.dot-active {
+  border-radius: 50%;
+  background-color: #fff;
+  animation: dotActive 0.3s ease forwards;
+}
+
+/*  
+    控制指示点元素（背景颜色白，边框颜色蓝）
+    从宽高00边框10变成宽高16边框2
+    以此实现中间的白色香外扩张的动画效果
+*/
+
+@keyframes dotActive {
+  from {
+    border: solid #8cb2d3 10rpx;
+    width: 0rpx;
+    height: 0rpx;
+  }
+  to {
+    border: solid #8cb2d3 2rpx;
     width: 16rpx;
     height: 16rpx;
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 50%;
-    vertical-align: middle;
   }
-  
-  swiper[class*="-dot"] .wx-swiper-dots {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    justify-content: center;
-    margin-top: 20rpx;
-  }
-  
-  /*未选中点大小*/
-  
-  swiper.round-dot .wx-swiper-dot {
-    width: 10px;
-    height: 10px;
-    position: relative;
-    margin: -5rpx 26rpx !important;
-  }
-  
-  /*选中点遮盖大小*/
-  
-  swiper.round-dot .wx-swiper-dot.wx-swiper-dot-active::after {
-    content: "";
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    top: 0rpx;
-    left: 0rpx;
-    right: 0;
-    bottom: 0rpx;
-    margin: auto;
-    background-color: var(--white);
-    border-radius: 20rpx;
-  }
-  
-  /*选中点背景大小*/
-  
-  swiper.round-dot .wx-swiper-dot.wx-swiper-dot-active {
-    width: 10px;
-    height: 10px;
-  }
-  
-  .screen-swiper {
-    min-height: 375rpx;
-  }
-  
-  .screen-swiper image, .screen-swiper video, .swiper-item image,
-  .swiper-item video {
-    width: 84%;
-    display: block;
-    height: 84%;
-    margin-left: 8%;
-    pointer-events: none;
-    border-bottom-left-radius: 7.5%;
-    border-bottom-right-radius: 7.5%;
-  }
-  
+}

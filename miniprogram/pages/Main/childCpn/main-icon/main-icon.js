@@ -8,10 +8,12 @@ Component({
     iconInf: {
       type: Object,
       value: {
-        navigateUrl: "", // 要跳转到的页面路径
-        iconSrc: "", // 按钮图标的路径
-        iconText: "", // 按钮的文本
-        iconClass: "", // 决定了icon的样式
+        navigateUrl: "",                 // 要跳转到的页面路径
+        iconSrc: "",                     // 按钮图标的路径
+        iconText: "",                    // 按钮的文本
+        width: "520.64rpx",              // 按钮的宽度
+        backgroundColor: "#f68c60",      // 按钮的背景颜色
+        zIndex: 2,                       // 按钮的层级
       },
     },
   },

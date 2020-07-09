@@ -1,3 +1,4 @@
+/* 组件基本样式 */
 .middle-item {
   box-shadow: 2rpx 5.5rpx 2rpx rgba(0, 0, 0, 0.2);
   height: 135.87rpx;
@@ -8,35 +9,7 @@
   position: relative;
 }
 
-.middle1 {
-  margin-top: 20rpx;
-  background-color: #22a2c3;
-  width: 724.64rpx;
-  z-index: 5;
-}
-
-.middle2 {
-  background-color: #5fc1c7;
-  width: 656.64rpx;
-  z-index: 4;
-}
-
-.middle3 {
-  background-color: #f9d770;
-  width: 588.64rpx;
-  z-index: 3;
-}
-
-.middle4 {
-  background-color: #f68c60;
-  width: 520.64rpx;
-  z-index: 2;
-}
-
-.middle5 {
-  background-color: #f07c82;
-  width: 452.64rpx;
-}
+/* 文本样式 */
 
 .middle-text {
   font-size: 40rpx;
@@ -45,9 +18,10 @@
   margin-left: 25rpx;
 }
 
+/* 图标样式 */
+
 .middle-icon {
   width: 64rpx;
   height: 64rpx;
-  z-index: 2;
   margin-left: 30rpx;
 }

@@ -2,9 +2,17 @@ page {
   background-color: white;
 }
 
+/* logo图片定位 */
 .logo {
-  margin-top: -35rpx;
+  margin-top: -50rpx;
 }
+
+/* 中部按钮相对定位 */
+.middle-icon {
+  margin-top: 35rpx;
+}
+
+/* 蓝小咕定位 */
 
 .gugugu {
   height: 240rpx;
