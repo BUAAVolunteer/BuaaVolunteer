@@ -1,0 +1,12 @@
+<!--pages/Main/childCpn/activity-events/activity-events.wxml-->
+<view class="eventlist">
+  <navigator url="/pages/OuterLink/OuterLink?url={{eventInf.url}}" class="kind-list-item">
+    <view class="events">
+      <view class="title_text">{{eventInf.title}}</view>
+      <view class="tag">蓝小咕@北航蓝天志愿者协会</view>
+    </view>
+    <image mode="scaleToFill" class="right_pic" src="{{eventInf.image}}" />
+  </navigator>
+</view>
+
+

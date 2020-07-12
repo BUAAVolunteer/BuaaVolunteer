@@ -1,4 +1,7 @@
 {
-    "usingComponents": {},
-    "navigationBarTitleText": "近期活动"
+  "component": true,
+  "usingComponents": {
+    "activity-events": "/pages/Main/childCpn/activity-events/activity-events",
+    "activity-swiper": "/pages/Main/childCpn/activity-swiper/activity-swiper"
+  }
 }
