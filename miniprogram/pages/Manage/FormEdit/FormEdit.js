@@ -35,6 +35,7 @@ Page({
             title: '加载中',
         })
         var that = this;
+        let formData = {}
         this.setData({
             title: options.title
         })
@@ -46,70 +47,52 @@ Page({
                 title: "发布一个新志愿"
             }
             ]))
-            .get({
-                success: function (res) {
-                    let download = {};
-                    if (res.data.length == 1) {
-                        download = res.data[0];
-                        db.collection('form').add({
-                            data: {
-                                formInfo: [],
-                                title: options.title,
-                                fieldName: options.title
-                            },
-                            success: function (res) {
-                                db.collection('signUp').add({
-                                    data: {
-                                        title: options.title,
-                                        list: []
-                                    },
-                                    success: function (res) {
-                                        wx.hideLoading();
-                                        let addList = `formList.fieldName`;
-                                        that.setData({
-                                            [addList]: options.title
-                                        })
-                                    }
-                                })
-                            }
-                        })
-                    } else {
-                        for (let i = 0; i < res.data.length; i++) {
-                            if (res.data[i].title === options.title) {
-                                download = res.data[i];
-                                break;
-                            }
-                        }
-                        db.collection('signUp').where({
-                            title: options.title
-                        }).get({
-                            success: function (res) {
-                                wx.hideLoading()
-                                if (res.data.length == 0) {
-                                    db.collection('signUp').add({
-                                        data: {
-                                            title: options.title,
-                                            list: []
-                                        },
-
-                                    })
-                                }
-                            }
-                        })
-
-
+            .get()
+        .then(res =>{
+            if (res.data.length == 1){
+                formData = res.data[0]
+                db.collection('form').add({
+                    data: {
+                        formInfo: [],
+                        title: options.title,
+                        fieldName: options.title
                     }
-                    cnt = download.formInfo.length;
-                    let fi = download;
-                    for (let i = 0; i < cnt; i++) {
-                        fi.formInfo[i].id = fi.formInfo[i].id.slice(1)
+                })
+            }else{
+                for (let i = 0; i < res.data.length; i++) {
+                    if (res.data[i].title === options.title) {
+                        formData = res.data[i];
+                        break;
                     }
-                    //console.log(fi)
-                    that.setData({
-                        formList: fi
-                    })
                 }
+            }
+        }).then(() =>{
+            return db.collection('signUp').where({
+                title: options.title
             })
+            .get()
+        })
+        .then(res =>{
+            if (res.data.length == 0) {
+                db.collection('signUp').add({
+                    data: {
+                        title: options.title,
+                        list: []
+                    }
+                })
+            }
+        })
+        .then(() =>{
+            let formLength = formData.formInfo.length;
+            for (let i = 0; i < formLength; i++) {
+                formData.formInfo[i].id = formData.formInfo[i].id.slice(1)
+            }
+            //console.log(fi)
+            that.setData({
+                formList: formData
+            })
+            wx.hideLoading();
+        })
     },
 
     //左侧导航的开关函数

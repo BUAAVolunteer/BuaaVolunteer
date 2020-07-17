@@ -34,7 +34,6 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-
     },
 
     /**
@@ -52,6 +51,9 @@ Page({
             title: '加载中',
         })
         var that = this
+        this.setData({
+            register: app.globalData.register
+        })
         db.collection('person').where({
                 _openid: app.globalData.openid,
             })
@@ -89,28 +91,16 @@ Page({
 
     },
     admin: function() {
-        db.collection('admin').where({
-                _openid: app.globalData.openid,
+        if (app.globalData.admin){
+            wx.navigateTo({
+                url: '../admin/admin',
+            });
+        }else{
+            wx.showToast({
+                title: '这里是小咕的秘密基地哦！不能让你进来的啦QAQ',
+                icon: 'none'
             })
-            .get({
-                success: function(res) {
-                    if (res.data.length == 0) {
-                        wx.showToast({
-                            title: '这里是小咕的秘密基地哦！不能让你进来的啦QAQ',
-                            icon: 'none'
-                        })
-                    } else {
-                        wx.navigateTo({
-                            url: '../admin/admin',
-                            success: (result) => {
-
-                            },
-                            fail: () => {},
-                            complete: () => {}
-                        });
-                    }
-                }
-            })
+        }
     },
     program_open: function() {
         var that = this;

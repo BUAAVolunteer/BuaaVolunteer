@@ -25,7 +25,7 @@
 			"outputPath": ""
 		},
 		"useIsolateContext": true,
-		"useCompilerModule": true,
+		"useCompilerModule": false,
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"appid": "wxbef368e6c04e1ca1",
@@ -75,6 +75,13 @@
 					"name": "pages/Manage/FormEdit/FormEdit",
 					"pathName": "pages/Manage/FormEdit/FormEdit",
 					"query": "title=国家图书馆",
+					"scene": null
+				},
+				{
+					"id": 3,
+					"name": "pages/Manage/FormEdit/FormEdit",
+					"pathName": "pages/Manage/FormEdit/FormEdit",
+					"query": "title=北航一日游",
 					"scene": null
 				}
 			]

@@ -68,30 +68,62 @@ Component({
       wx.cloud.callFunction({
         name: "login",
         data: {},
-        success: (res) => {
-          //获取openid并赋值给全局变量
-          app.globalData.openid = res.result.openid;
-          console.log(app.globalData);
-          //主页轮播图地址
-          db.collection("main")
-            .get()
-            .then((res) => {
-              console.log(res.data); //获取到的地址数组
-              that.setData({
-                imageList: res.data,
-              });
-              wx.hideLoading();
-            })
-            .catch((err) => {
-              console.log(err)
-              wx.hideLoading();
-              wx.showModal({
-                title: "错误",
-                content: "没有找到记录，请检查网络或重启小程序",
-                showCancel: false,
-              });
-            });
-        },
+      }).then(res => {
+        //获取openid并赋值给全局变量
+        app.globalData.openid = res.result.openid;
+        console.log(app.globalData);
+      }).then(() =>{
+        //主页轮播图地址
+          return db.collection("main")
+          .get()
+      })
+      .then(res => {
+        console.log(res.data); //获取到的地址数组
+        that.setData({
+          imageList: res.data,
+        });
+      })
+      .then(() =>{
+        return db.collection('person')
+          .where({
+            _openid: app.globalData.openid
+          })
+          .get()
+      }).then(res =>{
+        console.log(res.data)
+        if (res.data.length === 0){
+          app.globalData.register = 0
+        }else{
+          app.globalData.personNum = res.data[0].personnum;
+          app.globalData.campus = res.data[0].campus;
+          app.globalData.phone = res.data[0].phone;
+          app.globalData.qqNum = res.data[0].qqnum;
+          app.globalData.phone = res.data[0].phone;
+        }
+      }).then(() =>{
+        return db.collection('admin')
+          .where({
+            _openid: app.globalData.openid
+          })
+          .get()
+      }).then(res =>{
+        console.log(res.data)
+        if (res.data.length){
+          app.globalData.admin = 1
+        }else{
+          app.globalData.admin = 0
+        }
+        console.log("个人信息登记完成")
+        wx.hideLoading();
+      })
+      .catch((err) => {
+        console.log(err)
+        wx.hideLoading();
+        wx.showModal({
+          title: "错误",
+          content: "没有找到记录，请检查网络或重启小程序",
+          showCancel: false,
+        });
       });
     },
   },

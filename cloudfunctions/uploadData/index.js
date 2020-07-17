@@ -17,10 +17,14 @@ exports.main = async (event, context) => {
 		})
 		.then(signUpCheck(0,event))
 		.then(res => {
-			let dtu = dataUpload(res.stopPlace - 1, event, res.success);
-			if (!res.success & dtu) {
-				return "error";
-			}
+			return new Promise((resolve,reject) =>{
+				let dtu = dataUpload(res.stopPlace - 1, event, res.success);
+				if (!res.success & dtu) {
+					reject("error");
+				}else{
+					resolve();
+				}
+			})
 		})
 		.then(() => {
 			//console.log(uploadList)
@@ -28,7 +32,7 @@ exports.main = async (event, context) => {
 			var l = uploadList[0].length - 3
 			var openid = uploadList[0][l]
 			console.log(openid)
-			db.collection('project').where({
+			return db.collection('project').where({
 				title: event.title
 			}).update({
 				data:{
@@ -36,13 +40,13 @@ exports.main = async (event, context) => {
 				}
 			})
 		})
-		.then(
+		.then(() =>{
 			//获得表单数据
-			db.collection('form').where({
+			return db.collection('form').where({
 				title: event.title
 			})
 			.get()
-		)
+		})
 		.then(res => {
 			//判断是否报名完毕
 			let over = 1;
@@ -104,7 +108,7 @@ exports.main = async (event, context) => {
 		})
 		.catch(err => {
 			console.log(err)
-			reject(err)
+			reject('error')
 		})
 		return promise
 	}catch (e) {
