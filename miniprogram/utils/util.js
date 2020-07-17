@@ -36,6 +36,43 @@ class Util {
         n = n.toString();
         return n[1] ? n : '0' + n;
     };
+
+    static exportToExcel (exportInfo) {
+        //??Export???????Excel???
+        wx.cloud.callFunction({
+            name: 'Export',
+            data: {
+                title : exportInfo.title,
+                fileName : exportInfo.fileName,
+                exportList : exportInfo.downloadList
+            }
+        }).then(res => {
+            //??Excel
+            wx.cloud.downloadFile({
+                fileID: res.result.fileID
+            })
+        }).then(res => {
+            //??Excel
+            wx.saveFile({
+                tempFilePath: res.tempFilePath
+            })
+        }).then(res => {
+            //??Excel
+            wx.openDocument({
+                filePath: res.savedFilePath
+            })
+        }).then(res => {
+            let returnData = {};
+            returnData.success = true;
+            returnData.res = res;
+            return returnData;
+        }).catch(err => {
+            let returnData = {};
+            returnData.success = false;
+            returnData.res = err;
+            return returnData;
+        })
+    }
 };
 
 
