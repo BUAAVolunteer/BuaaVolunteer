@@ -1,31 +1,29 @@
 <!-- components/text-time/text-time.wxml -->
-<view class='reports-form-box form-inner'>
-  <view class='input-all-width'>
-    <view class='form-inputname'>
-      {{forminfo.label}}
-      <text wx:if="{{forminfo.force}}" class="force_text">*</text>
-    </view>
+<view class="reports-form-box">
+  <!-- 标题 -->
+  <view class="form-inputname">
+    {{forminfo.label}}
+    <text wx:if="{{forminfo.force}}" class="force-text">*</text>
   </view>
-  <view wx:if="{{forminfo.text.length>0}}" class="form-describe input-all-width">
-    {{forminfo.text}}
-  </view>
-  <checkbox-group class="block" bindchange="checkboxChange">
-		<label class="radio-group margin-top">
-			<checkbox
-			 disabled="{{forminfo.limit&&item.limit<=0}}"
-			 class="{{(forminfo.limit&&item.limit<=0)?'grey':'blue'}}"
-			 style="display:flex;"
-			 wx:for-items="{{forminfo.data}}"
-			 value='{{item.name}},{{item.id}},{{item.duration}}'
-			 wx:key="id"
-			>
-				<view class="radio-box">
-					{{item.name}}
-					<text wx:if="{{forminfo.limit}}" class="form-describe" style="margin-left:20rpx;">剩余{{item.limit}}</text>
-					<text wx:if="{{forminfo.duration}}" class="form-describe" style="margin-left:20rpx;">时长{{item.duration}}</text>
-				</view>
-
-			</checkbox>
-		</label>
-	</checkbox-group>
+  <!-- 描述 -->
+  <view wx:if="{{forminfo.text.length>0}}" class="form-describe mt-10">{{forminfo.text}}</view>
+  <!-- 主体 -->
+  <checkbox-group bindchange="checkboxChange">
+    <!-- 选项 -->
+    <label class="radio-group">
+      <block wx:for="{{forminfo.data}}">
+        <checkbox
+          disabled="{{forminfo.limit && item.limit <= 0}}"
+          value="{{item.name}},{{item.id}},{{item.duration}}"
+          wx:key="id"
+        >
+          <view class="radio-item">
+            {{item.name}}
+            <text wx:if="{{forminfo.limit}}" class="form-describe ml-20">剩余{{item.limit}}</text>
+            <text wx:if="{{forminfo.duration}}" class="form-describe ml-20">时长{{item.duration}}</text>
+          </view>
+        </checkbox>
+      </block>
+    </label>
+  </checkbox-group>
 </view>

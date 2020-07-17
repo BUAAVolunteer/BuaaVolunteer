@@ -111,6 +111,22 @@ image.loading::after {
     width: 100%;
 }
 
+/* ==================
+         按钮
+ ==================== */
+
+button {
+    background: initial;
+}
+
+button:focus {
+    outline: 0;
+}
+
+button::after {
+    border: none;
+}
+
 
 /* ==================
          开关

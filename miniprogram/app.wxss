@@ -1,1 +1,2 @@
 @import "/assests/wxss/main.wxss";
+@import "/assests/wxss/icon.wxss";

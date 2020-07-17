@@ -1,1 +1,9 @@
 /* components/text-describe/text-describe.wxss */
+.form-describe-middle {
+    display: flex;
+    justify-content: center;
+    margin: 20rpx;
+    font-size: 20rpx;
+    font-weight: lighter;
+    width: 90%;
+}

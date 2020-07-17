@@ -1,49 +1,28 @@
 // components/my-form/my-input.js
 Component({
-    /**
-     * 组件的初始数据
-     */
-    options: {
-        addGlobalClass: true,
+  /**
+   * 组件的初始数据
+   */
+  properties: {
+    forminfo: {
+      type: Object,
+      value: {},
     },
-    properties: {
-        label: {
-            type: String,
-            value: '',
-        },
-        formid: {
-            type: String,
-            value: '',
-        },
-        forminfo: {
-            type: Object,
-            value: {}
-        },
-        role: {
-            type: Object,
-            value: {}
-        }
+  },
+  /**
+   * 组件的方法列表
+   */
+  methods: {
+    enterValue: function (e) {
+      console.log(e.detail.value);
+      let input_text = e.detail.value;
+      let ID = parseInt(this.properties.forminfo.id.substr(1));
+      //  子传父事件，将输入数据回传
+      this.triggerEvent("input", {
+        type: "input",
+        ID,
+        input_text,
+      });
     },
-    data: {
-        input_text: '',
-    },
-    behaviors: ['wx://component-export'],
-    /**
-     * 组件的方法列表
-     */
-    ready: function() {
-        //console.log(this.properties);
-    },
-    methods: {
-        enterValue: function(e) {
-            //console.log(e.detail.value);
-            let input_text = e.detail.value;
-            let ID = parseInt(this.properties.forminfo.id.substr(1));
-            this.triggerEvent('input', {
-                type: 'input',
-                ID,
-                input_text
-            })
-        }
-    }
-})
+  },
+});

@@ -1,1 +1,2 @@
 /* components/text-time/text-time.wxss */
+@import "../text-checkbox/text-checkbox.wxss";

@@ -112,55 +112,6 @@ page {
     padding: 7rpx;
 }
 
-.divLine {
-    background: #E0E3DA;
-    width: 100%;
-    height: 5rpx;
-    margin-top: 20rpx;
-}
-
-.form-describe-middle {
-    display: flex;
-    justify-content: center;
-    margin: 20rpx;
-    font-size: 20rpx;
-    font-weight: lighter;
-    width: 90%;
-}
-
-.form-describe {
-    text-align: left;
-    margin: 0;
-    font-size: 20rpx;
-    font-weight: lighter;
-    width: 90%;
-}
-
-.radio-box {
-    width: 100%;
-    display: block;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    margin: 25rpx 25rpx 25rpx 5rpx;
-    line-height: 10rpx;
-}
-
-.radio-text {
-    display: flex;
-    vertical-align: center;
-    text-align: center;
-    font-weight: bold;
-    margin: 20rpx;
-}
-
-.radio-group {
-    align-items: center;
-    min-height: 100rpx;
-    justify-content: space-between;
-    margin: 10rpx 0rpx 19rpx 0rpx;
-}
-
 .reports-header {
     display: flex;
     padding: 20rpx 0rpx;
@@ -172,28 +123,6 @@ page {
     letter-spacing: 2rpx;
 }
 
-.reports-header-line {
-    width: 10rpx;
-    height: 36rpx;
-    border-radius: 5rpx;
-    background-color: green;
-    margin: 0 14rpx 0rpx 28rpx;
-    min-width: 90%;
-}
-
-.reports-form-btn {
-    width: 694rpx;
-    height: 90rpx;
-    background: green;
-    border-radius: 10rpx;
-    font-size: 36rpx;
-    font-family: PingFang-SC-Bold;
-    font-weight: bold;
-    color: rgba(255, 255, 255, 1);
-    text-align: center;
-    line-height: 90rpx;
-}
-
 .form-center {
     display: flex;
     justify-content: center;
@@ -201,11 +130,6 @@ page {
     padding-bottom: 100rpx;
 }
 
-.reports-form-box {
-    display: flex;
-    margin-bottom: 30rpx;
-    margin-left: 28rpx;
-}
 
 .edit-form-box {
     display: flex;
@@ -213,48 +137,11 @@ page {
     margin-left: 18rpx;
 }
 
-.reports-form-input {
-    width: 332rpx;
-    height: 60rpx;
-    border: 1px solid rgba(203, 200, 203, 1);
-    border-radius: 5rpx;
-    margin-right: 30rpx;
-    display: flex;
-    align-items: center;
-    margin-top: 10rpx;
-}
-
-.form-inputname {
-    font-size: 28rpx;
-    font-family: PingFang-SC-Bold;
-    font-weight: bold;
-    color: rgba(51, 51, 51, 1);
-    width: 90%;
-}
-
-.form-inputtext {
-    width: 450rpx;
-    height: 30rpx;
-    font-family: PingFang-SC-Bold;
-    font-weight: bold;
-    color: rgba(51, 51, 51, 1);
-    font-size: 28rpx;
-    display: flex;
-    align-items: center;
-    margin-left: 10rpx;
-}
-
 .form-upload {
     height: 50rpx;
     opacity: 0;
 }
 
-.form-inputtext>.picker {
-    font-family: PingFang-SC-Bold;
-    font-weight: bold;
-    color: rgba(51, 51, 51, 1);
-    font-size: 28rpx
-}
 
 .form-inner {
     display: block;

@@ -1,32 +1,27 @@
 <!--components/text-time/text-time.wxml-->
-<view class='reports-form-box form-inner'>
-  <view class='input-all-width'>
-    <view class='form-inputname'>{{forminfo.label}}
-      <text wx:if="{{forminfo.force}}" class="force_text">*</text>
-    </view>
+<view class="reports-form-box form-inner">
+  <view class="form-inputname">
+    {{forminfo.label}}
+    <text wx:if="{{forminfo.force}}" class="force-text">*</text>
   </view>
-  <view wx:if="{{forminfo.text.length>0}}" class="form-describe input-all-width">
-    {{forminfo.text}}
-  </view>
-
-  <radio-group class="block" bindchange="radioChange">
-		<label class="radio-group margin-top">
-			<radio
-			 disabled="{{forminfo.limit&&item.limit<=0}}"
-			 class="{{(forminfo.limit&&item.limit<=0)?'grey':'blue'}}"
-			 style="display:flex;"
-			 wx:for-items="{{forminfo.data}}"
-			 value='{{item.name}},{{item.id}},{{item.duration}}'
-			 wx:key="id"
-			>
-				<view class="radio-box">
-					{{item.name}}
-					<text wx:if="{{forminfo.limit}}" class="form-describe" style="margin-left:20rpx;">剩余{{item.limit}}</text>
-					<text wx:if="{{forminfo.duration}}" class="form-describe" style="margin-left:20rpx;">时长{{item.duration}}</text>
-				</view>
-
-			</radio>
-		</label>
-	</radio-group>
-
+  <view wx:if="{{forminfo.text.length>0}}" class="radio-describe mt-10">{{forminfo.text}}</view>
+  <radio-group bindchange="checkboxChange">
+    <!-- 选项 -->
+    <label class="radio-group">
+      <block wx:for="{{forminfo.data}}">
+        <radio
+          disabled="{{forminfo.limit && item.limit <= 0}}"
+          class="{{(forminfo.limit&&item.limit<=0)?'grey':'blue'}}"
+          value="{{item.name}},{{item.id}},{{item.duration}}"
+          wx:key="id"
+        >
+          <view class="radio-item">
+            {{item.name}}
+            <text wx:if="{{forminfo.limit}}" class="radio-describe ml-20">剩余{{item.limit}}</text>
+            <text wx:if="{{forminfo.duration}}" class="radio-describe ml-20">时长{{item.duration}}</text>
+          </view>
+        </radio>
+      </block>
+    </label>
+  </radio-group>
 </view>
