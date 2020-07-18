@@ -3,9 +3,6 @@ Component({
   /**
    * 组件的初始数据
    */
-  options: {
-    addGlobalClass: true,
-  },
   properties: {
     forminfo: {
       type: Object,

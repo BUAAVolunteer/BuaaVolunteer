@@ -4,7 +4,7 @@
     {{forminfo.label}}
     <text wx:if="{{forminfo.force}}" class="force-text">*</text>
   </view>
-  <view wx:if="{{forminfo.text.length>0}}" class="radio-describe mt-10">{{forminfo.text}}</view>
+  <view wx:if="{{forminfo.text.length>0}}" class="form-describe mt-10">{{forminfo.text}}</view>
   <radio-group bindchange="checkboxChange">
     <!-- 选项 -->
     <label class="radio-group">
@@ -17,8 +17,8 @@
         >
           <view class="radio-item">
             {{item.name}}
-            <text wx:if="{{forminfo.limit}}" class="radio-describe ml-20">剩余{{item.limit}}</text>
-            <text wx:if="{{forminfo.duration}}" class="radio-describe ml-20">时长{{item.duration}}</text>
+            <text wx:if="{{forminfo.limit}}" class="form-describe ml-20">剩余{{item.limit}}</text>
+            <text wx:if="{{forminfo.duration}}" class="form-describe ml-20">时长{{item.duration}}</text>
           </view>
         </radio>
       </block>

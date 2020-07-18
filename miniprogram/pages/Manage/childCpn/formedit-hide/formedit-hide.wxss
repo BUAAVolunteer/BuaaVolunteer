@@ -1,0 +1,31 @@
+/* pages/Manage/childCpn/formedit-hide/formedit-hide.wxss */
+.edit-textarea {
+    height: 300rpx !important;
+    margin-top: 10rpx;
+    background-color: white;
+    margin-right: 2.5%;
+    width: 90%;
+}
+
+.edit-checkbox-margin {
+    margin-top: 10rpx;
+    margin-left: 10rpx;
+}
+
+.border {
+    border: solid;
+    border-width: thin;
+    border-color: var(--gray);
+}
+
+.edit-form-input {
+    border-bottom: 1px solid rgba(203, 200, 203, 1);
+    border-radius: 5rpx;
+    margin-right: 30rpx;
+    display: flex;
+    align-items: center;
+}
+
+.edit-title {
+    font-weight: lighter;
+}

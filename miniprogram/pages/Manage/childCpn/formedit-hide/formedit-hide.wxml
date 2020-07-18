@@ -1,0 +1,80 @@
+<!--pages/Manage/childCpn/formedit-hide/formedit-hide.wxml-->
+
+<!--左侧展开层-首页-->
+<view wx:if="{{page==0}}">
+  <!--输入标题-->
+  <view wx:if="{{isTypeOne}}" class="edit-form-box form-inner">
+    <view class="edit-title">标题</view>
+    <view class="edit-form-input">
+      <input style="width:90%;" bindinput="enter" id="title" value="{{formItem.label}}" />
+    </view>
+  </view>
+  <!--描述-->
+  <view wx:if="{{isTypeOne}}" class="edit-form-box form-inner">
+    <view class="edit-title">描述</view>
+    <view class="edit-form-input">
+      <input style="width:90%;" bindinput="enter" id="text" value="{{formItem.describe}}" />
+    </view>
+  </view>
+  <checkbox-group
+    wx:if="{{isTypeTwo}}"
+    class="block"
+    style="margin:20rpx 20rpx 20rpx 0rpx;"
+    id="force"
+    bindchange="enter"
+  >
+    <view class="edit-checkbox-margin">
+      <checkbox class="blue" style="display:flex;width:60%;" value="force" checked="{{formItem.force}}">
+        <view class="radio-box">这是个必填项</view>
+      </checkbox>
+    </view>
+  </checkbox-group>
+  <view wx:if="{{isTypeThree}}" class="edit-form-box form-inner">
+    <view class="edit-title">选项</view>
+    <view class="describe">编辑格式："选项内容 选项限额 基础时长"。请确保选项内容与限额间，限额与时长间都只有一个空格，并以换行为两选项之间的分隔，限额与时长均默认为0。</view>
+    <textarea
+      auto-height="{{false}}"
+      class="border edit-textarea block"
+      bindblur="enterOption"
+      value="{{option}}"
+    />
+  </view>
+</view>
+<!--左侧展开层-备注-->
+<view wx:if="{{page==1}}">
+  <checkbox-group
+    wx:if="{{isTypeThree}}"
+    class="block"
+    style="margin:20rpx 20rpx 20rpx 0rpx;"
+    id="detailopen"
+    bindchange="enter"
+  >
+    <view class="edit-checkbox-margin">
+      <checkbox class="blue" style="display:flex;width:60%;" value="detail" checked="{{detail}}">
+        <view class="radio-box">该题存在备注</view>
+      </checkbox>
+    </view>
+  </checkbox-group>
+  <view class="describe">
+    备注即现有时长表格式中的备注，选择该选项的志愿者将会获得此备注，为简化流程，建议只标注时间与通用的备注。
+    例：2020-01-01（全天）
+  </view>
+  <view wx:if="{{detail}}" class="edit-form-box form-inner">
+    <view class="edit-title">备注</view>
+    <textarea
+      auto-height="{{false}}"
+      class="border edit-textarea block"
+      bindinput="entertd"
+      value="{{textd}}"
+    />
+  </view>
+</view>
+<!--底部按钮-->
+<view class="flex-decoration">
+  <button
+    wx:if="{{isTypeThree}}"
+    class="cu-btn bg-orange"
+    style="margin-left:10rpx;"
+    bind:tap="change"
+  >切换</button>
+</view>

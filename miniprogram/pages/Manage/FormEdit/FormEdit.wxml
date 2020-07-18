@@ -1,150 +1,37 @@
 <!-- pages/forms/forms.wxml -->
 <scroll-view scroll-y="{{true}}" class="reports-container">
   <view class="{{open ? 'open' : 'page-state-hide'}}">
-    <!--左侧展开层-首页-->
-    <view wx:if="{{page==0}}">
-      <!--输入标题-->
-      <view
-        wx:if="{{type=='text' || type=='radio' || type =='checkbox' || type=='title'}}"
-        class="edit-form-box form-inner"
-      >
-        <view class="edit-title">标题</view>
-        <view class="edit-form-input">
-          <input style="width:90%;" bindinput="enter" id="title" value="{{label}}" />
-        </view>
-      </view>
-      <!--描述-->
-      <view
-        wx:if="{{type=='text' || type=='radio' || type =='checkbox' || type== 'describe'}}"
-        class="edit-form-box form-inner"
-      >
-        <view class="edit-title">描述</view>
-        <view class="edit-form-input">
-          <input style="width:90%;" bindinput="enter" id="text" value="{{text}}" />
-        </view>
-      </view>
-      <checkbox-group
-        wx:if="{{type=='text' || type=='radio' || type =='checkbox'}}"
-        class="block"
-        style="margin:20rpx 20rpx 20rpx 0rpx;"
-        id="force"
-        bindchange="enter"
-      >
-        <view class="edit-checkbox-margin">
-          <checkbox class="blue" style="display:flex;width:60%;" value="force" checked="{{force}}">
-            <view class="radio-box">这是个必填项</view>
-          </checkbox>
-        </view>
-      </checkbox-group>
-      <view wx:if="{{type=='radio' || type =='checkbox'}}" class="edit-form-box form-inner">
-        <view class="edit-title">选项</view>
-        <view
-          class="describe"
-        >编辑格式："选项内容 选项限额 基础时长"。请确保选项内容与限额间，限额与时长间都只有一个空格，并以换行为两选项之间的分隔，限额与时长均默认为0。</view>
-        <textarea
-          auto-height="{{false}}"
-          class="border edit-textarea block"
-          bindinput="enterta"
-          value="{{texta}}"
-        />
-        <!--
-				<view class="flex">
-					<textarea
-					auto-height="{{false}}"
-					class="border edit-textarea value"
-					bindinput="enterta"
-					id="value"
-					value="{{texta}}"
-					/>
-					<textarea
-					auto-height="{{false}}"
-					class="border edit-textarea limit"
-					bindinput="enterta"
-					id="limit"
-					value="{{textl}}"
-					/>
-					<textarea
-					auto-height="{{false}}"
-					class="border edit-textarea duration"
-					bindinput="enterta"
-					id="duration"
-					value="{{textd}}"
-					/>
-				</view>
-        -->
-      </view>
-    </view>
-    <!--左侧展开层-备注-->
-    <view wx:if="{{page==1}}">
-      <checkbox-group
-        wx:if="{{ type=='radio' || type =='checkbox'}}"
-        class="block"
-        style="margin:20rpx 20rpx 20rpx 0rpx;"
-        id="detailopen"
-        bindchange="enter"
-      >
-        <view class="edit-checkbox-margin">
-          <checkbox
-            class="blue"
-            style="display:flex;width:60%;"
-            value="detail"
-            checked="{{detail}}"
-          >
-            <view class="radio-box">该题存在备注</view>
-          </checkbox>
-        </view>
-      </checkbox-group>
-      <view class="describe">
-        备注即现有时长表格式中的备注，选择该选项的志愿者将会获得此备注，为简化流程，建议只标注时间与通用的备注。
-        例：2020-01-01（全天）
-      </view>
-      <view wx:if="{{detail}}" class="edit-form-box form-inner">
-        <view class="edit-title">备注</view>
-        <textarea
-          auto-height="{{false}}"
-          class="border edit-textarea block"
-          bindinput="entertd"
-          value="{{textd}}"
-        />
-      </view>
-    </view>
-    <!--底部按钮-->
-    <view class="flex-decoration">
-      <button
-        wx:if="{{type=='radio' || type =='checkbox'}}"
-        class="cu-btn bg-orange"
-        style="margin-left:10rpx;"
-        bind:tap="change"
-      >切换</button>
-      <button class="cu-btn bg-cyan" style="margin-left:10rpx;" bindtap="offCanvas">完成</button>
-      <button class="cu-btn bg-red" style="margin-left:10rpx;" bindtap="delete">删除</button>
-    </view>
+    <formedit-hide formItem="{{formItem}}" bind:optionChange="optionChange"></formedit-hide>
   </view>
+  <view class="page-mask {{open ? 'page-state' : 'page-state-hide'}}" bindtap="offCanvas" />
   <!--中心组件层-->
   <view class="page-top {{open ? 'page-state' : ''}}">
-    <view class="page-mask {{open ? '' : 'page-mask-show'}}" bindtap="offCanvas" />
     <!--表单标题-->
     <view id="-1" class="reports-header input-all-width" bindtap="offCanvas">{{formList.fieldName}}</view>
     <!--表单主体-->
     <view class="reports-form">
       <block wx:for="{{formList.formInfo}}" wx:for-index="idx" wx:for-item="items" wx:key="id">
-        <button id="{{items.id}}" class="but-each" bindtap="offCanvas">
+        <button
+          id="{{items.id}}"
+          class="but-each"
+          bind:longpress="buttonOpen"
+          bind:tap="offCanvas"
+        >
           <!-- 输入框组件 -->
           <block wx:if="{{items.type=='text'}}">
-            <text-input id="{{items.id}}" role="{{items.role}}" forminfo="{{items}}" />
+            <text-input id="{{items.id}}" forminfo="{{items}}" bindinput="childChange" />
           </block>
-
           <!-- 描述文本组件 -->
           <block wx:if="{{items.type=='describe'}}">
             <text-describe id="{{items.id}}" forminfo="{{items}}" />
           </block>
           <!-- 单选组件 -->
           <block wx:if="{{items.type=='radio'}}">
-            <text-radio id="{{items.id}}" forminfo="{{items}}" />
+            <text-radio id="{{items.id}}" forminfo="{{items}}" bindradio="childChange" />
           </block>
           <!-- 多选组件 -->
           <block wx:if="{{items.type=='checkbox'}}">
-            <text-checkbox id="{{items.id}}" forminfo="{{items}}" />
+            <text-checkbox id="{{items.id}}" forminfo="{{items}}" bindcheckbox="childChange" />
           </block>
           <!-- 分割线组件 -->
           <block wx:if="{{items.type=='div'}}">
@@ -157,13 +44,20 @@
 </scroll-view>
 
 <!--底部组件-->
-<!--悬浮按钮-->
-<button style="margin:0;" bindtap="add">
-  <image class="add-img" src="../../icons/add.png" />
-</button>
-<button style="margin:0;" bindtap="submit">
-  <image class="submit-img" src="../../icons/submit-blue.png" />
-</button>
+<!--悬浮按钮第一层-->
+<view class="button-bottom button-common {{button ? 'button-common-hide' : ''}}">
+  <formedit-icon iconSrc="/assests/icons/formedit/add.png" bindtap="add"></formedit-icon>
+  <formedit-icon iconSrc="/assests/icons/formedit/submit.png" bindtap="submit"></formedit-icon>
+</view>
+<!--悬浮按钮第二层-->
+<view class="mask-bottom {{button ? 'mask-bottom-show' : 'page-state-hide'}}" bind:tap="buttonClose">
+</view>
+<view class="button-bottom button-hide {{button ? 'button-common-show' : ''}}">
+  <formedit-icon iconSrc="/assests/icons/formedit/up.png" bindtap="up"></formedit-icon>
+  <formedit-icon iconSrc="/assests/icons/formedit/down.png" bindtap="down"></formedit-icon>
+  <formedit-icon iconSrc="/assests/icons/formedit/copy.png" bindtap="copy"></formedit-icon>
+  <formedit-icon iconSrc="/assests/icons/formedit/delete.png" bindtap="delete"></formedit-icon>
+</view>
 <!--添加组件-->
 <view class="addlist" wx:if="{{checked}}">
   <button class="button1 but-font" id="text" bindtap="addAll">文本输入</button>
