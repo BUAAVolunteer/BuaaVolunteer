@@ -220,30 +220,6 @@ Page({
           [addl]: false,
         }); */
   },
-  entertd: function (e) {
-    let that = this;
-    let detail = e.detail.value.split("\n");
-    let detLength = detail.length;
-    if (detLength > that.data.la) {
-      wx.showModal({
-        title: "错误提示",
-        content: "请确保备注个数不要大于选项个数相同，换行即为分隔",
-        showCancel: false, //是否显示取消按钮
-        //cancelText: "否", //默认是“取消”
-        //cancelColor: 'skyblue', //取消文字的颜色
-        confirmText: "我知道了", //默认是“确定”
-        //confirmColor: 'skyblue', //确定文字的颜色{
-      });
-      return;
-    }
-    var addList = "formList.formInfo[" + ID + "].data";
-    for (var i = 0; i < detLength; i++) {
-      var addl = addList + "[" + i + "].detail";
-      that.setData({
-        [addl]: detail[i],
-      });
-    }
-  },
 
   /*
   第二层按钮的四个方法
@@ -294,7 +270,7 @@ Page({
       [addList]: formInfo,
       button: false
     });
-    cnt = cnt - 1;
+    cnt = formLinkedList.length;
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -305,6 +281,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {},
+
+  /*
+  向表单末尾添加组件
+  */
   addAll: function (e) {
     //console.log(e.currentTarget.id);
     var addItem = {
@@ -363,16 +343,25 @@ Page({
       checked: false,
     });
   },
+
+
   /**
    * 生命周期函数--监听页面隐藏
    */
-
   onHide: function () {},
+  
+  /*
+  展开添加组件选项
+  */
   add: function () {
     this.setData({
       checked: !this.data.checked,
     });
   },
+
+  /*
+  提交编辑好的表单
+  */
   submit: function () {
     var that = this;
     wx.showModal({
