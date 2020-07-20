@@ -1,6 +1,9 @@
 /**
  * 工具类 util.js
  */
+
+import LinkedList from 'LinkedList'
+
 class Util {
     static formatTime(date) {
         let year = date.getFullYear();
@@ -38,7 +41,7 @@ class Util {
     };
 
     static exportToExcel (exportInfo) {
-        //??Export???????Excel???
+        //将数组信息导出为excel
         wx.cloud.callFunction({
             name: 'Export',
             data: {
@@ -47,17 +50,17 @@ class Util {
                 exportList : exportInfo.downloadList
             }
         }).then(res => {
-            //??Excel
+            //下载Excel
             wx.cloud.downloadFile({
                 fileID: res.result.fileID
             })
         }).then(res => {
-            //??Excel
+            //保存Excel
             wx.saveFile({
                 tempFilePath: res.tempFilePath
             })
         }).then(res => {
-            //??Excel
+            //自动打开Excel
             wx.openDocument({
                 filePath: res.savedFilePath
             })
@@ -72,8 +75,16 @@ class Util {
             returnData.res = err;
             return returnData;
         })
+    };
+
+    static toLinkedList (list) {
+        var linkedList = new LinkedList();
+        for (let i = 0; i < list.length; i++) {
+            linkedList.append(list[i])
+        }
+        return linkedList
     }
 };
 
 
-module.exports = Util;
+export default Util;

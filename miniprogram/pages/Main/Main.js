@@ -78,7 +78,8 @@ Component({
           .get()
       })
       .then(res => {
-        console.log(res.data); //获取到的地址数组
+        console.log(res.data);
+        //获取到的地址数组
         that.setData({
           imageList: res.data,
         });
@@ -92,13 +93,14 @@ Component({
       }).then(res =>{
         console.log(res.data)
         if (res.data.length === 0){
-          app.globalData.register = 0
+          app.globalData.isRegister = 0
         }else{
           app.globalData.personNum = res.data[0].personnum;
           app.globalData.campus = res.data[0].campus;
           app.globalData.phone = res.data[0].phone;
           app.globalData.qqNum = res.data[0].qqnum;
           app.globalData.phone = res.data[0].phone;
+          app.globalData.isRegister = 1
         }
       }).then(() =>{
         return db.collection('admin')
@@ -109,9 +111,9 @@ Component({
       }).then(res =>{
         console.log(res.data)
         if (res.data.length){
-          app.globalData.admin = 1
+          app.globalData.isAdmin = 1
         }else{
-          app.globalData.admin = 0
+          app.globalData.isAdmin = 0
         }
         console.log("个人信息登记完成")
         wx.hideLoading();

@@ -1,10 +1,12 @@
 // pages/edit/edit.js
+import Util from '../../../utils/util'
 const db = wx.cloud.database();
 const _ = db.command;
 const app = getApp();
 var formConfig;
 var cnt = 0; //index plus with item grow
 var ID, IDitem; //index of change item
+var formLinkedList; //表单对应链表
 Page({
   /**
    * 页面的初始数据
@@ -77,8 +79,7 @@ Page({
         }
       })
       .then(() => {
-        return db
-          .collection("signUp")
+        return db.collection("signUp")
           .where({
             title: options.title,
           })
@@ -96,9 +97,14 @@ Page({
       })
       .then(() => {
         let formLength = formData.formInfo.length;
-        for (let i = 0; i < formLength; i++) {
-          formData.formInfo[i].id = formData.formInfo[i].id.slice(1);
+        if ("id" in formData.formInfo[0]) {
+          for (let i = 0; i < formLength; i++) {
+            delete formData.formInfo[i].id
+          }
         }
+        formLinkedList = Util.toLinkedList(formData.formInfo)
+        formData.formInfo = formLinkedList.toList()
+        cnt = formLinkedList.length
         //console.log(fi)
         that.setData({
           formList: formData,
@@ -109,6 +115,7 @@ Page({
   // 打开底部按钮
   buttonOpen(e) {
     console.log("buttonChange",e.currentTarget.id);
+    ID = e.currentTarget.id;
     this.setData({
       button: true,
     });
@@ -237,19 +244,55 @@ Page({
       });
     }
   },
-  delete: function (e) {
-    var that = this;
-    let formInfo = that.data.formList.formInfo;
-    //console.log('ID', ID, 'cnt', cnt)
-    for (var i = ID + 1; i < cnt; i++) formInfo[i].id = formInfo[i].id - 1;
-    formInfo.splice(ID, 1);
+
+  /*
+  第二层按钮的四个方法
+  */
+  up: function (e) {
+    console.log('ID', ID, 'cnt', cnt)
+    formLinkedList.goUp(ID);
+    let formInfo = formLinkedList.toList();
     var addList = "formList.formInfo";
     //console.log(formInfo);
     this.setData({
       [addList]: formInfo,
-      checked: false,
-      open: false,
-      type: "",
+      button: false
+    });
+  },
+
+  down: function (e) {
+    console.log('ID', ID, 'cnt', cnt)
+    formLinkedList.goDown(ID);
+    let formInfo = formLinkedList.toList();
+    var addList = "formList.formInfo";
+    //console.log(formInfo);
+    this.setData({
+      [addList]: formInfo,
+      button: false
+    });
+  },
+
+  copy: function (e) {
+    console.log('ID', ID, 'cnt', cnt)
+    formLinkedList.copy(ID);
+    let formInfo = formLinkedList.toList();
+    var addList = "formList.formInfo";
+    //console.log(formInfo);
+    this.setData({
+      [addList]: formInfo,
+      button: false
+    });
+  },
+
+  delete: function (e) {
+    console.log('ID', ID, 'cnt', cnt)
+    formLinkedList.removeAt(ID);
+    let formInfo = formLinkedList.toList();
+    var addList = "formList.formInfo";
+    //console.log(formInfo);
+    this.setData({
+      [addList]: formInfo,
+      button: false
     });
     cnt = cnt - 1;
   },
@@ -264,10 +307,9 @@ Page({
   onShow: function () {},
   addAll: function (e) {
     //console.log(e.currentTarget.id);
-    var additem = {
+    var addItem = {
       label: "",
       type: "",
-      id: "",
       text: "",
       placeholder: "",
       data: [],
@@ -282,14 +324,11 @@ Page({
       detail: false,
     };
     //添加种类
-    additem.type = e.currentTarget.id;
-    //记录顺位
-    additem.id = cnt.toString();
-    cnt = cnt + 1;
+    addItem.type = e.currentTarget.id;
     //个性添加
-    if (additem.type == "text") {
-      additem.label = "输入组件";
-    } else if (additem.type == "radio" || additem.type == "checkbox") {
+    if (addItem.type == "text") {
+      addItem.label = "输入组件";
+    } else if (addItem.type == "radio" || addItem.type == "checkbox") {
       var data = [
         {
           id: 0,
@@ -310,18 +349,17 @@ Page({
           name: "选项二",
         },
       ];
-      additem.data = data;
-      additem.label = additem.type == "radio" ? "单选组件" : "多选组件";
-    } else if (additem.type == "describe") {
-      additem.text = "这是一段文本描述";
+      addItem.data = data;
+      addItem.label = addItem.type == "radio" ? "单选组件" : "多选组件";
+    } else if (addItem.type == "describe") {
+      addItem.text = "这是一段文本描述";
     }
     //加入现有队列，concat为拼接方法
-    let list = [];
-    list.push(additem);
-    let formInfo = this.data.formList.formInfo;
+    formLinkedList.append(addItem)
+    let formInfo = formLinkedList.toList();
     var addList = "formList.formInfo";
     this.setData({
-      [addList]: formInfo.concat(list),
+      [addList]: formInfo,
       checked: false,
     });
   },

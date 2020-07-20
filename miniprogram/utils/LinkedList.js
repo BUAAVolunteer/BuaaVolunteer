@@ -13,7 +13,7 @@ function LinkedList() {
 
     LinkedList.prototype.append = function (data) {
         let newNode = new Node(data);
-        if (this.length === 0) {
+        if (this.length == 0) {
             this.head = newNode;
             this.tail = newNode;
             this.length += 1;
@@ -26,6 +26,7 @@ function LinkedList() {
     }
 
     LinkedList.prototype.insert = function (position,data) {
+        position = parseInt(position)
         let preNode = null;
         let nextNode = this.head;
         let newNode = new Node(data);
@@ -33,12 +34,12 @@ function LinkedList() {
             console.log("不正确的插入位置：" + position + "；链表总长度：" + this.length)
             return false;
         }else{
-            if (position === 0) {
+            if (position == 0) {
                 newNode.next = this.head;
                 newNode.next.previous = newNode;
                 this.head = newNode;
                 this.length += 1;
-            }else if (position === this.length) {
+            }else if (position == this.length) {
                 this.append(data);
             }else{
                 for (let i = 0; i < position; i++) {
@@ -55,6 +56,7 @@ function LinkedList() {
     }
 
     LinkedList.prototype.get = function (position) {
+        position = parseInt(position)
         let nowNode = this.head;
         if (position < 0 || position >= this.length) {
             console.log("不正确的查找位置：" + position + "；链表总长度：" + this.length)
@@ -72,7 +74,7 @@ function LinkedList() {
         let found = 0;
         let index = 0;
         for (let i = 0; i < this.length; i++) {
-            if (nowNode.data === data) {
+            if (nowNode.data == data) {
                 found = 1;
                 index = i;
                 break;
@@ -88,6 +90,7 @@ function LinkedList() {
     }
 
     LinkedList.prototype.update = function (position,data){
+        position = parseInt(position)
         let nowNode = this.head;
         if (position < 0 || position >= this.length) {
             console.log("不正确的更新位置：" + position + "；链表总长度：" + this.length)
@@ -101,15 +104,16 @@ function LinkedList() {
     }
 
     LinkedList.prototype.removeAt = function (position) {
+        position = parseInt(position)
         let nowNode = this.head;
         if (position < 0 || position >= this.length) {
             console.log("不正确的删除位置：" + position + "；链表总长度：" + this.length)
             return false;
         }else{
-            if (position === 0) {
+            if (position == 0) {
                 this.head = nowNode.next;
                 this.length -= 1;
-            }else if (position === this.length - 1) {
+            }else if (position == this.length - 1) {
                 nowNode = this.tail;
                 this.tail = nowNode.previous;
                 this.length -= 1;
@@ -145,10 +149,45 @@ function LinkedList() {
         let list = [];
         let nowNode = this.head;
         for (let i = 0; i < this.length; i++) {
+            nowNode.data.ID = i
             list.push(nowNode.data);
             nowNode = nowNode.next;
         }
         return list;
+    }
+
+    LinkedList.prototype.goUp = function (position) {
+        position = parseInt(position)
+        if (position < 1 || position >= this.length) {
+            console.log("不正确的移动位置：" + position + "；链表总长度：" + this.length)
+        }else{
+            let nowData = this.get(position)
+            let upData = this.get(position - 1)
+            this.update(position, upData)
+            this.update(position-1, nowData)
+        }
+    }
+
+    LinkedList.prototype.goDown = function (position) {
+        position = parseInt(position)
+        if (position < 0 || position >= this.length - 1) {
+            console.log("不正确的移动位置：" + position + "；链表总长度：" + this.length)
+        }else{
+            let nowData = this.get(position)
+            let downData = this.get(position + 1)
+            this.update(position, downData)
+            this.update(position+1, nowData)
+        }
+    }
+
+    LinkedList.prototype.copy = function (position) {
+        position = parseInt(position)
+        if (position < 1 || position >= this.length) {
+            console.log("不正确的复制位置：" + position + "；链表总长度：" + this.length)
+        }else{
+            let nowData = this.get(position)
+            this.insert(position+1,nowData)
+        }
     }
 }
 
