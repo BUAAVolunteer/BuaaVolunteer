@@ -1,4 +1,6 @@
 {
   "component": true,
-  "usingComponents": {}
+  "usingComponents": {
+    "checkbox-single":"/components/checkbox-single/checkbox-single"
+  }
 }

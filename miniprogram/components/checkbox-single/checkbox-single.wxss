@@ -1,0 +1,17 @@
+/* components/checkbox-single/checkbox-single.wxss */
+
+/* 多选 */
+.checkbox {
+  width: 100%;
+  display: flex;
+  padding: 10rpx;
+  flex-direction: column;
+}
+
+.checkbox-item {
+  margin-top: 10rpx;
+}
+
+.checkbox-item-text {
+  margin-left: 20rpx;
+}

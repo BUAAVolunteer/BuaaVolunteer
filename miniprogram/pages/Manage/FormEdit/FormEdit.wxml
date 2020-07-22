@@ -3,11 +3,10 @@
   <view class="{{open ? 'open' : 'page-state-hide'}}">
     <formedit-hide formItem="{{formItem}}" bind:optionChange="optionChange"></formedit-hide>
   </view>
-  <view class="page-mask {{open ? 'page-state' : 'page-state-hide'}}" bindtap="offCanvas" />
   <!--中心组件层-->
   <view class="page-top {{open ? 'page-state' : ''}}">
     <!--表单标题-->
-    <view id="-1" class="reports-header input-all-width" bindtap="offCanvas">{{formList.fieldName}}</view>
+    <view id="-1" class="reports-header" bindtap="offCanvas">{{formList.fieldName}}</view>
     <!--表单主体-->
     <view class="reports-form">
       <block wx:for="{{formList.formInfo}}" wx:for-index="idx" wx:for-item="items" wx:key="id">
@@ -45,14 +44,14 @@
 
 <!--底部组件-->
 <!--悬浮按钮第一层-->
-<view class="button-bottom button-common {{button ? 'button-common-hide' : ''}}">
+<view class="footer button-common {{button ? 'button-common-hide' : ''}}">
   <formedit-icon iconSrc="/assests/icons/formedit/add.png" bindtap="add"></formedit-icon>
   <formedit-icon iconSrc="/assests/icons/formedit/submit.png" bindtap="submit"></formedit-icon>
 </view>
 <!--悬浮按钮第二层-->
 <view class="mask-bottom {{button ? 'mask-bottom-show' : 'page-state-hide'}}" bind:tap="buttonClose">
 </view>
-<view class="button-bottom button-hide {{button ? 'button-common-show' : ''}}">
+<view class="footer button-hide {{button ? 'button-common-show' : ''}}">
   <formedit-icon iconSrc="/assests/icons/formedit/up.png" bindtap="up"></formedit-icon>
   <formedit-icon iconSrc="/assests/icons/formedit/down.png" bindtap="down"></formedit-icon>
   <formedit-icon iconSrc="/assests/icons/formedit/copy.png" bindtap="copy"></formedit-icon>

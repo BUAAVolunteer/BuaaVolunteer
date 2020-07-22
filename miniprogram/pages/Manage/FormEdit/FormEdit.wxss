@@ -5,24 +5,23 @@ page {
   height: 80%;
 }
 
-
 /* 底层按钮父属性 */
-.button-bottom {
-    position: fixed;
-    width: 100vw;
-    display: flex;
-    justify-content: space-around;
-    transition: transform 0.3s ease;
+.footer {
+  position: fixed;
+  width: 100vw;
+  display: flex;
+  justify-content: space-around;
+  transition: transform 0.3s ease;
 }
 
 /* 第一层按钮定位 */
 .button-common {
-    bottom: 0;
+  bottom: 0;
 }
 
 /* 第二层按钮定位 */
 .button-hide {
-    bottom: -200rpx;
+  bottom: -200rpx;
 }
 
 /* 第一层按钮下移 */
@@ -34,6 +33,7 @@ page {
 .button-common-show {
   transform: translateY(-200rpx);
 }
+
 /* 随第二层组件上移而显现的全局遮盖层 */
 .mask-bottom-show {
   width: 100vw;
@@ -44,21 +44,20 @@ page {
 
 /* 上层组件全局高度 */
 .reports-container {
-  height: 1250rpx;
+  height: 100vh;
 }
 
 .addlist {
-  z-index: 5;
+  z-index: 2;
 }
 
 .but-each {
-  margin: 0;
   padding: 0;
-  font-size: 28rpx;
-  text-align: left;
-  line-height: 1.5;
 }
 
+/* 添加的5个按钮 */
+
+/* 公共样式 */
 .but-font {
   left: 100rpx;
   height: 50rpx;
@@ -72,6 +71,7 @@ page {
   background-color: white;
 }
 
+/* 各自定位 */
 .button1 {
   bottom: 155rpx;
 }
@@ -92,20 +92,6 @@ page {
   bottom: 395rpx;
 }
 
-.add-img {
-  width: 100rpx;
-  height: 100rpx;
-  position: fixed;
-  bottom: 50rpx;
-  left: 130rpx;
-  z-index: 5;
-  border-radius: 50%;
-  border: 2px solid #fff;
-  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
-}
-
-
-
 .reports-header {
   display: flex;
   padding: 20rpx 0rpx;
@@ -115,48 +101,6 @@ page {
   font-family: PingFang-SC-Bold;
   font-weight: bold;
   letter-spacing: 2rpx;
-}
-
-.form-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-bottom: 100rpx;
-}
-
-.edit-form-box {
-  display: flex;
-  margin-bottom: 30rpx;
-  margin-left: 18rpx;
-}
-
-.form-upload {
-  height: 50rpx;
-  opacity: 0;
-}
-
-.form-inner {
-  display: block;
-}
-
-.input-all-width {
-  min-width: 90%;
-}
-
-.input-l-width {
-  width: 260rpx;
-  margin-right: 10rpx;
-}
-
-.force_text {
-  color: rgba(219, 44, 31, 1);
-  padding-left: 10rpx;
-}
-
-.picker {
-  font-size: 24rpx;
-  width: 450rpx;
-  height: 30rpx;
 }
 
 /*右侧展示层  */
@@ -184,22 +128,11 @@ page {
 }
 
 /*右侧遮罩层  */
-
-.page-mask {
-  z-index: 5;
-  position: fixed;
-  width: 100%;
-  height: 2000rpx;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  transition: transform 0.5s ease;
-}
-
 .open {
   width: 60%;
   background-color: var(--greyLight);
-  position: fixed;
+  z-index: 5;
+  position: absolute;
 }
 
 /*选项*/

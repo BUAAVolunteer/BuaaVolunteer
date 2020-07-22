@@ -41,7 +41,7 @@
     "color": "#7A7E83",
     "selectedColor": "#3cc51f",
     "borderStyle": "black",
-    "backgroundColor": "#ffffff",
+    "backgroundColor": "#b5e9f4",
     "list": [
       {
         "pagePath": "pages/Main/Main",
