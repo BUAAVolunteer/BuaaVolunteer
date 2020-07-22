@@ -77,19 +77,6 @@
   width: 90%;
 }
 
-/* 多选 */
-.checkbox {
-  flex-direction: column;
-}
-
-.checkbox-item {
-  margin-top: 10rpx;
-}
-
-.checkbox-item-text {
-  margin-left: 20rpx;
-}
-
 /* 阴影 */
 
 .page-mask {

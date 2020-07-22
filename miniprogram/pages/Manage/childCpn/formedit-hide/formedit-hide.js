@@ -43,7 +43,7 @@ Component({
   data: {
     option: "", // 展示的选项信息
     type:[
-      
+
     ]
   },
   behaviors: [computedBehavior],
