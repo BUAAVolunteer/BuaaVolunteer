@@ -156,6 +156,7 @@ Page({
       this.setData({
         ID,
       });
+      console.log(ID)
       formItem.type = this.data.formList.formInfo[ID].type;
       formItem.label = this.data.formList.formInfo[ID].label;
       formItem.describe = this.data.formList.formInfo[ID].text;
@@ -192,9 +193,21 @@ Page({
    */
 
   // 1.监听选项修改
-  optionChange(e) { 
+  optionChange(e) {
     // e.detail中存放子传父的数据
+    var that = this;
     console.log(e.detail);
+    let data = e.detail;
+    delete data.ID;
+    data.data = data.option;
+    delete data.option;
+    formLinkedList.update(ID, data)
+    let formInfo = formLinkedList.toList();
+    console.log(formInfo)
+    let addList = "formList.formInfo";
+    this.setData({
+      [addList]: formInfo
+    })
     // 这是原本的改变代码，仅供参考
     /*let addList = "formList.formInfo[" + ID + "].";
       addl = addList + "data";
@@ -233,6 +246,7 @@ Page({
     this.setData({
       [addList]: formInfo
     });
+    ID = ID - 1;
   },
 
   down: function (e) {
@@ -244,6 +258,7 @@ Page({
     this.setData({
       [addList]: formInfo
     });
+    ID = ID + 1;
   },
 
   copy: function (e) {
