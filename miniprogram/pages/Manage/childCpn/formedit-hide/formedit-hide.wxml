@@ -4,22 +4,25 @@
   <!-- 切换组件类型 -->
   <view class="header">
     <view class="header-title">切换组件类型</view>
-    <!-- <picker class="header-content" mode="selector" range="type" range-key="index" 
-      value="" 
-      disabled="false" bindchange="typeChange">
-      
-    </picker> -->
-    <view class="header-content">
-      <view class="title">{{formItem.type}}</view>
-      <image
-        class="header-content-image"
-        src="/assests/icons/formedit/down.png"
-        mode="widthFix"
-      ></image>
-    </view>
+    <picker
+      mode="selector"
+      range="{{typePicker}}"
+      range-key="{{'show'}}"
+      value="{{pickerValue}}"
+      bindchange="typeChange"
+    >
+      <view class="header-content">
+        <view class="title">{{typeValue}}</view>
+        <image
+          class="header-content-image"
+          src="/assests/icons/formedit/down.png"
+          mode="widthFix"
+        ></image>
+      </view>
+    </picker>
   </view>
   <!-- 输入标题 -->
-  <view wx:if="{{isTypeOne}}" class="edit">
+  <view wx:if="{{isTypeZero}}" class="edit">
     <view class="edit-title">标题</view>
     <view class="edit-content">
       <input
@@ -63,12 +66,7 @@
       value="{{option}}"
     />
   </view>
-  <block wx:v-if="{{isTypeThree}}">
-    <checkbox-single
-      checked="{{formItem.isOtherOption}}"
-      content="添加其他选项"
-      bind:checkboxChange="addOtherOption"
-    ></checkbox-single>
+  <block wx:if="{{isTypeThree}}">
     <checkbox-single
       checked="{{formItem.isNumber}}"
       content="自动加选项编号"
@@ -79,19 +77,18 @@
       content="该题存在备注"
       bind:checkboxChange="addNote"
     ></checkbox-single>
-  </block>
-
-  <!-- 备注 -->
-  <view class="edit">
-    <view class="edit-describe">
-      备注即现有时长表格式中的备注，选择该选项的志愿者将会获得此备注，为简化流程，建议只标注时间与通用的备注。
-      例：2020-01-01（全天）
+    <!-- 备注 -->
+    <view class="edit">
+      <view class="edit-describe">
+        备注即现有时长表格式中的备注，选择该选项的志愿者将会获得此备注，为简化流程，建议只标注时间与通用的备注。
+        例：2020-01-01（全天）
+      </view>
     </view>
-  </view>
-  <view wx:if="{{formItem.isNote}}" class="edit">
-    <view class="edit-title">备注</view>
-    <textarea auto-height="{{false}}" class="edit-textarea" bindinput="enter" value="{{note}}" />
-  </view>
+    <view wx:if="{{formItem.isNote}}" class="edit">
+      <view class="edit-title">备注</view>
+      <textarea auto-height="{{false}}" class="edit-textarea" bindinput="enter" value="{{note}}" />
+    </view>
+  </block>
 </scroll-view>
 <!-- 右侧阴影 -->
 <view class="page-mask" bindtap="offCanvas" />

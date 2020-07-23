@@ -19,13 +19,14 @@ Component({
           value: "",
         },
         isForce: false, // 是否必选
+        isNumber: false, // 是否自动加编号
         isLimit: false, // 是否限额
         isDuration: false, // 是否有时长
         isNote: false, // 是否有备注
         option: [
           // 选项列表
           {
-            id: 0,
+            ID: 0,
             checked: false,
             limit: 0,
             name: "",
@@ -42,9 +43,28 @@ Component({
    */
   data: {
     option: "", // 展示的选项信息
-    type:[
-
-    ]
+    typePicker: [ // 展示和切换的选项类型
+      {
+        type: "text",
+        show: "文本输入",
+      },
+      {
+        type: "radio",
+        show: "单选",
+      },
+      {
+        type: "checkbox",
+        show: "多选",
+      },
+      {
+        type: "div",
+        show: "分割线",
+      },
+      {
+        type: "describe",
+        show: "文本描述",
+      },
+    ],
   },
   behaviors: [computedBehavior],
   /**
@@ -91,9 +111,16 @@ Component({
   computed: {
     // 根据组件类型，展示不同的数据
     // 由上至下，可展示的越来越多
-
+    isTypeZero(data) {
+      return (
+        data.formItem.type == "text" ||
+        data.formItem.type == "radio" ||
+        data.formItem.type == "checkbox" ||
+        data.formItem.type == "title" ||
+        data.formItem.type == "describe"
+      );
+    },
     isTypeOne(data) {
-      console.log(data);
       return (
         data.formItem.type == "text" ||
         data.formItem.type == "radio" ||
@@ -111,11 +138,46 @@ Component({
     isTypeThree(data) {
       return data.formItem.type == "radio" || data.formItem.type == "checkbox";
     },
+    // picker的选中值
+    pickerValue(data) {
+      switch (data.formItem.type) {
+        case "text":
+          return 0;
+        case "radio":
+          return 1;
+        case "checkbox":
+          return 2;
+        case "div":
+          return 3;
+        case "describe":
+          return 4;
+      }
+    },
+    typeValue(data) {
+      switch (data.formItem.type) {
+        case "text":
+          return "文本输入";
+        case "radio":
+          return "单选";
+        case "checkbox":
+          return "多选";
+        case "div":
+          return "分割线";
+        case "describe":
+          return "文本描述";
+      }
+    },
+    scrollHeight(data) {
+      return wx.getSystemInfoSync().windowHeight;
+    }
   },
   /**
    * 组件的方法列表
    */
   methods: {
+    offCanvas() {
+      this.triggerEvent("finish");
+    },
     // 选项输入
     enterOption(e) {
       //console.log(e.detail.value)
@@ -175,8 +237,17 @@ Component({
         this._trigger();
       }
     },
-    _trigger() {
-      this.triggerEvent("optionChange", this.data.formItem);
+    typeChange(e) {
+      // console.log('选中数据',parseInt(e.detail.value))
+      console.log(
+        "赋值数据",
+        this.data.typePicker[parseInt(e.detail.value)].type
+      );
+      let type = this.data.typePicker[parseInt(e.detail.value)].type;
+      this.setData({
+        "formItem.type": type,
+      });
+      this._trigger();
     },
     // 其他设定
     enterInfo: function (e) {
@@ -264,6 +335,9 @@ Component({
         });
       }
       this._trigger();
+    },
+    _trigger() {
+      this.triggerEvent("optionChange", this.data.formItem);
     },
   },
 });

@@ -1,44 +1,41 @@
 <!-- pages/forms/forms.wxml -->
-<scroll-view scroll-y="{{true}}" class="reports-container">
-  <view class="{{open ? 'open' : 'page-state-hide'}}">
-    <formedit-hide formItem="{{formItem}}" bind:optionChange="optionChange"></formedit-hide>
-  </view>
-  <!--中心组件层-->
-  <view class="page-top {{open ? 'page-state' : ''}}">
-    <!--表单标题-->
-    <view id="-1" class="reports-header" bindtap="offCanvas">{{formList.fieldName}}</view>
-    <!--表单主体-->
-    <view class="reports-form">
-      <block wx:for="{{formList.formInfo}}" wx:for-index="idx" wx:for-item="items" wx:key="id">
-        <button
-          id="{{items.ID}}"
-          class="but-each"
-          bind:longpress="buttonOpen"
-          bind:tap="offCanvas"
-        >
-          <!-- 输入框组件 -->
-          <block wx:if="{{items.type=='text'}}">
-            <text-input id="{{items.ID}}" forminfo="{{items}}" bindinput="childChange" />
-          </block>
-          <!-- 描述文本组件 -->
-          <block wx:if="{{items.type=='describe'}}">
-            <text-describe id="{{items.ID}}" forminfo="{{items}}" />
-          </block>
-          <!-- 单选组件 -->
-          <block wx:if="{{items.type=='radio'}}">
-            <text-radio id="{{items.ID}}" forminfo="{{items}}" bindradio="childChange" />
-          </block>
-          <!-- 多选组件 -->
-          <block wx:if="{{items.type=='checkbox'}}">
-            <text-checkbox id="{{items.ID}}" forminfo="{{items}}" bindcheckbox="childChange" />
-          </block>
-          <!-- 分割线组件 -->
-          <block wx:if="{{items.type=='div'}}">
-            <text-div id="{{items.ID}}" forminfo="{{items}}" />
-          </block>
-        </button>
-      </block>
-    </view>
+<!-- 左边隐藏层 -->
+<formedit-hide
+  class="{{open ? 'open' : 'page-state-hide'}}"
+  formItem="{{formItem}}"
+  bind:optionChange="optionChange"
+  bind:finish="offCanvas"
+></formedit-hide>
+<!--中心组件层-->
+<scroll-view scroll-y="{{true}}" class="page-top {{open ? 'page-state' : ''}}">
+  <!--表单标题-->
+  <view id="-1" class="reports-header" bindtap="offCanvas">{{formList.fieldName}}</view>
+  <!--表单主体-->
+  <view class="reports-form">
+    <block wx:for="{{formList.formInfo}}" wx:for-index="idx" wx:for-item="items" wx:key="id">
+      <button id="{{items.ID}}" class="but-each" bind:longpress="buttonOpen" bind:tap="offCanvas">
+        <!-- 输入框组件 -->
+        <block wx:if="{{items.type=='text'}}">
+          <text-input id="{{items.ID}}" forminfo="{{items}}" bindinput="childChange" />
+        </block>
+        <!-- 描述文本组件 -->
+        <block wx:if="{{items.type=='describe'}}">
+          <text-describe id="{{items.ID}}" forminfo="{{items}}" />
+        </block>
+        <!-- 单选组件 -->
+        <block wx:if="{{items.type=='radio'}}">
+          <text-radio id="{{items.ID}}" forminfo="{{items}}" bindradio="childChange" />
+        </block>
+        <!-- 多选组件 -->
+        <block wx:if="{{items.type=='checkbox'}}">
+          <text-checkbox id="{{items.ID}}" forminfo="{{items}}" bindcheckbox="childChange" />
+        </block>
+        <!-- 分割线组件 -->
+        <block wx:if="{{items.type=='div'}}">
+          <text-div id="{{items.ID}}" forminfo="{{items}}" />
+        </block>
+      </button>
+    </block>
   </view>
 </scroll-view>
 
@@ -49,7 +46,7 @@
   <formedit-icon iconSrc="/assests/icons/formedit/submit.png" bindtap="submit"></formedit-icon>
 </view>
 <!--悬浮按钮第二层-->
-<view class="mask-bottom {{button ? 'mask-bottom-show' : 'page-state-hide'}}" bind:tap="buttonClose">
+<view class="mask-bottom {{button ? 'mask-bottom-show' : 'page-state-hide'}}" bindtap="buttonClose">
 </view>
 <view class="footer button-hide {{button ? 'button-common-show' : ''}}">
   <formedit-icon iconSrc="/assests/icons/formedit/up.png" bindtap="up"></formedit-icon>

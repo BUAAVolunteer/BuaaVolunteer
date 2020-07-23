@@ -1,5 +1,5 @@
 <!--描述文本-->
-<view wx:if="{{forminfo.text.length>0}}" class="form-describe-middle">
-	{{forminfo.text}}
+<view wx:if="{{forminfo.label.length>0}}" class="form-describe-middle">
+	{{forminfo.label}}
 </view>
 

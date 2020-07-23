@@ -5,5 +5,4 @@
     margin: 20rpx;
     font-size: 20rpx;
     font-weight: lighter;
-    width: 90%;
 }
