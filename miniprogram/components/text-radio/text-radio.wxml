@@ -1,24 +1,24 @@
 <!--components/text-time/text-time.wxml-->
 <view class="reports-form-box form-inner">
   <view class="form-inputname">
-    {{forminfo.label}}
-    <text wx:if="{{forminfo.force}}" class="force-text">*</text>
+    {{formInfo.label}}
+    <text wx:if="{{formInfo.isForce}}" class="force-text">*</text>
   </view>
-  <view wx:if="{{forminfo.text.length>0}}" class="form-describe mt-10">{{forminfo.text}}</view>
+  <view wx:if="{{formInfo.text.length>0}}" class="form-describe mt-10">{{formInfo.text}}</view>
   <radio-group bindchange="checkboxChange">
     <!-- 选项 -->
     <label class="radio-group">
-      <block wx:for="{{forminfo.data}}">
+      <block wx:for="{{formInfo.option}}">
         <radio
-          disabled="{{forminfo.limit && item.limit <= 0}}"
-          class="{{(forminfo.limit&&item.limit<=0)?'grey':'blue'}}"
+          disabled="{{formInfo.isLimit && item.limit <= 0}}"
+          class="{{(formInfo.isLimit&&item.limit<=0)?'grey':'blue'}}"
           value="{{item.name}},{{item.id}},{{item.duration}}"
           wx:key="id"
         >
           <view class="radio-item">
             {{item.name}}
-            <text wx:if="{{forminfo.limit}}" class="form-describe ml-20">剩余{{item.limit}}</text>
-            <text wx:if="{{forminfo.duration}}" class="form-describe ml-20">时长{{item.duration}}</text>
+            <text wx:if="{{formInfo.isLimit}}" class="form-describe ml-20">剩余{{item.limit}}</text>
+            <text wx:if="{{formInfo.isDuration}}" class="form-describe ml-20">时长{{item.duration}}</text>
           </view>
         </radio>
       </block>

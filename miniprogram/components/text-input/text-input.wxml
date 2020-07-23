@@ -1,10 +1,10 @@
 <!--components/my-form/my-input.wxml-->
 <view class="reports-form-box">
   <view class="form-inputname">
-    {{forminfo.label}}
-    <text wx:if="{{forminfo.force}}" class="force-text">*</text>
+    {{formInfo.label}}
+    <text wx:if="{{formInfo.force}}" class="force-text">*</text>
   </view>
-  <view wx:if="{{forminfo.text.length>0}}" class="form-describe">{{forminfo.text}}</view>
+  <view wx:if="{{formInfo.text.length>0}}" class="form-describe">{{formInfo.text}}</view>
   <view class="form-input" hover-class="none" hover-stop-propagation="false">
     <input class="form-input-text" bindblur="enterValue" />
   </view>

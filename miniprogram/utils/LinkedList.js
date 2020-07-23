@@ -186,7 +186,7 @@ function LinkedList() {
             console.log("不正确的复制位置：" + position + "；链表总长度：" + this.length)
         }else{
             let nowData = this.get(position)
-            this.insert(position+1,nowData)
+            this.insert(position + 1,nowData)
         }
     }
 }

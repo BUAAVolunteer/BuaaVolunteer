@@ -4,7 +4,7 @@ Component({
    * 组件的初始数据
    */
   properties: {
-    forminfo: {
+    formInfo: {
       type: Object,
       value: {},
     },
@@ -16,7 +16,7 @@ Component({
     enterValue: function (e) {
       console.log(e.detail.value);
       let input_text = e.detail.value;
-      let ID = parseInt(this.properties.forminfo.id.substr(1));
+      let ID = parseInt(this.properties.formInfo.ID);
       //  子传父事件，将输入数据回传
       this.triggerEvent("input", {
         type: "input",

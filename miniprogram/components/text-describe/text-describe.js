@@ -4,7 +4,7 @@ Component({
    * 组件的初始数据
    */
   properties: {
-    forminfo: {
+    formInfo: {
       type: Object,
       value: {},
     },

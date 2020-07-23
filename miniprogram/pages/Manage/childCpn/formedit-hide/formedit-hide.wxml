@@ -48,7 +48,7 @@
   <!-- 组件是否必填 -->
   <checkbox-single
     wx:if="{{isTypeTwo}}"
-    checked="{{formItem.force}}"
+    checked="{{formItem.isForce}}"
     content="这是个必填项"
     bind:checkboxChange="addForce"
   ></checkbox-single>

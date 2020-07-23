@@ -43,6 +43,7 @@ Component({
    */
   data: {
     option: "", // 展示的选项信息
+    note: "", //展示的备注信息
     typePicker: [ // 展示和切换的选项类型
       {
         type: "text",
@@ -84,6 +85,7 @@ Component({
     "formItem.option"() {
       // console.log(this.properties.formItem.option)
       let that = this;
+      //console.log(that.properties.formItem)
       let option = that.properties.formItem.option
         .reduce(function (preValue, n) {
           //preValue代表当前累计值，n为正要处理的数组元素
@@ -95,6 +97,18 @@ Component({
           return preValue;
         }, "")
         .slice(0, -1);
+      //console.log(option)
+      let note = "";
+      if (that.properties.formItem.isNote) {
+        note = that.properties.formItem.option
+        .reduce(function (preValue, n) {
+          //preValue代表当前累计值，n为正要处理的数组元素
+          preValue += n.detail;
+          preValue += "\n";
+          return preValue;
+        }, "")
+        .slice(0, -1);
+      }
       this.setData({
         option,
       });

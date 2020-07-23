@@ -45,8 +45,9 @@ Component({
    * 生命周期函数--监听页面加载
    */
   lifetimes: {
-    created() {
+    attached() {
       let title = this.properties.title
+      //console.log(title)
       wx.showLoading({
         title: "加载中",
       });
@@ -111,6 +112,42 @@ Component({
               delete formData.formInfo[i].id;
             }
           }
+          if ("data" in formData.formInfo[0]) {
+            for (let i = 0; i < formLength; i++) {
+              formData.formInfo[i].option = formData.formInfo[i].data;
+              delete formData.formInfo[i].data;
+            }
+          }
+          if ("text" in formData.formInfo[0]) {
+            for (let i = 0; i < formLength; i++) {
+              formData.formInfo[i].describe = formData.formInfo[i].text;
+              delete formData.formInfo[i].text;
+            }
+          }
+          if ("force" in formData.formInfo[0]) {
+            for (let i = 0; i < formLength; i++) {
+              formData.formInfo[i].isForce = formData.formInfo[i].force;
+              delete formData.formInfo[i].force;
+            }
+          }
+          if ("limit" in formData.formInfo[0]) {
+            for (let i = 0; i < formLength; i++) {
+              formData.formInfo[i].isLimit = formData.formInfo[i].limit;
+              delete formData.formInfo[i].limit;
+            }
+          }
+          if ("duration" in formData.formInfo[0]) {
+            for (let i = 0; i < formLength; i++) {
+              formData.formInfo[i].isDuration = formData.formInfo[i].duration;
+              delete formData.formInfo[i].duration;
+            }
+          }
+          if ("detail" in formData.formInfo[0]) {
+            for (let i = 0; i < formLength; i++) {
+              formData.formInfo[i].isNote = formData.formInfo[i].detail;
+              delete formData.formInfo[i].detail;
+            }
+          }
           formLinkedList = Util.toLinkedList(formData.formInfo);
           formData.formInfo = formLinkedList.toList();
           cnt = formLinkedList.length;
@@ -168,6 +205,8 @@ Component({
           ID,
         });
         console.log(ID);
+        formItem = this.data.formList.formInfo[ID];
+        /*
         formItem.type = this.data.formList.formInfo[ID].type;
         formItem.label = this.data.formList.formInfo[ID].label;
         formItem.describe = this.data.formList.formInfo[ID].text;
@@ -175,13 +214,14 @@ Component({
         formItem.isLimit = this.data.formList.formInfo[ID].limit;
         formItem.isDuration = this.data.formList.formInfo[ID].duration;
         formItem.isNote = this.data.formList.formInfo[ID].detail;
-        formItem.option = this.data.formList.formInfo[ID].data;
+        formItem.option = this.data.formList.formInfo[ID].option;
+        */
         this.setData({
           formItem,
         });
         if (formItem.type == "radio" || formItem.type == "checkbox") {
           //拼接两个textarea框
-          let data = this.data.formList.formInfo[ID].data;
+          let data = this.data.formList.formInfo[ID].option;
           if (formItem.detail) {
             let textd = data
               .reduce(function (preValue, n) {
@@ -210,8 +250,6 @@ Component({
       console.log(e.detail);
       let data = e.detail;
       delete data.ID;
-      data.data = data.option;
-      delete data.option;
       formLinkedList.update(ID, data);
       let formInfo = formLinkedList.toList();
       console.log(formInfo);
@@ -281,6 +319,7 @@ Component({
       this.setData({
         [addList]: formInfo,
       });
+      cnt = formLinkedList.length;
     },
 
     delete: function (e) {
@@ -305,7 +344,7 @@ Component({
         type: "",
         text: "",
         placeholder: "",
-        data: [],
+        option: [],
         role: {
           type: "",
           value: "",
@@ -342,7 +381,7 @@ Component({
             name: "选项二",
           },
         ];
-        addItem.data = data;
+        addItem.option = data;
         addItem.label = addItem.type == "radio" ? "单选组件" : "多选组件";
       } else if (addItem.type == "describe") {
         addItem.text = "这是一段文本描述";
@@ -388,23 +427,20 @@ Component({
               title: "加载中",
             });
             let inf = that.data.formList.formInfo;
-            for (let i = 0; i < cnt; i++) {
-              inf[i].id = "t" + inf[i].id;
-            }
-            var inlist = [["姓名", "手机号", "学号", "QQ号", "校区"]];
+            var initList = [["姓名", "手机号", "学号", "QQ号", "校区"]];
             for (let i = 0; i < cnt; i++) {
               if (
                 inf[i].type === "text" ||
                 inf[i].type === "radio" ||
                 inf[i].type === "checkbox"
               ) {
-                inlist[0].push(inf[i].label);
+                initList[0].push(inf[i].label);
               }
             }
-            inlist[0].push("openid");
-            inlist[0].push("志愿时长");
-            inlist[0].push("备注");
-            //console.log(inlist)
+            initList[0].push("openid");
+            initList[0].push("志愿时长");
+            initList[0].push("备注");
+            //console.log(initList)
             wx.cloud.callFunction({
               name: "uploadform",
               data: {
@@ -418,7 +454,7 @@ Component({
                   name: "InitSignUp",
                   data: {
                     title: that.data.title,
-                    list: inlist,
+                    list: initList,
                   },
                   success: function (res) {
                     wx.hideLoading();
@@ -428,7 +464,7 @@ Component({
                       showCancel: false,
                       success: function (res) {
                         wx.redirectTo({
-                          url: "../list/list",
+                          url: "../Manage",
                         });
                       },
                     });
