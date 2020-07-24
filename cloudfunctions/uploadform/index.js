@@ -1,7 +1,11 @@
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
 
-cloud.init()
+cloud.init({
+	env: 'volunteer-platform-1v92i',
+  	// env: 'buaalx-w5aor',
+	traceUser: true,
+})
 
 const db = cloud.database();
 const _ = db.command;
@@ -31,6 +35,18 @@ exports.main = async (event, context) => {
 					over: 1
 				}
 			})
+		})
+		.then(() =>{
+			return db.collection('signUp').where({
+				title: event.title
+			}).update({
+				data:{
+					list: event.list
+				}
+			})
+		})
+		.catch(err =>{
+			reject(err)
 		})
 	} catch(e) {
 		console.error(e)

@@ -194,6 +194,7 @@ Component({
         open: !this.data.open,
       });
       if (e.currentTarget.id == -1) {
+        ID = -1;
         formItem.ID = parseInt(e.currentTarget.id);
         formItem.type = "title";
         formItem.label = this.data.formList.fieldName;
@@ -243,15 +244,23 @@ Component({
       // e.detail中存放子传父的数据
       var that = this;
       console.log(e.detail);
+      console.log(ID)
       let data = e.detail;
-      delete data.ID;
-      formLinkedList.update(ID, data);
-      let formInfo = formLinkedList.toList();
-      console.log(formInfo);
-      let addList = "formList.formInfo";
-      this.setData({
-        [addList]: formInfo,
-      });
+      if (ID == -1) {
+        let addList = "formList.fieldName";
+        that.setData({
+          [addList]: data.label,
+        });
+      }else{
+        delete data.ID;
+        formLinkedList.update(ID, data);
+        let formInfo = formLinkedList.toList();
+        console.log(formInfo);
+        let addList = "formList.formInfo";
+        that.setData({
+          [addList]: formInfo,
+        });
+      }
     },
 
     /*
@@ -412,43 +421,36 @@ Component({
             initList[0].push("openid");
             initList[0].push("志愿时长");
             initList[0].push("备注");
-            //console.log(initList)
+            console.log(initList)
             wx.cloud.callFunction({
               name: "uploadform",
               data: {
                 formInfo: inf,
                 title: that.data.title,
                 fieldName: that.data.formList.fieldName,
+                list: initList
               },
               success: function (res) {
-                //console.log(res)
-                wx.cloud.callFunction({
-                  name: "InitSignUp",
-                  data: {
-                    title: that.data.title,
-                    list: initList,
-                  },
+                console.log(res)
+                wx.hideLoading();
+                wx.showModal({
+                  title: "发布成功",
+                  content: "成功发布表单",
+                  showCancel: false,
                   success: function (res) {
-                    wx.hideLoading();
-                    wx.showModal({
-                      title: "发布成功",
-                      content: "成功发布表单",
-                      showCancel: false,
-                      success: function (res) {
-                        wx.redirectTo({
-                          url: "../Manage",
-                        });
-                      },
+                    wx.redirectTo({
+                      url: "../Manage",
                     });
                   },
-                  fail: function (res) {
-                    wx.hideLoading();
-                    wx.showModal({
-                      title: "发布失败",
-                      content: "数据库初始化失败",
-                      showCancel: false,
-                    });
-                  },
+                });
+              },
+              fail: function (res) {
+                console.log(res)
+                wx.hideLoading();
+                wx.showModal({
+                  title: "发布失败",
+                  content: "数据库初始化失败",
+                  showCancel: false,
                 });
               },
             });
