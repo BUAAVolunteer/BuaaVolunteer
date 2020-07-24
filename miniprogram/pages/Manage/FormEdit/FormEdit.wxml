@@ -7,7 +7,7 @@
   bind:finish="offCanvas"
 ></formedit-hide>
 <!--中心组件层-->
-<scroll-view scroll-y="{{true}}" class="page-top {{open ? 'page-state' : ''}}">
+<scroll-view scroll-y="{{true}}" class="page-top {{open ? 'page-state' : ''}}" style="height:{{scrollHeight}}">
   <!--表单标题-->
   <view id="-1" class="reports-header" bindtap="offCanvas">{{formList.fieldName}}</view>
   <!--表单主体-->

@@ -42,9 +42,8 @@ Component({
    * 组件的初始数据
    */
   data: {
-    option: "", // 展示的选项信息
-    note: "", //展示的备注信息
-    typePicker: [ // 展示和切换的选项类型
+    typePicker: [
+      // 展示和切换的选项类型
       {
         type: "text",
         show: "文本输入",
@@ -79,47 +78,6 @@ Component({
     },
   },
   /**
-   * 监听事件，用于同步数据
-   */
-  observers: {
-    "formItem.option"() {
-      // console.log(this.properties.formItem.option)
-      let that = this;
-      //console.log(that.properties.formItem)
-      let option = that.properties.formItem.option
-        .reduce(function (preValue, n) {
-          //preValue代表当前累计值，n为正要处理的数组元素
-          preValue += n.name;
-          //不会出现有duration无limit情况，两种同时出现按顺序拼接
-          if (that.properties.formItem.isLimit) preValue += " " + n.limit;
-          if (that.properties.formItem.isDuration) preValue += " " + n.duration;
-          preValue += "\n";
-          return preValue;
-        }, "")
-        .slice(0, -1);
-      //console.log(option)
-      let note = "";
-      if (that.properties.formItem.isNote) {
-        note = that.properties.formItem.option
-        .reduce(function (preValue, n) {
-          //preValue代表当前累计值，n为正要处理的数组元素
-          preValue += n.detail;
-          preValue += "\n";
-          return preValue;
-        }, "")
-        .slice(0, -1);
-      }
-      this.setData({
-        option,
-      });
-    },
-    formItem() {
-      this.setData({
-        isNote: this.properties.formItem.isNote,
-      });
-    },
-  },
-  /**
    * 组件的计算函数
    */
   computed: {
@@ -139,7 +97,8 @@ Component({
         data.formItem.type == "text" ||
         data.formItem.type == "radio" ||
         data.formItem.type == "checkbox" ||
-        data.formItem.type == "title"
+        data.formItem.type == "describe" ||
+        data.formItem.type == "div"
       );
     },
     isTypeTwo(data) {
@@ -181,9 +140,29 @@ Component({
           return "文本描述";
       }
     },
-    scrollHeight(data) {
-      return wx.getSystemInfoSync().windowHeight;
-    }
+    note(data) {
+      return data.formItem.option
+        .reduce((preValue, n) => {
+          return preValue + n.detail + "\n";
+        }, "")
+        .slice(0, -1);
+    },
+    option(data) {
+      return data.formItem.option
+        .reduce(function (preValue, n) {
+          //preValue代表当前累计值，n为正要处理的数组元素
+          preValue += n.name;
+          //不会出现有duration无limit情况，两种同时出现按顺序拼接
+          if (data.formItem.isLimit) preValue += " " + n.limit;
+          if (data.formItem.isDuration) preValue += " " + n.duration;
+          preValue += "\n";
+          return preValue;
+        }, "")
+        .slice(0, -1);
+    },
+    scrollHeight() {
+      return wx.getSystemInfoSync().windowHeight + 'px';
+    },
   },
   /**
    * 组件的方法列表
@@ -251,6 +230,18 @@ Component({
         this._trigger();
       }
     },
+    // 备注输入
+    enterNote(e) {
+      let noteDetail = e.detail.value.split("\n");
+      let option = this.data.formItem.option;
+      for (let i = 0; i < option.length; i++) {
+        option[i].detail = noteDetail[i];
+      }
+      this.setData({
+        "formItem.option": option,
+      });
+    },
+    // 组件类型更改
     typeChange(e) {
       // console.log('选中数据',parseInt(e.detail.value))
       console.log(
@@ -334,14 +325,19 @@ Component({
       // 添加备注
       let checked = e.detail;
       if (checked) {
-        let note = this.data.formItem.option
-          .reduce((preValue, n) => {
-            return preValue + n.name + "\n";
-          }, "")
-          .slice(0, -1);
+        let option = this.data.formItem.option.map((n) => {
+          n.detail = n.name;
+          return n;
+        });
+        // let note = option
+        //   .reduce((preValue, n) => {
+        //     return preValue + n.detail + "\n";
+        //   }, "")
+        //   .slice(0, -1);
         this.setData({
           "formItem.isNote": true,
-          note,
+          "formItem.option": option,
+          // note,
         });
       } else {
         this.setData({

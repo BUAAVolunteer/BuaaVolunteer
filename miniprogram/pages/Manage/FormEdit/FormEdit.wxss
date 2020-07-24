@@ -110,7 +110,6 @@ page {
   top: 0;
   left: 0;
   width: 750rpx;
-  height: 100vh;
   background-color: white;
   transition: transform 0.5s ease;
 }

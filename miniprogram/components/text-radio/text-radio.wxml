@@ -4,7 +4,7 @@
     {{formInfo.label}}
     <text wx:if="{{formInfo.isForce}}" class="force-text">*</text>
   </view>
-  <view wx:if="{{formInfo.text.length>0}}" class="form-describe mt-10">{{formInfo.text}}</view>
+  <view wx:if="{{formInfo.describe.length>0}}" class="form-describe mt-10">{{formInfo.describe}}</view>
   <radio-group bindchange="checkboxChange">
     <!-- 选项 -->
     <label class="radio-group">

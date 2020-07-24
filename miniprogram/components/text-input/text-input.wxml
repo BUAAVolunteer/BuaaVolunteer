@@ -2,9 +2,9 @@
 <view class="reports-form-box">
   <view class="form-inputname">
     {{formInfo.label}}
-    <text wx:if="{{formInfo.force}}" class="force-text">*</text>
+    <text wx:if="{{formInfo.isForce}}" class="force-text">*</text>
   </view>
-  <view wx:if="{{formInfo.text.length>0}}" class="form-describe">{{formInfo.text}}</view>
+  <view wx:if="{{formInfo.describe.length>0}}" class="form-describe">{{formInfo.describe}}</view>
   <view class="form-input" hover-class="none" hover-stop-propagation="false">
     <input class="form-input-text" bindblur="enterValue" />
   </view>

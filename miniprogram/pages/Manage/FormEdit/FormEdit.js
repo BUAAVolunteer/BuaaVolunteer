@@ -1,18 +1,18 @@
 // pages/edit/edit.js
 import Util from "../../../utils/util";
+const computedBehavior = require("miniprogram-computed");
 const db = wx.cloud.database();
 const _ = db.command;
 const app = getApp();
-var formConfig;
 var cnt = 0; //index plus with item grow
-var ID, IDitem; //index of change item
+var ID; //index of change item
 var formLinkedList; //表单对应链表
 Component({
-  properties:{
-    title:{
-      type:String,
-      value: ''
-    }
+  properties: {
+    title: {
+      type: String,
+      value: "",
+    },
   },
   /**
    * 页面的初始数据
@@ -40,13 +40,18 @@ Component({
     textd: "",
     dat: "",
   },
-
+  behaviors: [computedBehavior],
+  computed: {
+    scrollHeight() {
+      return wx.getSystemInfoSync().windowHeight - 82 + "px";
+    },
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   lifetimes: {
     attached() {
-      let title = this.properties.title
+      let title = this.properties.title;
       //console.log(title)
       wx.showLoading({
         title: "加载中",
@@ -185,19 +190,19 @@ Component({
         detail: "",
         page: 0,
       };
+      this.setData({
+        open: !this.data.open,
+      });
       if (e.currentTarget.id == -1) {
         formItem.ID = parseInt(e.currentTarget.id);
         formItem.type = "title";
         formItem.label = this.data.formList.fieldName;
-        formItem.open = true;
+        formItem.option = [];
         this.setData({
           formItem,
         });
         return;
       }
-      this.setData({
-        open: !this.data.open,
-      });
       //console.log(this.data.formList.formInfo)
       if (this.data.open) {
         ID = parseInt(e.currentTarget.id);
@@ -206,16 +211,6 @@ Component({
         });
         console.log(ID);
         formItem = this.data.formList.formInfo[ID];
-        /*
-        formItem.type = this.data.formList.formInfo[ID].type;
-        formItem.label = this.data.formList.formInfo[ID].label;
-        formItem.describe = this.data.formList.formInfo[ID].text;
-        formItem.isForce = this.data.formList.formInfo[ID].force;
-        formItem.isLimit = this.data.formList.formInfo[ID].limit;
-        formItem.isDuration = this.data.formList.formInfo[ID].duration;
-        formItem.isNote = this.data.formList.formInfo[ID].detail;
-        formItem.option = this.data.formList.formInfo[ID].option;
-        */
         this.setData({
           formItem,
         });
@@ -257,30 +252,6 @@ Component({
       this.setData({
         [addList]: formInfo,
       });
-      // 这是原本的改变代码，仅供参考
-      /*let addList = "formList.formInfo[" + ID + "].";
-      addl = addList + "data";
-      this.setData({
-        [addl]: data,
-      });
-      let addl = addList + "limit";
-      if (flagl)
-        this.setData({
-          [addl]: true,
-        });
-      else
-        this.setData({
-          [addl]: false,
-        });
-      addl = addList + "duration";
-      if (flagd)
-        this.setData({
-          [addl]: true,
-        });
-      else
-        this.setData({
-          [addl]: false,
-        }); */
     },
 
     /*
@@ -340,20 +311,21 @@ Component({
     addAll: function (e) {
       //console.log(e.currentTarget.id);
       var addItem = {
-        label: "",
-        type: "",
-        text: "",
-        placeholder: "",
-        option: [],
+        type: "", // 类型
+        label: "", // 标题
+        describe: "", // 描述
         role: {
-          type: "",
+          // 选项的合法性检验
+          msg: "", // 选项违背type原则时，弹出的提示消息
+          type: "", // 选项类型，一般为notnull表示非空
           value: "",
-          msg: "",
         },
-        force: false,
-        limit: false,
-        duration: false,
-        detail: false,
+        isForce: false, // 是否必选
+        isNumber: false, // 是否自动加编号
+        isLimit: false, // 是否限额
+        isDuration: false, // 是否有时长
+        isNote: false, // 是否有备注
+        option: [], // 选项列表
       };
       //添加种类
       addItem.type = e.currentTarget.id;
@@ -363,7 +335,7 @@ Component({
       } else if (addItem.type == "radio" || addItem.type == "checkbox") {
         var data = [
           {
-            id: 0,
+            ID: 0,
             checked: false,
             limit: 0,
             duration: 0,
@@ -372,7 +344,7 @@ Component({
             name: "选项一",
           },
           {
-            id: 1,
+            ID: 1,
             checked: false,
             limit: 0,
             duration: 0,
@@ -384,7 +356,7 @@ Component({
         addItem.option = data;
         addItem.label = addItem.type == "radio" ? "单选组件" : "多选组件";
       } else if (addItem.type == "describe") {
-        addItem.text = "这是一段文本描述";
+        addItem.label = "这是一段文本描述";
       }
       //加入现有队列，concat为拼接方法
       formLinkedList.append(addItem);

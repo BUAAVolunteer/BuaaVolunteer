@@ -1,8 +1,8 @@
 <!-- pages/Manage/childCpn/formedit-hide/formedit-hide.wxml -->
 <!-- 左侧展开层-首页 -->
-<scroll-view class="wrapper" scroll-y="{{true}}">
+<scroll-view class="wrapper" style="height:{{scrollHeight}}" scroll-y="{{true}}">
   <!-- 切换组件类型 -->
-  <view class="header">
+  <view wx:if="{{isTypeOne}}" class="header">
     <view class="header-title">切换组件类型</view>
     <picker
       mode="selector"
@@ -34,7 +34,7 @@
     </view>
   </view>
   <!-- 描述 -->
-  <view wx:if="{{isTypeOne}}" class="edit">
+  <view wx:if="{{isTypeTwo}}" class="edit">
     <view class="edit-title">描述</view>
     <view class="edit-content">
       <input
@@ -86,7 +86,7 @@
     </view>
     <view wx:if="{{formItem.isNote}}" class="edit">
       <view class="edit-title">备注</view>
-      <textarea auto-height="{{false}}" class="edit-textarea" bindinput="enter" value="{{note}}" />
+      <textarea auto-height="{{false}}" class="edit-textarea" bindinput="enterNote" value="{{note}}" />
     </view>
   </block>
 </scroll-view>
