@@ -177,6 +177,7 @@ Component({
       if (e.detail.value == "") return;
       let chooseDetail = e.detail.value.split("\n");
       let pattern = /(( +)\d+)/g; //用于全局匹配数字
+      let pattern1 = /^([\u3002\uff1b\uff0c\uff1a\u201c\u201d\uff08\uff09\u3001\uff1f\u300a\u300b\u4e00-\u9fa5a-zA-Z0-9]+)( +)?$/; //用于匹配包含选项名和限额的情况
       let pattern2 = /^([\u3002\uff1b\uff0c\uff1a\u201c\u201d\uff08\uff09\u3001\uff1f\u300a\u300b\u4e00-\u9fa5a-zA-Z0-9]+)( +)(\d+)( +)?$/; //用于匹配包含选项名和限额的情况
       let pattern3 = /^([\u3002\uff1b\uff0c\uff1a\u201c\u201d\uff08\uff09\u3001\uff1f\u300a\u300b\u4e00-\u9fa5a-zA-Z0-9]+)( +)(\d+)( +)(\d+)( +)?$/; //用于匹配包含选项名，限额和时长的情况
       let ID = 0,
@@ -196,7 +197,8 @@ Component({
         };
         ID += 1;
         dataitem.name = n.split(" ")[0];
-        if (pattern2.test(n)) {
+        if (pattern1.test(n)){}
+        else if (pattern2.test(n)) {
           dataitem.limit = parseInt(n.match(pattern)[0].replace(" ", ""));
           isLimit = 1;
         } else if (pattern3.test(n)) {
