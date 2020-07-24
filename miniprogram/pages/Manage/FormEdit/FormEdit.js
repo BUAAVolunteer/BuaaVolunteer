@@ -43,6 +43,7 @@ Component({
   behaviors: [computedBehavior],
   computed: {
     scrollHeight() {
+      // 减去的82px是底部按钮高度
       return wx.getSystemInfoSync().windowHeight - 82 + "px";
     },
   },
@@ -173,6 +174,7 @@ Component({
         button: true,
       });
     },
+    // 关闭底部按钮
     buttonClose() {
       this.setData({
         button: false,
@@ -244,14 +246,14 @@ Component({
       // e.detail中存放子传父的数据
       var that = this;
       console.log(e.detail);
-      console.log(ID)
+      console.log(ID);
       let data = e.detail;
       if (ID == -1) {
         let addList = "formList.fieldName";
         that.setData({
           [addList]: data.label,
         });
-      }else{
+      } else {
         delete data.ID;
         formLinkedList.update(ID, data);
         let formInfo = formLinkedList.toList();
@@ -264,8 +266,8 @@ Component({
     },
 
     /*
-  第二层按钮的四个方法
-  */
+      第二层按钮的四个方法
+    */
     up: function (e) {
       console.log("ID", ID, "cnt", cnt);
       formLinkedList.goUp(ID);
@@ -315,8 +317,8 @@ Component({
       cnt = formLinkedList.length;
     },
     /*
-  向表单末尾添加组件
-  */
+      向表单末尾添加组件
+    */
     addAll: function (e) {
       //console.log(e.currentTarget.id);
       var addItem = {
@@ -421,17 +423,17 @@ Component({
             initList[0].push("openid");
             initList[0].push("志愿时长");
             initList[0].push("备注");
-            console.log(initList)
+            console.log(initList);
             wx.cloud.callFunction({
               name: "uploadform",
               data: {
                 formInfo: inf,
                 title: that.data.title,
                 fieldName: that.data.formList.fieldName,
-                list: initList
+                list: initList,
               },
               success: function (res) {
-                console.log(res)
+                console.log(res);
                 wx.hideLoading();
                 wx.showModal({
                   title: "发布成功",
@@ -445,7 +447,7 @@ Component({
                 });
               },
               fail: function (res) {
-                console.log(res)
+                console.log(res);
                 wx.hideLoading();
                 wx.showModal({
                   title: "发布失败",

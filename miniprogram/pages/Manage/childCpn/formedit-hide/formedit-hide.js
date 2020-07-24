@@ -160,24 +160,26 @@ Component({
         }, "")
         .slice(0, -1);
     },
+    // 返回页面高度
     scrollHeight() {
-      return wx.getSystemInfoSync().windowHeight + 'px';
+      return wx.getSystemInfoSync().windowHeight + "px";
     },
   },
   /**
    * 组件的方法列表
    */
   methods: {
+    // 收起组件
     offCanvas() {
       this.triggerEvent("finish");
     },
-    // 选项输入
+    // 选项输入，将数据解析为选项名，时长和限额
     enterOption(e) {
       //console.log(e.detail.value)
       if (e.detail.value == "") return;
       let chooseDetail = e.detail.value.split("\n");
       let pattern = /(( +)\d+)/g; //用于全局匹配数字
-      let pattern1 = /^([\u3002\uff1b\uff0c\uff1a\u201c\u201d\uff08\uff09\u3001\uff1f\u300a\u300b\u4e00-\u9fa5a-zA-Z0-9]+)( +)?$/; //用于匹配包含选项名和限额的情况
+      let pattern1 = /^([\u3002\uff1b\uff0c\uff1a\u201c\u201d\uff08\uff09\u3001\uff1f\u300a\u300b\u4e00-\u9fa5a-zA-Z0-9]+)( +)?$/; //用于匹配只包含选项名的情况
       let pattern2 = /^([\u3002\uff1b\uff0c\uff1a\u201c\u201d\uff08\uff09\u3001\uff1f\u300a\u300b\u4e00-\u9fa5a-zA-Z0-9]+)( +)(\d+)( +)?$/; //用于匹配包含选项名和限额的情况
       let pattern3 = /^([\u3002\uff1b\uff0c\uff1a\u201c\u201d\uff08\uff09\u3001\uff1f\u300a\u300b\u4e00-\u9fa5a-zA-Z0-9]+)( +)(\d+)( +)(\d+)( +)?$/; //用于匹配包含选项名，限额和时长的情况
       let ID = 0,
@@ -196,18 +198,22 @@ Component({
           bookingNum: 0,
         };
         ID += 1;
+        // 选项名
         dataitem.name = n.split(" ")[0];
-        if (pattern1.test(n)){}
-        else if (pattern2.test(n)) {
+        if (pattern1.test(n)) {
+          // 选项名已经取出，什么都不用做
+        } else if (pattern2.test(n)) {
+          // 取出限额limit
           dataitem.limit = parseInt(n.match(pattern)[0].replace(" ", ""));
           isLimit = 1;
         } else if (pattern3.test(n)) {
+          // 取出时长duration
           dataitem.limit = parseInt(n.match(pattern)[0].replace(" ", ""));
           dataitem.duration = parseInt(n.match(pattern)[1].replace(" ", ""));
           isLimit = 1;
           isDuration = 1;
         }
-        // 错误输出
+        // 错误判断
         else if (!isIllLegal) {
           console.log("n:", n, "匹配4");
           isIllLegal = true;
@@ -215,7 +221,7 @@ Component({
         preValue.push(dataitem);
         return preValue;
       }, []);
-      console.log(option);
+      // console.log(option);
       if (isIllLegal) {
         wx.showModal({
           title: "错误提示",
@@ -229,11 +235,13 @@ Component({
           "formItem.isLimit": isLimit, // 是否限额
           "formItem.isDuration": isDuration, // 是否有时长
         });
+        // 内部更新方法
         this._trigger();
       }
     },
     // 备注输入
     enterNote(e) {
+      // 将备注按行切分录入选项数组
       let noteDetail = e.detail.value.split("\n");
       let option = this.data.formItem.option;
       for (let i = 0; i < option.length; i++) {
@@ -242,6 +250,7 @@ Component({
       this.setData({
         "formItem.option": option,
       });
+      this._trigger();
     },
     // 组件类型更改
     typeChange(e) {
@@ -256,8 +265,9 @@ Component({
       });
       this._trigger();
     },
-    // 其他设定
+    // 修改标题和提示信息
     enterInfo: function (e) {
+      // 根据type区分要改的是标题还是提示信息
       let type = e.currentTarget.id;
       console.log(e.detail.value, e.currentTarget.id);
       if (type == "label") {
@@ -273,6 +283,7 @@ Component({
       }
       this._trigger();
     },
+    // 其他设定，均与全局组件checkbox-single有关，返回值e.detail为Boolean值表示是否选中
     addForce(e) {
       // 是否必填
       console.log(e.detail);
@@ -323,23 +334,17 @@ Component({
       // console.log(option);
       this._trigger();
     },
+    // 添加备注
     addNote(e) {
-      // 添加备注
       let checked = e.detail;
       if (checked) {
         let option = this.data.formItem.option.map((n) => {
           n.detail = n.name;
           return n;
         });
-        // let note = option
-        //   .reduce((preValue, n) => {
-        //     return preValue + n.detail + "\n";
-        //   }, "")
-        //   .slice(0, -1);
         this.setData({
           "formItem.isNote": true,
           "formItem.option": option,
-          // note,
         });
       } else {
         this.setData({
@@ -348,6 +353,7 @@ Component({
       }
       this._trigger();
     },
+    // 自定义事件子传父，传递更新后的数据
     _trigger() {
       this.triggerEvent("optionChange", this.data.formItem);
     },

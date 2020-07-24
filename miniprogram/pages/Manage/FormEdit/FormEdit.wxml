@@ -41,12 +41,13 @@
 
 <!--底部组件-->
 <!--悬浮按钮第一层-->
-<view class="footer button-common {{button ? 'button-common-hide' : ''}}">
+<view class="footer {{button ? 'button-common-hide' : 'button-common'}}">
   <formedit-icon iconSrc="/assests/icons/formedit/add.png" bindtap="add"></formedit-icon>
   <formedit-icon iconSrc="/assests/icons/formedit/submit.png" bindtap="submit"></formedit-icon>
 </view>
+<!-- 随二层组件上升的全局遮盖 -->
+<view class="{{button ? 'mask-bottom-show' : 'page-state-hide'}}" bindtap="buttonClose">
 <!--悬浮按钮第二层-->
-<view class="mask-bottom {{button ? 'mask-bottom-show' : 'page-state-hide'}}" bindtap="buttonClose">
 </view>
 <view class="footer button-hide {{button ? 'button-common-show' : ''}}">
   <formedit-icon iconSrc="/assests/icons/formedit/up.png" bindtap="up"></formedit-icon>

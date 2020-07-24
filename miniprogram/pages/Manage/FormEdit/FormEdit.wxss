@@ -2,26 +2,25 @@
 
 page {
   background-color: white;
-  height: 80%;
 }
 
 /* 底层按钮父属性 */
 .footer {
-  position: fixed;
-  width: 100vw;
   display: flex;
   justify-content: space-around;
   transition: transform 0.3s ease;
+  position: fixed;
+  width: 100vw;  
 }
 
 /* 第一层按钮定位 */
 .button-common {
-  bottom: 0;
+  bottom: 10rpx;
 }
 
 /* 第二层按钮定位 */
 .button-hide {
-  bottom: -200rpx;
+  bottom: -190rpx;
 }
 
 /* 第一层按钮下移 */
@@ -36,10 +35,10 @@ page {
 
 /* 随第二层组件上移而显现的全局遮盖层 */
 .mask-bottom-show {
-  width: 100vw;
   height: 1250rpx;
   position: fixed;
   top: 0;
+  width: 100vw;  
 }
 
 /* 上层组件全局高度 */
@@ -59,16 +58,18 @@ page {
 
 /* 公共样式 */
 .but-font {
-  left: 100rpx;
-  height: 50rpx;
-  width: 170rpx;
-  position: fixed;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+  border: 2px solid #fff;
+  border-radius: 0.04%;
   font-size: 20rpx;
   font-weight: bold;
-  border: 2px solid #fff;
-  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
-  border-radius: 0.04%;
-  background-color: white;
+  height: 50rpx;
+  left: 100rpx;
+  width: 170rpx;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;  
 }
 
 /* 各自定位 */
@@ -92,25 +93,21 @@ page {
   bottom: 395rpx;
 }
 
+/* 页面标题 */
 .reports-header {
-  display: flex;
-  padding: 20rpx 0rpx;
   align-items: center;
-  justify-content: center;
+  display: flex;
   font-size: 34rpx;
-  font-family: PingFang-SC-Bold;
   font-weight: bold;
+  justify-content: center;
   letter-spacing: 2rpx;
+  padding: 20rpx 0rpx;
 }
 
 /*右侧展示层  */
 
 .page-top {
-  position: relative;
-  top: 0;
-  left: 0;
   width: 750rpx;
-  background-color: white;
   transition: transform 0.5s ease;
 }
 
@@ -122,28 +119,10 @@ page {
   display: none;
 }
 
-.imgw {
-  width: 100%;
-}
-
 /*右侧遮罩层  */
 .open {
   width: 60%;
   background-color: var(--greyLight);
   z-index: 5;
   position: absolute;
-}
-
-/*选项*/
-
-.value {
-  width: 70%;
-}
-
-.limit {
-  width: 10%;
-}
-
-.duration {
-  width: 10%;
 }

@@ -4,7 +4,7 @@ const db = wx.cloud.database()
 const _ = db.command
 
 //请求util.js
-var util = require('../../utils/util.js');
+// var util = require('../../utils/util');
 var max;
 Page({
 
@@ -26,29 +26,28 @@ Page({
 
         //获取目前系统时间
         // 调用函数时，传入new Date()参数，返回值是日期和时间
-        var currenTime = util.formatTime1(new Date());
-        var currenDate = util.formatTime(new Date());
+        // var currenTime = util.formatTime1(new Date());
+        // var currenDate = util.formatTime(new Date());
         // 再通过setData更改Page()里面的data，动态更新页面的数据
 
         var that = this
             //日期字符串分别赋值，然后合并
-        var str = currenDate.split('-')
-        let year = str[0]
-        let month = str[1]
-        let day = str[2]
-        if (month.length == 1) {
-            month = '0' + month
-        }
-        if (day.length == 1) {
-            day = '0' + day
-        }
-        currenDate = year + '-' + month + '-' + day
-        this.setData({
-            currenDate: currenDate,
-            currenTime: currenTime
-        });
+        // var str = currenDate.split('-')
+        // let year = str[0]
+        // let month = str[1]
+        // let day = str[2]
+        // if (month.length == 1) {
+        //     month = '0' + month
+        // }
+        // if (day.length == 1) {
+        //     day = '0' + day
+        // }
+        // currenDate = year + '-' + month + '-' + day
+        // this.setData({
+        //     currenDate: currenDate,
+        //     currenTime: currenTime
+        // });
 
-        var that = this;
         var pick = [];
         wx.cloud.callFunction({
             name: 'GetProject',
