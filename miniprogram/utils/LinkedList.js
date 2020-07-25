@@ -182,7 +182,7 @@ function LinkedList() {
 
     LinkedList.prototype.copy = function (position) {
         position = parseInt(position)
-        if (position < 1 || position >= this.length) {
+        if (position < 0 || position >= this.length) {
             console.log("不正确的复制位置：" + position + "；链表总长度：" + this.length)
         }else{
             let nowData = this.get(position)

@@ -18,9 +18,9 @@
 	>
 		<view class="items-title" id="{{items.id}}" bindtap="openbutton">
 			<!--准备发布-->
-			<image wx:if="{{currenDate < items.date && items.edit==1 || currenDate == items.date && currenTime < items.time && items.edit==1}}" class="items-titleimg" src="../../icons/yes.png" />
+			<image wx:if="{{currentDate < items.date && items.edit==1 || currentDate == items.date && currentTime < items.time && items.edit==1}}" class="items-titleimg" src="../../icons/yes.png" />
 			<!--正在招募-->
-			<image wx:elif="{{currenDate > items.date && items.edit==1 || currenDate == items.date && currenTime >= items.time && items.edit==1}}" class="items-titleimg" src="../../icons/working.png" />
+			<image wx:elif="{{currentDate > items.date && items.edit==1 || currentDate == items.date && currentTime >= items.time && items.edit==1}}" class="items-titleimg" src="../../icons/working.png" />
 			<!--表单待编辑-->
 			<image wx:elif="{{items.edit==0}}" class="items-titleimg" src="../../icons/warning.png" />
 			<!--招募结束/为编辑详细信息-->
@@ -33,7 +33,7 @@
 		
 		<view wx:if="{{items.checked}}" class="items-button">
 			<!--不能打开的按钮一-->
-			<view class="items" bind:tap="warn"  wx:if="{{items.date < currenDate && items.edit==1 || items.date == currenDate && items.time <= currenTime && items.edit==1}}" id="{{items.id}}">
+			<view class="items" bind:tap="warn"  wx:if="{{items.date < currentDate && items.edit==1 || items.date == currentDate && items.time <= currentTime && items.edit==1}}" id="{{items.id}}">
 				<!--图片-->
 				<image class="items-img" src="../../icons/detail.png" />
 				<!--文字-->
@@ -53,7 +53,7 @@
 			</view>
 
 			<!--不能打开的按钮二-->
-			<view class="items"  bind:tap="warn" wx:if="{{items.date < currenDate && items.edit==1 || items.date == currenDate && items.time <= currenTime && items.edit==1}}" id="{{items.id}}">
+			<view class="items"  bind:tap="warn" wx:if="{{items.date < currentDate && items.edit==1 || items.date == currentDate && items.time <= currentTime && items.edit==1}}" id="{{items.id}}">
 				<!--图片-->
 				<image class="items-img" src="../../icons/edit.png" />
 				<!--文字-->

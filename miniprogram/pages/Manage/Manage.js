@@ -2,7 +2,6 @@
 var app = getApp();
 const db = wx.cloud.database()
 const _ = db.command
-
 //请求util.js
 // var util = require('../../utils/util');
 var max;
@@ -13,7 +12,8 @@ Page({
      */
     data: {
         picker: [],
-        currenDate: ""
+        currentDate: "",
+        currentTime: ""
     },
 
     /**
@@ -23,14 +23,23 @@ Page({
         wx.showLoading({
             title: '加载中',
         })
-
-        //获取目前系统时间
-        // 调用函数时，传入new Date()参数，返回值是日期和时间
-        // var currenTime = util.formatTime1(new Date());
-        // var currenDate = util.formatTime(new Date());
-        // 再通过setData更改Page()里面的data，动态更新页面的数据
-
         var that = this
+        // 获取目前系统时间
+        // 调用函数时，传入new Date()参数，返回值是日期和时间
+        // var currentTime = util.formatTime1(new Date());
+        // var currentDate = util.formatTime(new Date());
+        // 再通过setData更改Page()里面的data，动态更新页面的数据
+        wx.cloud.callFunction({
+            name: 'getTime'
+        })
+        .then(res => {
+            console.log(res)
+            let current = res.result.time.split(' ');
+            that.setData({
+                currentDate: current[0],
+                currentTime: current[1]
+            })
+        })
             //日期字符串分别赋值，然后合并
         // var str = currenDate.split('-')
         // let year = str[0]
