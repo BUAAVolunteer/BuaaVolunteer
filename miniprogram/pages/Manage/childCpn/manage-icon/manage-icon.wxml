@@ -1,0 +1,56 @@
+<!--pages/Manage/childCpn/manage-icon/manage-icon.wxml-->
+<view class="wrapper" hover-class="none" hover-stop-propagation="false">
+  <view class="header {{project.open ? 'header-show':''}}">
+    <!--准备发布-->
+    <image wx:if="{{isPreparing}}" class="header-img" src="/assests/icons/manage/yes.png" />
+    <!--正在招募-->
+    <image wx:elif="{{isRecruit}}" class="header-img" src="/assests/icons/manage/working.png" />
+    <!--表单待编辑-->
+    <image
+      wx:elif="{{project.check==0}}"
+      class="header-img"
+      src="/assests/icons/manage/warning.png"
+    />
+    <!--招募结束/为编辑详细信息-->
+    <image wx:else class="header-img" src="/assests/icons/manage/stop.png" />
+    <view class="header-text">
+      {{project.title}}
+    </view>
+    <view class="header-assure" bindtap="openconfirm">
+      时长确认
+    </view>
+  </view>
+  <!-- 下部展开层 -->
+  <view wx:if="{{project.open}}" class="content">
+    <!--不能打开的按钮一-->
+    <nav-pt
+      wx:if="{{isRecruit}}"
+      navImg="/assests/icons/manage/detail.png"
+      navText="详细信息"
+    ></nav-pt>
+    <nav-pt
+      navUrl="/pages/Manage/Detail/Detail?title={{project.title}}"
+      navImg="/assests/icons/manage/detail.png"
+      navText="详细信息"
+    ></nav-pt>
+    <!--不能打开的按钮二-->
+    <nav-pt
+      wx:if="{{isRecruit}}"
+      navUrl="/pages/Manage/FormEdit/FormEdit?title={{project.title}}"
+      navImg="/assests/icons/manage/edit.png"
+      navText="编辑表单"
+    ></nav-pt>
+    <!--按钮二-->
+    <nav-pt
+      navUrl="/pages/Manage/FormEdit/FormEdit?title={{project.title}}"
+      navImg="/assests/icons/manage/edit.png"
+      navText="编辑表单"
+    ></nav-pt>
+    <!--按钮三-->
+    <nav-pt
+      navUrl="/pages/Manage/DataExport/DataExport?title={{project.title}}"
+      navImg="/assests/icons/manage/down.png"
+      navText="导出数据"
+    ></nav-pt>
+  </view>
+</view>

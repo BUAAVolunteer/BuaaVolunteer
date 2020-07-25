@@ -1,90 +1,23 @@
-<view class="bg" style="opacity:{{0.2}}" >
-    <image style="height:111%;" src='../../image/shu.jpg' class="bg-image"/>
-</view>
-<view class="padding flex flex-direction add-but">
-  <button class="cu-btn block line-black lg" style="background-color: var(--cyan);color: white;" bindtap="add">创建一个新志愿</button>
+<view class="bg">
+  <image class="bg-img" src="/assests/image/shu.jpg" />
 </view>
 <!-- 标题图片 -->
-<view style="display:flex;justify-content:center">
-	<image class="title-img" src="../../image/volunteerlist.png" />
+<view class="header">
+  <image class="header-img" src="/assests/icons/manage/manage.png" />
 </view>
-<scroll-view scroll-y="{{true}}" class="block scroll-view">
-	
-	<view
-	 wx:for="{{picker}}"
-	 wx:for-item="items"
-	 wx:key="id"
-	 class="items-box"
-	>
-		<view class="items-title" id="{{items.id}}" bindtap="openbutton">
-			<!--准备发布-->
-			<image wx:if="{{currentDate < items.date && items.edit==1 || currentDate == items.date && currentTime < items.time && items.edit==1}}" class="items-titleimg" src="../../icons/yes.png" />
-			<!--正在招募-->
-			<image wx:elif="{{currentDate > items.date && items.edit==1 || currentDate == items.date && currentTime >= items.time && items.edit==1}}" class="items-titleimg" src="../../icons/working.png" />
-			<!--表单待编辑-->
-			<image wx:elif="{{items.edit==0}}" class="items-titleimg" src="../../icons/warning.png" />
-			<!--招募结束/为编辑详细信息-->
-			<image wx:else class="items-titleimg" src="../../icons/stop.png" />
-			{{items.title}}
-			<view class="items-titleimg2" id="{{items.id}}" data-id="{{items.id}}" bindtap="openconfirm">
-				时长确认
-			</view>
-		</view>
-		
-		<view wx:if="{{items.checked}}" class="items-button">
-			<!--不能打开的按钮一-->
-			<view class="items" bind:tap="warn"  wx:if="{{items.date < currentDate && items.edit==1 || items.date == currentDate && items.time <= currentTime && items.edit==1}}" id="{{items.id}}">
-				<!--图片-->
-				<image class="items-img" src="../../icons/detail.png" />
-				<!--文字-->
-				<view class="items-text">
-					详细信息
-				</view>
-			</view>
-			
-			<!--按钮一-->
-			<view wx:else class="items" bind:tap="opentextarea" id="{{items.id}}">
-				<!--图片-->
-				<image class="items-img" src="../../icons/detail.png" />
-				<!--文字-->
-				<view class="items-text">
-					详细信息
-				</view>
-			</view>
-
-			<!--不能打开的按钮二-->
-			<view class="items"  bind:tap="warn" wx:if="{{items.date < currentDate && items.edit==1 || items.date == currentDate && items.time <= currentTime && items.edit==1}}" id="{{items.id}}">
-				<!--图片-->
-				<image class="items-img" src="../../icons/edit.png" />
-				<!--文字-->
-				<view class="items-text">
-					编辑表单
-				</view>
-			</view>
-
-			<!--按钮二-->
-			<view wx:else class="items" bind:tap="openedit" id="{{items.id}}">
-				<!--图片-->
-				<image class="items-img" src="../../icons/edit.png" />
-				<!--文字-->
-				<view class="items-text">
-					编辑表单
-				</view>
-			</view>
-
-			<!--按钮三-->
-			<view class="items" bind:tap="opendown" id="{{items.id}}">
-				<!--图片-->
-				<image class="items-img" src="../../icons/down.png" />
-				<!--文字-->
-				<view class="items-text">
-					导出数据
-				</view>
-			</view>
-
-		</view>
-
-	</view>
+<scroll-view scroll-y="{{true}}" class="main">
+  <block wx:for="{{projectList}}">
+    <manage-icon
+      project="{{item}}"
+      currentDate="{{currentDate}}"
+      currentTime="currentTime"
+      id="{{index}}"
+      bindtap="openNav"
+    ></manage-icon>
+  </block>
 </scroll-view>
-
-
+<view class="footer">
+  <navigator url="/pages/Manage/Detail/Detail?title=发布一个新志愿" class="footer-btn">
+    创建一个新志愿
+  </navigator>
+</view>

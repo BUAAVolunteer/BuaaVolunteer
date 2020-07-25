@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "nav-pt" : "/components/nav-pt/nav-pt"
+  }
+}

@@ -1,3 +1,6 @@
 {
-    "navigationBarTitleText": "志愿信息发布"
+    "navigationBarTitleText": "志愿信息发布",
+    "usingComponents": {
+        "manage-icon": "./childCpn/manage-icon/manage-icon"
+    }
 }

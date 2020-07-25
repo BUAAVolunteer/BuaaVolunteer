@@ -1,0 +1,9 @@
+<!--components/nav-pt/nav-pt.wxml-->
+<view bindtap="navUrl" class="item">
+  <!--图片-->
+  <image class="item-img" src="{{navImg}}" />
+  <!--文字-->
+  <view>
+    {{navText}}
+  </view>
+</view>
