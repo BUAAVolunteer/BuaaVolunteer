@@ -37,6 +37,10 @@ Component({
         ],
       },
     },
+    open: {
+      type: Boolean,
+      value: false,
+    },
   },
   /**
    * 组件的初始数据
@@ -172,6 +176,9 @@ Component({
     // 收起组件
     offCanvas() {
       this.triggerEvent("finish");
+      this.setData({
+        open: false,
+      });
     },
     // 选项输入，将数据解析为选项名，时长和限额
     enterOption(e) {

@@ -8,13 +8,13 @@
 
 /* 抽屉样式 */
 
-.hide {
-  display: none;
-}
-
 .open {
-  width: 60%;
+  width: 60vw;
   background-color: var(--greyLight);
   z-index: 5;
   position: absolute;
+}
+
+.hide {
+  display: none;
 }

@@ -1,4 +1,6 @@
 {
-    "usingComponents": {},
-    "navigationBarTitleText": "报名数据"
+    "navigationBarTitleText": "报名数据",
+    "usingComponents": {
+        "dataexport-hide":"../childCpn/dataexport-hide/dataexport-hide"
+    }
 }
