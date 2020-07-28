@@ -1,6 +1,7 @@
 {
   "component": true,
   "usingComponents": {
-    "checkbox-single":"/components/checkbox-single/checkbox-single"
+    "drawer-left": "/components/drawer-left/drawer-left",
+    "checkbox-single": "/components/checkbox-single/checkbox-single"
   }
 }

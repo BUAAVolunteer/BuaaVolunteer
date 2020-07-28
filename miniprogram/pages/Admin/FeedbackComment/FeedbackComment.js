@@ -38,9 +38,9 @@ Page({
         wx.showLoading({
             title: '加载中',
         })
-        db.collection('question')
+        db.collection('feedback')
             .get().then(e => {
-                //console.log(e.data.title);
+                console.log(e);
                 this.setData({
                     comment_list: e.data
                 })

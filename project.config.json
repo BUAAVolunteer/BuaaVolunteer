@@ -73,16 +73,16 @@
 				},
 				{
 					"id": 2,
-					"name": "FormEdit",
-					"pathName": "pages/Manage/FormEdit/FormEdit",
+					"name": "DataExport",
+					"pathName": "pages/Manage/DataExport/DataExport",
 					"query": "title=国家图书馆",
 					"scene": null
 				},
 				{
-					"id": 4,
-					"name": "Manage",
-					"pathName": "pages/Manage/Manage",
-					"query": "",
+					"id": 3,
+					"name": "Confirm时长确认",
+					"pathName": "pages/Manage/Confirm/Confirm",
+					"query": "title=国家图书馆",
 					"scene": null
 				},
 				{
@@ -90,6 +90,20 @@
 					"name": "Admin",
 					"pathName": "pages/Admin/Admin",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": 5,
+					"name": "feedbackComment",
+					"pathName": "pages/Admin/FeedbackComment/FeedbackComment",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "FormEdit",
+					"pathName": "pages/Manage/FormEdit/FormEdit",
+					"query": "title=国家图书馆",
 					"scene": null
 				}
 			]
