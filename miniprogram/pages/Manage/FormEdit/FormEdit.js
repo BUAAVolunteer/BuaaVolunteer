@@ -424,6 +424,7 @@ Component({
             initList[0].push("志愿时长");
             initList[0].push("备注");
             console.log(initList);
+            console.log(inf)
             wx.cloud.callFunction({
               name: "uploadform",
               data: {

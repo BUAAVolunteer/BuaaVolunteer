@@ -68,7 +68,7 @@
 					"id": 1,
 					"name": "form",
 					"pathName": "pages/Recruit/Form/Form",
-					"query": "title=国家图书馆&stime=2020-01-01",
+					"query": "title=北航一日游&stime=2020-01-01&qqnum=2423248790",
 					"scene": null
 				},
 				{
@@ -90,6 +90,13 @@
 					"name": "Admin",
 					"pathName": "pages/Admin/Admin",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/Manage/FormEdit/FormEdit",
+					"pathName": "pages/Manage/FormEdit/FormEdit",
+					"query": "title=北航一日游",
 					"scene": null
 				}
 			]
