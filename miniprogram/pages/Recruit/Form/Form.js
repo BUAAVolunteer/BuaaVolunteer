@@ -23,6 +23,7 @@ Page({
    */
   onLoad: function (options) {
     //console.log(options.title, options.stime)
+    //app.globalData.openid = "oN3gs5FbaOwv3o1lj0WjWEcp8VRo";
     qqnum = options.qqnum;
     //console.log(qqnum)
     wx.showLoading({
@@ -126,7 +127,7 @@ Page({
       });
   },
   formValidate: function (item) {
-    if (item.force) {
+    if (item.isForce) {
       //console.log(item, item.force, item.label);
       //获取验证类型和验证方式
       let { type, value } = item.role;
@@ -220,10 +221,11 @@ Page({
         let input = v.input_text;
         if (v.type === "div" || v.type === "describe") continue;
         else if (v.type === "radio" || v.type === "checkbox") {
-          if (v.limit) {
+          if (v.isLimit) {
+            console.log(limit)
             limit[0] = limit[0].concat(
               v.choose.reduce(function (preValue, n) {
-                preValue.push(n.id);
+                preValue.push(n.ID);
                 return preValue;
               }, [])
             );
@@ -251,15 +253,15 @@ Page({
         else listitem.push(input);
 
         //计算时长，添加时间备注
-        if (v.duration)
+        if (v.isDuration)
           duration = v.choose.reduce(function (preVlaue, n) {
             return preVlaue + n.duration;
           }, 0);
 
-        if (v.detail)
+        if (v.isNote)
           for (let i = 0; i < v.choose.length; i++) {
             let m = v.choose[i].value;
-            detail = detail + v.data[m].detail + ";";
+            detail = detail + v.option[m].detail + ";";
           }
       } else {
         //不合法情况
@@ -273,6 +275,7 @@ Page({
     }
     //合法性检验完毕
     //本地防线，如果没有时长则不允许提交
+    console.log(listitem)
     if (duration == 0) {
       that.setData({
         loading: false,
@@ -305,6 +308,7 @@ Page({
       success: function (res) {
         //console.log(res)
         uplist = [];
+        console.log(res)
         if (res.result === "error") {
           wx.showModal({
             title: "错误",
@@ -340,7 +344,7 @@ Page({
                 showCancel: false,
                 success: function () {
                   wx.redirectTo({
-                    url: "../history/history",
+                    url: "../../Profile/History/History",
                   });
                 },
               });

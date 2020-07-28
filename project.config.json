@@ -65,6 +65,16 @@
 					"query": ""
 				},
 				{
+<<<<<<< HEAD
+=======
+					"id": 1,
+					"name": "form",
+					"pathName": "pages/Recruit/Form/Form",
+					"query": "title=北航一日游&stime=2020-01-01&qqnum=2423248790",
+					"scene": null
+				},
+				{
+>>>>>>> b3b0701f4f87c20b7102986b6a81cd35a848ae31
 					"id": 2,
 					"name": "DataExport",
 					"pathName": "pages/Manage/DataExport/DataExport",
@@ -83,6 +93,13 @@
 					"name": "feedbackComment",
 					"pathName": "pages/Admin/FeedbackComment/FeedbackComment",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/Manage/FormEdit/FormEdit",
+					"pathName": "pages/Manage/FormEdit/FormEdit",
+					"query": "title=北航一日游",
 					"scene": null
 				}
 			]
