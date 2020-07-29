@@ -1,4 +1,7 @@
 {
-    "usingComponents": {},
-    "navigationBarTitleText": "详细信息编辑"
+    "navigationBarTitleText": "详细信息编辑",
+    "usingComponents": {
+        "lx-input":"/components/lx-input/lx-input",
+        "lx-picker":"/components/lx-picker/lx-picker"
+    }
 }

@@ -25,7 +25,7 @@
 			"outputPath": ""
 		},
 		"useIsolateContext": true,
-		"useCompilerModule": true,
+		"useCompilerModule": false,
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"appid": "wxbef368e6c04e1ca1",
@@ -65,8 +65,6 @@
 					"query": ""
 				},
 				{
-<<<<<<< HEAD
-=======
 					"id": 1,
 					"name": "form",
 					"pathName": "pages/Recruit/Form/Form",
@@ -74,7 +72,6 @@
 					"scene": null
 				},
 				{
->>>>>>> b3b0701f4f87c20b7102986b6a81cd35a848ae31
 					"id": 2,
 					"name": "DataExport",
 					"pathName": "pages/Manage/DataExport/DataExport",
@@ -100,6 +97,13 @@
 					"name": "pages/Manage/FormEdit/FormEdit",
 					"pathName": "pages/Manage/FormEdit/FormEdit",
 					"query": "title=北航一日游",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "Detail",
+					"pathName": "pages/Manage/Detail/Detail",
+					"query": "title=国家图书馆",
 					"scene": null
 				}
 			]

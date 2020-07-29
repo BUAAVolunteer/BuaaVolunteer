@@ -1,118 +1,72 @@
-<view class="title flex">
-	{{title}}
+<view class="title">
+  {{title}}
 </view>
-<view class="describe block">
-	这里是详细信息的编辑页面，请大家参照自己标准的招募信息进行编辑。
-	<text class="red">
-        请注意同一门类下换行即视为分点!
-    </text>
-</view>
-
-<!--
-<view class='edit-form-box form-inner'>
-    <view class='edit-title'>
-        活动时间
-    </view>
-    <view class='edit-form-input'>
-    <input style="width:90%;" bindinput='people' value="{{people}}" />
-    </view>
-</view>
--->
-<view class="block">
-	<view class='reports-header'>
-		<view class='reports-header-line' />
-		<view class='reports-header-name'>招募信息</view>
-	</view>
+<view class="header">
+  这里是详细信息的编辑页面，请大家参照自己标准的招募信息进行编辑。
+  <text class="header-text">
+    请注意同一门类下换行即视为分点!
+  </text>
 </view>
 
-<view wx:if="{{etitle==='发布一个新志愿'}}" class='edit-form-box form-inner'>
-	<view class='edit-title'>
-		活动名称
-	</view>
-	<view class='edit-form-input border'>
-		<input style="width:90%;" model:value="{{title}}" />
-	</view>
+<view class="label">
+  <view class="label-line" />
+  <view class="label-name">招募信息</view>
 </view>
 
-<view class='edit-form-box form-inner'>
-	<view class='edit-title'>
-		招募日期
-	</view>
-	<picker
-	 name="bd"
-	 mode="date"
-	 model:value="{{date}}"
-	 class="block border edit-picker"
-	>
-		<view class="picker">
-			{{date}}
-		</view>
-	</picker>
-</view>
-<view class='edit-form-box form-inner'>
-	<view class='edit-title'>
-		招募发布时间
-	</view>
-	<picker
-	 name="time"
-	 mode="time"
-	 model:value="{{time}}"
-	 class="block border edit-picker"
-	>
-		<view class="picker">
-			{{time}}
-		</view>
-	</picker>
-</view>
-<view class='edit-form-box form-inner'>
-	<view class='edit-title'>
-		志愿开展日期
-	</view>
-	<view class='edit-form-input border'>
-		<input
-		 style="width:90%;"
-		 maxlength="-1"
-		 model:value="{{textarea}}"
-		 placeholder="请输入志愿活动时间，如：11月9日至11月10日"
-		/>
-	</view>
-</view>
-<view class="block">
-	<view class='reports-header'>
-		<view class='reports-header-line' />
-		<view class='reports-header-name'>志愿详细信息</view>
-	</view>
+<lx-input wx:if="{{etitle==='发布一个新志愿'}}" title="活动名称" model:content="{{title}}" />
+
+<lx-picker title="招募日期" mode="date" model:content="{{date}}" />
+
+<lx-picker title="招募发布时间" mode="time" model:content="{{time}}" />
+
+<lx-input
+  title="志愿开展日期"
+  model:content="{{textarea}}"
+  placeholder="请输入志愿活动时间，如：11月9日至11月10日"
+/>
+
+<view class="label">
+  <view class="label-line" />
+  <view class="label-name">志愿详细信息</view>
 </view>
 
-<view class='edit-form-box form-inner'>
-	<view class='edit-title'>
-		活动地点
-	</view>
-	<view class='edit-form-input border'>
-		<input style="width:90%;" model:value="{{place}}" />
-	</view>
-</view>
-<view wx:for="{{array}}" wx:for-item="item" wx:key="index" class='edit-form-box form-inner'>
-	<view class='edit-title'>
-		{{item.content}}
-	</view>
-	<textarea
-	 auto-height="{{false}}"
-	 class="block border edit-textarea"
-	 bindinput="enterTextarea"
-	 id="{{item.type}}"
-	 value="{{item.data}}"
-	 placeholder="{{item.placeholder}}"
-	 maxlength="-1"
-	/>
-</view>
-<view class='edit-form-box form-inner'>
-    <view class='edit-title'>
-        qq群号
-    </view>
-    <textarea class="block border edit-textarea" model:value="{{qqnum}}" placeholder="{{qqnump}}" maxlength="-1"/>
-</view>
+<lx-input
+  title="活动内容"
+  type="textarea"
+  model:content="{{detail}}"
+  placeholder="请在这里填写志愿活动内容，例：回答读者与借还书相关的问题"
+/>
+
+<lx-input title="招募人数" type="textarea" model:content="{{people}}" placeholder="全体新生" />
+
+<lx-input
+  title="志愿者保障"
+  type="textarea"
+  model:content="{{assure}}"
+  placeholder="请在这里填写志愿者保障，例：5h志愿时长"
+/>
+<lx-input
+  title="特别提醒"
+  type="textarea"
+  model:content="{{require}}"
+  placeholder="请在这里填写特别提醒，例：请志愿者记得携带身份证或学生证"
+/>
+<lx-input
+  title="负责人联系方式"
+  type="textarea"
+  model:content="{{response}}"
+  placeholder="曹老师 电话：12312312312 或 刘师傅 QQ：1212122121"
+/>
+<lx-input
+  title="活动地点"
+  model:content="{{place}}"
+  placeholder="请输入志愿地点，如：中国国家图书馆（中关村南大街33号）南区综合阅览室"
+/>
+<lx-input
+  title="qq群号"
+  model:content="{{qqnum}}"
+  placeholder="请输入qq群号，将会发送给报名成功的志愿者"
+/>
 <view class="padding-xl">
-   <button class="cu-btn block line-blue lg" bindtap="upload">已确认信息，发布志愿</button>
+  <button class="cu-btn block line-blue lg" bindtap="upload">已确认信息，发布志愿</button>
 </view>
-
