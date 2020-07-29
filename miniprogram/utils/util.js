@@ -42,26 +42,27 @@ class Util {
 
     static exportToExcel (exportInfo) {
         //将数组信息导出为excel
-        wx.cloud.callFunction({
-            name: 'Export',
+        return wx.cloud.callFunction({
+            name: 'exportData',
             data: {
                 title : exportInfo.title,
                 fileName : exportInfo.fileName,
                 exportList : exportInfo.downloadList
             }
         }).then(res => {
+            console.log(res)
             //下载Excel
-            wx.cloud.downloadFile({
+            return wx.cloud.downloadFile({
                 fileID: res.result.fileID
             })
         }).then(res => {
             //保存Excel
-            wx.saveFile({
+            return wx.saveFile({
                 tempFilePath: res.tempFilePath
             })
         }).then(res => {
             //自动打开Excel
-            wx.openDocument({
+            return wx.openDocument({
                 filePath: res.savedFilePath
             })
         }).then(res => {

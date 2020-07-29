@@ -34,6 +34,8 @@ Page({
     });
     let that = this;
     let ti = options.title;
+    //获取个人信息
+    // TODO：在流程完成后修改为从全局变量获取个人信息，并且规范化变量名
     db.collection("person")
       .where({
         _openid: app.globalData.openid,
@@ -127,6 +129,7 @@ Page({
       });
   },
   formValidate: function (item) {
+    //进行输入校验
     if (item.isForce) {
       //console.log(item, item.force, item.label);
       //获取验证类型和验证方式
@@ -169,6 +172,7 @@ Page({
     return true;
   },
   childChange: function (e) {
+    //当组件内容改变时运行的方法，即文本框输入与单选多选选择
     //console.log(e)
     let type = e.detail.type;
     let input_text = e.detail.input_text;
@@ -187,6 +191,7 @@ Page({
     });
   },
   getInputValue: function () {
+    //最后进行数据处理并且上传的方法
     // if (watcher)
     //     watcher.close();
     this.setData({
