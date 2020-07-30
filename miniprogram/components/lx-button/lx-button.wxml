@@ -1,0 +1,8 @@
+<!--components/lx-button/lx-button.wxml-->
+<view class="wrapper">
+  <button class="button {{color}}">
+    <view>
+      {{content}}
+    </view>
+  </button>
+</view>

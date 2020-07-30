@@ -290,7 +290,7 @@ Component({
       }
       this._trigger();
     },
-    // 其他设定，均与全局组件checkbox-single有关，返回值e.detail为Boolean值表示是否选中
+    // 其他设定，均与全局组件lx-checkbox-single有关，返回值e.detail为Boolean值表示是否选中
     addForce(e) {
       // 是否必填
       console.log(e.detail);

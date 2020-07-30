@@ -1,6 +1,6 @@
 <!-- pages/Manage/childCpn/formedit-hide/formedit-hide.wxml -->
 <!-- 左侧展开层-首页 -->
-<drawer-left open="{{open}}">
+<lx-drawer-left open="{{open}}">
   <!-- 切换组件类型 -->
   <view wx:if="{{isTypeOne}}" class="header">
     <view class="header-title">切换组件类型</view>
@@ -46,12 +46,12 @@
     </view>
   </view>
   <!-- 组件是否必填 -->
-  <checkbox-single
+  <lx-checkbox-single
     wx:if="{{isTypeTwo}}"
     checked="{{formItem.isForce}}"
     content="这是个必填项"
     bind:checkboxChange="addForce"
-  ></checkbox-single>
+  ></lx-checkbox-single>
   <!-- 选项编辑 -->
   <view wx:if="{{isTypeThree}}" class="edit">
     <view class="edit-title">选项</view>
@@ -67,16 +67,16 @@
     />
   </view>
   <block wx:if="{{isTypeThree}}">
-    <checkbox-single
+    <lx-checkbox-single
       checked="{{formItem.isNumber}}"
       content="自动加选项编号"
       bind:checkboxChange="addNumber"
-    ></checkbox-single>
-    <checkbox-single
+    ></lx-checkbox-single>
+    <lx-checkbox-single
       checked="{{formItem.isNote}}"
       content="该题存在备注"
       bind:checkboxChange="addNote"
-    ></checkbox-single>
+    ></lx-checkbox-single>
     <!-- 备注 -->
     <view class="edit">
       <view class="edit-describe">
@@ -94,6 +94,6 @@
       />
     </view>
   </block>
-</drawer-left>
+</lx-drawer-left>
 <!-- 右侧阴影 -->
 <view wx:if="{{open}}" class="page-mask" bindtap="offCanvas" />

@@ -1,4 +1,4 @@
-/* components/nav-pt/nav-pt.wxss */
+/* components/lx-nav-pt/lx-nav-pt.wxss */
 
 .item {
   display: flex;

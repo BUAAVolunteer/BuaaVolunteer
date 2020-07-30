@@ -39,8 +39,5 @@ Component({
     finish() {
       this.triggerEvent("finish");
     },
-    delete() {
-      this.triggerEvent("delete");
-    },
   },
 });

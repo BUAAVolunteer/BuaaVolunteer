@@ -23,34 +23,34 @@
   <!-- 下部展开层 -->
   <view wx:if="{{project.open}}" class="content">
     <!--不能打开的按钮一-->
-    <nav-pt
+    <lx-nav-pt
       wx:if="{{isRecruit}}"
       navImg="/assests/icons/manage/detail.png"
       navText="详细信息"
-    ></nav-pt>
-    <nav-pt
+    ></lx-nav-pt>
+    <lx-nav-pt
       navUrl="/pages/Manage/Detail/Detail?title={{project.title}}"
       navImg="/assests/icons/manage/detail.png"
       navText="详细信息"
-    ></nav-pt>
+    ></lx-nav-pt>
     <!--不能打开的按钮二-->
-    <nav-pt
+    <lx-nav-pt
       wx:if="{{isRecruit}}"
       navUrl="/pages/Manage/FormEdit/FormEdit?title={{project.title}}"
       navImg="/assests/icons/manage/edit.png"
       navText="编辑表单"
-    ></nav-pt>
+    ></lx-nav-pt>
     <!--按钮二-->
-    <nav-pt
+    <lx-nav-pt
       navUrl="/pages/Manage/FormEdit/FormEdit?title={{project.title}}"
       navImg="/assests/icons/manage/edit.png"
       navText="编辑表单"
-    ></nav-pt>
+    ></lx-nav-pt>
     <!--按钮三-->
-    <nav-pt
+    <lx-nav-pt
       navUrl="/pages/Manage/DataExport/DataExport?title={{project.title}}"
       navImg="/assests/icons/manage/down.png"
       navText="导出数据"
-    ></nav-pt>
+    ></lx-nav-pt>
   </view>
 </view>

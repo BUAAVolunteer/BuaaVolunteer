@@ -1,0 +1,47 @@
+/* components/lx-button/lx-button.wxss */
+.wrapper {
+  padding: 20rpx 50rpx;
+}
+
+.button {
+  border: 1rpx solid;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  font-size: 32rpx;
+  font-weight: 500;
+  outline: none;
+  padding: 15rpx 40rpx;
+  white-space: nowrap;
+}
+
+.white {
+  background: #fff;
+  border-color: #dcdfe6;
+  color: #606266;
+}
+
+.blue {
+  color: var(--blue);
+  border-color: #b3d8ff;
+}
+
+.green {
+  color: #67c23a;
+  border-color: #c2e7b0;
+}
+
+.grey {
+  color: #909399;
+  border-color: #d3d4d6;
+}
+
+.yellow {
+  color: #e6a23c;
+  border-color: #f5dab1;
+}
+
+.red {
+  color: #f56c6c;
+  border-color: #fbc4c4;
+}

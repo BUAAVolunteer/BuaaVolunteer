@@ -1,5 +1,5 @@
 <!--pages/Manage/childCpn/dataexport-hide/dataexport-hide.wxml-->
-<drawer-left open="{{open}}">
+<lx-drawer-left open="{{open}}">
   <view style="wrapper">
     <view wx:for="{{signupItem}}">
       <view class="title">
@@ -20,7 +20,6 @@
     </view>
     <view class="footer">
       <button class="footer-btn bg-cyan" bind:tap="finish">完成</button>
-      <button class="footer-btn bg-red" bindtap="delete">删除</button>
     </view>
   </view>
-</drawer-left>
+</lx-drawer-left>
