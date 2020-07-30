@@ -1,27 +1,26 @@
-.title {
-    display: flex;
-    margin: 20rpx;
-    overflow: hidden;
-}
-
-.margin {
-    margin: 10 10;
-}
-
-.bg {
+/* pages/Admin/FeedbackComment/FeedbackComment.wxss */
+.background {
+    background-size: cover;
+    height: 100%;
+    left: 0;
     position: fixed;
     top: 0;
-    left: 0;
     width: 750rpx;
-    height: 100%;
-    background-size: cover;
     z-index: -1;
-}
-
-image {
-    max-width: 100%;
-    display: inline-block;
-    position: relative;
-    z-index: 0;
-    width: 750rpx;
-}
+  }
+  
+  .bg-image {
+      display: inline-block;
+      height:111%;
+      max-width: 100%;
+      position: relative;
+      width: 750rpx;
+      z-index: 0;
+  }
+  
+  .noevent{
+    font-size:35rpx;
+    font-weight:bold;
+    text-align:center;
+    margin:40rpx;
+  }

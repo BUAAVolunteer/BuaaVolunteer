@@ -1,5 +1,5 @@
 <!--pages/Main/Activity/Activity.wxml-->
 <!--下方推送-->
 <view wx:for="{{list}}">
-    <activity-evnet eventInf="{{item}}"></activity-evnet>
-</view>
+  <activity-event eventInf="{{item}}"></activity-event>
+</view>         

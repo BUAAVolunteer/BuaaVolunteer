@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
-  "navigationBarTitleText": "志愿者反馈"
+  "component": true,
+  "usingComponents": {
+    "feedback-events": "/pages/Admin/childCpn/feedback-events/feedback-events"
+  }
 }

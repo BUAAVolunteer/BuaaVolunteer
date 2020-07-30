@@ -1,4 +1,5 @@
 {
-    "usingComponents": {},
-    "navigationBarTitleText": "添加黑名单"
+  "component": true,
+  "usingComponents": {},
+  "navigationBarTitleText": "添加黑名单"
 }

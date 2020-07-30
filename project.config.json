@@ -25,7 +25,7 @@
 			"outputPath": ""
 		},
 		"useIsolateContext": true,
-		"useCompilerModule": true,
+		"useCompilerModule": false,
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"appid": "wxbef368e6c04e1ca1",
@@ -89,6 +89,27 @@
 					"id": 4,
 					"name": "Admin",
 					"pathName": "pages/Admin/Admin",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 5,
+					"name": "pages/Admin/Absence/Absence",
+					"pathName": "pages/Admin/Absence/Absence",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/Admin/Score/Score",
+					"pathName": "pages/Admin/Score/Score",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/Admin/FeedbackComment/FeedbackComment",
+					"pathName": "pages/Admin/FeedbackComment/FeedbackComment",
 					"query": "",
 					"scene": null
 				}
