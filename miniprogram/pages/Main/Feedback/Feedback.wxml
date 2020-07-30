@@ -1,34 +1,23 @@
 <!-- miniprogram/pages/want/want.wxml -->
-<image src='../../image/top2.jpg' mode='widthFix' class='png' style='width:100%;height:486rpx;'></image>
-<view class="margin-top-sm text-Abc" style="margin:20rpx;padding-top:10rpx;padding-bottom:10rpx;">
-  <form bindsubmit="order_submit" report-submit="true">
-    <view class="title-top">
-      <view class="important">*</view>
-      <view style="color:black;">昵称</view>
-    </view>
-    <view class=" light cu-form-input1">
-      <input style="padding-left:15rpx;" name="name" class="border" style='height:50rpx;padding:10rpx;' placeholder="请输入姓名，可以匿名反馈" value="{{name}}" bindinput="bindKeyInputName" />
-    </view>
-    <view class="title">
-      <view class="important">*</view>
-      <view style="color:black;">你想反映的问题发生在哪个项目？</view>
-    </view>
-    <view class="cu-form-input1">
-      <picker class="border" style='height:53rpx;padding: 20rpx 0px 10rpx 10rpx;color:gray;min-height: 1.4rem;' name="title" bindchange="PickerChange" value="{{index}}" range="{{picker}}">
-        {{index?picker[index]:'请在这里选择想要评价的志愿项目'}}
-      </picker>
-    </view>
-    <view class="weui-cells weui-cells_after-title">
-      <view class="title">
-        <view class="important">*</view>
-        <view style="color:black;">问题描述</view>
-      </view>
-      <view style="padding-top:15rpx;padding-left:15rpx;" class="align-start border">
-        <textarea name="textarea" placeholder="请详细描述你的问题" maxlength="-1" disabled="{{modalName!=null}}"></textarea>
-      </view>
-    </view>
-    <view class="padding-xl">
-      <button class="cu-btn block line-blue lg" form-type="submit">提交反馈</button>
-    </view>
-  </form>
+<image src="/assests/image/feedback.jpg" mode="widthFix" class="header"></image>
+<view class="wrapper">
+  <lx-picker
+    mode="selector"
+    range="{{range}}"
+    title="你想反映的问题发生在哪个项目？"
+    model:value="{{value}}"
+  />
+  <lx-input
+    title="问题描述"
+    type="textarea"
+    model:content="{{text}}"
+    placeholder="请详细描述你的问题~"
+  />
+  <lx-input
+    title="联系方式"
+    model:content="{{contact}}"
+    isForce="{{false}}"
+    placeholder="可以选择留下联系方式~问题解决后我们会联系您"
+  />
+  <lx-button content="提交反馈" color="blue" bindtap="submit" />
 </view>

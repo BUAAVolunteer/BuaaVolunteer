@@ -101,9 +101,9 @@
 				},
 				{
 					"id": -1,
-					"name": "Detail",
-					"pathName": "pages/Manage/Detail/Detail",
-					"query": "title=国家图书馆",
+					"name": "反馈Feedback",
+					"pathName": "pages/Main/Feedback/Feedback",
+					"query": "",
 					"scene": null
 				}
 			]
