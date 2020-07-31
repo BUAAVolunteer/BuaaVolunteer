@@ -66,8 +66,8 @@ Component({
   methods: {
     //  打开Confirm列表，方法名可以改
     openNav: function (e) {
-      // console.log(e.target.id);
-      let ID = e.detail.ID;
+      console.log(e.currentTarget.id);
+      let ID = e.currentTarget.id;
       var confirmList_json = this.data.ConfirmList[ID];
       wx.navigateTo({
         url: "Confirm/Confirm?confirmList=" + JSON.stringify(confirmList_json),

@@ -73,9 +73,9 @@
 				},
 				{
 					"id": 2,
-					"name": "DataExport",
+					"name": "pages/Manage/DataExport/DataExport",
 					"pathName": "pages/Manage/DataExport/DataExport",
-					"query": "title=国家图书馆",
+					"query": "title=北航一日游&date=2020-01-01",
 					"scene": null
 				},
 				{
@@ -93,7 +93,7 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 5,
 					"name": "pages/Manage/FormEdit/FormEdit",
 					"pathName": "pages/Manage/FormEdit/FormEdit",
 					"query": "title=北航一日游",
@@ -108,7 +108,7 @@
 				},
 				{
 					"id": 7,
-					"name": "pages/ConfirmHistory/ConfirmHistory",
+					"name": "ConfirmHistory",
 					"pathName": "pages/ConfirmHistory/ConfirmHistory",
 					"query": "title=北航一日游",
 					"scene": null

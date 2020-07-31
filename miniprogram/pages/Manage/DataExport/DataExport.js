@@ -2,6 +2,7 @@ const db = wx.cloud.database();
 var max, iv;
 var limlist = [{}];
 var date = "";
+var watcher = null;
 const computedBehavior = require("miniprogram-computed");
 const Util = require("../../../utils/util")
 Component({
@@ -46,26 +47,30 @@ Component({
       this.setData({
         title,
       });
-      var interval = setInterval(function () {
-        wx.cloud.callFunction({
-          name: "GetSignUp",
-          data: {
-            title,
-          },
-          success: function (res) {
-            let signUpList = res.result.data[0].list.slice(1);
-            let signUpTitle = res.result.data[0].list[0];
-            that.setData({
-              signUpList,
-              signUpTitle,
-            });
-          },
-          fail: function (res) {
-            console.log(res);
-          },
-        });
-      }, 1000);
-      iv = interval;
+      watcher = db.collection("signUp").where({
+        title: that.properties.title,
+      })
+      .watch({
+        onChange: function (snapshot) {
+          let download = snapshot.docs[0];
+          //修改页面中
+          console.log(download)
+          let signUpList = download.list.slice(1);
+          let signUpTitle = download.list[0];
+          that.setData({
+            signUpList,
+            signUpTitle,
+          });
+        },
+        onError: function (err) {
+          console.log(err)
+          wx.showModal({
+            title: "错误",
+            content: "获取记录失败,请检查网络或反馈给管理员",
+            showCancel: false,
+          });
+        },
+      });
       wx.hideLoading();
     },
   },
@@ -101,7 +106,7 @@ Component({
       for (let i = 0; i < that.data.signUpList.length; i++) {
         DownloadList.push(that.data.signUpList[i]);
       }
-      console.log(DownloadList)
+      console.log(date)
       //console.log(DownloadList)
       db.collection("project")
         .where({
@@ -124,8 +129,9 @@ Component({
             //下载导出数据
             let formInfo = {};
             formInfo.title = that.data.title;
-            formInfo.filename = that.data.title + " 报名信息表格";
+            formInfo.fileName = that.data.title + " 报名信息表格";
             formInfo.downloadList = DownloadList;
+            console.log(formInfo)
             wx.cloud.callFunction({
               name: "DownloadSignUp",
               data: {
