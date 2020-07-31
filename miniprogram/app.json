@@ -5,30 +5,25 @@
     "pages/Main/Activity/Activity",
     "pages/Main/Feedback/Feedback",
     "pages/Main/UpdateLog/UpdateLog",
-
     "pages/Recruit/Recruit",
     "pages/Recruit/Form/Form",
-
     "pages/Profile/Profile",
     "pages/Profile/History/History",
     "pages/Profile/Map/Map",
     "pages/Profile/PersonEdit/PersonEdit",
-
     "pages/Admin/Admin",
     "pages/Admin/FeedbackComment/FeedbackComment",
     "pages/Admin/Score/Score",
     "pages/Admin/Absence/Absence",
-
     "pages/Manage/Manage",
     "pages/Manage/FormEdit/FormEdit",
     "pages/Manage/Detail/Detail",
     "pages/Manage/Confirm/Confirm",
     "pages/Manage/DataExport/DataExport",
-
     "pages/Introduction/Introduction",
     "pages/Introduction/VolunteerMain/VolunteerMain",
-
-    "pages/OuterLink/OuterLink"
+    "pages/OuterLink/OuterLink",
+    "pages/ConfirmHistory/ConfirmHistory"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
