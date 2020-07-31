@@ -7,7 +7,8 @@
   暂无反馈信息
 </view>
 <view wx:else>
-  <feedback-events></feedback-events>
+  <!-- 组件传参，properties里写的都是要传入的 -->
+  <feedback-events comment_list="{{comment_list}}"></feedback-events>
 </view>
       
     

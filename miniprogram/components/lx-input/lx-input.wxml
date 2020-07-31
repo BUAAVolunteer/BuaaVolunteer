@@ -1,0 +1,36 @@
+<!--components/lx-input/lx-input.wxml-->
+
+<view wx:if="{{type == 'input'}}" class="input" style="width:{{width}};">
+  <view class="input-header">
+    <view class="input-header__title">
+      {{title}}
+    </view>
+    <view wx:if="{{isForce}}" class="input-header__force">
+      *
+    </view>
+  </view>
+  <view class="input-content">
+    <!-- 这里将输入的content值又绑定在了input的value -->
+    <input class="input-content__inner" model:value="{{content}}" placeholder="{{placeholder}}" />
+  </view>
+</view>
+
+<view wx:else class="textarea" style="width:{{width}};">
+  <view class="textarea-header">
+    <view class="textarea-header__title">
+      {{title}}
+    </view>
+    <view wx:if="{{isForce}}" class="textarea-header__force">
+      *
+    </view>
+  </view>
+  <view class="textarea-content">
+    <textarea
+      auto-height="{{false}}"
+      class="textarea-content__inner"
+      maxlength="-1"
+      model:value="{{content}}"
+      placeholder="{{placeholder}}"
+    />
+  </view>
+</view>

@@ -25,7 +25,7 @@
 			"outputPath": ""
 		},
 		"useIsolateContext": true,
-		"useCompilerModule": false,
+		"useCompilerModule": true,
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"appid": "wxbef368e6c04e1ca1",
@@ -68,27 +68,27 @@
 					"id": 1,
 					"name": "form",
 					"pathName": "pages/Recruit/Form/Form",
-					"query": "title=国家图书馆&stime=2020-01-01",
+					"query": "title=北航一日游&stime=2020-01-01&qqnum=2423248790",
 					"scene": null
 				},
 				{
 					"id": 2,
-					"name": "FormEdit",
-					"pathName": "pages/Manage/FormEdit/FormEdit",
+					"name": "DataExport",
+					"pathName": "pages/Manage/DataExport/DataExport",
 					"query": "title=国家图书馆",
 					"scene": null
 				},
 				{
-					"id": 4,
-					"name": "Manage",
-					"pathName": "pages/Manage/Manage",
-					"query": "",
+					"id": 3,
+					"name": "Confirm时长确认",
+					"pathName": "pages/Manage/Confirm/Confirm",
+					"query": "title=国家图书馆",
 					"scene": null
 				},
 				{
-					"id": 4,
-					"name": "Admin",
-					"pathName": "pages/Admin/Admin",
+					"id": 5,
+					"name": "feedbackComment",
+					"pathName": "pages/Admin/FeedbackComment/FeedbackComment",
 					"query": "",
 					"scene": null
 				},
@@ -111,6 +111,12 @@
 					"name": "pages/Admin/FeedbackComment/FeedbackComment",
 					"pathName": "pages/Admin/FeedbackComment/FeedbackComment",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/Admin/Admin",
+					"pathName": "pages/Admin/Admin",
 					"scene": null
 				}
 			]

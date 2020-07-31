@@ -4,12 +4,9 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    eventsInf: {
-      type: Object,
-      value: {
-        comment_list: [{}],
-        answer: null,
-      },    
+    comment_list: {
+      type: Array,
+      value: []    
     },
   },
 

@@ -1,0 +1,35 @@
+/* components/lx-picker/lx-picker.wxss */
+.picker {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 160rpx;
+  padding: 20rpx 0;
+}
+
+.picker-header__force {
+  color: var(--red);
+  margin-left: 20rpx;
+}
+
+.picker-header {
+  align-items: center;
+  display: flex;
+}
+
+.picker-content {
+  font-size: 28rpx;
+  position: relative;
+}
+
+.picker-content__inner {
+  align-items: center;
+  background-color: #fff;
+  border-radius: 4px;
+  border: 1px solid #dcdfe6;
+  color: #606266;
+  display: flex;
+  height: 80rpx;
+  transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  padding: 0 15rpx;
+}

@@ -4,6 +4,9 @@
   <view class="eventscard">
     <view class="title">项目名称：{{item.title}}</view>
     <view class="title">昵称：{{item.name}}</view>
-    <view class="title">反馈问题：{{item.textarea}}</view>
+    <view class="item">
+      <view class="item-title">反馈问题：</view>
+      <view class="item-content">{{item.textarea}}</view>
+    </view>
   </view>
 </view>

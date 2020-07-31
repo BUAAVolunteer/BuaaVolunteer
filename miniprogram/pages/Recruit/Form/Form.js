@@ -23,6 +23,7 @@ Page({
    */
   onLoad: function (options) {
     //console.log(options.title, options.stime)
+    //app.globalData.openid = "oN3gs5FbaOwv3o1lj0WjWEcp8VRo";
     qqnum = options.qqnum;
     //console.log(qqnum)
     wx.showLoading({
@@ -33,6 +34,8 @@ Page({
     });
     let that = this;
     let ti = options.title;
+    //获取个人信息
+    // TODO：在流程完成后修改为从全局变量获取个人信息，并且规范化变量名
     db.collection("person")
       .where({
         _openid: app.globalData.openid,
@@ -126,7 +129,8 @@ Page({
       });
   },
   formValidate: function (item) {
-    if (item.force) {
+    //进行输入校验
+    if (item.isForce) {
       //console.log(item, item.force, item.label);
       //获取验证类型和验证方式
       let { type, value } = item.role;
@@ -168,6 +172,7 @@ Page({
     return true;
   },
   childChange: function (e) {
+    //当组件内容改变时运行的方法，即文本框输入与单选多选选择
     //console.log(e)
     let type = e.detail.type;
     let input_text = e.detail.input_text;
@@ -186,6 +191,7 @@ Page({
     });
   },
   getInputValue: function () {
+    //最后进行数据处理并且上传的方法
     // if (watcher)
     //     watcher.close();
     this.setData({
@@ -220,10 +226,11 @@ Page({
         let input = v.input_text;
         if (v.type === "div" || v.type === "describe") continue;
         else if (v.type === "radio" || v.type === "checkbox") {
-          if (v.limit) {
+          if (v.isLimit) {
+            console.log(limit)
             limit[0] = limit[0].concat(
               v.choose.reduce(function (preValue, n) {
-                preValue.push(n.id);
+                preValue.push(n.ID);
                 return preValue;
               }, [])
             );
@@ -251,15 +258,15 @@ Page({
         else listitem.push(input);
 
         //计算时长，添加时间备注
-        if (v.duration)
+        if (v.isDuration)
           duration = v.choose.reduce(function (preVlaue, n) {
             return preVlaue + n.duration;
           }, 0);
 
-        if (v.detail)
+        if (v.isNote)
           for (let i = 0; i < v.choose.length; i++) {
             let m = v.choose[i].value;
-            detail = detail + v.data[m].detail + ";";
+            detail = detail + v.option[m].detail + ";";
           }
       } else {
         //不合法情况
@@ -273,6 +280,7 @@ Page({
     }
     //合法性检验完毕
     //本地防线，如果没有时长则不允许提交
+    console.log(listitem)
     if (duration == 0) {
       that.setData({
         loading: false,
@@ -305,6 +313,7 @@ Page({
       success: function (res) {
         //console.log(res)
         uplist = [];
+        console.log(res)
         if (res.result === "error") {
           wx.showModal({
             title: "错误",
@@ -340,7 +349,7 @@ Page({
                 showCancel: false,
                 success: function () {
                   wx.redirectTo({
-                    url: "../history/history",
+                    url: "../../Profile/History/History",
                   });
                 },
               });

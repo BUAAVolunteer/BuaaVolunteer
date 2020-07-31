@@ -1,18 +1,37 @@
 /* pages/Admin/childCpn/feedback-events/feedback-events.wxss */
 
-.eventscard{
+.eventscard {
     background-color: white;
     display: flex;
-    flex-direction:column;
+    flex-direction: column;
     justify-content: center;
     margin: 0 auto;
     margin-top: 30rpx;
     width: 90%;
-    flex-wrap:warp;
     box-shadow: 5px 3px 20px grey;
 }
+
 .title {
     display: flex;
     margin: 20rpx;
     overflow: hidden;
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 20rpx;
+}
+
+.item-title {
+    margin-bottom: 10rpx;
+}
+
+.item-content {
+    display: -webkit-box;
+    text-align: left;
+    word-break: break-word;
+    -webkit-line-orient: vertical;
+    -webkit-line-clamp: 10;
 }

@@ -1,6 +1,6 @@
 <!-- pages/Manage/childCpn/formedit-hide/formedit-hide.wxml -->
 <!-- 左侧展开层-首页 -->
-<scroll-view class="wrapper" style="height:{{scrollHeight}}" scroll-y="{{true}}">
+<drawer-left open="{{open}}">
   <!-- 切换组件类型 -->
   <view wx:if="{{isTypeOne}}" class="header">
     <view class="header-title">切换组件类型</view>
@@ -86,9 +86,14 @@
     </view>
     <view wx:if="{{formItem.isNote}}" class="edit">
       <view class="edit-title">备注</view>
-      <textarea auto-height="{{false}}" class="edit-textarea" bindinput="enterNote" value="{{note}}" />
+      <textarea
+        auto-height="{{false}}"
+        class="edit-textarea"
+        bindinput="enterNote"
+        value="{{note}}"
+      />
     </view>
   </block>
-</scroll-view>
+</drawer-left>
 <!-- 右侧阴影 -->
-<view class="page-mask" bindtap="offCanvas" />
+<view wx:if="{{open}}" class="page-mask" bindtap="offCanvas" />

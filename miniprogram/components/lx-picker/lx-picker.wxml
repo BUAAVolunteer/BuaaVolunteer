@@ -1,0 +1,16 @@
+<!--components/lx-picker/lx-picker.wxml-->
+<view class="picker" style="width:{{width}};">
+  <view class="picker-header">
+    <view class="picker-header__title">
+      {{title}}
+    </view>
+    <view wx:if="{{isForce}}" class="picker-header__force">
+      *
+    </view>
+  </view>
+  <picker mode="{{mode}}" model:value="{{content}}" class="picker-content">
+    <view class="picker-content__inner">
+      {{content}}
+    </view>
+  </picker>
+</view>

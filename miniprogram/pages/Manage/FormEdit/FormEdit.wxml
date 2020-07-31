@@ -1,7 +1,7 @@
 <!-- pages/forms/forms.wxml -->
 <!-- 左边隐藏层 -->
 <formedit-hide
-  class="{{open ? 'open' : 'page-state-hide'}}"
+  open="{{open}}"
   formItem="{{formItem}}"
   bind:optionChange="optionChange"
   bind:finish="offCanvas"

@@ -5,14 +5,14 @@
     <text wx:if="{{formInfo.isForce}}" class="force-text">*</text>
   </view>
   <view wx:if="{{formInfo.describe.length>0}}" class="form-describe mt-10">{{formInfo.describe}}</view>
-  <radio-group bindchange="checkboxChange">
+  <radio-group bindchange="radioChange">
     <!-- 选项 -->
     <label class="radio-group">
       <block wx:for="{{formInfo.option}}">
         <radio
           disabled="{{formInfo.isLimit && item.limit <= 0}}"
           class="{{(formInfo.isLimit&&item.limit<=0)?'grey':'blue'}}"
-          value="{{item.name}},{{item.id}},{{item.duration}}"
+          value="{{item.name}},{{item.ID}},{{item.duration}}"
           wx:key="id"
         >
           <view class="radio-item">

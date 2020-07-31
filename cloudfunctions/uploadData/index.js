@@ -1,9 +1,10 @@
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
 
-init({
-	env:'buaalx-w5aor',
-	traceUser:true
+cloud.init({
+	env: 'volunteer-platform-1v92i',
+    // env: 'buaalx-w5aor',
+    traceUser: true,
 })
 
 const db = cloud.database();
@@ -12,11 +13,14 @@ const _ = db.command;
 exports.main = async (event, context) => {
 	try {
 		let uploadList = event.list;
-		let promise = new Promise(function (resolve,reject) {
+		return promise = new Promise(function (resolve,reject) {
 			resolve();
 		})
-		.then(signUpCheck(0,event))
+		.then(() => {
+			return signUpCheck(0,event);
+		})
 		.then(res => {
+			console.log(res)
 			return new Promise((resolve,reject) =>{
 				let dtu = dataUpload(res.stopPlace - 1, event, res.success);
 				if (!res.success & dtu) {
@@ -36,7 +40,7 @@ exports.main = async (event, context) => {
 				title: event.title
 			}).update({
 				data:{
-					signuplist: _.push(openid)
+					signupList: _.push(openid)
 				}
 			})
 		})
@@ -104,13 +108,12 @@ exports.main = async (event, context) => {
 			})
 		})
 		.then(() => {
-			resolve('SignUpSuccess');
+			return 'SignUpSuccess'
 		})
 		.catch(err => {
 			console.log(err)
-			reject('error')
+			return "error"
 		})
-		return promise
 	}catch (e) {
 		console.error(e)
 	}
@@ -119,34 +122,37 @@ exports.main = async (event, context) => {
 function signUpCheck(position,event) {
 	//名额增减的递归函数
 	let i = position;
-	let upPosition = "formInfo." + event.limit[0][i] + ".data." + event.limit[1][i] + ".bookingNum";
-	db.collection('form').where({
+	let upPosition = "formInfo." + event.limit[0][i] + ".option." + event.limit[1][i] + ".bookingNum";
+	return db.collection('form').where({
 		title: event.title,
 	}).update({
 		data:{
 			[upPosition] : _.inc(1)
 		}
 	}).then(() => {
-		db.collection('form').where({
+		return db.collection('form').where({
 			title: event.title
 		}).field({
 			formInfo: true
 		}).get()
 	}).then(res => {
-			let temp = res.data[0].formInfo[event.limit[0][i]].data[event.limit[1][i]].bookingNum;
-			let limit = res.data[0].formInfo[event.limit[0][i]].data[event.limit[1][i]].limit;
-			i++;
-			if (temp > limit){
-				//无民歌，返回报名失败
-				let checkResult = {}
-				checkResult.success = false;
-				checkResult.stopPlace = i;
-				return checkResult;
-			}
+		let temp = res.data[0].formInfo[event.limit[0][i]].option[event.limit[1][i]].bookingNum;
+		let limit = res.data[0].formInfo[event.limit[0][i]].option[event.limit[1][i]].limit;
+		i++;
+		if (temp > limit){
+			//无名额，返回报名失败
+			console.log("fail")
+			let checkResult = {}
+			checkResult.success = false;
+			checkResult.stopPlace = i;
+			return checkResult;
+		}
 	}).then(() => {
 		if (i < event.limit[0].length) {
+			console.log("continue")
 			signUpCheck(i,event);
 		} else {
+			console.log("success")
 			let checkResult = {}
 			checkResult.success = true;
 			checkResult.stopPlace = i;
@@ -157,10 +163,10 @@ function signUpCheck(position,event) {
 
 function dataUpload(position,event,success) {
 	let i = position;
-	let upPosition = "formInfo." + event.limit[0][i] + ".data." + event.limit[1][i] + ".bookingNum";
-	let limPosition = "formInfo." + event.limit[0][i] + ".data." + event.limit[1][i] + ".limit"
+	let upPosition = "formInfo." + event.limit[0][i] + ".option." + event.limit[1][i] + ".bookingNum";
+	let limPosition = "formInfo." + event.limit[0][i] + ".option." + event.limit[1][i] + ".limit"
 	if (!success){
-		db.collection('form').where({
+		return db.collection('form').where({
 			title: event.title
 		}).update({
 			data:{
@@ -175,7 +181,7 @@ function dataUpload(position,event,success) {
 			}
 		})
 	}else{
-		db.collection('form').where({
+		return db.collection('form').where({
 			title: event.title
 		}).update({
 			data:{

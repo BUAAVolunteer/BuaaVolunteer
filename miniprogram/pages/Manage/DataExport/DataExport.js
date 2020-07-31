@@ -2,331 +2,191 @@ const db = wx.cloud.database();
 var max, iv;
 var limlist = [{}];
 var date = "";
-var qqnum = "";
-Page({
-
-    /**
-     * 页面的初始数据
-     */
-    data: {
-        title: "",
-        SignUpList: [],
-        FormList: [],
-        id: -1,
-        open: false,
-        hide1: "openid",
-        hide2: "志愿时长",
-        hide3: "备注"
+const computedBehavior = require("miniprogram-computed");
+const Util = require("../../../utils/util")
+Component({
+  properties: {
+    title: {      // 志愿标题
+      type: String,
+      value: "",
     },
-
-    /**
-     * 生命周期函数--监听页面加载
-     */
-    onLoad: function(options) {
-        var title = options.title;
-        date = options.date;
-        qqnum = options.qqnum;
-        console.log(options)
-            //var title = options.title;
-        wx.showLoading({
-            title: '加载中',
-        })
-        var that = this;
-        var SignUp = [];
-        this.setData({
-            //title: options.title
-            title
-        })
+    date: {       // 志愿日期
+      type: String,
+      value: "",
+    },
+  },
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    signUpList: [],   // 总的报名记录
+    signUpTitle: [],  // 组件的标题列表
+    open: false,      // 是否打开展开页面
+    index: -1,        // 当前选中的报名数据
+  },
+  behaviors: [computedBehavior], // 代表页面中可以使用computed扩展方法
+  computed: {
+    signupItem(data) {
+      if (data.index == -1) return [];
+      else return data.signUpList[data.index].slice(0, -3);
+    },
+  },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  lifetimes: {
+    attached() {
+      var title = this.properties.title;
+      date = this.properties.date;
+      console.log(title);
+      wx.showLoading({
+        title: "加载中",
+      });
+      var that = this;
+      this.setData({
+        title,
+      });
+      var interval = setInterval(function () {
         wx.cloud.callFunction({
-            name: 'GetSignUp',
-            data: {
-                //title: options.title
-                title
-            },
-            success: function(res) {
-                max = res.result.data[0].list.length;
-
-                for (let i = 1; i < max; i++) {
-                    //let signlist = res.result.data[0].list[i].slice(1);
-                    let signlist = res.result.data[0].list[i];
-                    let signupitem = {
-                        name: res.result.data[0].list[i][0],
-                        list: signlist,
-                        checked: false,
-                        id: i - 1
-                    }
-                    SignUp.push(signupitem);
-                }
-                //let form = res.result.data[0].list[0].slice(1);
-                let form = res.result.data[0].list[0];
-                that.setData({
-                    SignUpList: SignUp,
-                    FormList: form,
-                })
-                wx.hideLoading();
-            },
-            fail: function(res) {
-                console.log(res)
-            }
+          name: "GetSignUp",
+          data: {
+            title,
+          },
+          success: function (res) {
+            let signUpList = res.result.data[0].list.slice(1);
+            let signUpTitle = res.result.data[0].list[0];
+            that.setData({
+              signUpList,
+              signUpTitle,
+            });
+          },
+          fail: function (res) {
+            console.log(res);
+          },
+        });
+      }, 1000);
+      iv = interval;
+      wx.hideLoading();
+    },
+  },
+  methods: {
+    offcanvas: function () {
+      this.setData({
+        open: !this.data.open,
+      });
+    },
+    openbutton(e) {
+      let index = e.currentTarget.dataset.index;
+      this.setData({
+        index,
+      });
+      this.setData({
+        open: true,
+      });
+    },
+    changeCurrent(e) {
+      console.log(e.detail.type);
+      let type = e.detail.type;
+      let index = this.data.index;
+      if (type == "next") index = min(this.data.signUpList.length, index + 1);
+      else if (type == "back") index = max(index - 1, 0);
+      this.setData({
+        index,
+      });
+    },
+    download: function (e) {
+      var that = this;
+      var DownloadList = [];
+      DownloadList.push(that.data.signUpTitle);
+      for (let i = 0; i < that.data.signUpList.length; i++) {
+        DownloadList.push(that.data.signUpList[i]);
+      }
+      console.log(DownloadList)
+      //console.log(DownloadList)
+      db.collection("project")
+        .where({
+          title: that.data.title,
         })
-        var interval = setInterval(function() {
-            db.collection('form').where({
-                title: title
-            }).field({
-                formInfo: true,
-                over: true
-            }).get({
-                success: function(res) {
-                    //console.log(res)
-                    limlist = res.data[0].formInfo;
-                    let over = 0;
-                    let len = 0;
-                    if (res.data[0].over == 1) {
-                        for (let i = 0;
-                            (i < limlist.length) && (over == 0); i++) {
-                            if (limlist[i].limit == true) {
-                                for (let j = 0; j < limlist[i].data.length; j++) {
-                                    if (limlist[i].data[j] > 0) {
-                                        over = 1;
-                                        break;
-                                    }
-                                }
-                            } else {
-                                len++;
-                            }
-                        }
-                        if ((over == 0) && (len < limlist.length)) {
-                            wx.cloud.callFunction({
-                                name: "overForm",
-                                data: {
-                                    title: title
-                                },
-                                success: function(res) {
-                                    console.log(res)
-                                }
-                            })
-                        }
-                    }
-                }
+        .field({
+          check: true,
+        })
+        .get()
+        .then(res =>{
+          //console.log(res)
+          if (res.data[0].check != -1) {
+            wx.showModal({
+              title: "报名未完成",
+              content: "报名尚未完成，请等待完成后再导出",
+              showCancel: false,
+            });
+            return "not over";
+          } else {
+            //下载导出数据
+            let formInfo = {};
+            formInfo.title = that.data.title;
+            formInfo.filename = that.data.title + " 报名信息表格";
+            formInfo.downloadList = DownloadList;
+            wx.cloud.callFunction({
+              name: "DownloadSignUp",
+              data: {
+                title: that.data.title,
+                time: date,
+                list: DownloadList,
+              }
             })
-        }, 1000);
-        iv = interval;
-
-    },
-    delete: function(e) {
-        console.log(e)
-        var that = this;
-        let formInfo = that.data.SignUpList;
-        var ID = parseInt(e.currentTarget.dataset.id);
-        for (var i = ID + 1; i < max; i++)
-            formInfo[i].id = formInfo[i].id - 1;
-        formInfo.splice(ID, 1);
-        that.setData({
-            SignUpList: formInfo
-        })
-        max = max - 1
-    },
-    next: function(e) {
-        var id = this.data.id + 1;
-        this.setData({
-            id
-        })
-    },
-    before: function(e) {
-        var id = this.data.id - 1 > 0 ? this.data.id : 0;
-        this.setData({
-            id
-        })
-    },
-    offcanvas: function(e) {
-        this.setData({
-            open: false
-        })
-    },
-    openbutton: function(e) {
-        //console.log(this.data.SignUpList[e.target.id].checked)
-        for (var i = 0; i < max - 1; i++) {
-            let change = 'SignUpList[' + i + '].checked'
-            if (i == e.target.id) {
-                this.setData({
-                    [change]: !this.data.SignUpList[e.target.id].checked,
-                    open: true,
-                    id: e.target.id
-                })
-            } else {
-                this.setData({
-                    [change]: false
-                })
-            }
-        }
-
-
-    },
-    download: function(e) {
-        var that = this;
-        var DownloadList = []
-        let slist = that.data.SignUpList;
-        let flist = that.data.FormList;
-        DownloadList.push(flist)
-        for (let i = 0; i < slist.length; i++) {
-            DownloadList.push(slist[i].list);
-        }
-        //console.log(DownloadList)
-        db.collection('project').where({
-            title: that.data.title
-        }).field({
-            check: true
-        }).get({
-            success: function(res) {
-                if (res.data[0].check != -1) {
-                    wx.showModal({
-                        title: "报名未完成",
-                        content: "报名尚未完成，请等待完成后再导出",
-                        showCancel: false
-                    })
-                    return;
-                } else {
-                    //下载导出数据
-                    wx.cloud.callFunction({
-                        name: 'DownloadSignUp',
-                        data: {
-                            title: that.data.title,
-                            time: date,
-                            list: DownloadList
-                        },
-                        success: function(res) {
-                            //console.log(res)
-                            wx.cloud.downloadFile({
-                                fileID: res.result.fileID,
-                                success: function(res) {
-                                    //console.log(res)
-                                    wx.saveFile({
-                                        tempFilePath: res.tempFilePath,
-                                        success: function(res) {
-                                            wx.openDocument({
-                                                filePath: res.savedFilePath,
-                                                success: function() {
-                                                    wx.showModal({
-                                                        title: "导出成功",
-                                                        content: "已成功导出,请在自动打开后尽快另存",
-                                                        showCancel: false,
-                                                        success: function() {
-                                                            wx.redirectTo({
-                                                                url: '../list/list',
-                                                            })
-                                                        }
-                                                    })
-                                                }
-                                            })
-                                        }
-                                    })
-                                },
-                                fail: function(res) {
-                                    console.log(res)
-                                    wx.showModal({
-                                        title: "导出失败",
-                                        content: "导出失败，请联系管理员",
-                                        showCancel: false
-                                    })
-                                }
-                            })
-                        }
-                    })
-                }
-            }
-        })
-
-
-    },
-    sift: function() {
-        clearInterval(iv);
-        var that = this;
-        let slist = that.data.SignUpList
-        console.log(slist)
-        for (let i = 0; i < limlist.length; i++) {
-            if (limlist[i].limit == true) {
-                console.log(i)
-                for (let j = 0; j < limlist[i].data.length; j++) {
-                    if (limlist[i].data[j].limit < 0) {
-                        console.log(j)
-                        for (let k = slist.length - 1;
-                            (k >= 0) && (limlist[i].data[j].limit < 0); k--) {
-                            if (slist[k].list[i + 4].indexOf(limlist[i].data[j].name) >= 0) {
-                                console.log(k)
-                                let rp = limlist[i].data[j].name + ";"
-                                console.log(rp)
-                                slist[k].list[i + 4] = slist[k].list[i + 4].replace(rp, "");
-                                limlist[i].data[j].limit++;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        for (let i = slist.length - 1; i >= 0; i--) {
-            console.log(slist.length)
-            console.log(i)
-            for (let j = 0; j < limlist.length; j++) {
-                if ((limlist[j].force == true) && (slist[i].list[j + 4] === "")) {
-                    slist.splice(i, 1);
-                    break;
-                }
-            }
-        }
-        console.log(limlist)
-        console.log(slist)
-        this.setData({
-            SignUpList: slist
+            .then(res => {
+              console.log("DownloadRes",res)
+              if(res.result === "success") {
+                return Util.default.exportToExcel(formInfo)
+              }else{
+                console.log(res);
+                return "data-trans fail"
+              }
+            })
+            .then(res => {
+              console.log(res)
+              if (res === "data-trans fail") {
+                wx.showModal({
+                  title: "数据转移失败",
+                  content: "数据转移失败，请联系管理员",
+                  showCancel: false,
+                });
+              }else if (res.success) {
+                console.log(res)
+                wx.showModal({
+                  title: "导出成功",
+                  content: "已成功导出,请在自动打开后尽快另存",
+                  showCancel: false,
+                  success: function () {
+                    wx.redirectTo({
+                      url: "../Manage",
+                    });
+                  },
+                });
+              }else {
+                console.log(res);
+                wx.showModal({
+                  title: "导出失败",
+                  content: "导出失败，请联系管理员",
+                  showCancel: false,
+                });
+              }
+            })
+          }
         })
     },
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function() {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function() {
-
-    },
-
     /**
      * 生命周期函数--监听页面隐藏
      */
-    onHide: function() {
-        clearInterval(iv);
-
+    onHide: function () {
+      clearInterval(iv);
     },
 
     /**
      * 生命周期函数--监听页面卸载
      */
-    onUnload: function() {
-        clearInterval(iv);
+    onUnload: function () {
+      clearInterval(iv);
     },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function() {
-
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function() {
-
-    },
-
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function() {
-
-    }
-})
+  },
+});

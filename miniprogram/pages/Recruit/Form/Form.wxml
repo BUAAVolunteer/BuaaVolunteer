@@ -3,23 +3,23 @@
 <block wx:for="{{formList.formInfo}}" wx:for-index="idx" wx:for-item="items" wx:key="id">
   <!-- 输入框组件 -->
   <block wx:if="{{items.type=='text'}}">
-    <text-input id="{{items.id}}" forminfo="{{items}}" bindinput="childChange" />
+    <text-input id="{{items.ID}}" formInfo="{{items}}" bindinput="childChange" />
   </block>
   <!-- 描述文本组件 -->
   <block wx:if="{{items.type=='describe'}}">
-    <text-describe id="{{items.id}}" forminfo="{{items}}" />
+    <text-describe id="{{items.ID}}" formInfo="{{items}}" />
   </block>
   <!-- 单选组件 -->
   <block wx:if="{{items.type=='radio'}}">
-    <text-radio id="{{items.id}}" forminfo="{{items}}" bindradio="childChange" />
+    <text-radio id="{{items.ID}}" formInfo="{{items}}" bindradio="childChange" />
   </block>
   <!-- 多选组件 -->
   <block wx:if="{{items.type=='checkbox'}}">
-    <text-checkbox id="{{items.id}}" forminfo="{{items}}" bindcheckbox="childChange" />
+    <text-checkbox id="{{items.ID}}" formInfo="{{items}}" bindcheckbox="childChange" />
   </block>
   <!-- 分割线组件 -->
   <block wx:if="{{items.type=='div'}}">
-    <text-div id="{{items.id}}" forminfo="{{items}}" />
+    <text-div id="{{items.ID}}" formInfo="{{items}}" />
   </block>
 </block>
 

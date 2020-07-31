@@ -35,10 +35,6 @@ Component({
     open: false,
     checked: false,
     button: false, // 底部按钮状态
-    texta: "",
-    textl: "",
-    textd: "",
-    dat: "",
   },
   behaviors: [computedBehavior],
   computed: {

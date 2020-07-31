@@ -1,5 +1,7 @@
 {
   "component": true,
-  "usingComponents": {},
+  "usingComponents": {
+    "lx-input":"/components/lx-input/lx-input"
+  },
   "navigationBarTitleText": "添加黑名单"
 }

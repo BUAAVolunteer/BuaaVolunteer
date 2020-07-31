@@ -1,0 +1,20 @@
+/* components/drawer-left/drawer-left.wxss */
+
+/* 全局样式 */
+.wrapper {
+  width: 100%;
+  padding: 30rpx 0;
+}
+
+/* 抽屉样式 */
+
+.open {
+  width: 60vw;
+  background-color: var(--greyLight);
+  z-index: 5;
+  position: absolute;
+}
+
+.hide {
+  display: none;
+}
