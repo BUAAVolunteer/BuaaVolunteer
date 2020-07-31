@@ -21,22 +21,22 @@
   align-items: center;
   border: 1rpx solid currentColor;
   box-shadow: var(--box-shadow);
-  color: var(--greyLight);
-  background-color: var(--greyLight);
+  color: var(--greenLight);
+  background-color: var(--greenLight);
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   margin: 30rpx;
   padding: 30rpx;
 }
 
 .main-item__check {
-  color: var(--greenLight);
-  background-color: var(--greenLight);
+  color: var(--greyLight);
+  background-color: var(--greyLight);
 }
 
 .main-item-icon {
   border: 1px solid currentColor;
-  color: var(--black);
+  color: var(--green);
   font-size: 25rpx;
   position: absolute;
   padding: 10rpx;
@@ -44,7 +44,7 @@
 }
 
 .main-item-icon__check {
-  color: var(--green);
+  color: var(--black);
 }
 
 .main-item-content {
