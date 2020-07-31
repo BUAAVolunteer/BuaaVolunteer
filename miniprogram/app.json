@@ -18,12 +18,12 @@
     "pages/Manage/Manage",
     "pages/Manage/FormEdit/FormEdit",
     "pages/Manage/Detail/Detail",
-    "pages/Manage/Confirm/Confirm",
     "pages/Manage/DataExport/DataExport",
     "pages/Introduction/Introduction",
     "pages/Introduction/VolunteerMain/VolunteerMain",
     "pages/OuterLink/OuterLink",
-    "pages/ConfirmHistory/ConfirmHistory"
+    "pages/ConfirmHistory/ConfirmHistory",
+    "pages/ConfirmHistory/Confirm/Confirm"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

@@ -3,8 +3,7 @@
 }
 
 .title {
-  font-size: 50rpx;
-  font-weight: bold;
+  font: var(--title);
   justify-content: center;
   text-align: center;
 }

@@ -105,6 +105,13 @@
 					"pathName": "pages/Main/Feedback/Feedback",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": 7,
+					"name": "pages/ConfirmHistory/ConfirmHistory",
+					"pathName": "pages/ConfirmHistory/ConfirmHistory",
+					"query": "title=北航一日游",
+					"scene": null
 				}
 			]
 		}

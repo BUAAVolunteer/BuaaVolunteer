@@ -1,2 +1,26 @@
 <!--miniprogram/pages/ConfirmHistory/ConfirmHistory.wxml-->
-<text>miniprogram/pages/ConfirmHistory/ConfirmHistory.wxml</text>
+<view class="header">
+  <view class="header-title">
+    {{title}}
+  </view>
+</view>
+<scroll-view class="main" scroll-y="{{true}}">
+  <block wx:for="{{ConfirmList}}" wx:key="index">
+    <view wx:if="{{item.isCheck}}" class="main-item">
+      <view class="main-item-icon">
+        确认完毕
+      </view>
+      <view class="main-item-content">
+        招募时间：{{item.time}}
+      </view>
+    </view>
+    <view wx:else class="main-item main-item__check">
+      <view class="main-item-icon main-item-icon__check">
+        尚未确认
+      </view>
+      <view class="main-item-content">
+        招募时间：{{item.time}}
+      </view>
+    </view>
+  </block>
+</scroll-view>
