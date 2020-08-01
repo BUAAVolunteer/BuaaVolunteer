@@ -101,8 +101,8 @@
 				},
 				{
 					"id": -1,
-					"name": "反馈Feedback",
-					"pathName": "pages/Main/Feedback/Feedback",
+					"name": "pages/Admin/FeedbackComment/FeedbackComment",
+					"pathName": "pages/Admin/FeedbackComment/FeedbackComment",
 					"query": "",
 					"scene": null
 				},

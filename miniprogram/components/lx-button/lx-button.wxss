@@ -1,6 +1,6 @@
 /* components/lx-button/lx-button.wxss */
 .wrapper {
-  padding: 20rpx 50rpx;
+  padding: 20rpx 0rpx;
 }
 
 .button {
@@ -11,7 +11,7 @@
   font-size: 32rpx;
   font-weight: 500;
   outline: none;
-  padding: 15rpx 40rpx;
+  padding: 15rpx 0;
   white-space: nowrap;
 }
 

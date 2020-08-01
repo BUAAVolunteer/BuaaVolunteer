@@ -10,6 +10,7 @@
     </view>
   </view>
   <view class="input-content">
+    <!-- 这里将输入的content值又绑定在了input的value -->
     <input class="input-content__inner" model:value="{{content}}" placeholder="{{placeholder}}" />
   </view>
 </view>

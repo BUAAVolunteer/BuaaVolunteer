@@ -1,0 +1,12 @@
+<!--pages/Admin/childCpn/feedback-events/feedback-events.wxml-->
+
+<view class="feedbacks" wx:for="{{comment_list}}" wx:key="index">
+  <view class="eventscard">
+    <view class="title">项目名称：{{item.title}}</view>
+    <view class="title">昵称：{{item.name}}</view>
+    <view class="item">
+      <view class="item-title">反馈问题：</view>
+      <view class="item-content">{{item.textarea}}</view>
+    </view>
+  </view>
+</view>
