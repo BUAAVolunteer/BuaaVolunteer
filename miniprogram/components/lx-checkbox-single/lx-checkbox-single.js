@@ -1,4 +1,4 @@
-// components/checkbox-single/checkbox-single.js
+// components/lx-checkbox-single/lx-checkbox-single.js
 Component({
   /**
    * 组件的属性列表

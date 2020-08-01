@@ -18,9 +18,10 @@
 }
 
 .item {
+    align-items: flex-start;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    margin-top: 10rpx;
     padding: 0 20rpx;
 }
 

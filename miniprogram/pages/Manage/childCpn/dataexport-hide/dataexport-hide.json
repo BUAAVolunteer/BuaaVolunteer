@@ -1,6 +1,6 @@
 {
   "component": true,
   "usingComponents": {
-    "drawer-left": "/components/drawer-left/drawer-left"
+    "lx-drawer-left": "/components/lx-drawer-left/lx-drawer-left"
   }
 }

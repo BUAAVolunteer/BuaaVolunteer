@@ -1,46 +1,10 @@
 <!--pages/Admin/Absence/Absence.wxml-->
-<form bindsubmit="order_submit" report-submit="true">
-	<view class="cu-form-group margin-top">
-		<view class="title">项目名称</view>
-		<picker name="title" bindchange="PickerChange" value="{{index}}" range="{{picker}}">
-			<view class="picker">
-				{{index?picker[index]:'请在这里选择志愿项目'}}
-			</view>
-		</picker>
-	</view>
+<view class="wrapper" bindtap="order_submit">
+	<lx-picker mode="selector" range="{{picker}}" title="项目名称" model:value="pickname" placeholder="请在这里选择志愿项目" />
 	<!-- model:content说明绑定了传入的参数content -->
-	<lx-input
-		title="姓名"
-		model:content="{{name}}"
-		placeholder="请输入失信志愿者姓名"
-	/>
-	<lx-input
-		title="手机"
-		model:content="{{tele}}"
-		placeholder="请输入失信志愿者手机号"
-	/>
-
-
-
-	<view class="cu-form-group">
-		<view class="title">志愿日期</view>
-		<picker name="time" mode="date" value="{{date}}" start="2015-09-01" end="2020-09-01" bindchange="DateChange">
-			<view class="picker">
-				{{date1}}
-			</view>
-		</picker>
-	</view>
-
-	<view class="cu-form-group">
-		<view class="title">失信方式</view>
-		<picker name="mode" bindchange="PickerChange2" value="{{index2}}" range="{{picker2}}">
-			<view class="picker">
-				{{index2?picker2[index2]:'请在这里选择失信方式'}}
-			</view>
-		</picker>
-	</view>
-
-	<view class="padding-xl">
-		<button class="cu-btn block line-black lg" form-type="submit">确定添加黑名单</button>
-	</view>
-</form>
+	<lx-input title="姓名" model:content="{{name}}" placeholder="请输入失信志愿者姓名" />
+	<lx-input title="手机" model:content="{{tele}}" placeholder="请输入失信志愿者手机号" />
+	<lx-picker title="志愿日期" mode="date" model:content="{{date1}}" />
+	<lx-picker mode="selector" range="{{picker2}}" title="失信方式" model:value="index2" placeholder="请在这里选择失信方式" />
+	<lx-button bindtap="order_submit" content="确定添加黑名单" color="red" />
+</view>

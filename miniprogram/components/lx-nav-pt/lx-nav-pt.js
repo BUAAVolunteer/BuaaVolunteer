@@ -1,4 +1,4 @@
-// components/nav-pt/nav-pt.js
+// components/lx-nav-pt/lx-nav-pt.js
 Component({
   /**
    * 组件的属性列表

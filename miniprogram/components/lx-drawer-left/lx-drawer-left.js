@@ -1,4 +1,4 @@
-// components/drawer-left/drawer-left.js
+// components/lx-drawer-left/lx-drawer-left.js
 const computedBehavior = require("miniprogram-computed");
 Component({
   /**

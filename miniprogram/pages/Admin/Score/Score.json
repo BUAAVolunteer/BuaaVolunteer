@@ -1,5 +1,9 @@
 {
   "component": true,
-  "usingComponents": {},
+  "usingComponents": {
+    "lx-input":"/components/lx-input/lx-input",
+    "lx-button":"/components/lx-button/lx-button",
+    "lx-picker":"/components/lx-picker/lx-picker"
+  },
   "navigationBarTitleText": "操作志愿者积分"
 }

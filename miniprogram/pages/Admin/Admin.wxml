@@ -1,34 +1,34 @@
 <!--pages/Admin/Admin.wxml-->
 <view class="swiper-tab">
-  <scroll-view scroll-x="true" class="tab-h" scroll-left="{{scrollLeft}}">
-    <view class="tab-item {{currentTab==0?'active':''}}" data-current="0" bindtap="swichNav">发布招募</view>
-    <view class="tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="swichNav">审核反馈</view>
-    <view class="tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="swichNav">管理积分</view>
-    <view class="tab-item {{currentTab==3?'active':''}}" data-current="3" bindtap="swichNav">处理缺勤</view>
-  </scroll-view>
+	<scroll-view scroll-x="true" class="tab-h" scroll-left="{{scrollLeft}}">
+		<view class="tab-item {{currentTab==0?'active':''}}" data-current="0" bindtap="swichNav">发布招募</view>
+		<view class="tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="swichNav">审核反馈</view>
+		<view class="tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="swichNav">管理积分</view>
+		<view class="tab-item {{currentTab==3?'active':''}}" data-current="3" bindtap="swichNav">处理缺勤</view>
+	</scroll-view>
 </view>
 
 <view class="swiper-content">
-<swiper class="swiper" current="{{currentTab}}" duration="300" bindchange="swiperChange">  
-  <swiper-item>  
-    <view>
-      <Manage></Manage>
-    </view>  
-  </swiper-item>  
-  <swiper-item>  
-    <view>
-      <FeedbackComment></FeedbackComment>
-    </view>  
-  </swiper-item>  
-  <swiper-item>  
-    <view>
-      <Score></Score>
-    </view>  
-  </swiper-item>  
-  <swiper-item>  
-    <view>
-      <Absence></Absence>
-    </view>  
-  </swiper-item> 
-</swiper>  
-</view>  
+	<swiper class="swiper" current="{{currentTab}}" duration="300" bindchange="swiperChange">
+		<swiper-item>
+			<view>
+				<Manage></Manage>
+			</view>
+		</swiper-item>
+		<swiper-item>
+			<view>
+				<FeedbackComment></FeedbackComment>
+			</view>
+		</swiper-item>
+		<swiper-item>
+			<!-- <view> -->
+				<Score></Score>
+			<!-- </view> -->
+		</swiper-item>
+		<swiper-item>
+			<view>
+				<Absence></Absence>
+			</view>
+		</swiper-item>
+	</swiper>
+</view>
