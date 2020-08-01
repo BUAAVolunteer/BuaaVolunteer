@@ -1,0 +1,52 @@
+/* pages/Profile/childCpn/profile-footer-icon/profile-footer-icon.wxss */
+.wrapper {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.icon {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  height: 55rpx;
+  width: 50rpx;
+}
+
+.icon__type1 {
+  height: 37rpx;
+  width: 43rpx;
+}
+
+.icon__type2 {
+  height: 52rpx;
+  width: 42rpx;
+}
+
+.icon__type3 {
+  height: 39rpx;
+  width: 31rpx;
+}
+
+.icon__type4 {
+  height: 42rpx;
+  width: 42rpx;
+}
+
+.icon__type5 {
+  height: 32rpx;
+  width: 46rpx;
+}
+
+.icon__type6 {
+  height: 32rpx;
+  width: 46rpx;
+}
+
+.content {
+  color: #5a5d5d;
+  font-size: 25.3rpx;
+  font-weight: lighter;
+  letter-spacing: 0.75rpx;
+  margin-top: 3rpx;
+}

@@ -1,0 +1,9 @@
+<!--pages/Profile/childCpn/profile-middle-icon/profile-middle-icon.wxml-->
+<view class="middle--item">
+  <image class="middle--title" src="{{icon}}" />
+  <view class="middle--main">
+    <view class="middle--main__describe">{{describe}}</view>
+    <view class="middle--main__{{color}}">{{content}}</view>
+  </view>
+  <image class="middle--aside" src="/assests/icons/profile/arrow.png" />
+</view>

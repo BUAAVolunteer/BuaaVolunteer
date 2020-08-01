@@ -1,0 +1,33 @@
+<!--pages/Profile/childCpn/profile-header/profile-header.wxml-->
+<image class="bg back" src="/assests/image/profile/back.png" />
+<image class="bg forward__left" mode="widthFix" src="/assests/image/profile/forward.png" />
+<image class="bg forward__right" mode="widthFix" src="/assests/image/profile/forward.png" />
+<!-- 头部 -->
+<view class="header">
+  <!-- 主要部分 -->
+  <view class="main">
+    <view class="main--image__wrapper">
+      <image class="main--image__inner" src="cloud://volunteer-platform-1v92i.766f-volunteer-platform-1v92i-1300053277/要抱抱-小李.png" mode="widthFix"/>
+    </view>
+    <view class="main--name">
+      {{person.name}}
+    </view>
+    <button class="main--btn" bindtap="toEdit">
+      编辑
+    </button>
+  </view>
+  <!-- 信息展示 -->
+  <view class="aside">
+    <view class="aside--item">
+      学号：{{person.personNum}}
+    </view>
+    <view class="aside--item">
+      {{person.text}}
+    </view>
+    <view class="aside--item"></view>
+  </view>
+  <!-- 小飞机入口 -->
+  <cover-view class="header--fly">
+    <cover-image class="header--fly__inner" src="/assests/image/profile/fly.png"></cover-image>
+  </cover-view>
+</view>

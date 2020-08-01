@@ -1,0 +1,137 @@
+/* pages/Profile/childCpn/profile-header/profile-header.wxss */
+.bg {
+  position: absolute;
+  height: 310rpx;
+  width: 100vw;
+}
+
+.back {
+  left: 0;
+  z-index: -1;
+  top: 0;
+}
+
+.forward__left,
+.forward__right {
+  top: 288rpx;
+  z-index: 1;
+}
+
+.forward__left {
+  left: -100vw;
+  animation: toRight 1.5s ease-in forwards;
+}
+
+.forward__right {
+  right: -100vw;
+  animation: toLeft 1.5s ease-in forwards;
+}
+
+@keyframes toRight {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    left: 0;
+  }
+}
+
+@keyframes toLeft {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    right: 0;
+  }
+}
+
+.header {
+  background-color: #c8e1ff;
+  border-radius: 30rpx;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  justify-content: space-between;
+  height: 300rpx;
+  margin: 22rpx 25rpx 0;
+  padding: 35rpx 60rpx 0;
+  z-index: 0;
+}
+
+.main {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.main--image__wrapper {
+  align-items: flex-end;
+  background-color: #fff;
+  border: 1px solid #ebebeb;
+  border-radius: 50%;
+  display: flex;
+  height: 117.75rpx;
+  overflow: hidden;
+  padding: 5rpx;
+  width: 117.75rpx;
+}
+
+.main--image__inner {
+  width: 100%;
+}
+
+.main--name {
+  color: #5a5d5d;
+  font-size: 30rpx;
+  font-weight: lighter;
+  line-height: 30rpx;
+  letter-spacing: 1.25px;
+  margin-top: 10rpx;
+}
+
+.main--btn {
+  align-items: center;
+  border-radius: 22.5rpx;
+  background-color: #fff;
+  color: #8a8a8a;
+  display: flex;
+  justify-content: center;
+  height: 45rpx;
+  font-size: 25rpx;
+  letter-spacing: 1.25px;
+  margin-top: 10rpx;
+  opacity: 0.82;
+  padding: 0;
+  width: 106rpx;
+}
+
+.aside {
+  height: 155rpx;
+  width: 406rpx;
+}
+
+.aside--item {
+  align-items: flex-end;
+  border-bottom: 2rpx solid #fff;
+  display: flex;
+  font-size: 30rpx;
+  font-weight: lighter;
+  letter-spacing: 1.25px;
+  margin: 15rpx 0 5rpx;
+  text-indent: 10rpx;
+  height: 50rpx;
+}
+
+.header--fly {
+  height: 110rpx;
+  position: absolute;
+  right: 32rpx;
+  top: 25rpx;
+  width: 120rpx;
+}
+
+.header--fly__inner {
+  width: 100%;
+  height: 100%;
+}

@@ -1,0 +1,41 @@
+/* pages/Profile/childCpn/profile-middle-icon/profile-middle-icon.wxss */
+.middle--item {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 55rpx 0 40rpx;
+}
+
+.middle--title {
+  height: 32rpx;
+  margin-right: 40rpx;
+  width: 32rpx;
+}
+
+.middle--main {
+  align-items: center;
+  display: flex;
+  font-size: 30rpx;
+  flex: 1;
+  justify-content: flex-start;
+  letter-spacing: 1.25rpx;
+  line-height: 30rpx;
+}
+
+.middle--main__describe {
+  color: #5a5d5d;
+  margin-right: 20rpx;
+}
+
+.middle--main__yellow {
+  color: #ffc241;
+}
+
+.middle--main__blue {
+  color: #54a2fe;
+}
+
+.middle--aside {
+  height: 24rpx;
+  width: 14rpx;
+}

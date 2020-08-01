@@ -1,0 +1,55 @@
+/* pages/Practice/Practice.wxss */
+page {
+  animation: in 1s ease-in forwards;
+
+}
+.middle {
+  z-index: 3;
+  position: relative;
+  margin-top: 25rpx;
+}
+
+@keyframes in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.middle--div {
+  background-color: #D9D9DA;
+  height: 2rpx;
+  margin: 30rpx 0 30rpx 115rpx;
+  width: 635rpx;    
+}
+
+.middle--map {
+  height: 150rpx;
+  margin: 50rpx 25rpx 50rpx;
+  width: 700rpx;
+}
+
+.footer__up,
+.footer__down {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 103rpx;
+}
+
+.footer__down {
+  margin-top: 30rpx;
+}
+
+.gugugu {
+  margin:  40rpx auto 0;
+  height: 231rpx;
+  width: 187rpx;
+}
+
+.gugugu image {
+  width: 100%;
+  height: 100%;
+  opacity: 0.6;
+}
