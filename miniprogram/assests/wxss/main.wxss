@@ -65,6 +65,7 @@ page {
   color: var(--black);
   font-family: Helvetica Neue, Helvetica, sans-serif;
   --box-shadow: 0 2px 12px currentColor;
+  --box-shadow-common: 2rpx 5.5rpx 2rpx rgba(0, 0, 0, 0.2);
 }
 
 /* ==================

@@ -6,25 +6,17 @@ Component({
   properties: {
     comment_list: {
       type: Array,
-      value: []    
+      value: [],
     },
   },
 
   /**
    * 组件的初始数据
    */
-  data: {
-    comment_list:[{
-      name:"hzx",
-      textarea:"yeahiloveitqwertyuioplkjhgfdsazxcvbnmmmmmmmmmmmmmmffffffffff",
-      title:"somanybugs"
-    }]
-  },
+  data: {},
 
   /**
    * 组件的方法列表
    */
-  methods: {
-
-  }
-})
+  methods: {},
+});

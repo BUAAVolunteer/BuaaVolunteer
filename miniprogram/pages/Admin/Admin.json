@@ -1,9 +1,10 @@
 {
   "component": true,
+  "navigationBarTitleText": "管理员界面",
   "usingComponents": {
-    "FeedbackComment":"/pages/Admin/FeedbackComment/FeedbackComment",
-    "Score":"/pages/Admin/Score/Score",
-    "Absence":"/pages/Admin/Absence/Absence",
-    "Manage":"/pages/Manage/Manage"
+    "FeedbackComment": "/pages/Admin/FeedbackComment/FeedbackComment",
+    "Score": "/pages/Admin/Score/Score",
+    "Absence": "/pages/Admin/Absence/Absence",
+    "Manage": "/pages/Manage/Manage"
   }
 }

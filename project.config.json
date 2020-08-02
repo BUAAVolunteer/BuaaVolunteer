@@ -59,51 +59,10 @@
 			"current": -1,
 			"list": [
 				{
-					"id": -1,
-					"name": "db guide",
-					"pathName": "pages/databaseGuide/databaseGuide",
-					"query": ""
-				},
-				{
-					"id": 1,
-					"name": "form",
-					"pathName": "pages/Recruit/Form/Form",
-					"query": "title=北航一日游&stime=2020-01-01&qqnum=2423248790",
-					"scene": null
-				},
-				{
-					"id": 2,
-					"name": "pages/Manage/DataExport/DataExport",
-					"pathName": "pages/Manage/DataExport/DataExport",
-					"query": "title=北航一日游&date=2020-01-01",
-					"scene": null
-				},
-				{
 					"id": 3,
 					"name": "Confirm时长确认",
 					"pathName": "pages/Manage/Confirm/Confirm",
 					"query": "title=国家图书馆",
-					"scene": null
-				},
-				{
-					"id": 5,
-					"name": "feedbackComment",
-					"pathName": "pages/Admin/FeedbackComment/FeedbackComment",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 5,
-					"name": "pages/Manage/FormEdit/FormEdit",
-					"pathName": "pages/Manage/FormEdit/FormEdit",
-					"query": "title=北航一日游",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/Admin/FeedbackComment/FeedbackComment",
-					"pathName": "pages/Admin/FeedbackComment/FeedbackComment",
-					"query": "",
 					"scene": null
 				},
 				{
@@ -118,6 +77,13 @@
 					"name": "Practice",
 					"pathName": "pages/Practice/Practice",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "Admin",
+					"pathName": "pages/Admin/Admin",
+					"query": "title=北航一日游",
 					"scene": null
 				}
 			]

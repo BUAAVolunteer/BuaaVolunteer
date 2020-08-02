@@ -5,4 +5,5 @@
 
 .wrapper{
   padding: 20rpx;
+  height: 1300rpx;
 }

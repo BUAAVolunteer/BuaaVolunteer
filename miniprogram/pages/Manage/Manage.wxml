@@ -1,9 +1,5 @@
-<view class="bg">
-  <image class="bg-img" src="/assests/image/shu.jpg" />
-</view>
-<!-- 标题图片 -->
-<view class="header">
-  <image class="header-img" src="/assests/icons/manage/manage.png" />
+<view class="title">
+  志愿列表
 </view>
 <scroll-view scroll-y="{{true}}" class="main">
   <block wx:for="{{projectList}}">
