@@ -1,0 +1,38 @@
+.wrapper {
+  border: 1px solid grey;
+  display: flex;
+  flex-direction: column;
+  margin-top: 70rpx;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  width: 310rpx;
+  box-shadow: 0 1rpx 3rpx rgba(0, 0, 0, 0.2);
+  border-radius: 25rpx;
+}
+
+.header {
+  width: 100%;
+  height: 230rpx;
+}
+
+.header__inner {
+  width: 100%;
+  height: 100%;
+  border-top-left-radius: 25rpx;
+  border-top-right-radius: 25rpx;
+}
+
+.title {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  height: 50rpx;
+  margin-top: 10rpx;
+  margin-bottom: 10rpx;
+}
+
+.title--inner {
+  font-size: 30rpx;
+  font-family: Microsoft YaHei;
+  font-weight: bold;
+}

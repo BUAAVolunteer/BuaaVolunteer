@@ -1,123 +1,44 @@
 /*@import "../../wxSearchView/wxSearchView.wxss";*/
-
-.padding-xl {
-    padding-top: 0rpx;
-    padding-left: 0rpx;
-    padding-right: 0rpx;
-    padding-bottom: 0rpx;
-    box-shadow: 0 0rpx 3rpx rgba(0, 0, 0, 0.2);
+page {
+  background-color: #fff;
 }
 
-.kind-list {
-    height: auto;
-    overflow: hidden;
-    justify-content: space-between;
-    align-items: center;
+.wrapper {
+  height: 90vh; 
 }
 
-.my_title {
-    display: flex;
-    align-items: center;
-    padding: 10rpx;
-    background-color: #ffffff;
+/* flex设置所有的在一行，flex-wrap设置允许换行  */
+/* 关键在align-content，多行对齐方式，flex-start表示向上对齐 */
+/* justify...代表水平轴对齐方式，目前采用的方法会导致独立的居中，如果想改可以改 */
+.swiper-main {
+  align-content: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  height: auto;
 }
-
-.logo {
-    flex: 7;
-}
-
-.search_img {
-    padding-top: 10rpx;
-}
-
-.title {
-    color: var(--black);
-    justify-content: center;
-    font-weight: bold;
-}
-
-.search_icon {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.user_icon {
-    flex: 2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.video_wrap {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 10rpx;
-    justify-content: space-between;
-    margin: 5rpx;
-}
-
-.video_item {
-    width: 48%;
-    margin-bottom: 20rpx;
-}
-
-.video_img image {
-    width: 100%;
-    height: 230rpx;
-}
-
-.video_img {
-    position: relative;
-}
-
-.video_title {
-    font-size: 28rpx;
-    display: -webkit-box;
-    white-space: space normal;
-    text-overflow: ellipsis;
-    word-wrap: break-word;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-}
-
 
 /*滑动组件*/
 
 .swiper-tab {
-    width: 100%;
-    border-bottom: 2rpx solid #eeeeee;
-    text-align: center;
-    line-height: 80rpx;
-    height: 88rpx;
-    display: flex;
-    flex-flow: row;
-    justify-content: space-between;
+  width: 100%;
+  border-bottom: 2rpx solid #eee;
+  text-align: center;
+  line-height: 80rpx;
+  height: 88rpx;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
 }
 
 .swiper-tab-item {
-    font-size: 30rpx;
-    display: inline-block;
-    width: 50%;
-    color: #666666;
+  font-size: 30rpx;
+  display: inline-block;
+  width: 50%;
+  color: #666;
 }
 
 .active {
-    color: var(--blue);
-    border-bottom: 4rpx solid var(--blue);
-}
-
-.swiper {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    position: fixed;
-    text-align: center;
-    font-weight: bold;
-}
-
-scroll-view {
-    width: 100%;
-    height: 93%;
+  color: var(--blue);
+  border-bottom: 4rpx solid var(--blue);
 }

@@ -1,0 +1,8 @@
+<navigator url="../detail/detail?id={{iconInf.id}}" class="wrapper" wx:key="index">
+  <view class="header">
+    <image class="header__inner" src="{{iconInf.imgSrc}}"/>
+  </view>
+  <view class="title">
+    <text class="title--inner">{{iconInf.desc}}</text>
+  </view>
+</navigator>

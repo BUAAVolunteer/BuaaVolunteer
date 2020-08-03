@@ -1,4 +1,6 @@
 {
-    "usingComponents": {},
+    "usingComponents": {
+      "volunteer-swiper":"./childCpn/volunteer-swiper/volunteer-swiper"
+    },
     "navigationBarTitleText": "志愿项目"
 }
