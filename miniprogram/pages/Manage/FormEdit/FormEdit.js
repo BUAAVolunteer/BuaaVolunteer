@@ -84,6 +84,7 @@ Component({
             for (let i = 0; i < res.data.length; i++) {
               if (res.data[i].title === title) {
                 formData = res.data[i];
+                console.log(title)
                 break;
               }
             }
@@ -108,46 +109,49 @@ Component({
           }
         })
         .then(() => {
+          console.log(formData)
           let formLength = formData.formInfo.length;
-          if ("id" in formData.formInfo[0]) {
-            for (let i = 0; i < formLength; i++) {
-              delete formData.formInfo[i].id;
+          if (formLength) {
+            if ("id" in formData.formInfo[0]) {
+              for (let i = 0; i < formLength; i++) {
+                delete formData.formInfo[i].id;
+              }
             }
-          }
-          if ("data" in formData.formInfo[0]) {
-            for (let i = 0; i < formLength; i++) {
-              formData.formInfo[i].option = formData.formInfo[i].data;
-              delete formData.formInfo[i].data;
+            if ("data" in formData.formInfo[0]) {
+              for (let i = 0; i < formLength; i++) {
+                formData.formInfo[i].option = formData.formInfo[i].data;
+                delete formData.formInfo[i].data;
+              }
             }
-          }
-          if ("text" in formData.formInfo[0]) {
-            for (let i = 0; i < formLength; i++) {
-              formData.formInfo[i].describe = formData.formInfo[i].text;
-              delete formData.formInfo[i].text;
+            if ("text" in formData.formInfo[0]) {
+              for (let i = 0; i < formLength; i++) {
+                formData.formInfo[i].describe = formData.formInfo[i].text;
+                delete formData.formInfo[i].text;
+              }
             }
-          }
-          if ("force" in formData.formInfo[0]) {
-            for (let i = 0; i < formLength; i++) {
-              formData.formInfo[i].isForce = formData.formInfo[i].force;
-              delete formData.formInfo[i].force;
+            if ("force" in formData.formInfo[0]) {
+              for (let i = 0; i < formLength; i++) {
+                formData.formInfo[i].isForce = formData.formInfo[i].force;
+                delete formData.formInfo[i].force;
+              }
             }
-          }
-          if ("limit" in formData.formInfo[0]) {
-            for (let i = 0; i < formLength; i++) {
-              formData.formInfo[i].isLimit = formData.formInfo[i].limit;
-              delete formData.formInfo[i].limit;
+            if ("limit" in formData.formInfo[0]) {
+              for (let i = 0; i < formLength; i++) {
+                formData.formInfo[i].isLimit = formData.formInfo[i].limit;
+                delete formData.formInfo[i].limit;
+              }
             }
-          }
-          if ("duration" in formData.formInfo[0]) {
-            for (let i = 0; i < formLength; i++) {
-              formData.formInfo[i].isDuration = formData.formInfo[i].duration;
-              delete formData.formInfo[i].duration;
+            if ("duration" in formData.formInfo[0]) {
+              for (let i = 0; i < formLength; i++) {
+                formData.formInfo[i].isDuration = formData.formInfo[i].duration;
+                delete formData.formInfo[i].duration;
+              }
             }
-          }
-          if ("detail" in formData.formInfo[0]) {
-            for (let i = 0; i < formLength; i++) {
-              formData.formInfo[i].isNote = formData.formInfo[i].detail;
-              delete formData.formInfo[i].detail;
+            if ("detail" in formData.formInfo[0]) {
+              for (let i = 0; i < formLength; i++) {
+                formData.formInfo[i].isNote = formData.formInfo[i].detail;
+                delete formData.formInfo[i].detail;
+              }
             }
           }
           formLinkedList = Util.toLinkedList(formData.formInfo);

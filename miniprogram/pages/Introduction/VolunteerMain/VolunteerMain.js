@@ -20,7 +20,7 @@ Page({
         var that = this
         var indexId = options.id
             //  调用login云函数获取openid
-        db.collection('test').doc(options.id).get({
+        db.collection('introduction').doc(options.id).get({
             success: function(res) {
                 // res.data 包含该记录的数据
                 //console.log(res)
