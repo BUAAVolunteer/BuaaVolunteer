@@ -4,7 +4,7 @@
   flex-direction: column;
   justify-content: space-around;
   height: 160rpx;
-  padding: 20rpx 0;
+  padding: 0 0 20rpx;
 }
 
 .picker-header__force {

@@ -1,108 +1,20 @@
-.bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 750rpx;
-    height: 100%;
-    background-size: cover;
-    z-index: -1;
+page {
+  background-color: white;
 }
 
-page {
-    background-color: white;
+.img,
+.middle-img,
+.bottom-img {
+  width: 750rpx;
+}
+
+.middle-img {
+  margin-top: 120rpx;
+  margin-bottom: 20rpx;
 }
 
 .bottom-img {
-    position: absolute;
-    left: 0;
-    top: 1100rpx;
-}
-
-image {
-    max-width: 100%;
-    display: inline-block;
-    position: relative;
-    z-index: 0;
-    width: 750rpx;
-}
-
-.icon {
-    width: 100rpx;
-    height: 80rpx;
-}
-
-.clock {
-    height: 110rpx;
-    width: 130rpx;
-}
-
-.center {
-    display: flex;
-    justify-content: center;
-}
-
-.step1 {
-    position: absolute;
-    left: 0rpx;
-    top: 890rpx;
-}
-
-.icon1 {
-    height: 100rpx;
-    width: 100rpx;
-}
-
-.step2 {
-    position: absolute;
-    left: 310rpx;
-    top: 930rpx;
-}
-
-.icon2 {
-    width: 250rpx;
-    height: 80rpx;
-}
-
-.step3 {
-    position: absolute;
-    left: 160rpx;
-    top: 720rpx;
-}
-
-.icon3 {
-    width: 180rpx;
-    height: 90rpx;
-}
-
-.step4 {
-    position: absolute;
-    left: 500rpx;
-    top: 700rpx;
-}
-
-.icon4 {
-    width: 120rpx;
-    height: 100rpx;
-}
-
-.step5 {
-    position: absolute;
-    left: 340rpx;
-    top: 560rpx;
-}
-
-.icon5 {
-    width: 160rpx;
-    height: 70rpx;
-}
-
-.step6 {
-    position: absolute;
-    left: 570rpx;
-    top: 450rpx;
-}
-
-.icon6 {
-    width: 140rpx;
-    height: 60rpx;
+  position: absolute;
+  left: 0;
+  top: 1100rpx;
 }

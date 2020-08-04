@@ -1,4 +1,8 @@
 {
-    "usingComponents": {},
+    "usingComponents": {
+        "lx-input": "/components/lx-input/lx-input",
+        "lx-picker": "/components/lx-picker/lx-picker",
+        "lx-button": "/components/lx-button/lx-button"
+    },
     "navigationBarTitleText": "志愿者注册"
 }

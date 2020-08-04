@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "map-middle-icon":"../childCpn/map-middle-icon/map-middle-icon"
+  },
   "navigationBarTitleText": "志愿地图"
 }

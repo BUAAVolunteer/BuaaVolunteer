@@ -85,6 +85,13 @@
 					"pathName": "pages/Admin/Admin",
 					"query": "title=北航一日游",
 					"scene": null
+				},
+				{
+					"id": 4,
+					"name": "PersonEdit",
+					"pathName": "pages/Profile/PersonEdit/PersonEdit",
+					"query": "score=0",
+					"scene": null
 				}
 			]
 		}
