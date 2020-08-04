@@ -11,13 +11,21 @@
 <!-- 用swiper来切换,这里的currentTab就是js里修改的-->
 <swiper class="wrapper" current="{{currentTab}}" bindchange="swiperTab">
   <swiper-item class="swiper-main">
-    <block wx:for="{{volunteerIcon}}" wx:key="index">
-      <volunteer-swiper iconInf="{{item}}"></volunteer-swiper>
-    </block>
+    <scroll-view scroll-y="{{true}}" style="height:100%">
+      <view class="swiper-main">
+        <block wx:for="{{volunteerIcon}}" wx:key="index">
+          <volunteer-swiper iconInf="{{item}}"></volunteer-swiper>
+        </block>
+      </view>
+    </scroll-view>
   </swiper-item>
-  <swiper-item class="swiper-main">
-    <block wx:for="{{volunteerIcon2}}" wx:key="index">
-      <volunteer-swiper iconInf="{{item}}"></volunteer-swiper>
-    </block>
+  <swiper-item >
+    <scroll-view scroll-y="{{true}}" style="height:100%">
+      <view class="swiper-main">
+        <block wx:for="{{volunteerIcon2}}" wx:key="index">
+          <volunteer-swiper iconInf="{{item}}"></volunteer-swiper>
+        </block>
+      </view>
+    </scroll-view>
   </swiper-item>
 </swiper>

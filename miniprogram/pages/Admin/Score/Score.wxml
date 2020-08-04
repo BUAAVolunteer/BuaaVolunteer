@@ -1,4 +1,4 @@
-<scroll-view class="wrapper" scroll-y="{{true}}">s
+<scroll-view class="wrapper" scroll-y="{{true}}">
   <view bindsubmit="identify" report-submit="true">
     <lx-input title="手机号" model:content="{{tele}}" placeholder="请输入11位手机号" />
     <lx-picker

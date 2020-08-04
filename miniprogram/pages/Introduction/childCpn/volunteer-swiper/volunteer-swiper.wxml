@@ -1,4 +1,4 @@
-<navigator url="../detail/detail?id={{iconInf.id}}" class="wrapper" wx:key="index">
+<navigator url="VolunteerMain/VolunteerMain?id={{iconInf.id}}" class="wrapper">
   <view class="header">
     <image class="header__inner" src="{{iconInf.imgSrc}}"/>
   </view>
