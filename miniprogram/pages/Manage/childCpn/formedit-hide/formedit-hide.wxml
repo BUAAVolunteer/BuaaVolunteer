@@ -15,7 +15,7 @@
         <view class="title">{{typeValue}}</view>
         <image
           class="header-content-image"
-          src="/assests/icons/formedit/down.png"
+          src="/assets/icons/formedit/down.png"
           mode="widthFix"
         ></image>
       </view>

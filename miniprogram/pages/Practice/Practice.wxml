@@ -5,19 +5,19 @@
 <!-- 中部 -->
 <view class="middle">
   <profile-middle-icon
-    icon="/assests/icons/profile/time.png"
+    icon="/assets/icons/profile/time.png"
     describe="志愿历史："
     content="{{person.time}} 小时"
   />
   <view class="middle--div"></view>
   <profile-middle-icon
-    icon="/assests/icons/profile/score.png"
+    icon="/assets/icons/profile/score.png"
     describe="志愿积分："
     content="{{person.score}} 分"
     color="blue"
   />
   <!-- 地图 -->
-  <image class="middle--map" src="/assests/image/profile/map.png" />
+  <image class="middle--map" src="/assets/image/profile/map.png" />
   <view class="footer__up">
     <profile-footer-icon type="1" content="新手教程"></profile-footer-icon>
     <profile-footer-icon type="2" content="问题反馈"></profile-footer-icon>
@@ -29,6 +29,6 @@
     <profile-footer-icon type="6" content="联系我们"></profile-footer-icon>
   </view>
   <view class="gugugu">
-    <image mode="widthFix" src="/assests/image/profile/gu.png" />
+    <image mode="widthFix" src="/assets/image/profile/gu.png" />
   </view>
 </view>

@@ -41,20 +41,20 @@
     "list": [
       {
         "pagePath": "pages/Main/Main",
-        "iconPath": "assests/icons/component.png",
-        "selectedIconPath": "assests/icons/component_cur.png",
+        "iconPath": "assets/icons/component.png",
+        "selectedIconPath": "assets/icons/component_cur.png",
         "text": "主页"
       },
       {
         "pagePath": "pages/Recruit/Recruit",
-        "iconPath": "assests/icons/plugin.png",
-        "selectedIconPath": "assests/icons/plugin_cur.png",
+        "iconPath": "assets/icons/plugin.png",
+        "selectedIconPath": "assets/icons/plugin_cur.png",
         "text": "志愿招募"
       },
       {
         "pagePath": "pages/Profile/Profile",
-        "iconPath": "assests/icons/about.png",
-        "selectedIconPath": "assests/icons/about_cur.png",
+        "iconPath": "assets/icons/about.png",
+        "selectedIconPath": "assets/icons/about_cur.png",
         "text": "我的"
       }
     ]

@@ -11,18 +11,18 @@
   top: 0;
 }
 
-.forward__left,
-.forward__right {
+.forward--left,
+.forward--right {
   top: 288rpx;
   z-index: 1;
 }
 
-.forward__left {
+.forward--left {
   left: -100vw;
   animation: toRight 1.5s ease-in forwards;
 }
 
-.forward__right {
+.forward--right {
   right: -100vw;
   animation: toLeft 1.5s ease-in forwards;
 }

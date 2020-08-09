@@ -1,5 +1,5 @@
 <!-- miniprogram/pages/want/want.wxml -->
-<image src="/assests/image/feedback.jpg" mode="widthFix" class="header"></image>
+<image src="/assets/image/feedback.jpg" mode="widthFix" class="header"></image>
 <view class="wrapper">
   <lx-picker
     mode="selector"

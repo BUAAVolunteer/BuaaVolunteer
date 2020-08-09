@@ -10,5 +10,5 @@
 </view>
 <!-- 蓝小咕咕咕咕 -->
 <navigator url="/pages/Main/UpdateLog/UpdateLog" open-type="navigate" hover-class="none">
-  <image class="gugugu" mode="aspectFit" src="/assests/image/gu.png" />
+  <image class="gugugu" mode="aspectFit" src="/assets/image/gu.png" />
 </navigator>

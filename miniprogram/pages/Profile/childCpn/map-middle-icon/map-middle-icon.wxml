@@ -1,10 +1,10 @@
 <!--pages/Profile/childCpn/map-middle-icon/map-middle-icon.wxml-->
 <view wx:if="{{isShow}}" class="step{{step}}">
-  <image class="icon{{step}}" src="/assests/image/step{{step}}.png" mode="widthFix"/>
+  <image class="icon{{step}}" src="/assets/image/step{{step}}.png" mode="widthFix"/>
   <view class="center">
     Step {{step}}
   </view>
 </view>
 <view wx:else class="step{{step}}">
-  <image class="clock" src="/assests/image/lock.png" mode="widthFix"/>
+  <image class="clock" src="/assets/image/lock.png" mode="widthFix"/>
 </view>

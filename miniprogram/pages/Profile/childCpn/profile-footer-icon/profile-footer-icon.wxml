@@ -1,7 +1,7 @@
 <!--pages/Profile/childCpn/profile-footer-icon/profile-footer-icon.wxml-->
 <view class="wrapper">
   <view class="icon">
-    <image class="icon__type{{type}}" src="/assests/icons/profile/icon{{type}}.png" />
+    <image class="icon__type{{type}}" src="/assets/icons/profile/icon{{type}}.png" />
   </view>
   <view class="content">{{content}}</view>
 </view>

@@ -1,4 +1,4 @@
 <!-- 首页页面logo -->
 <view class="logo-position">
-  <image class="logo-img" mode="widthFix" src="/assests/image/logo.png" />
+  <image class="logo-img" mode="widthFix" src="/assets/image/logo.png" />
 </view>

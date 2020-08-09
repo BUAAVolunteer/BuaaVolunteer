@@ -2,17 +2,17 @@
 <view class="wrapper" hover-class="none" hover-stop-propagation="false">
   <view class="header {{project.open ? 'header-show':''}}">
     <!--准备发布-->
-    <image wx:if="{{isPreparing}}" class="header-img" src="/assests/icons/manage/yes.png" />
+    <image wx:if="{{isPreparing}}" class="header-img" src="/assets/icons/manage/yes.png" />
     <!--正在招募-->
-    <image wx:elif="{{isRecruit}}" class="header-img" src="/assests/icons/manage/working.png" />
+    <image wx:elif="{{isRecruit}}" class="header-img" src="/assets/icons/manage/working.png" />
     <!--表单待编辑-->
     <image
       wx:elif="{{project.check==0}}"
       class="header-img"
-      src="/assests/icons/manage/warning.png"
+      src="/assets/icons/manage/warning.png"
     />
     <!--招募结束/为编辑详细信息-->
-    <image wx:else class="header-img" src="/assests/icons/manage/stop.png" />
+    <image wx:else class="header-img" src="/assets/icons/manage/stop.png" />
     <view class="header-text">
       {{project.title}}
     </view>
@@ -25,31 +25,31 @@
     <!--不能打开的按钮一-->
     <lx-nav-pt
       wx:if="{{isRecruit}}"
-      navImg="/assests/icons/manage/detail.png"
+      navImg="/assets/icons/manage/detail.png"
       navText="详细信息"
     ></lx-nav-pt>
     <lx-nav-pt
       navUrl="/pages/Manage/Detail/Detail?title={{project.title}}"
-      navImg="/assests/icons/manage/detail.png"
+      navImg="/assets/icons/manage/detail.png"
       navText="详细信息"
     ></lx-nav-pt>
     <!--不能打开的按钮二-->
     <lx-nav-pt
       wx:if="{{isRecruit}}"
       navUrl="/pages/Manage/FormEdit/FormEdit?title={{project.title}}"
-      navImg="/assests/icons/manage/edit.png"
+      navImg="/assets/icons/manage/edit.png"
       navText="编辑表单"
     ></lx-nav-pt>
     <!--按钮二-->
     <lx-nav-pt
       navUrl="/pages/Manage/FormEdit/FormEdit?title={{project.title}}"
-      navImg="/assests/icons/manage/edit.png"
+      navImg="/assets/icons/manage/edit.png"
       navText="编辑表单"
     ></lx-nav-pt>
     <!--按钮三-->
     <lx-nav-pt
       navUrl="/pages/Manage/DataExport/DataExport?title={{project.title}}"
-      navImg="/assests/icons/manage/down.png"
+      navImg="/assets/icons/manage/down.png"
       navText="导出数据"
     ></lx-nav-pt>
   </view>

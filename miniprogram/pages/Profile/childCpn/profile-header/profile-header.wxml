@@ -1,7 +1,7 @@
 <!--pages/Profile/childCpn/profile-header/profile-header.wxml-->
-<image class="bg back" src="/assests/image/profile/back.png" />
-<image class="bg forward__left" mode="widthFix" src="/assests/image/profile/forward.png" />
-<image class="bg forward__right" mode="widthFix" src="/assests/image/profile/forward.png" />
+<image class="bg back" src="/assets/image/profile/back.png" />
+<image class="bg forward--left" mode="widthFix" src="/assets/image/profile/forward.png" />
+<image class="bg forward--right" mode="widthFix" src="/assets/image/profile/forward.png" />
 <!-- 头部 -->
 <view class="header">
   <!-- 主要部分 -->
@@ -28,6 +28,6 @@
   </view>
   <!-- 小飞机入口 -->
   <cover-view class="header--fly">
-    <cover-image class="header--fly__inner" src="/assests/image/profile/fly.png"></cover-image>
+    <cover-image class="header--fly__inner" src="/assets/image/profile/fly.png"></cover-image>
   </cover-view>
 </view>

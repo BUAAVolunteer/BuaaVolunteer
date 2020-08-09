@@ -1,18 +1,18 @@
 /* pages/Profile/childCpn/profile-middle-icon/profile-middle-icon.wxss */
-.middle--item {
+.middle__item {
   align-items: center;
   display: flex;
   justify-content: space-between;
   margin: 0 55rpx 0 40rpx;
 }
 
-.middle--title {
+.middle__title {
   height: 32rpx;
   margin-right: 40rpx;
   width: 32rpx;
 }
 
-.middle--main {
+.middle__main {
   align-items: center;
   display: flex;
   font-size: 30rpx;
@@ -22,20 +22,20 @@
   line-height: 30rpx;
 }
 
-.middle--main__describe {
+.middle__main--describe {
   color: #5a5d5d;
   margin-right: 20rpx;
 }
 
-.middle--main__yellow {
+.middle__main--yellow {
   color: #ffc241;
 }
 
-.middle--main__blue {
+.middle__main--blue {
   color: #54a2fe;
 }
 
-.middle--aside {
+.middle__aside {
   height: 24rpx;
   width: 14rpx;
 }

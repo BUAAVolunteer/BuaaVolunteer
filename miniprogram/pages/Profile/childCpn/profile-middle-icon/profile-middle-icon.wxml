@@ -1,9 +1,9 @@
 <!--pages/Profile/childCpn/profile-middle-icon/profile-middle-icon.wxml-->
-<view class="middle--item">
-  <image class="middle--title" src="{{icon}}" />
-  <view class="middle--main">
-    <view class="middle--main__describe">{{describe}}</view>
-    <view class="middle--main__{{color}}">{{content}}</view>
+<view class="middle__item">
+  <image class="middle__title" src="{{icon}}" />
+  <view class="middle__main">
+    <view class="middle__main--describe">{{describe}}</view>
+    <view class="middle__main--{{color}}">{{content}}</view>
   </view>
-  <image class="middle--aside" src="/assests/icons/profile/arrow.png" />
+  <image class="middle__aside" src="/assets/icons/profile/arrow.png" />
 </view>
