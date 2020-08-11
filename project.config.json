@@ -99,6 +99,20 @@
 					"pathName": "pages/Profile/History/History",
 					"query": "score=0",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/Manage/FormEdit/FormEdit",
+					"pathName": "pages/Manage/FormEdit/FormEdit",
+					"query": "name=北航一日游",
+					"scene": null
+				},
+				{
+					"id": 7,
+					"name": "Detail",
+					"pathName": "pages/Manage/Detail/Detail",
+					"query": "title=发布一个新志愿",
+					"scene": null
 				}
 			]
 		}

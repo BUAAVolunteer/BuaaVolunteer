@@ -69,12 +69,21 @@ exports.main = async (event, context) => {
 			}
 			console.log("over:" + over)
 			if (over == 1){
-				db.collection('project').where({
+				return db.collection('project').where({
 					title: event.title
 				}).update({
 					data:{
 						check: -1
 					}
+				})
+				.then(() =>{
+					db.collection('form').where({
+						title: event.title
+					}).update({
+						data: {
+							isOver: true
+						}
+					})
 				})
 			}
 		})

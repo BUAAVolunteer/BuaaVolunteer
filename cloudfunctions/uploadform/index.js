@@ -32,7 +32,7 @@ exports.main = async (event, context) => {
 				data:{
 					formInfo: event.formInfo,
 					fieldName: event.fieldName,
-					over: 1
+					isOver: false
 				}
 			})
 		})

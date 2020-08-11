@@ -27,7 +27,6 @@ Component({
           // 选项列表
           {
             ID: 0,
-            checked: false,
             limit: 0,
             name: "",
             duration: 0,
@@ -212,13 +211,13 @@ Component({
         } else if (pattern2.test(n)) {
           // 取出限额limit
           dataitem.limit = parseInt(n.match(pattern)[0].replace(" ", ""));
-          isLimit = 1;
+          isLimit = true;
         } else if (pattern3.test(n)) {
           // 取出时长duration
           dataitem.limit = parseInt(n.match(pattern)[0].replace(" ", ""));
           dataitem.duration = parseInt(n.match(pattern)[1].replace(" ", ""));
-          isLimit = 1;
-          isDuration = 1;
+          isLimit = true;
+          isDuration = true;
         }
         // 错误判断
         else if (!isIllLegal) {
