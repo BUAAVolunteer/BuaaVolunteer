@@ -95,11 +95,11 @@ Component({
         if (res.data.length === 0){
           app.globalData.isRegister = 0
         }else{
-          app.globalData.personNum = res.data[0].personnum;
+          app.globalData.personNum = res.data[0].personNum;
           app.globalData.campus = res.data[0].campus;
           app.globalData.phone = res.data[0].phone;
-          app.globalData.qqNum = res.data[0].qqnum;
-          app.globalData.phone = res.data[0].phone;
+          app.globalData.qqNum = res.data[0].qqNum;
+          app.globalData.name = res.data[0].name;
           app.globalData.isRegister = 1
         }
       }).then(() =>{

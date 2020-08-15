@@ -21,9 +21,9 @@ exports.main = async(event, context) => {
                 _openid: event.id,
                 name: event.name,
                 phone: event.phone,
-                personnum: event.personnum,
+                personNum: event.personNum,
                 text: event.text,
-                qqnum: event.qqnum,
+                qqNum: event.qqNum,
                 campus: event.campus
             }
         })
@@ -34,9 +34,9 @@ exports.main = async(event, context) => {
                     _openid: event.id,
                     name: event.name,
                     phone: event.phone,
-                    personnum: event.personnum,
+                    personNum: event.personNum,
                     text: event.text,
-                    qqnum: event.qqnum,
+                    qqNum: event.qqNum,
                     campus: event.campus,
                     score: 0
                 }

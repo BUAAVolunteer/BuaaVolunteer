@@ -3,17 +3,17 @@ const db = wx.cloud.database();
 const _ = db.command;
 const app = getApp();
 let watcher = null; //监听事件
-let getname, getphone, getpersonnum, getqqnum, getcampus; //person集合获取的信息
-let uplist = [], //总上传数据
-  listitem = []; //一个人的信息
-let qqnum;
+let getName, getPhone, getPersonNum, getQQNum, getCampus; //person集合获取的信息
+let uploadList = [], //总上传数据
+  listItem = []; //一个人的信息
+let qqNum;
 Page({
   /**
    * 页面的初始数据
    */
   data: {
     title: "",
-    stime: "",
+    signUpTime: "",
     formList: {},
     loading: false,
   },
@@ -22,15 +22,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    //console.log(options.title, options.stime)
+    //console.log(options.title, options.signUpTime)
     //app.globalData.openid = "oN3gs5FbaOwv3o1lj0WjWEcp8VRo";
-    qqnum = options.qqnum;
-    //console.log(qqnum)
+    qqNum = options.qqNum;
+    //console.log(qqNum)
     wx.showLoading({
       title: "加载中",
     });
     this.setData({
-      stime: options.stime,
+      signUpTime: options.signUpTime,
     });
     let that = this;
     let ti = options.title;
@@ -43,12 +43,12 @@ Page({
       .get({
         success: function (res) {
           //console.log(res);
-          getname = res.data[0].name;
-          getphone = res.data[0].phone;
-          getpersonnum = res.data[0].personnum;
-          getqqnum = res.data[0].qqnum;
-          getcampus = res.data[0].campus;
-          //console.log(getname, getphone, getpersonnum, getqqnum, getcampus);
+          getName = res.data[0].name;
+          getPhone = res.data[0].phone;
+          getPersonNum = res.data[0].personNum;
+          getQQNum = res.data[0].qqNum;
+          getCampus = res.data[0].campus;
+          //console.log(getName, getPhone, getPersonNum, getQQNum, getCampus);
 
           db.collection("form")
             .where({
@@ -197,11 +197,11 @@ Page({
     this.setData({
       loading: true,
     });
-    listitem.push(getname);
-    listitem.push(getphone);
-    listitem.push(getpersonnum);
-    listitem.push(getqqnum);
-    listitem.push(getcampus);
+    listItem.push(getName);
+    listItem.push(getPhone);
+    listItem.push(getPersonNum);
+    listItem.push(getQQNum);
+    listItem.push(getCampus);
 
     let that = this;
     let duration = 0;
@@ -252,10 +252,10 @@ Page({
             let instr = v.choose.reduce(function (preValue, n) {
               return preValue + n.input_text + ";";
             }, "");
-            listitem.push(instr);
+            listItem.push(instr);
           }
         } //对于input组件
-        else listitem.push(input);
+        else listItem.push(input);
 
         //计算时长，添加时间备注
         if (v.isDuration)
@@ -274,13 +274,13 @@ Page({
         that.setData({
           loading: false,
         });
-        listitem = [];
+        listItem = [];
         return 0;
       }
     }
     //合法性检验完毕
     //本地防线，如果没有时长则不允许提交
-    console.log(listitem)
+    console.log(listItem)
     if (duration == 0) {
       that.setData({
         loading: false,
@@ -290,29 +290,29 @@ Page({
         content: "您所选择的部分选项已满，请重新选择！",
         showCancel: false,
       });
-      listitem = [];
+      listItem = [];
       //that.watch();
       return;
     }
-    listitem.push(app.globalData.openid);
-    listitem.push(duration);
-    listitem.push(detail);
+    listItem.push(app.globalData.openid);
+    listItem.push(duration);
+    listItem.push(detail);
     console.log(limit);
-    console.log(listitem);
-    uplist.push(listitem);
-    listitem = [];
-    console.log(uplist);
+    console.log(listItem);
+    uploadList.push(listItem);
+    listItem = [];
+    console.log(uploadList);
     wx.cloud.callFunction({
       name: "uploadData",
       data: {
         title: that.data.formList.title,
-        stime: that.data.stime,
-        list: uplist,
+        signUpTime: that.data.signUpTime,
+        list: uploadList,
         limit: limit,
       },
       success: function (res) {
         //console.log(res)
-        uplist = [];
+        uploadList = [];
         console.log(res)
         if (res.result === "error") {
           wx.showModal({
@@ -335,7 +335,7 @@ Page({
               title: that.data.formList.title,
               openid: app.globalData.openid,
               date: detail,
-              detail: "QQ群" + qqnum,
+              detail: "QQ群" + qqNum,
             },
             success: function (res) {
               that.setData({
@@ -345,7 +345,7 @@ Page({
               wx.showModal({
                 title: "提交成功",
                 content:
-                  "请留意微信消息，并加入\nqq群:" + qqnum + "\n以便志愿开展",
+                  "请留意微信消息，并加入\nqq群:" + qqNum + "\n以便志愿开展",
                 showCancel: false,
                 success: function () {
                   wx.redirectTo({
@@ -366,7 +366,7 @@ Page({
           content: "请检查网络或重新提交",
           showCancel: false,
         });
-        uplist = [];
+        uploadList = [];
         //that.watch();
       },
     });

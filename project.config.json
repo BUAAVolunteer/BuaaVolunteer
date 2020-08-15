@@ -25,7 +25,7 @@
 			"outputPath": ""
 		},
 		"useIsolateContext": true,
-		"useCompilerModule": true,
+		"useCompilerModule": false,
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"appid": "wxbef368e6c04e1ca1",
@@ -111,6 +111,13 @@
 					"id": 7,
 					"name": "Detail",
 					"pathName": "pages/Manage/Detail/Detail",
+					"query": "title=发布一个新志愿",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "Main",
+					"pathName": "pages/Main/Main",
 					"query": "title=发布一个新志愿",
 					"scene": null
 				}

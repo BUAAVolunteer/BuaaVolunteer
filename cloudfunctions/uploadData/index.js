@@ -90,11 +90,11 @@ exports.main = async (event, context) => {
 		.then(() => {
 			//向个人数据中添加报名成功记录
 			let inf = {};
-			inf.t = "待定";
-			inf.v = event.title;
-			inf.a = "待定";
-			inf.s = "待定";
-			inf.st = event.stime;
+			inf.duration = "待定";
+			inf.title = event.title;
+			inf.note = "待定";
+			inf.score = "待定";
+			inf.signUpTime = event.signUpTime;
 			console.log(inf)
 			let phone = uploadList[0][1];
 			db.collection('person').where({

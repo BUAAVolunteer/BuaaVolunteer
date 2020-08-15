@@ -115,7 +115,7 @@ Component({
         mask: "true",
       });
       //console.log(app.globalData.openid)
-      //console.log(e.detail.value.qqnum)
+      //console.log(e.detail.value.qqNum)
       //console.log(e.detail.value.campus)
 
       wx.cloud.callFunction({
@@ -126,13 +126,18 @@ Component({
           id: app.globalData.openid,
           name: e.detail.value.name,
           phone: e.detail.value.phone,
-          personNum: e.detail.value.personnum,
+          personNum: e.detail.value.personNum,
           text: e.detail.value.text,
-          qqNum: e.detail.value.qqnum,
+          qqNum: e.detail.value.qqNum,
           campus: picker[e.detail.value.campus],
         },
         success: function (res) {
           //console.log(res)
+          app.globalData.name = e.detail.value.name
+          app.globalData.phone = e.detail.value.phone
+          app.globalData.personNum = e.detail.value.personNum
+          app.globalData.qqNum = e.detail.value.qqNum
+          app.globalData.campus = picker[e.detail.value.campus]
           wx.hideLoading();
           wx.showModal({
             title: "信息更新成功",
@@ -140,7 +145,7 @@ Component({
             showCancel: false,
             success: function () {
               wx.switchTab({
-                url: "../about/about",
+                url: "../Profile",
               });
             },
           });

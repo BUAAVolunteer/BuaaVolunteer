@@ -13,11 +13,11 @@ exports.main = async (event, context) => {
   const db = cloud.database();
   const _ = db.command;
 	try {
-    //删除signup报名数据，转入history待确认数据
+    //将报名数据转入confirm待确认
     let his = {};
     his.time = event.time;
     his.data = event.list;
-    his.isCheck = 0;
+    his.isCheck = false;
     return db.collection('confirm').where({
       title: event.title
     }).update({
@@ -47,11 +47,13 @@ exports.main = async (event, context) => {
       */
     })
     .then(() => {
+      // 清空已报名以及内部名额数据，因此在添加内部名额前要确认已经导出报名表
       return db.collection('project').where({
         title: event.title
       }).update({
         data:{
-          signuplist: []
+          signupList: [],
+          innerList: []
         }
       })
     })
