@@ -8,7 +8,15 @@
       model:value="pickname"
       placeholder="请选择增减积分的志愿项目"
     />
-    <lx-button content="查询志愿" color="green" width="700rpx" />
+    <lx-picker title="志愿日期" mode="date" model:content="{{date}}" />
+    <lx-picker
+      mode="selector"
+      range="{{picker2}}"
+      title="积分变动情况"
+      model:value="scorechange"
+      placeholder="请选择积分变动情况"
+    />
+    <lx-button content="提交" color="green" width="700rpx" bindtap = "identify"/>
   </view>
 
   <view class="inform">
@@ -18,22 +26,4 @@
     <text class="margin">志愿积分：{{volun_score}}\n\n</text>
   </view>
 
-  <view class="margin">奖励积分</view>
-  <view class="padding flex flex-wrap justify-around align-center">
-    <lx-button content="添加内部名额" color="yellow" width="700rpx" />
-  </view>
-
-  <view class="margin">奖励积分</view>
-  <view class="padding flex flex-wrap justify-around align-center">
-    <lx-button content="提交感想" color="blue" width="700rpx" />
-    <lx-button content="优秀感想" color="blue" width="700rpx" />
-    <lx-button content="受到表扬" color="blue" width="700rpx" />
-  </view>
-  <view class="margin">惩罚积分</view>
-  <view>
-    <lx-button content="志愿迟到" color="red" width="700rpx" />
-    <lx-button content="受到批评" color="red" width="700rpx" />
-    <lx-button content="其他行为" color="red" width="700rpx" />
-    <view>与缺勤有关的失信情况，请前往缺勤者页面进行处理</view>
-  </view>
 </scroll-view>
