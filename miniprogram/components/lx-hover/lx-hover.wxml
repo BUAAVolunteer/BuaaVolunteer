@@ -1,0 +1,23 @@
+<!--components/lx-hover/lx-hover.wxml-->
+<view class="suspended">
+	<!-- 阴影 -->
+	<view class="onShow ? '' : 'hide'" bindtap="cancel" class="mask"></view>
+	<view class="onShow ? 'show' : 'hide'">
+		<view class="wrapper">
+			<view class="title">
+				{{ title }}
+			</view>
+			<view class="main">
+				<slot></slot>
+			</view>
+			<view class="footer">
+				<button wx:if="assureBtn" bindtap="submit">
+					{{ assureBtn }}
+				</button>
+				<button wx:if="cancelBtn" bindtap="cancel">
+					{{ cancelBtn }}
+				</button>
+			</view>
+		</view>
+	</view>
+</view>

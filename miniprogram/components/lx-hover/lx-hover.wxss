@@ -1,0 +1,61 @@
+/* components/lx-hover/lx-hover.wxss */
+.suspended {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.mask {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0.3;
+  z-index: 1628;
+}
+
+.show {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 350px;
+  opacity: 1;
+  position: fixed;
+  top: 20%;
+  z-index: 1629;
+}
+
+.hide {
+  position: fixed;
+  opacity: 0;
+  z-index: -1629;
+}
+
+.wrapper {
+  background-color: #fff;
+  border-radius: 12px;
+}
+
+.title {
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-align: center;
+  padding: 15px 30px;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px;
+}
