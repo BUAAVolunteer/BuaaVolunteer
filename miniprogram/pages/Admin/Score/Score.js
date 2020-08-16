@@ -14,7 +14,7 @@ Component({
   data: {
     tele: "", //输入的手机号
     pickname: "", //选定的志愿名称
-    scorechange: "",//积分变动原因
+    scoreChange: "",//积分变动原因
     picker: [],
     picker2: [
       "提交感想",
@@ -29,11 +29,11 @@ Component({
       "缺勤且未说明"
 
     ],
-    volun_name: "",
-    volun_phone: "",
-    volun_time: "",
-    volun_score: 0,
-    volun_id: "",
+    volunteerName: "",
+    volunteerPhone: "",
+    volunteerTime: "",
+    volunteerScore: 0,
+    volunteerID: "",
     person_list: [{}],
     index: null,
     index2: null,
@@ -47,7 +47,7 @@ Component({
       //console.log(e);
       this.setData({
         index: this.data.pickname,
-        index2: this.data.scorechange
+        index2: this.data.scoreChange
       });
     },
 
@@ -77,11 +77,11 @@ Component({
               });
             } else {
               that.setData({
-                volun_name: res.data[0].name,
-                volun_phone: res.data[0].phone,
-                volun_time: res.data[0].duration,
-                volun_score: res.data[0].score,
-                volun_id: res.data[0]._openid,
+                volunteerName: res.data[0].name,
+                volunteerPhone: res.data[0].phone,
+                volunteerTime: res.data[0].duration,
+                volunteerScore: res.data[0].score,
+                volunteerID: res.data[0]._openid,
               });
             }
             wx.hideLoading();
@@ -95,11 +95,11 @@ Component({
         title: "请稍后",
         mask: "true",
       });
-      var scorechange = this.data.scorechange;
-      var _id = this.data.volun_id;
+      var scoreChange = this.data.scoreChange;
+      var _id = this.data.volunteerID;
       var picker = this.data.picker;
       var title = picker[this.data.index];
-      if (scorechange === '添加内部名额') {
+      if (scoreChange === '添加内部名额') {
         wx.cloud.callFunction({
           // 云函数名称
           name: "innerSign",
@@ -116,16 +116,16 @@ Component({
           data: {
             openid: _id,
             title: title,
-            scorechange: scorechange,
+            scoreChange: scoreChange,
           }
         })
-        if (scorechange === '缺勤但提前说明' || scorechange === '缺勤但未提前说明' || scorechange === '缺勤且提前说明') {
+        if (scoreChange === '缺勤但提前说明' || scoreChange === '缺勤但未提前说明' || scoreChange === '缺勤且提前说明') {
           db.collection('blacklist').add({
             data: {
-              name: this.data.volun_name,
+              name: this.data.volunteerName,
               phone: this.data.tele,
               title: this.data.picker[this.data.pickname],
-              time: this.data.volun_time,
+              time: this.data.volunteerTime,
             },
           })
           db.collection('list').add({

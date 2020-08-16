@@ -28,6 +28,9 @@
   </view>
   <!-- 小飞机入口 -->
   <cover-view class="header--fly">
-    <cover-image class="header--fly__inner" src="/assets/image/profile/fly.png"></cover-image>
+    
+    <cover-image class="header--fly__inner" src="/assets/image/profile/fly.png" bindtap="admin"></cover-image>
+    
+    
   </cover-view>
 </view>

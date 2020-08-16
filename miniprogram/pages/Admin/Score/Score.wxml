@@ -13,7 +13,7 @@
       mode="selector"
       range="{{picker2}}"
       title="积分变动情况"
-      model:value="scorechange"
+      model:value="scoreChange"
       placeholder="请选择积分变动情况"
     />
     <lx-button content="提交" color="green" width="700rpx" bindtap = "identify"/>
