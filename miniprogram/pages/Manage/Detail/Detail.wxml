@@ -14,7 +14,7 @@
     <view class="label-name">招募信息</view>
   </view>
 
-  <lx-input wx:if="{{etitle==='发布一个新志愿'}}" title="活动名称" model:content="{{title}}" />
+  <lx-input wx:if="{{originTitle==='发布一个新志愿'}}" title="活动名称" model:content="{{title}}" />
 
   <lx-picker title="招募日期" mode="date" model:content="{{date}}" />
 
@@ -65,7 +65,7 @@
   />
   <lx-input
     title="qq群号"
-    model:content="{{qqnum}}"
+    model:content="{{qqNum}}"
     placeholder="请输入qq群号，将会发送给报名成功的志愿者"
   />
   <lx-button bindtap="upload" content="已确认信息" color="blue" />
