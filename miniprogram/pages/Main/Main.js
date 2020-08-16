@@ -91,16 +91,16 @@ Component({
           })
           .get()
       }).then(res =>{
-        console.log(res.data)
+        // console.log(res.data)
         if (res.data.length === 0){
-          app.globalData.isRegister = 0
+          app.globalData.isRegister = false
         }else{
           app.globalData.personNum = res.data[0].personNum;
           app.globalData.campus = res.data[0].campus;
           app.globalData.phone = res.data[0].phone;
           app.globalData.qqNum = res.data[0].qqNum;
           app.globalData.name = res.data[0].name;
-          app.globalData.isRegister = 1
+          app.globalData.isRegister = true
         }
       }).then(() =>{
         return db.collection('admin')
@@ -109,11 +109,11 @@ Component({
           })
           .get()
       }).then(res =>{
-        console.log(res.data)
+        // console.log(res.data)
         if (res.data.length){
-          app.globalData.isAdmin = 1
+          app.globalData.isAdmin = true
         }else{
-          app.globalData.isAdmin = 0
+          app.globalData.isAdmin = false
         }
         console.log("个人信息登记完成")
         wx.hideLoading();

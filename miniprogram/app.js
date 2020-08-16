@@ -16,7 +16,16 @@ App({
             })
         }
 
-        this.globalData = {}
+        this.globalData = {
+            openid: "",
+            isRegister: true,
+            isAdmin: false,
+            personNum: "",
+            campus: "南校区",
+            phone: "",
+            qqNum: "",
+            name: "",
+        }
 
     }
 })
