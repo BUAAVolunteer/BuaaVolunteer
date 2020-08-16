@@ -21,11 +21,23 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-width: 350px;
-  opacity: 1;
+  background-color: #fff;
+  width: 600rpx;
+  animation: show-up 0.3s ease-in forwards;
   position: fixed;
-  top: 20%;
+  border-radius: 30rpx;
   z-index: 1629;
+}
+
+@keyframes show-up {
+  0% {
+    opacity: 0;
+    top: 23%;
+  }
+  100% {
+    opacity: 1;
+    top: 20%;
+  }
 }
 
 .hide {
@@ -36,12 +48,12 @@
 
 .wrapper {
   background-color: #fff;
-  border-radius: 12px;
+  border-radius: 30rpx;
 }
 
 .title {
   border-bottom: 1px solid #f0f0f0;
-  font-size: 16px;
+  font-size: 30rpx;
   font-weight: bold;
   letter-spacing: 1px;
   text-align: center;
@@ -51,11 +63,49 @@
 .main {
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  justify-content: center;
+  padding: 20rpx;
+}
+
+.content-text {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  font-size: 35rpx;
 }
 
 .footer {
   display: flex;
   justify-content: space-around;
-  margin: 20px;
+  flex-wrap: wrap;
+  margin: 20rpx;
+}
+
+.able-btn,
+.unable-btn {
+  display: flex;
+  justify-content: center;
+  margin: 10rpx;
+  border-radius: 20rpx;
+  width: 200rpx;
+  height: 70rpx;
+}
+
+.able-btn {
+  background-color: #4bcee5;
+}
+
+.unable-btn {
+  background-color: #858585;
+}
+
+.btn-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bolder;
+  font-family: Microsoft YaHei;
+  color: #fff;
+  font-size: 25rpx;
 }
