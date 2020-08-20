@@ -1,0 +1,8 @@
+{
+    "navigationBarTitleText": "志愿项目反馈与建议",
+    "usingComponents": {
+        "lx-input": "/components/lx-input/lx-input",
+        "lx-button": "/components/lx-button/lx-button",
+        "lx-picker": "/components/lx-picker/lx-picker"
+    }
+}

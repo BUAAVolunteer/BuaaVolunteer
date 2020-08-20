@@ -14,10 +14,134 @@ Component({
       score: 100,
       time: 10000,
     },
+    buttonsgath: [
+      {
+        navigateUrl: "", // 要跳转到的页面路径    还没出现的新手教程
+      },
+      {
+        navigateUrl: "/pages/Profile/Feedback/Feedback",//问题反馈
+      },
+      {
+        navigateUrl: "/pages/Profile/UpdateLog/Updatelog",//更新日志
+      },
+      {
+        navigateUrl: "",//积分细则
+      },
+      {
+        navigateUrl:
+          "/pages/OuterLink/OuterLink?url=https://mp.weixin.qq.com/s/5bqJNvDXhH8j9iGZ5diyMw",
+        //蓝协介绍
+      },
+      {
+        navigateUrl:
+          "/pages/OuterLink/OuterLink?url=https://mp.weixin.qq.com/s/cgU6BbeFxHXXsWwl5wePTw",
+        //联系我们
+      },
+    ]
   },
   methods:{
-    
+    //跳转志愿历史
+    toHistory: function(){
+      wx.navigateTo({
+        url: '/pages/Profile/History/History'
+      })
+    },
+    //跳转志愿地图
+    toMap: function(){
+      wx.navigateTo({
+        url: '/pages/Profile/Map/Map'
+      })
+    },
+    //志愿积分按钮
+    scoreLevel: function() {
+      var score = this.data.person.score
+      if (score <= -10) {
+          wx.showModal({
+              title: '警告',
+              content: '您的积分已达到惩罚线，6个月内无法继续参与蓝协志愿。',
+              showCancel: false,
+          })
+      } else if (score > -10 && score < 0) {
+          wx.showModal({
+              title: '警告',
+              content: '请注意志愿服务的行为规范，否则您将无法继续参与蓝协志愿。',
+              showCancel: false,
+          })
+      } else if (score >= 0 && score <= 10) {
+          wx.showModal({
+              title: '志愿者星级',
+              content: '恭喜您成为一星志愿者！',
+              showCancel: false,
+          })
+      } else if (score > 10 && score <= 15) {
+          wx.showModal({
+              title: '志愿者星级',
+              content: '恭喜您成为二星志愿者！',
+              showCancel: false,
+          })
+      } else if (score > 15 && score <= 25) {
+          wx.showModal({
+              title: '志愿者星级',
+              content: '恭喜您成为三星志愿者！',
+              showCancel: false,
+          })
+      } else if (score > 25 && score <= 40) {
+          wx.showModal({
+              title: '志愿者星级',
+              content: '恭喜您成为四星志愿者！',
+              showCancel: false,
+          })
+      } else if (score > 40 && score <= 60) {
+          wx.showModal({
+              title: '志愿者星级',
+              content: '恭喜您成为五星志愿者！',
+              showCancel: false,
+          })
+      } else if (score > 60) {
+          wx.showModal({
+              title: '志愿者星级',
+              content: '恭喜您成为六星志愿者！',
+              showCancel: false,
+          })
+      }
+    },
+    //新手教程
+    forNew: function(){
+      wx.navigateTo({
+        
+      })
+    },
 
+    //问题反馈
+    toFeedback: function(){
+      wx.navigateTo({
+        url: '/pages/Profile/Feedback/Feedback'
+      })
+    },
+    //更新日志
+    toLog: function(){
+      wx.navigateTo({
+        url: '/pages/Profile/UpdateLog/Updatelog'
+      })
+    },
+    //积分细则
+    toRule: function(){
+      wx.navigateTo({
+        
+      })
+    },
+    //蓝协介绍
+    toIntroduction: function(){
+      wx.navigateTo({
+        url: '/pages/OuterLink/OuterLink?url=https://mp.weixin.qq.com/s/5bqJNvDXhH8j9iGZ5diyMw'
+      })
+    },
+    //联系我们
+    contact: function(){
+      wx.navigateTo({
+        url: '/pages/OuterLink/OuterLink?url=https://mp.weixin.qq.com/s/cgU6BbeFxHXXsWwl5wePTw'
+      })
+    },
   },
   lifetimes: {
     created: function(){

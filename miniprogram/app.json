@@ -3,8 +3,8 @@
   "pages": [
     "pages/Main/Main",
     "pages/Main/Activity/Activity",
-    "pages/Main/Feedback/Feedback",
-    "pages/Main/UpdateLog/UpdateLog",
+    "pages/Profile/Feedback/Feedback",
+    "pages/Profile/UpdateLog/UpdateLog",
     "pages/Recruit/Recruit",
     "pages/Recruit/Form/Form",
     "pages/Profile/Profile",

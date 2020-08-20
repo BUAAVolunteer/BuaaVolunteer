@@ -20,7 +20,7 @@
             <image class="name-image-admin" mode="widthFix" src="../../image/up.png" />
         </view>
 
-        <!--<!--普通蓝小咕
+        <!--普通蓝小咕
         <view wx:if="{{register==0}}" wx:if="{{admin==0}}">
             <image class="name-image-admin" mode="widthFix" src="../../image/up.png" />
         </view>-->

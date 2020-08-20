@@ -40,6 +40,17 @@ Component({
           icon: 'none',
         });
       }
+    },
+
+    toEdit: function(){
+      wx.navigateTo({
+        url: '/pages/Profile/PersonEdit/PersonEdit'
+      })
     }
-  },
+
+    
+  }
+
+
+
 });
