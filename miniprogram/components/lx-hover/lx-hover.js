@@ -117,10 +117,10 @@ Component({
       var choose = button[ID].name
       var that = this
       if (that.properties.detail.type === 'show') {
-        that.setData({
-          onShow: !that.data.onShow
-        })
         if (button[ID].isAblePress) {
+          that.setData({
+            onShow: !that.data.onShow
+          })
           that.triggerEvent('hoverConfirm', choose, {})
         }
       } else {

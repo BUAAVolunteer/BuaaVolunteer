@@ -81,11 +81,42 @@ class Util {
     };
 
     static toLinkedList (list) {
+        // 将数组转换为链表
         var linkedList = new LinkedList();
         for (let i = 0; i < list.length; i++) {
             linkedList.append(list[i])
         }
         return linkedList
+    };
+
+    static limitedText (text, limit) {
+        // 将长文本截取到限制长度内并加上省略号
+        var patternChinese = new RegExp("[\u4E00-\u9FA5]+"); 
+        var patternEnglish = new RegExp("[A-Za-z]+");
+        var patternNumber = new RegExp("[0-9]+");
+        console.log(text.length)
+        if (text.length <= limit) {
+            return text
+        } else if (patternEnglish.test(text[limit - 2])) {
+            console.log("Eng")
+            var newPosition = this.firstNoAlphabat(text, limit - 2, patternEnglish)
+            return text.substring(0, newPosition) + "..."
+        } else if (patternNumber.test(text[limit - 2])) {
+            console.log("Num")
+            var newPosition = this.firstNoAlphabat(text, limit - 2, patternNumber)
+            return text.substring(0, newPosition) + "..."
+        } else {
+            return text.substring(0, limit - 2) + "..."
+        }
+    }
+
+    static firstNoAlphabat (text, position, set) {
+        var newPosition = position
+        while (set.test(text[newPosition])) {
+            newPosition--
+        }
+        newPosition++
+        return newPosition
     }
 };
 

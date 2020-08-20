@@ -61,6 +61,6 @@
   },
   "sitemapLocation": "sitemap.json",
   "usingComponents": {
-    "lx-hover": "../components/lx-hover/lx-hover"
+    "lx-hover": "components/lx-hover/lx-hover"
   }
 }
