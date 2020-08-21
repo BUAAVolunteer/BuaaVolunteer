@@ -22,7 +22,9 @@ Component({
   /**
    * 组件的初始数据
    */
-  data: {},
+  data: {
+    isRegister: app.globalData.isRegister,
+  },
 
   /**
    * 组件的方法列表

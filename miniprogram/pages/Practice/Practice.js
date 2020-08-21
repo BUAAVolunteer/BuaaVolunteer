@@ -14,6 +14,7 @@ Component({
       score: 100,
       time: 10000,
     },
+    isRegister: app.globalData.isRegister,
     buttonsgath: [
       {
         navigateUrl: "", // 要跳转到的页面路径    还没出现的新手教程
@@ -50,6 +51,11 @@ Component({
     toMap: function(){
       wx.navigateTo({
         url: '/pages/Profile/Map/Map'
+      })
+    },
+    toEdit:function(){
+      wx.navigateTo({
+        url:'/pages/Profile/PersonEdit/PersonEdit'
       })
     },
     //志愿积分按钮

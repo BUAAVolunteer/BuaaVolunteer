@@ -39,6 +39,8 @@
 
 <view wx:if="{{isRegister==1}}" class="noRegister_header">
 
-  <image class="main--image__inner" src="cloud://volunteer-platform-1v92i.766f-volunteer-platform-1v92i-1300053277/要抱抱-小李.png" mode="widthFix"/>
+  <view class="main--image__wrapper">
+    <image class="main--image__inner" src="cloud://volunteer-platform-1v92i.766f-volunteer-platform-1v92i-1300053277/要抱抱-小李.png" mode="widthFix"/>
+  </view>
   <image class="registerTip" src="/assets/image/profile/tip.png"/>
 </view>
