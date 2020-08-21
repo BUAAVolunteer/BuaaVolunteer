@@ -46,10 +46,10 @@
         "text": "主页"
       },
       {
-        "pagePath": "pages/Recruit/Recruit",
+        "pagePath": "pages/Introduction/Introduction",
         "iconPath": "assets/icons/plugin.png",
         "selectedIconPath": "assets/icons/plugin_cur.png",
-        "text": "志愿招募"
+        "text": "志愿项目"
       },
       {
         "pagePath": "pages/Profile/Profile",
