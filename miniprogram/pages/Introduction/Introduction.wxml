@@ -1,0 +1,23 @@
+<page-meta>
+  <navigation-bar front-color="#fff" background-color="#fff" />
+</page-meta>
+<view class="intro-header">
+  <!-- 搜索 -->
+  <view class="intro-search">
+    <image class="intro-search__icon" src="/assets/icons/introduction/search.png" />
+    <input class="intro-search__input" bindinput="search" placeholder="搜索志愿项目" />
+  </view>
+</view>
+<!-- 主页面卡片 -->
+<view class="intro-main">
+  <block wx:for="{{volunteerList}}">
+    <navigator
+      wx:if="{{item.onShow}}"
+      class="intro-item"
+      url="./VolunteerMain/VolunteerMain?id={{item.id}}"
+      hover-class="none"
+    >
+      <image class="intro__inner" src="{{baseUrl + item.desc + '.png'}}" />
+    </navigator>
+  </block>
+</view>

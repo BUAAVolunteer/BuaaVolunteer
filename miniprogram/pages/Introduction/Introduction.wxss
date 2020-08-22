@@ -3,42 +3,34 @@ page {
   background-color: #fff;
 }
 
-.wrapper {
-  height: 90vh; 
+.intro-header {
+  padding: 0rpx 75rpx;
 }
 
-/* flex设置所有的在一行，flex-wrap设置允许换行  */
-/* 关键在align-content，多行对齐方式，flex-start表示向上对齐 */
-/* justify...代表水平轴对齐方式，目前采用的方法会导致独立的居中，如果想改可以改 */
-.swiper-main {
-  align-content: flex-start;
+.intro-search {
+  align-items: center;
+  background-color: #f4f4f4;
+  border-radius: 40rpx;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  height: auto;
+  justify-content: center;
+  height: 80rpx;
 }
 
-/*滑动组件*/
-
-.swiper-tab {
-  width: 100%;
-  border-bottom: 2rpx solid #eee;
-  text-align: center;
-  line-height: 80rpx;
-  height: 88rpx;
-  display: flex;
-  flex-flow: row;
-  justify-content: space-between;
+.intro-search__icon {
+  width: 27rpx;
+  height: 27rpx;
+  margin-right: 18rpx;
 }
 
-.swiper-tab-item {
-  font-size: 30rpx;
-  display: inline-block;
-  width: 50%;
-  color: #666;
+.intro-search__input {
+  color: #5a5d5d;
+  font-size: 25rpx;
+  letter-spacing: 3.2px;
+  width: 90px;
 }
 
-.active {
-  color: var(--blue);
-  border-bottom: 4rpx solid var(--blue);
+.intro__inner {
+  display: block;
+  width: 700rpx;
+  margin: 0 auto;
 }
