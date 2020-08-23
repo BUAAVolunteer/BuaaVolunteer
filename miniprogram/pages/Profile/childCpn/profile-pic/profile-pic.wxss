@@ -1,0 +1,25 @@
+/* pages/Profile/ProfilePic/ProfilePic.wxss */
+
+.crossclick{
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.cross{
+    height: 30rpx;
+    width: 30rpx;
+}
+
+.pick{
+    display: inline-block;
+    height: 500rpx;
+    width: 750rpx;
+    padding: 15rpx;
+}
+.pic{
+    height: 200rpx;
+    width: 200rpx;
+    border-radius: 50%;
+    padding: 20rpx;
+}

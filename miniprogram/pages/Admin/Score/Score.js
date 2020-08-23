@@ -37,6 +37,7 @@ Component({
     person_list: [{}],
     index: null,
     index2: null,
+    isSubmit: 0
   },
 
   /**

@@ -26,4 +26,5 @@
     <text class="margin">志愿积分：{{volun_score}}\n\n</text>
   </view>
 
+  
 </scroll-view>

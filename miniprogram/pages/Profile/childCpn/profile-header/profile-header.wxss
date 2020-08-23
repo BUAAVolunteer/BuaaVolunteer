@@ -31,6 +31,7 @@
   0% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
     left: 0;
@@ -41,6 +42,7 @@
   0% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
     right: 0;
@@ -136,32 +138,19 @@
   height: 100
 }
 
-.noRegister_header{
+.noRegister_header {
+  align-items: center;
   display: flex;
   justify-content: space-between;
   height: 300rpx;
-  margin: 22rpx 25rpx 0;
-  padding: 35rpx 60rpx 0;
+  margin: 0rpx 25rpx 0;
+  padding: 5rpx 60rpx 0;
   z-index: 0;
 }
 
-.registerTip{
+.registerTip {
   height: 100rpx;
   padding: 50rpx;
+  flex: 1;
 }
 
-.no--image__wrapper {
-  align-items: flex-end;
-  background-color: #fff;
-  border: 1px solid #ebebeb;
-  border-radius: 50%;
-  display: flex;
-  height: 117.75rpx;
-  overflow: hidden;
-  padding: 5rpx;
-  width: 117.75rpx;
-}
-
-.no--image__inner {
-  width: 100%;
-}
