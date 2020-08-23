@@ -40,4 +40,4 @@
     <image mode="widthFix" src="/assets/image/profile/gu.png" />
   </view>
 </view>
-<profile-pic></profile-pic>
+<profile-pic class="profile-pic profile-pic--active"></profile-pic>
