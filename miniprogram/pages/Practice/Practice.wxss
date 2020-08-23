@@ -70,10 +70,10 @@ page {
   position: absolute;
   z-index: 10;
   bottom: -550px;
+  transition: transform 0.7s ease;
 }
 
 .profile-pic--active {
   transform: translateY(-550px);
-  transition: transform 0.7s ease;
 }
 
