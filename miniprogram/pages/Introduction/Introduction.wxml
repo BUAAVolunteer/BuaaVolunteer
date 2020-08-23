@@ -17,7 +17,7 @@
       url="./VolunteerMain/VolunteerMain?id={{item.id}}"
       hover-class="none"
     >
-      <image class="intro__inner" src="{{baseUrl + item.desc + '.png'}}" />
+      <image class="intro__inner" mode="widthFix" src="{{baseUrl + item.desc + '.png'}}" />
     </navigator>
   </block>
 </view>

@@ -42,18 +42,18 @@
   position: relative;
   width: 368rpx;
   display: flex;
-  font-weight: 550;
+  font-weight: 540;
   justify-content: space-around;
 }
 
 .main-upimg__inner5 {
-  font-size: 40rpx;
-  padding: 26rpx 15rpx;
+  font-size: 45rpx;
+  padding: 26rpx 15rpx 26rpx 45rpx;
 }
 
 .main-upimg__inner8 {
   font-size: 30rpx;
-  padding: 35rpx 15rpx;
+  padding: 35rpx 15rpx 35rpx 45rpx;
 }
 
 .main-middle {
