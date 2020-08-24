@@ -4,19 +4,19 @@
   <image class="cross" src="/assets/image/profilepic/cross.png" />
 </view>
 
-<view class="pick">
-  <image class="pic" src="cloud://volunteer-platform-1v92i.766f-volunteer-platform-1v92i-1300053277/头像照片/common/common-1.png"/>
-  <image class="pic" src="/assets/image/profilepic/1-3.png"/>
-  <image class="pic" src="/assets/image/profilepic/2-1.png"/>
-  <image class="pic" src="/assets/image/profilepic/2-2.png"/>
-  <image class="pic" src="/assets/image/profilepic/2-3.png"/>
-  <image class="pic" src="/assets/image/profilepic/3-1.png"/>
-  <image class="pic" src="/assets/image/profilepic/3-2.png"/>
-  <image class="pic" src="/assets/image/profilepic/3-3.png"/>
-  <image class="pic" src="/assets/image/profilepic/4-1.png"/>
-  <image class="pic" src="/assets/image/profilepic/4-2.png"/>
-  <image class="pic" src="/assets/image/profilepic/4-3.png"/>
-
-</view>
 
 
+
+  <view class="pick">
+    <image class="pic" src="/assets/image/profilepic/1-2.png" />
+    <image class="pic" src="/assets/image/profilepic/1-3.png" />
+    <image class="pic" src="/assets/image/profilepic/2-1.png" />
+    <image class="pic" src="/assets/image/profilepic/2-2.png" />
+    <image class="pic" src="/assets/image/profilepic/2-3.png" />
+    <image class="pic" src="/assets/image/profilepic/3-1.png" />
+    <image class="pic" src="/assets/image/profilepic/3-2.png" />
+    <image class="pic" src="/assets/image/profilepic/3-3.png" />
+    <image class="pic" src="/assets/image/profilepic/4-1.png" />
+    <image class="pic" src="/assets/image/profilepic/4-2.png" />
+    <image class="pic" src="/assets/image/profilepic/4-3.png" /> 
+  </view>

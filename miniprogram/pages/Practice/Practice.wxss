@@ -1,8 +1,8 @@
 /* pages/Practice/Practice.wxss */
 page {
   animation: in 1s ease-in forwards;
-
 }
+
 .middle {
   z-index: 3;
   position: relative;
@@ -19,10 +19,10 @@ page {
 }
 
 .middle--div {
-  background-color: #D9D9DA;
+  background-color: #d9d9da;
   height: 2rpx;
   margin: 30rpx 0 30rpx 115rpx;
-  width: 635rpx;    
+  width: 635rpx;
 }
 
 .middle--map {
@@ -43,7 +43,7 @@ page {
 }
 
 .gugugu {
-  margin:  40rpx auto 0;
+  margin: 40rpx auto 0;
   height: 231rpx;
   width: 187rpx;
 }
@@ -54,14 +54,26 @@ page {
   opacity: 0.6;
 }
 
-.noRegister{
+.noRegister {
   width: 100%;
   height: 100%;
   margin: 50rpx 25rpx 50rpx;
   position: relative;
 }
 
-.goRegister{
+.goRegister {
   height: 200rpx;
   width: 700rpx;
 }
+
+.profile-pic {
+  position: absolute;
+  z-index: 10;
+  bottom: -550px;
+  transition: transform 0.7s ease;
+}
+
+.profile-pic--active {
+  transform: translateY(-550px);
+}
+
