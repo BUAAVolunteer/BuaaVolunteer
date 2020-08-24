@@ -59,31 +59,10 @@
 			"current": -1,
 			"list": [
 				{
-					"id": 3,
-					"name": "Confirm时长确认",
-					"pathName": "pages/Manage/Confirm/Confirm",
-					"query": "title=国家图书馆",
-					"scene": null
-				},
-				{
-					"id": 7,
-					"name": "ConfirmHistory",
-					"pathName": "pages/ConfirmHistory/ConfirmHistory",
-					"query": "title=北航一日游",
-					"scene": null
-				},
-				{
 					"id": -1,
 					"name": "Practice",
 					"pathName": "pages/Practice/Practice",
 					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "Admin",
-					"pathName": "pages/Admin/Admin",
-					"query": "title=北航一日游",
 					"scene": null
 				},
 				{
@@ -101,13 +80,6 @@
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "pages/Manage/FormEdit/FormEdit",
-					"pathName": "pages/Manage/FormEdit/FormEdit",
-					"query": "name=北航一日游",
-					"scene": null
-				},
-				{
 					"id": 7,
 					"name": "Detail",
 					"pathName": "pages/Manage/Detail/Detail",
@@ -119,6 +91,20 @@
 					"name": "Main",
 					"pathName": "pages/Main/Main",
 					"query": "title=发布一个新志愿",
+					"scene": null
+				},
+				{
+					"id": 5,
+					"name": "VolunteerMain",
+					"pathName": "pages/Introduction/VolunteerMain/VolunteerMain",
+					"query": "id=0c928181-1d01-49aa-8675-17d7ba583f51",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "Introduction",
+					"pathName": "pages/Introduction/Introduction",
+					"query": "id=0c928181-1d01-49aa-8675-17d7ba583f51",
 					"scene": null
 				}
 			]

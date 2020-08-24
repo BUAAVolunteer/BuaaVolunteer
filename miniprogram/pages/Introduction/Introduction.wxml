@@ -1,31 +1,23 @@
-<!-- 以下选项 -->
-<view class="swiper-tab">
-  <view class="swiper-tab-item {{currentTab==0?'active':''}}" data-current="0" bindtap="clickTab">
-    北校区
-  </view>
-  <view class="swiper-tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="clickTab">
-    南校区
+<page-meta>
+  <navigation-bar front-color="#fff" background-color="#fff" />
+</page-meta>
+<view class="intro-header">
+  <!-- 搜索 -->
+  <view class="intro-search">
+    <image class="intro-search__icon" src="/assets/icons/introduction/search.png" />
+    <input class="intro-search__input" bindinput="search" placeholder="搜索志愿项目" />
   </view>
 </view>
-<!-- 这里是遍历icon的信息 -->
-<!-- 用swiper来切换,这里的currentTab就是js里修改的-->
-<swiper class="wrapper" current="{{currentTab}}" bindchange="swiperTab">
-  <swiper-item class="swiper-main">
-    <scroll-view scroll-y="{{true}}" style="height:100%">
-      <view class="swiper-main">
-        <block wx:for="{{volunteerIcon}}" wx:key="index">
-          <volunteer-swiper iconInf="{{item}}"></volunteer-swiper>
-        </block>
-      </view>
-    </scroll-view>
-  </swiper-item>
-  <swiper-item >
-    <scroll-view scroll-y="{{true}}" style="height:100%">
-      <view class="swiper-main">
-        <block wx:for="{{volunteerIcon2}}" wx:key="index">
-          <volunteer-swiper iconInf="{{item}}"></volunteer-swiper>
-        </block>
-      </view>
-    </scroll-view>
-  </swiper-item>
-</swiper>
+<!-- 主页面卡片 -->
+<view class="intro-main">
+  <block wx:for="{{volunteerList}}">
+    <navigator
+      wx:if="{{item.onShow}}"
+      class="intro-item"
+      url="./VolunteerMain/VolunteerMain?id={{item.id}}"
+      hover-class="none"
+    >
+      <image class="intro__inner" mode="widthFix" src="{{baseUrl + item.desc + '.png'}}" />
+    </navigator>
+  </block>
+</view>

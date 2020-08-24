@@ -29,38 +29,38 @@
   "window": {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#F6F6F6",
+    "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "云开发 QuickStart",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
     "color": "#7A7E83",
-    "selectedColor": "#3cc51f",
+    "selectedColor": "#54a2fe",
     "borderStyle": "black",
-    "backgroundColor": "#b5e9f4",
+    "backgroundColor": "#fff",
     "list": [
       {
         "pagePath": "pages/Main/Main",
-        "iconPath": "assets/icons/component.png",
-        "selectedIconPath": "assets/icons/component_cur.png",
+        "iconPath": "assets/icons/tabBar/component.png",
+        "selectedIconPath": "assets/icons/tabBar/component_cur.png",
         "text": "主页"
       },
       {
-        "pagePath": "pages/Recruit/Recruit",
-        "iconPath": "assets/icons/plugin.png",
-        "selectedIconPath": "assets/icons/plugin_cur.png",
-        "text": "志愿招募"
+        "pagePath": "pages/Introduction/Introduction",
+        "iconPath": "assets/icons/tabBar/plugin.png",
+        "selectedIconPath": "assets/icons/tabBar/plugin_cur.png",
+        "text": "志愿项目"
       },
       {
         "pagePath": "pages/Profile/Profile",
-        "iconPath": "assets/icons/about.png",
-        "selectedIconPath": "assets/icons/about_cur.png",
+        "iconPath": "assets/icons/tabBar/about.png",
+        "selectedIconPath": "assets/icons/tabBar/about_cur.png",
         "text": "我的"
       }
     ]
   },
   "sitemapLocation": "sitemap.json",
   "usingComponents": {
-    "lx-hover": "../components/lx-hover/lx-hover"
+    "lx-hover": "components/lx-hover/lx-hover"
   }
 }

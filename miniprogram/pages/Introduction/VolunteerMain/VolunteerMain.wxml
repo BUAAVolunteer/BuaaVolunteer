@@ -1,10 +1,31 @@
-<view class="title-name">{{title}}</view>
-<view style="display:flex;justify-content:center;margin-bottom:20rpx;">
-    <image style="width:600rpx;height:300rpx;" mode="widthFix" src="{{imageSrc}}" />
+<view class="header">
+  <image class="header__img" mode="aspectFill" src="{{baseUrl + title + '.jpg'}}" />
 </view>
-<view style="margin-bottom:20rpx;margin-left:20rpx;margin-right:20rpx;font-size:30rpx;text-indent:60rpx;text-align:middle;" class="padding-xl radius shadow-warp bg-white margin-top">
-    <view >{{text}}</view>
+<view class="main">
+  <view class="main-upimg">
+    <image class=".main__img--absolute" src="/assets/image/introduction/up.png" mode="widthFix" />
+    <view wx:if="{{title.length <= 5}}" class="main-upimg__inner5">
+      <block wx:for="{{title}}">
+        <view>
+          {{item}}
+        </view>
+      </block>
+    </view>
+    <view wx:elif="{{title.length <= 10}}" class="main-upimg__inner8">
+      <block wx:for="{{title}}">
+        <view>
+          {{item}}
+        </view>
+      </block>
+    </view>
+  </view>
+  <view class="main-middle">
+    <view>{{text}}</view>
     <view wx:if="{{text2.length!=0}}">{{text2}}</view>
-    <view wx:elif="{{text3.length!=0}}">{{text3}}</view>
-    <view wx:elif="{{text4.length!=0}}">{{text4}}</view>
+    <view wx:if="{{text3.length!=0}}">{{text3}}</view>
+    <view wx:if="{{text4.length!=0}}">{{text4}}</view>
+  </view>
+  <view class="main-downimg">
+    <image class="main__img" src="/assets/image/introduction/down.png" mode="widthFix" />
+  </view>
 </view>

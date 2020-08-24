@@ -38,7 +38,7 @@ Component({
   data: {
     onShow: true,
     isResult: false,
-    res: {}
+    res: ""
   },
 
 
@@ -100,12 +100,21 @@ Component({
         res: {},
         isResult: false
       })
-      try {
-        delay(that, success)
-      } catch(err) {
-        console.log(err)
+      return new Promise ((resolve, reject) => {
+        resolve()
+      })
+      .then(() => {
+        var t;
+        t = setInterval(function(){
+          if (that.data.isResult) {
+            clearInterval(t)
+            success(that.data.res)
+          }
+        }, 200)
+      })
+      .catch(err => {
         fail(err)
-      }
+      })
     },
 
     /*
@@ -117,10 +126,10 @@ Component({
       var choose = button[ID].name
       var that = this
       if (that.properties.detail.type === 'show') {
-        that.setData({
-          onShow: !that.data.onShow
-        })
         if (button[ID].isAblePress) {
+          that.setData({
+            onShow: !that.data.onShow
+          })
           that.triggerEvent('hoverConfirm', choose, {})
         }
       } else {
@@ -133,23 +142,3 @@ Component({
     },
   }
 })
-
-/*
-延时函数，用来等待buttonPress的触发
-*/
-function delay(that, callback) {
-  if (!that.data.isResult) {
-    setTimeout(
-      async function () {
-        // console.log("wait for click", that.data.isResult)
-        await new Promise((resolve, reject) => {
-          resolve()
-        })
-        .then(() => {
-          delay(that, callback)
-        })
-    }, 200)
-  } else {
-    callback(that.data.res)
-  }
-}
