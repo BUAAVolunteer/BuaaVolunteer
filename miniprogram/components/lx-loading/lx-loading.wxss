@@ -1,0 +1,51 @@
+/* components/lx-loading/lx-loading.wxss */
+.suspended {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.mask {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.5);
+    opacity: 0.3;
+    z-index: 1628;
+}
+
+.show {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    background-color: #fbfbfb;
+    top: 30%;
+    width: 370rpx;
+    position: fixed;
+    border-radius: 30rpx;
+    z-index: 1629;
+}
+
+.img {
+    width: 300rpx;
+    height: 300rpx;
+    margin-top: 30rpx;
+    margin-left: 70rpx;
+}
+
+.content {
+    justify-content: center;
+    margin: 0 auto;
+    margin-top: -5rpx;
+    margin-bottom: 15rpx;
+    height: 30rpx;
+    align-content: center;
+    font-size: 25rpx;
+    letter-spacing: 4rpx;
+    font-family: 'Ya Hei';
+    color: #5a5d5d;
+}
