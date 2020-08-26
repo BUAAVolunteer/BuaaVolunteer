@@ -36,7 +36,7 @@ Component({
    * 组件的初始数据
    */
   data: {
-    onShow: true,
+    onShow: false,
     isResult: false,
     res: ""
   },

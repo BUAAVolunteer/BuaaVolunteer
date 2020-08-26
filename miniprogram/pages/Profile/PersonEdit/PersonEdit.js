@@ -37,6 +37,7 @@ Component({
                 text: res.data[0].text,
                 qqNum: res.data[0].qqNum,
               });
+              
               if (res.data[0].campus === "北校区")
                 that.setData({
                   index: 1,
@@ -57,6 +58,7 @@ Component({
   },
   methods: {
     submit() {
+      var that = this;
       var picker = ["南校区", "北校区"];
       if (this.data.name.length >= 2) {
       } else {
@@ -122,22 +124,28 @@ Component({
         // 云函数名称
         name: "answer",
         // 传给云函数的参数
+        
         data: {
+         
           id: app.globalData.openid,
-          name: e.detail.value.name,
-          phone: e.detail.value.phone,
-          personNum: e.detail.value.personNum,
-          text: e.detail.value.text,
-          qqNum: e.detail.value.qqNum,
-          campus: picker[e.detail.value.campus],
+          name:that.data.name,
+          phone: that.data.phone,
+          personNum: that.data.personNum,
+          text: that.data.text,
+          qqNum: that.data.qqNum,
+          campus: picker[that.data.campus],
         },
         success: function (res) {
-          //console.log(res)
-          app.globalData.name = e.detail.value.name
-          app.globalData.phone = e.detail.value.phone
-          app.globalData.personNum = e.detail.value.personNum
-          app.globalData.qqNum = e.detail.value.qqNum
-          app.globalData.campus = picker[e.detail.value.campus]
+          
+          console.log('1',res)
+          console.log('2',app.globalData)
+          app.globalData.name = that.data.name
+          app.globalData.phone = that.data.phone
+          app.globalData.personNum = that.data.personNum
+          app.globalData.qqNum = that.data.qqNum
+          app.globalData.campus = picker[that.data.campus]
+          app.globalData.isRegister = true
+          console.log('3.',that.data)
           wx.hideLoading();
           wx.showModal({
             title: "信息更新成功",

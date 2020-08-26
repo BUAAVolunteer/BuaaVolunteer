@@ -12,17 +12,45 @@
 .cross {
   height: 30rpx;
   width: 30rpx;
+  background-color: #000000;
 }
 
 .pick {
-  height: 1000rpx;
+ 
+  background-color: white;
+}
+
+.pic {
+  height: 120rpx;
+  width: 120rpx;
+  border-radius: 50%;
+  padding: 20rpx;
+  box-shadow: 0rpx 1rpx 2px #999999;
+  margin: 45rpx;
+}
+
+.lock{
+  height: 120rpx;
+  width: 120rpx;
+  border-radius: 50%;
+  padding: 20rpx;
+  position: absolute;
+  margin-left: -205rpx;
+  margin-top: 25px;
+  background-color: #ffffff90;
+}
+
+
+
+
+
+.appear{
+  height: 700rpx;
   width: 750rpx;
   padding: 15rpx;
 }
 
-.pic {
-  height: 200rpx;
-  width: 200rpx;
-  border-radius: 50%;
-  padding: 20rpx;
+.disappear{
+  height: 700rpx;
+  z-index: -5;
 }

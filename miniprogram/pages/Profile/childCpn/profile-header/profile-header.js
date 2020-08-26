@@ -24,6 +24,7 @@ Component({
    */
   data: {
     isRegister: app.globalData.isRegister,
+    isShow: 0
   },
 
   /**
@@ -48,7 +49,12 @@ Component({
       wx.navigateTo({
         url: '/pages/Profile/PersonEdit/PersonEdit'
       })
-    }
+    },
+
+    callPic :function(){
+      this.triggerEvent('appearance')
+      console.log('try')
+   },
 
     
   }

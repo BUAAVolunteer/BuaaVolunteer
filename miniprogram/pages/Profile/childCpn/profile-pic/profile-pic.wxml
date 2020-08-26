@@ -1,22 +1,26 @@
 <!--pages/Profile/ProfilePic/ProfilePic.wxml-->
 <view class="head">
   <text class="title">选择头像</text>
-  <image class="cross" src="/assets/image/profilepic/cross.png" />
+  <image class="cross" src="/assets/image/profilepic/cross.png"/>
+  
 </view>
 
 
 
-
+<view class="{{onShow?'appear':'disappear'}}">
   <view class="pick">
-    <image class="pic" src="/assets/image/profilepic/1-2.png" />
-    <image class="pic" src="/assets/image/profilepic/1-3.png" />
-    <image class="pic" src="/assets/image/profilepic/2-1.png" />
-    <image class="pic" src="/assets/image/profilepic/2-2.png" />
-    <image class="pic" src="/assets/image/profilepic/2-3.png" />
-    <image class="pic" src="/assets/image/profilepic/3-1.png" />
-    <image class="pic" src="/assets/image/profilepic/3-2.png" />
-    <image class="pic" src="/assets/image/profilepic/3-3.png" />
-    <image class="pic" src="/assets/image/profilepic/4-1.png" />
-    <image class="pic" src="/assets/image/profilepic/4-2.png" />
-    <image class="pic" src="/assets/image/profilepic/4-3.png" /> 
+    <image class="pic" src="/assets/image/profilepic/common-1.png" />
+    <image class="pic" src="/assets/image/profilepic/common-2.png" />
+    <image class="pic" src="/assets/image/profilepic/common-3.png" />
+    <image class="pic" src="/assets/image/profilepic/common-4.png" />
+    <image class="pic" src="/assets/image/profilepic/common-5.png" />
+    <image class="pic" src="/assets/image/profilepic/common-6.png" />
+    
+    <image class="pic" src="/assets/image/profilepic/unique-1.png" />
+    <image class="lock" src="/assets/image/profilepic/lock.png" />
+    <image class="pic" src="/assets/image/profilepic/unique-2.png" />
+    <image class="pic" src="/assets/image/profilepic/unique-3.png" />
+    <image class="pic" src="/assets/image/profilepic/unique-4.png" />
+    <image class="pic" src="/assets/image/profilepic/unique-5.png" /> 
   </view>
+</view>

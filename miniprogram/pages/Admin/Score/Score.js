@@ -37,7 +37,8 @@ Component({
     person_list: [{}],
     index: null,
     index2: null,
-    isSubmit: 0
+    isSubmit: 0,
+    hover:"",
   },
 
   /**
@@ -61,10 +62,11 @@ Component({
       var finding = 0;
       var that = this;
       var picker = this.data.picker;
+      this.hover = this.selectComponent("#msg")
       db.collection("person")
         .where({
           //根据电话和项目名称查询志愿
-          phone: e.detail.value.phone,
+          phone: this.data.volunteerPhone,
         })
         .get({
           success: function (res) {
@@ -84,6 +86,26 @@ Component({
                 volunteerScore: res.data[0].score,
                 volunteerID: res.data[0]._openid,
               });
+              this.hover.showHover({
+  
+                isMaskCancel: false,
+                title:"信息确认",
+                content:"志愿者信息：",
+                button:[
+                  {
+                    ID: 0,
+                    name: "cancel",
+                    text: "确认",
+                    isAblePress: true  
+                  },
+                  {
+                    ID: 1,
+                    name: "assure",
+                    text: "取消",
+                    isAblePress: true
+                  }
+                ]
+              })
             }
             wx.hideLoading();
           },
@@ -140,6 +162,8 @@ Component({
         }
       } 
     },
+
+  
 
     
 
@@ -465,6 +489,8 @@ Component({
       });
       var picker = [];
       var that = this;
+      this.hover = this.selectComponent("#msg");
+     
       db.collection("project").get({
         success: function (res) {
           for (let i = 0; i < res.data.length; i++) {

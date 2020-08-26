@@ -18,13 +18,15 @@
     />
     <lx-button content="提交" color="green" width="700rpx" bindtap = "identify"/>
   </view>
-
-  <view class="inform">
-    <text class="margin">志愿名称：{{volun_name}}\n</text>
-    <text class="margin">手机号：{{volun_phone}}\n</text>
-    <text class="margin">志愿时长：{{volun_time}}\n</text>
-    <text class="margin">志愿积分：{{volun_score}}\n\n</text>
+  <lx-hover id="msg">
+    <view class="inform">
+    <text class="margin">志愿名称：{{volunteerName}}\n</text>
+    <text class="margin">手机号：{{volunteerPhone}}\n</text>
+    <text class="margin">志愿时长：{{volunteerTime}}\n</text>
+    <text class="margin">志愿积分：{{volunteerScore}}\n\n</text>
   </view>
+  </lx-hover>
+  
 
   
 </scroll-view>

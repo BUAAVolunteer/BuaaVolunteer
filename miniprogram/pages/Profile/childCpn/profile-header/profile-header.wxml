@@ -3,11 +3,11 @@
 <image class="bg forward--left" mode="widthFix" src="/assets/image/profile/forward.png" />
 <image class="bg forward--right" mode="widthFix" src="/assets/image/profile/forward.png" />
 <!-- 头部 -->
-<view wx:if="{{isRegister==0}}" class="header">
+<view wx:if="{{isRegister==true}}" class="header">
   <!-- 主要部分 -->
   <view class="main">
-    <view class="main--image__wrapper">
-      <image class="main--image__inner" src="cloud://volunteer-platform-1v92i.766f-volunteer-platform-1v92i-1300053277/要抱抱-小李.png" mode="widthFix"/>
+    <view class="main--image__wrapper" bindtap="callPic">
+      <image class="main--image__inner" src="cloud://volunteer-platform-1v92i.766f-volunteer-platform-1v92i-1300053277/要抱抱-小李.png" mode="widthFix" />
     </view>
     <view class="main--name">
       {{person.name}}
@@ -37,7 +37,7 @@
 <!--未注册-->
 
 
-<view wx:if="{{isRegister==1}}" class="noRegister_header">
+<view wx:if="{{isRegister==false}}" class="noRegister_header">
 
   <view class="main--image__wrapper">
     <image class="main--image__inner" src="cloud://volunteer-platform-1v92i.766f-volunteer-platform-1v92i-1300053277/要抱抱-小李.png" mode="widthFix"/>
