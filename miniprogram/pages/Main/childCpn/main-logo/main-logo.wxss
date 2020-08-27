@@ -1,5 +1,88 @@
 /* pages/Main/childCpn/main-logo/main-logo.wxss */
-.logo-img {
-  width: 750rpx;
-  height: 97rpx;
+.board {
+  display: flex;
+  justify-content: center;
+  z-index: 1;
+  position: relative;
+}
+
+.main-board {
+  background-color: #54a2fe;
+  border-radius: 40rpx;
+  display: flex;
+  height: 80rpx;
+  margin: 5rpx 0 30rpx 5rpx;
+  width: 700rpx;
+  padding: 20rpx 0 0 30rpx;
+}
+
+.outsider {
+  width: 700rpx;
+  height: 80rpx;
+  border-radius: 40rpx;
+  border: 2rpx solid black;
+  margin: -5rpx 0 0 -5rpx;
+  position: absolute;
+  z-index: 5;
+}
+
+.board-text {
+  color: white;
+  font-size: 30rpx;
+  letter-spacing: 2px;
+  line-height: 30rpx;
+}
+
+.boardpic-left {
+  margin-left: 30rpx;
+  width: 20rpx;
+  animation: tri1 0.7s ease 0s infinite;
+}
+
+.boardpic-else1 {
+  margin-left: 5rpx;
+  width: 20rpx;
+  animation: tri2 0.7s ease 0s infinite;
+}
+
+.boardpic-else2 {
+  margin-left: 5rpx;
+  width: 20rpx;
+  animation: tri3 0.7s ease 0s infinite;
+}
+
+@keyframes tri1 {
+  0% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+
+@keyframes tri2 {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes tri3 {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0.3;
+  }
 }

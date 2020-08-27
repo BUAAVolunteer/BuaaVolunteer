@@ -1,7 +1,9 @@
 <!-- 轮播图组件 -->
 <main-swiper imageList="{{imageList}}"></main-swiper>
 <!-- logo -->
-<main-logo logo-position="logo"></main-logo>
+<main-logo></main-logo>
+<!--text-->
+<text class="middle-text">志愿报名</text>
 <!-- 遍历展示组件，子组件仅包含按钮功能，数据由item传入 -->
 <view class="middle-icon">
   <block wx:for="{{mainIcon}}" wx:key="index">
@@ -9,6 +11,6 @@
   </block>
 </view>
 <!-- 蓝小咕咕咕咕 -->
-<navigator url="/pages/Main/UpdateLog/UpdateLog" open-type="navigate" hover-class="none">
-  <image class="gugugu" mode="aspectFit" src="/assets/image/gu.png" />
-</navigator>
+<view class="bottom-img">
+  <image class="gugugu" mode="aspectFit" src="cloud://volunteer-platform-1v92i.766f-volunteer-platform-1v92i-1300053277/main/小咕小表情.png" />
+</view>

@@ -1,4 +1,12 @@
 <!-- 首页页面logo -->
 <view class="logo-position">
-  <image class="logo-img" mode="widthFix" src="/assets/image/logo.png" />
+  <navigator class="board" open-type="navigate" hover-class="navigator-hover">
+    <view class="outsider"></view>
+    <view class="main-board">
+      <text class="board-text">公告：近期活动请查收~</text>
+      <image class="boardpic-left" mode="widthFix" src="cloud://buaalx-w5aor.6275-buaalx-w5aor-1300053277/main/1.png" />
+      <image class="boardpic-else1" mode="widthFix" src="cloud://buaalx-w5aor.6275-buaalx-w5aor-1300053277/main/1.png" />
+      <image class="boardpic-else2" mode="widthFix" src="cloud://buaalx-w5aor.6275-buaalx-w5aor-1300053277/main/1.png" />
+    </view>
+  </navigator>
 </view>

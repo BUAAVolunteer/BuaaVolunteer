@@ -2,23 +2,28 @@ page {
   background-color: white;
 }
 
-/* logo图片定位 */
-.logo {
-  margin-top: -50rpx;
+.middle-text {
+  color: #5a5d5d;
+  font-size: 30rpx;
+  font-weight: bold;
+  margin: 25rpx 0 30rpx 50rpx;
 }
 
-/* 中部按钮相对定位 */
 .middle-icon {
-  margin-top: 35rpx;
+  height: auto;
+  padding: 30rpx 23rpx 0 22rpx;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
+
 
 /* 蓝小咕定位 */
-
 .gugugu {
-  height: 240rpx;
-  width: 210rpx;
+  height: 170rpx;
+  width: 120rpx;
   max-width: 100%;
   position: relative;
-  margin-top: -98rpx;
+  margin-top: 45rpx;
   left: 510rpx;
 }
