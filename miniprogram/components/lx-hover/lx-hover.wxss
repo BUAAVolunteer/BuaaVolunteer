@@ -23,6 +23,7 @@
   justify-content: space-between;
   background-color: #fff;
   width: 600rpx;
+  left: calc(50% - 300rpx);
   animation: show-up 0.3s ease-in forwards;
   position: fixed;
   border-radius: 30rpx;

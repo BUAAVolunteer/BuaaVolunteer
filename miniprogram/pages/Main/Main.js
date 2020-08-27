@@ -10,6 +10,7 @@ Component({
   data: {
     mainIcon: [], // 页面招募志愿项目数据
     imageList: [], // 要传入main-swiper的对象数组
+    current: {}
   },
   // 组件生命周期
   lifetimes: {
@@ -36,9 +37,18 @@ Component({
           return db.collection("project").get();
         })
         .then((res) => {
-          console.log(res.data);
+          // console.log(res.data)
+          let projectList = res.data
+          // 对得到的项目列表进行排序，详见js中的sort函数
+          projectList.sort(function (a, b) {
+            if (a.date < b.date || (a.date == b.date && a.time < b.time)) {
+              return -1
+            } else {
+              return 1
+            }
+          })
           that.setData({
-            mainIcon: res.data,
+            mainIcon: projectList,
           });
         })
         /*-----------------主页轮播图地址-----------------------------*/
@@ -53,6 +63,7 @@ Component({
           });
         })
         .then(() => {
+        /*-----------------个人信息登记------------------------------*/
           return db
             .collection("person")
             .where({
@@ -90,6 +101,21 @@ Component({
           }
           console.log("个人信息登记完成");
           wx.hideLoading();
+        })
+        .then(() => {
+          return wx.cloud.callFunction({
+            name: "getTime"
+          })
+        })
+        .then(res => {
+          console.log(res)
+          var time = res.result.time.split(' ')
+          var current = {}
+          current.date = time[0]
+          current.time = time[1]
+          that.setData({
+            current,
+          })
         })
         .catch((err) => {
           console.log(err);

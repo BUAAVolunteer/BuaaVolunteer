@@ -12,22 +12,34 @@ Component({
       type: Object,
       value: {},
     },
+    currentTime: {
+      type: Object,
+      value: {},
+    }
   },
   data: {
-    button: [
-      {
-        ID: 1,
-        name: "assure",
-        text: "立即报名",
-        isAblePress: true,
-      },
-      {
-        ID: 2,
-        name: "more",
-        text: "更多信息",
-        isAblePress: true,
-      },
-    ],
+    pre: true,
+    hoverDetail: {
+      isMaskCancel: true,
+      isTitle: true,
+      title: '',
+      isContent:false,
+      type: "show",
+      button: [
+        {
+          ID: 0,
+          name: "signUpNow",
+          text: "立即报名",
+          isAblePress: true,
+        },
+        {
+          ID: 1,
+          name: "moreInformation",
+          text: "更多信息",
+          isAblePress: true,
+        },
+      ],
+    }
   },
   methods: {
     volunteer() {
@@ -36,106 +48,110 @@ Component({
       });
       var that = this;
       let hover = this.selectComponent("#msg");
-      hover.showHover({
-        isMaskCancel: false,
-        title: that.properties.iconInf.title,
-        // content:
-        //   "○ 活动时间：\n" +
-        //   that.properties.iconInf.textarea +
-        //   "\n○ 活动地点：\n " +
-        //   that.properties.iconInf.place +
-        //   "\n○ 活动内容：\n " +
-        //   that.properties.iconInf.detail +
-        //   "○ 招募人数：\n" +
-        //   that.properties.iconInf.people +
-        //   "○ 志愿保障：\n" +
-        //   that.properties.iconInf.assure +
-        //   "○ 特别提醒：\n" +
-        //   that.properties.iconInf.require +
-        //   "○ 负责人联系方式：\n" +
-        //   that.properties.iconInf.response,
-        button: that.data.button,
-      });
+      hover.stateChange()
       wx.hideLoading();
     },
-    //进入报名表单
-    signup: function () {
-      var that = this;
-      var id = this.data.id;
-      for (let i = 0; i < that.data.volunteer_list[id].signuplist.length; i++) {
+
+    buttonPress(e) {
+      var press = e.detail
+      console.log(press)
+      var that = this
+      var title = that.properties.iconInf.title;
+      if (press === "signUpNow") {
+        //进入报名表单
+        if(!(that._judge())) {
+          return
+        }
+        wx.requestSubscribeMessage({
+          tmplIds: ["Ynia8PHxf3L_uWFvZxtPiI-V8hE-wcErHpe0Ygh8O9w"],
+          success: (res) => {
+            if (res["Ynia8PHxf3L_uWFvZxtPiI-V8hE-wcErHpe0Ygh8O9w"] === "accept") {
+              wx.navigateTo({
+                url: "../Recruit/Form/Form?title=" + title,
+              });
+            } else {
+              wx.showToast({
+                title: "订阅后才能报名志愿~",
+                duration: 1000,
+                success(data) {
+                  //成功
+                },
+              });
+            }
+          },
+          fail(err) {
+            //失败
+            console.error(err);
+            reject();
+          },
+        })
+      } else if (press === "moreInformation") {
+        //进入更多信息页面
+        db.collection("introduction")
+        .where({
+          title: title,
+        })
+        .get()
+        .then(res => {
+          console.log(res);
+          wx.hideLoading();
+          var target_id = res.data[0]._id;
+          wx.navigateTo({
+            url: "../Introduction/VolunteerMain/VolunteerMain?id=" + target_id,
+          });
+        })
+        .catch(err => {
+          console.log(err);
+          wx.showModal({
+            title: "错误",
+            content: "获取记录失败",
+            showCancel: false,
+          });
+        })
+      }
+    },
+
+    _judge() {
+      //用户的合法性检验,以后可加入积分的判断
+      var that = this
+      for (let i = 0; i < that.properties.iconInf.signupList.length; i++) {
         if (
-          app.globalData.openid === that.data.volunteer_list[id].signuplist[i]
+          app.globalData.openid === that.properties.iconInf.signupList[i]
         ) {
           wx.showToast({
             title: "请勿重复报名",
             icon: "none",
           });
-          return;
+          return false
         }
       }
-
-      wx.requestSubscribeMessage({
-        tmplIds: ["Ynia8PHxf3L_uWFvZxtPiI-V8hE-wcErHpe0Ygh8O9w"],
-        success: (res) => {
-          if (res["Ynia8PHxf3L_uWFvZxtPiI-V8hE-wcErHpe0Ygh8O9w"] === "accept") {
-            var id = that.data.id;
-            var title = that.data.volunteer_list[id].title;
-            wx.navigateTo({
-              url: "../forms/forms?title=" + title,
-            });
-          } else {
-            wx.showToast({
-              title: "订阅后才能报名志愿~",
-              duration: 1000,
-              success(data) {
-                //成功
-              },
-            });
-          }
-        },
-        fail(err) {
-          //失败
-          console.error(err);
-          reject();
-        },
-      });
-    },
-    //进入更多信息页面
-    program_open: function (event) {
-      var that = this;
-      var id = that.data.id;
-      var title = that.data.volunteer_list[id].title;
-
-      //从test中找到项目名称相同的对象
-      db.collection("test")
-        .where({
-          title: title,
-        })
-        .get({
-          success: function (res) {
-            console.log(res);
-            wx.hideLoading();
-            var target_id = res.data[0]._id;
-            wx.navigateTo({
-              url: "../detail/detail?id=" + target_id,
-            });
-          },
-          fail: function (res) {
-            console.log(res);
-            wx.showModal({
-              title: "错误",
-              content: "获取记录失败",
-              showCancel: false,
-            });
-          },
-        });
+      return true
     },
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  // lifetimes:{
+  lifetimes:{
+    attached() {
+      var that = this
+      var detail = this.data.hoverDetail
+      detail.title = that.properties.iconInf.title
+      var isPre = true
+      var currentDate = that.properties.currentTime.date
+      var currentTime = that.properties.currentTime.time
+      var postDate = that.properties.iconInf.date
+      var postTime = that.properties.iconInf.time
+      if ( currentDate < postDate || (currentDate == postDate && currentTime < postTime)) {
+        isPre = false
+      }
+      console.log(that.properties.iconInf.title + isPre)
+      detail.button[0].isAblePress = isPre
+      this.setData({
+        pre: isPre,
+        hoverDetail:detail
+      })
+    }
   //   created() {
   //     var that = this;
   //     db.collection("person")
@@ -196,5 +212,5 @@ Component({
   //         },
   //       });
   //   },
-  // },
+  },
 });
