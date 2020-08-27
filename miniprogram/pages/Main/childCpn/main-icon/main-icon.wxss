@@ -1,27 +1,49 @@
 /* 组件基本样式 */
 .middle-item {
-  box-shadow: 2rpx 5.5rpx 2rpx rgba(0, 0, 0, 0.2);
-  height: 135.87rpx;
-  border-bottom-right-radius: 495.47rpx;
-  border-top-right-radius: 495.47rpx;
+  margin-left:15rpx;
   display: flex;
   align-items: center;
   position: relative;
+  margin-top:35rpx;
+  width:335rpx;
+}
+.middle-icon{
+  width:370rpx;
+  height:240rpx;
+  margin-left: -25rpx;
+}
+.middle-nav{
+  width:335rpx;
+}
+.inside-box{
+  width:370rpx;
+  height: 120rpx;
+  position: absolute;
+  margin-top: -185rpx;
+  display: flex;
+  align-items: center;
+}
+.middle-pics{
+  width:120rpx;
+  height: 120rpx;
+  position: absolute;
+  border-radius: 150rpx;
+  margin-left: 25rpx;
 }
 
 /* 文本样式 */
 
 .middle-text {
-  font-size: 40rpx;
+  font-size: 29rpx;
   font-family: Microsoft YaHei;
-  color: #464647;
-  margin-left: 25rpx;
+  color: #5a5d5d;
+  position: relative;
+  margin-left: 170rpx;
 }
-
-/* 图标样式 */
-
-.middle-icon {
-  width: 64rpx;
-  height: 64rpx;
-  margin-left: 30rpx;
+.wanted-pics{
+  width:335rpx;
+  height: 444rpx;
+}
+.top-date{
+  margin-top: -25rpx;
 }

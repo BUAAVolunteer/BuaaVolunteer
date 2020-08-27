@@ -1,5 +1,12 @@
 <!-- 自带阴影和右边圆角的按钮 其余属性由传入参数确定 -->
-<navigator class="middle-item" style="background-color:{{iconInf.backgroundColor}};width:{{iconInf.width}};z-index:{{iconInf.zIndex}}" open-type="navigate" url="{{iconInf.navigateUrl}}" hover-class="navigator-hover">
-  <image class="middle-icon" mode="widthFix" src="{{iconInf.iconSrc}}" />
-  <text class="middle-text">{{iconInf.iconText}}</text>
+<navigator class="middle-nav" url="{{iconInf.navigateUrl}}">
+    <image class="middle-icon" src="{{iconInf.imgsrc}}" />
+    <view class="inside-box">
+      	<text class="middle-text">{{iconInf.iconText}}</text>
+     		<image class="middle-pics" src="{{iconInf.picsrc}}" />
+    </view>
 </navigator>
+<lx-hover class="center" id="msg" bindtap="volunteer">
+		<image class="wanted-pics" src="cloud://buaalx-w5aor.6275-buaalx-w5aor-1300053277/main/招募有投影.png" />
+		<text class="top-date">本志愿将于\n{{volunteer_list[id].date}}日{{volunteer_list[id].time}}\n发布招募</text>
+</lx-hover>
