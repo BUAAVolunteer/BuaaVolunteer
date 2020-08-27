@@ -15,10 +15,27 @@ page {
 /* 蓝小咕定位 */
 
 .gugugu {
-  height: 240rpx;
-  width: 210rpx;
+  height: 170rpx;
+  width: 120rpx;
   max-width: 100%;
   position: relative;
-  margin-top: -98rpx;
+  margin-top: 45rpx;
   left: 510rpx;
+}
+.middle-text{
+  position: absolute;
+  margin-top: 25rpx;
+  font-size: 30rpx;
+  font-family: Microsoft YaHei;
+  font-weight: bold;
+  margin-left: 30rpx;
+  color: #5a5d5d;
+}
+
+.middle-icon{
+  align-content: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  height: auto;
 }
