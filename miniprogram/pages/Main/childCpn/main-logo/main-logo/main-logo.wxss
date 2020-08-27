@@ -1,0 +1,40 @@
+/* pages/Main/childCpn/main-logo/main-logo.wxss */
+.board{
+  display: flex;
+  justify-content: center;
+  z-index: 1;
+  position: relative;
+}
+.main-board{
+  background-color: #54a2fe;
+  width: 700rpx;
+  height: 80rpx;
+  border-radius: 40rpx;
+  display: flex;
+  align-items: center;
+}
+.outsider{
+  width: 700rpx;
+  height: 80rpx;
+  border-radius: 40rpx;
+  border: 2rpx solid black;
+  margin-top: -10rpx;
+  margin-left: -5rpx;
+  z-index: 5;
+  position: absolute;
+}
+.board-text{
+  font-size: 30rpx;
+  font-family: Microsoft YaHei;
+  color: white;
+  margin-left: 35rpx;
+  letter-spacing: 2px;
+}
+.boardpic-left{
+  margin-left: 30rpx;
+  width: 20rpx;
+}
+.boardpic-else{
+  margin-left: 5rpx;
+  width: 20rpx;
+}
