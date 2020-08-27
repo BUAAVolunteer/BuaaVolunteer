@@ -1,6 +1,7 @@
 /* pages/Profile/ProfilePic/ProfilePic.wxss */
-.profile-pic-wrapper {
+.profile-pic {
   background-color: #fff;
+  width: 100vw;
 }
 
 .crossclick {
@@ -15,42 +16,46 @@
   background-color: #000000;
 }
 
-.pick {
- 
+.head {
+  display: flex;
+  justify-content: center;
+}
+
+.main {
   background-color: white;
+  height: 700rpx;
+}
+
+.wrapper {
+  border-radius: 50%;
+  display: inline-block;
+  height: 160rpx;
+  margin: 45rpx;
+  padding: 10rpx;
+  position: relative;
+  width: 160rpx;
+}
+
+.current {
+  border: 1px solid var(--blueLight);
 }
 
 .pic {
-  height: 120rpx;
-  width: 120rpx;
+  box-sizing: border-box;
   border-radius: 50%;
-  padding: 20rpx;
   box-shadow: 0rpx 1rpx 2px #999999;
-  margin: 45rpx;
+  height: 100%;
+  width: 100%;
+  border: 1px solid #f0f0f0;
 }
 
-.lock{
-  height: 120rpx;
-  width: 120rpx;
-  border-radius: 50%;
-  padding: 20rpx;
-  position: absolute;
-  margin-left: -205rpx;
-  margin-top: 25px;
+.lock {
+  box-sizing: border-box;
   background-color: #ffffff90;
-}
-
-
-
-
-
-.appear{
-  height: 700rpx;
-  width: 750rpx;
-  padding: 15rpx;
-}
-
-.disappear{
-  height: 700rpx;
-  z-index: -5;
+  height: 140rpx;
+  border-radius: 50%;
+  left: 10rpx;
+  position: absolute;
+  top: 15rpx;
+  width: 140rpx;
 }

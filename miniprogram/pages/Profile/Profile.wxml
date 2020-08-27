@@ -1,9 +1,11 @@
 <page-meta>
   <navigation-bar front-color="#fff" background-color="#fff" />
 </page-meta>
-<profile-header class="hide" person="{{person}}"></profile-header>
-<!-- 中部 -->
 
+<!-- 头部 -->
+<profile-header class="hide" person="{{person}}" bind:appearance="showPic"></profile-header>
+
+<!-- 中部 -->
 <view class="middle">
   <view wx:if="{{isRegister==true}}">
     <profile-middle-icon
@@ -20,13 +22,13 @@
       color="blue"
       bindtap="scoreLevel"
     />
-  <!-- 地图 -->
-    <image class="middle--map" src="/assets/image/profile/map.png" bindtap="toMap"/>
+    <!-- 地图 -->
+    <image class="middle--map" src="/assets/image/profile/map.png" bindtap="toMap" />
   </view>
   <!--未注册-->
-    <view wx:if="{{isRegister==false}}" class="noRegister">
-    <image class="goRegister" src="/assets/image/profile/goregister.png" bindtap="toEdit"/>
-    </view>
+  <view wx:if="{{isRegister==false}}" class="noRegister">
+    <image class="goRegister" src="/assets/image/profile/goregister.png" bindtap="toEdit" />
+  </view>
   <view class="footer__up">
     <profile-footer-icon type="1" content="新手教程" bindtap="forNew"></profile-footer-icon>
     <profile-footer-icon type="2" content="问题反馈" bindtap="toFeedback"></profile-footer-icon>
@@ -41,4 +43,6 @@
     <image mode="widthFix" src="/assets/image/profile/gu.png" />
   </view>
 </view>
-<profile-pic class="profile-pic profile-pic--active" bind: appearance='shouldAppear'></profile-pic>
+<!-- 头像组件 -->
+<view wx:if="{{isShowPic}}" bindtap="showPic" class="shadow"></view>
+<profile-pic class="profile-pic {{isShowPic ? 'profile-pic--active':''}}"></profile-pic>
