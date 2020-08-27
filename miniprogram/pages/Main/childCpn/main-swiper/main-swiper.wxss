@@ -1,6 +1,8 @@
 /* 轮播图居中 */
 swiper {
-  height: 390rpx;
+  height: 300rpx;
+  display: flex;
+  justify-content: center;
 }
 
 swiper-item {
@@ -11,26 +13,27 @@ swiper-item {
 /* 轮播图宽高调整 */
 
 swiper-item image {
-  width: 630rpx;
-  height: 390rpx;
-  border-bottom-left-radius: 7.5%;
-  border-bottom-right-radius: 7.5%;
+  width: 700rpx;
+  height: 280rpx;
+  border-radius: 30rpx;
 }
 
 /* 指示点布局 包括：宽、高、间距 */
 
 .dot-display {
-  width: 290rpx;
+  align-items: center;
+  width: 135rpx;
   height: 20rpx;
   display: flex;
-  justify-content: space-around;
-  margin: 23rpx auto;
+  justify-content: space-between;
+  margin: -48rpx auto 45rpx;
+  position: relative;
 }
 
 .dot {
-  width: 20rpx;
-  height: 20rpx;
-  background-color: #8cb2d3;
+  width: 15rpx;
+  height: 15rpx;
+  background-color: #fff;
   border-radius: 50%;
 }
 
@@ -39,7 +42,7 @@ swiper-item image {
 
 .dot-active {
   border-radius: 50%;
-  background-color: #fff;
+  background-color: #54a2fe;
   animation: dotActive 0.3s ease forwards;
 }
 
@@ -51,13 +54,13 @@ swiper-item image {
 
 @keyframes dotActive {
   from {
-    border: solid #8cb2d3 10rpx;
-    width: 0rpx;
-    height: 0rpx;
+    border: solid #54a2fe 5rpx;
+    width: 5rpx;
+    height: 5rpx;
   }
   to {
-    border: solid #8cb2d3 2rpx;
-    width: 16rpx;
-    height: 16rpx;
+    border: solid #54a2fe 0rpx;
+    width: 15rpx;
+    height: 15rpx;
   }
 }

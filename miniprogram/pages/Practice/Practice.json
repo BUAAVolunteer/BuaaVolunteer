@@ -1,8 +1,0 @@
-{
-  "usingComponents": {
-    "profile-header": "/pages/Profile/childCpn/profile-header/profile-header",
-    "profile-middle-icon": "/pages/Profile/childCpn/profile-middle-icon/profile-middle-icon",
-    "profile-footer-icon": "/pages/Profile/childCpn/profile-footer-icon/profile-footer-icon"
-  },
-  "navigationBarTitleText": ""
-}

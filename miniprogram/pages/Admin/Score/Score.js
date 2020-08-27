@@ -14,31 +14,31 @@ Component({
   data: {
     tele: "", //输入的手机号
     pickname: "", //选定的志愿名称
-    picker: [
-      "立水桥站区平安地铁志愿",
-      "童年一课线上支教",
-      "鲁迅博物馆讲解",
-      "“夕阳再晨”智能手机教学（1号社区）",
-      "“夕阳再晨”智能手机教学（2号社区）",
-      "思源楼智能手机教学",
-      "科技馆志愿",
-      "国家图书馆",
-      "中华世纪坛",
-      "花园小课堂",
-      "昌雨春童康复中心",
-      "小桔灯听障儿童支教",
-      "咿呀总动员",
-      "CBA志愿服务",
-      "中甲志愿服务",
-      "天文馆志愿",
+    scoreChange: "",//积分变动原因
+    picker: [],
+    picker2: [
+      "提交感想",
+      "优秀感想",
+      "受到表扬",
+      "添加内部名额",
+      "志愿迟到",
+      "受到批评",
+      "其他减分行为",
+      "缺勤但提前说明",
+      "缺勤但未提前说明",
+      "缺勤且未说明"
+
     ],
-    volun_name: "",
-    volun_phone: "",
-    volun_time: "",
-    volun_score: 0,
-    volun_id: "",
+    volunteerName: "",
+    volunteerPhone: "",
+    volunteerTime: "",
+    volunteerScore: 0,
+    volunteerID: "",
     person_list: [{}],
     index: null,
+    index2: null,
+    isSubmit: 0,
+    hover:"",
   },
 
   /**
@@ -49,6 +49,7 @@ Component({
       //console.log(e);
       this.setData({
         index: this.data.pickname,
+        index2: this.data.scoreChange
       });
     },
 
@@ -61,11 +62,11 @@ Component({
       var finding = 0;
       var that = this;
       var picker = this.data.picker;
-
+      this.hover = this.selectComponent("#msg")
       db.collection("person")
         .where({
           //根据电话和项目名称查询志愿
-          phone: e.detail.value.phone,
+          phone: this.data.volunteerPhone,
         })
         .get({
           success: function (res) {
@@ -79,19 +80,96 @@ Component({
               });
             } else {
               that.setData({
-                volun_name: res.data[0].name,
-                volun_phone: res.data[0].phone,
-                volun_time: res.data[0].duration,
-                volun_score: res.data[0].score,
-                volun_id: res.data[0]._openid,
+                volunteerName: res.data[0].name,
+                volunteerPhone: res.data[0].phone,
+                volunteerTime: res.data[0].duration,
+                volunteerScore: res.data[0].score,
+                volunteerID: res.data[0]._openid,
               });
+              this.hover.showHover({
+  
+                isMaskCancel: false,
+                title:"信息确认",
+                content:"志愿者信息：",
+                button:[
+                  {
+                    ID: 0,
+                    name: "cancel",
+                    text: "确认",
+                    isAblePress: true  
+                  },
+                  {
+                    ID: 1,
+                    name: "assure",
+                    text: "取消",
+                    isAblePress: true
+                  }
+                ]
+              })
             }
             wx.hideLoading();
           },
-          fail: function (res) {},
+          fail: function (res) { },
         });
     },
 
+    score_deal: function (e) {
+      wx.showLoading({
+        title: "请稍后",
+        mask: "true",
+      });
+      var scoreChange = this.data.scoreChange;
+      var _id = this.data.volunteerID;
+      var picker = this.data.picker;
+      var title = picker[this.data.index];
+      if (scoreChange === '添加内部名额') {
+        wx.cloud.callFunction({
+          // 云函数名称
+          name: "innerSign",
+          // 传给云函数的参数
+          data: {
+            openid: _id,
+            title: title,
+          },
+        });
+      }
+      else{
+        wx.cloud.callFunction({
+          name: "plus",
+          data: {
+            openid: _id,
+            title: title,
+            scoreChange: scoreChange,
+          }
+        })
+        if (scoreChange === '缺勤但提前说明' || scoreChange === '缺勤但未提前说明' || scoreChange === '缺勤且提前说明') {
+          db.collection('blacklist').add({
+            data: {
+              name: this.data.volunteerName,
+              phone: this.data.tele,
+              title: this.data.picker[this.data.pickname],
+              time: this.data.volunteerTime,
+            },
+          })
+          db.collection('list').add({
+            data: {
+              duration: "0",
+              phone: this.data.tele,
+              title: this.data.picker[this.data.pickname],
+              note: this.data.date,
+            },
+          })
+        }
+      } 
+    },
+
+  
+
+    
+
+
+
+/*
     plus1: function (e) {
       wx.showLoading({
         title: "请稍后",
@@ -401,7 +479,7 @@ Component({
         },
         fail: console.error,
       });
-    },
+    },*/
   },
 
   lifetimes: {
@@ -411,6 +489,8 @@ Component({
       });
       var picker = [];
       var that = this;
+      this.hover = this.selectComponent("#msg");
+     
       db.collection("project").get({
         success: function (res) {
           for (let i = 0; i < res.data.length; i++) {
@@ -423,6 +503,7 @@ Component({
           wx.hideLoading();
         },
       });
+      
     },
   },
 });

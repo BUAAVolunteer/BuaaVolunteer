@@ -1,5 +1,51 @@
 <!-- 自带阴影和右边圆角的按钮 其余属性由传入参数确定 -->
-<navigator class="middle-item" style="background-color:{{iconInf.backgroundColor}};width:{{iconInf.width}};z-index:{{iconInf.zIndex}}" open-type="navigate" url="{{iconInf.navigateUrl}}" hover-class="navigator-hover">
-  <image class="middle-icon" mode="widthFix" src="{{iconInf.iconSrc}}" />
-  <text class="middle-text">{{iconInf.iconText}}</text>
-</navigator>
+<view class="wrapper">
+  <view class="middle-nav" bindtap="volunteer">
+    <!-- background -->
+    <image
+      wx:if="{{currenDate<iconInf.date || currenDate == iconInf.date && currenTime<iconInf.time}}"
+      class="middle-icon"
+      src="/assets/image/main/pre.png"
+    />
+    <image wx:else class="middle-icon--show" src="/assets/image/main/show.png" />
+    <view class="box">
+      <view class="box-header">
+        <image
+          class="box-header__pics"
+          src="cloud://volunteer-platform-1v92i.766f-volunteer-platform-1v92i-1300053277/志愿项目-内部展示/{{iconInf.title}}.jpg"
+        />
+        <view class="box-header__text">{{iconInf.title}}</view>
+      </view>
+      <view class="box-content">
+        <view>时间:</view>
+        <view class="box-content__inner">{{iconInf.textarea}}</view>
+        <view>地点:</view>
+        <view class="box-content__inner">{{iconInf.place}}</view>
+      </view>
+    </view>
+  </view>
+  <!-- 悬浮窗 -->
+  <lx-hover id="msg">
+    <view>
+      <view class="header">
+        <text class="header-date">本志愿将于\n{{iconInf.date}}日{{iconInf.time}}\n发布招募</text>
+      </view>
+      <scroll-view scroll-y="{{true}}" class="middle">
+        <text class="items-title">○ 活动时间：</text>
+        <text class="texts">\n{{iconInf.textarea}}\n</text>
+        <text class="items-title">○ 活动地点：</text>
+        <text class="texts">\n{{iconInf.place}}\n</text>
+        <text class="items-title">○ 活动内容：</text>
+        <text class="texts">\n{{iconInf.detail}}\n</text>
+        <text class="items-title">○ 招募人数：</text>
+        <text class="texts">\n{{iconInf.people}}\n</text>
+        <text class="items-title">○ 志愿保障：</text>
+        <text class="texts">\n{{iconInf.assure}}\n</text>
+        <text class="items-title">○ 特别提醒：</text>
+        <text class="texts">\n{{iconInf.require}}\n</text>
+        <text class="items-title">○ 负责人联系方式：</text>
+        <text class="texts">\n{{iconInf.response}}</text>
+      </scroll-view>
+    </view>
+  </lx-hover>
+</view>

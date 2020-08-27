@@ -1,230 +1,205 @@
-// pages/PersonMain/PersonMain.js
+// pages/Practice/Practice.js
 const db = wx.cloud.database();
 const _ = db.command;
 const app = getApp();
-// num表示需要四舍五入的小数
-// s表示需要保留几位小数
-function toFixed(num, s) {
-    let times = Math.pow(10, s);
-    if (num < 0) {
-        num = Math.abs(num); //先把负数转为正数，然后四舍五入之后再转为负数
-        let des = parseInt((num * times + 0.5), 10) / times;
-        return -des;
-    } else {
-        let des = parseInt((num * times + 0.5), 10) / times;
-        return des;
-    }
-}
-
-Page({
-
-    /**
-     * 页面的初始数据
-     */
-    data: {
-        person_list: [{}],
-        volunteer_list: [{}],
-        admin: 0,
-        totalscore: 0,
-        current: 0,
-        register: 0
+Component({
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    person: {
+      name: "蓝小咕",
+      personNum: 66666666,
+      text: "志存高远，愿惠天下",
+      score: 100,
+      time: 10000,
+    },
+    isShowPic: false,
+    isRegister: app.globalData.isRegister,
+    buttonsgath: [
+      {
+        navigateUrl: "", // 要跳转到的页面路径    还没出现的新手教程
+      },
+      {
+        navigateUrl: "/pages/Profile/Feedback/Feedback", //问题反馈
+      },
+      {
+        navigateUrl: "/pages/Profile/UpdateLog/Updatelog", //更新日志
+      },
+      {
+        navigateUrl: "", //积分细则
+      },
+      {
+        navigateUrl:
+          "/pages/OuterLink/OuterLink?url=https://mp.weixin.qq.com/s/5bqJNvDXhH8j9iGZ5diyMw",
+        //蓝协介绍
+      },
+      {
+        navigateUrl:
+          "/pages/OuterLink/OuterLink?url=https://mp.weixin.qq.com/s/cgU6BbeFxHXXsWwl5wePTw",
+        //联系我们
+      },
+    ],
+  },
+  methods: {
+    showPic() {
+      // console.log("子传父", this.data.isShowPic);
+      this.setData({
+        isShowPic: !this.data.isShowPic,
+      });
+    },
+    //跳转志愿历史
+    toHistory: function () {
+      wx.navigateTo({
+        url: "/pages/Profile/History/History",
+      });
+    },
+    //跳转志愿地图
+    toMap: function () {
+      wx.navigateTo({
+        url: "/pages/Profile/Map/Map",
+      });
+    },
+    toEdit: function () {
+      wx.navigateTo({
+        url: "/pages/Profile/PersonEdit/PersonEdit",
+      });
+    },
+    //志愿积分按钮
+    scoreLevel: function () {
+      var score = this.data.person.score;
+      if (score <= -10) {
+        wx.showModal({
+          title: "警告",
+          content: "您的积分已达到惩罚线，6个月内无法继续参与蓝协志愿。",
+          showCancel: false,
+        });
+      } else if (score > -10 && score < 0) {
+        wx.showModal({
+          title: "警告",
+          content: "请注意志愿服务的行为规范，否则您将无法继续参与蓝协志愿。",
+          showCancel: false,
+        });
+      } else if (score >= 0 && score <= 10) {
+        wx.showModal({
+          title: "志愿者星级",
+          content: "恭喜您成为一星志愿者！",
+          showCancel: false,
+        });
+      } else if (score > 10 && score <= 15) {
+        wx.showModal({
+          title: "志愿者星级",
+          content: "恭喜您成为二星志愿者！",
+          showCancel: false,
+        });
+      } else if (score > 15 && score <= 25) {
+        wx.showModal({
+          title: "志愿者星级",
+          content: "恭喜您成为三星志愿者！",
+          showCancel: false,
+        });
+      } else if (score > 25 && score <= 40) {
+        wx.showModal({
+          title: "志愿者星级",
+          content: "恭喜您成为四星志愿者！",
+          showCancel: false,
+        });
+      } else if (score > 40 && score <= 60) {
+        wx.showModal({
+          title: "志愿者星级",
+          content: "恭喜您成为五星志愿者！",
+          showCancel: false,
+        });
+      } else if (score > 60) {
+        wx.showModal({
+          title: "志愿者星级",
+          content: "恭喜您成为六星志愿者！",
+          showCancel: false,
+        });
+      }
+    },
+    //新手教程
+    forNew: function () {
+      wx.navigateTo({});
     },
 
-    /**
-     * 生命周期函数--监听页面加载
-     */
-    onLoad: function(options) {
+    //问题反馈
+    toFeedback: function () {
+      wx.navigateTo({
+        url: "/pages/Profile/Feedback/Feedback",
+      });
+    },
+    //更新日志
+    toLog: function () {
+      wx.navigateTo({
+        url: "/pages/Profile/UpdateLog/Updatelog",
+      });
+    },
+    //积分细则
+    toRule: function () {
+      wx.navigateTo({});
+    },
+    //蓝协介绍
+    toIntroduction: function () {
+      wx.navigateTo({
+        url:
+          "/pages/OuterLink/OuterLink?url=https://mp.weixin.qq.com/s/5bqJNvDXhH8j9iGZ5diyMw",
+      });
+    },
+    //联系我们
+    contact: function () {
+      wx.navigateTo({
+        url:
+          "/pages/OuterLink/OuterLink?url=https://mp.weixin.qq.com/s/cgU6BbeFxHXXsWwl5wePTw",
+      });
     },
 
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function() {
-
+    shouldAppear: function () {
+      console.log("succeess");
     },
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function() {
-        wx.showLoading({
-            title: '加载中',
+  },
+  lifetimes: {
+    created: function () {
+      wx.showLoading({
+        title: "加载中",
+      });
+      var that = this;
+      this.setData({
+        isRegister: app.globalData.isRegister,
+      });
+      db.collection("person")
+        .where({
+          _openid: app.globalData.openid,
         })
-        var that = this
-        this.setData({
-            register: app.globalData.register
-        })
-        db.collection('person').where({
-                _openid: app.globalData.openid,
-            })
-            .get({
-                success: function(res) {
-                    console.log(res.data)
-                    let data = res.data
-                    if (data.length == 0 || !data[0].campus || !data[0].qqnum) {
-                        wx.hideLoading()
-                        that.setData({
-                                register: 1
-                            })
-                            //console.log("reg", that.data.register)
-                    } else {
-                        that.setData({
-                            register: 0
-                        })
-                        wx.hideLoading()
-                        that.setData({
-                            person_list: res.data,
-                            totalscore: res.data[0].score.toFixed(1)
-                        })
-                    }
-                },
-                fail: function(res) {
-                    wx.hideLoading()
-                    wx.showModal({
-                        title: '错误',
-                        content: '获取记录失败,请检查网络或反馈给管理员',
-                        showCancel: false,
-                    })
-                }
-            })
-
-
-    },
-    admin: function() {
-        if (app.globalData.admin){
-            wx.navigateTo({
-                url: '../admin/admin',
+        .get({
+          success: function (res) {
+            console.log(res.data);
+            let data = res.data;
+            if (data.length == 0 || !data[0].campus || !data[0].qqnum) {
+              wx.hideLoading();
+              that.setData({
+                isRegister: 1,
+              });
+            } else {
+              that.setData({
+                isRegister: 0,
+              });
+              wx.hideLoading();
+              that.setData({
+                person_list: res.data,
+                totalscore: res.data[0].score.toFixed(1),
+              });
+            }
+          },
+          fail: function (res) {
+            wx.hideLoading();
+            wx.showModal({
+              title: "错误",
+              content: "获取记录失败,请检查网络或反馈给管理员",
+              showCancel: false,
             });
-        }else{
-            wx.showToast({
-                title: '这里是小咕的秘密基地哦！不能让你进来的啦QAQ',
-                icon: 'none'
-            })
-        }
-    },
-    program_open: function() {
-        var that = this;
-        that.setData({
-            current: 1 - this.data.current
+          },
         });
     },
-    secret: function() {
-        db.collection('admin').where({
-                _openid: app.globalData.openid,
-            })
-            .get({
-                success: function(res) {
-                    if (res.data.length == 0) {
-                        wx.showToast({
-                            title: '这里也是小咕的秘密基地！',
-                            icon: 'none'
-                        })
-                    } else {
-                        wx.navigateTo({
-                            url: '../secret/secret',
-                            success: (result) => {
-
-                            },
-                            fail: () => {},
-                            complete: () => {}
-                        });
-                    }
-                }
-            })
-
-    },
-    surprise: function() {
-        wx.showModal({
-            title: '这也许是一个彩蛋',
-            content: '隔壁北邮小程序都5.0了\n不开心！T_T',
-            showCancel: false,
-        })
-    },
-    score: function() {
-        var score = this.data.totalscore
-        if (score <= -10) {
-            wx.showModal({
-                title: '警告',
-                content: '您的积分已达到惩罚线，6个月内无法继续参与蓝协志愿。',
-                showCancel: false,
-            })
-        } else if (score > -10 && score < 0) {
-            wx.showModal({
-                title: '警告',
-                content: '请注意志愿服务的行为规范，否则您将无法继续参与蓝协志愿。',
-                showCancel: false,
-            })
-        } else if (score >= 0 && score <= 10) {
-            wx.showModal({
-                title: '志愿者星级',
-                content: '恭喜您成为一星志愿者！',
-                showCancel: false,
-            })
-        } else if (score > 10 && score <= 15) {
-            wx.showModal({
-                title: '志愿者星级',
-                content: '恭喜您成为二星志愿者！',
-                showCancel: false,
-            })
-        } else if (score > 15 && score <= 25) {
-            wx.showModal({
-                title: '志愿者星级',
-                content: '恭喜您成为三星志愿者！',
-                showCancel: false,
-            })
-        } else if (score > 25 && score <= 40) {
-            wx.showModal({
-                title: '志愿者星级',
-                content: '恭喜您成为四星志愿者！',
-                showCancel: false,
-            })
-        } else if (score > 40 && score <= 60) {
-            wx.showModal({
-                title: '志愿者星级',
-                content: '恭喜您成为五星志愿者！',
-                showCancel: false,
-            })
-        } else if (score > 60) {
-            wx.showModal({
-                title: '志愿者星级',
-                content: '恭喜您成为六星志愿者！',
-                showCancel: false,
-            })
-        }
-
-    },
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function() {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function() {
-
-    },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function() {
-
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function() {
-
-    },
-
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function() {
-
-    }
-})
+  },
+});
