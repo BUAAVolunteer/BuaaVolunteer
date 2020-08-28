@@ -41,6 +41,30 @@ Component({
       ],
     }
   },
+
+  observers: {
+    'iconInf,currentTime' (iconInf,currentTime) {
+      var that = this
+      var detail = this.data.hoverDetail
+      detail.title = iconInf.title
+      var isPre = false
+      var currentDate = currentTime.date
+      var currentTime = currentTime.time
+      var postDate = iconInf.date
+      var postTime = iconInf.time
+      console.log(currentDate)
+      if ( currentDate < postDate || (currentDate == postDate && currentTime < postTime)) {
+        isPre = true
+      }
+      // console.log(that.properties.iconInf.title + isPre)
+      detail.button[0].isAblePress = !isPre
+      this.setData({
+        pre: isPre,
+        hoverDetail:detail
+      })
+    }
+  },
+
   methods: {
     volunteer() {
       wx.showLoading({
@@ -142,6 +166,7 @@ Component({
       var currentTime = that.properties.currentTime.time
       var postDate = that.properties.iconInf.date
       var postTime = that.properties.iconInf.time
+      console.log(currentDate)
       if ( currentDate < postDate || (currentDate == postDate && currentTime < postTime)) {
         isPre = false
       }
