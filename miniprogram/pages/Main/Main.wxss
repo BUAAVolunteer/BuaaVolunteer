@@ -9,6 +9,10 @@ page {
   margin: 25rpx 0 30rpx 50rpx;
 }
 
+.middle-list {
+  height: 650rpx;
+}
+
 .middle-icon {
   height: auto;
   padding: 30rpx 23rpx 0 22rpx;

@@ -145,8 +145,8 @@ Component({
       if ( currentDate < postDate || (currentDate == postDate && currentTime < postTime)) {
         isPre = false
       }
-      console.log(that.properties.iconInf.title + isPre)
-      detail.button[0].isAblePress = isPre
+      // console.log(that.properties.iconInf.title + isPre)
+      detail.button[0].isAblePress = !isPre
       this.setData({
         pre: isPre,
         hoverDetail:detail

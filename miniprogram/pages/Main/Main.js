@@ -10,7 +10,8 @@ Component({
   data: {
     mainIcon: [], // 页面招募志愿项目数据
     imageList: [], // 要传入main-swiper的对象数组
-    current: {}
+    current: {},
+    refreshLoading: false
   },
   // 组件生命周期
   lifetimes: {
@@ -31,25 +32,6 @@ Component({
           //获取openid并赋值给全局变量
           app.globalData.openid = res.result.openid;
           console.log(app.globalData);
-        })
-        /*-----------------主页志愿招募数据-----------------------------*/
-        .then(() => {
-          return db.collection("project").get();
-        })
-        .then((res) => {
-          // console.log(res.data)
-          let projectList = res.data
-          // 对得到的项目列表进行排序，详见js中的sort函数
-          projectList.sort(function (a, b) {
-            if (a.date < b.date || (a.date == b.date && a.time < b.time)) {
-              return -1
-            } else {
-              return 1
-            }
-          })
-          that.setData({
-            mainIcon: projectList,
-          });
         })
         /*-----------------主页轮播图地址-----------------------------*/
         .then(() => {
@@ -100,22 +82,14 @@ Component({
             app.globalData.isAdmin = false;
           }
           console.log("个人信息登记完成");
-          wx.hideLoading();
         })
         .then(() => {
-          return wx.cloud.callFunction({
-            name: "getTime"
-          })
+          return that.initList()
         })
-        .then(res => {
-          console.log(res)
-          var time = res.result.time.split(' ')
-          var current = {}
-          current.date = time[0]
-          current.time = time[1]
-          that.setData({
-            current,
-          })
+        .then(() => {
+          console.log("志愿信息登记完成")
+          wx.hideLoading();
+
         })
         .catch((err) => {
           console.log(err);
@@ -129,5 +103,48 @@ Component({
     },
   },
   // 组件自己的方法
-  methods: {},
+  methods: {
+    initList() {
+      this.setData({
+        refreshLoading: true
+      })
+      var that = this
+      /*-----------------主页志愿招募数据-----------------------------*/
+      db.collection("project")
+      .get()
+      .then((res) => {
+        // console.log(res.data)
+        let projectList = res.data
+        // 对得到的项目列表进行排序，详见js中的sort函数
+        projectList.sort(function (a, b) {
+          if (a.date < b.date || (a.date == b.date && a.time < b.time)) {
+            return -1
+          } else {
+            return 1
+          }
+        })
+        that.setData({
+          mainIcon: projectList,
+        });
+      })
+      .then(() => {
+        // 获取目前的服务器时间
+        return wx.cloud.callFunction({
+          name: "getTime"
+        })
+      })
+      .then(res => {
+        console.log(res)
+        var time = res.result.time.split(' ')
+        var current = {}
+        current.date = time[0]
+        current.time = time[1]
+        app.globalData.current = current
+        that.setData({
+          current,
+          refreshLoading: false
+        })
+      })
+    }
+  },
 });
