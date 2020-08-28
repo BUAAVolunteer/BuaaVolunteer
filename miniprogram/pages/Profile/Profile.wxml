@@ -7,7 +7,7 @@
 
 <!-- 中部 -->
 <view class="middle">
-  <view wx:if="{{isRegister==true}}">
+  <view wx:if="{{isRegister}}">
     <profile-middle-icon
       icon="/assets/icons/profile/time.png"
       describe="志愿历史："
@@ -26,7 +26,7 @@
     <image class="middle--map" src="/assets/image/profile/map.png" bindtap="toMap" />
   </view>
   <!--未注册-->
-  <view wx:if="{{isRegister==false}}" class="noRegister">
+  <view wx:if="{{!isRegister}}" class="noRegister">
     <image class="goRegister" src="/assets/image/profile/goregister.png" bindtap="toEdit" />
   </view>
   <view class="footer__up">

@@ -4,9 +4,8 @@
   <!-- logo -->
   <main-logo></main-logo>
   <!--text-->
-  <text class="middle-text">志愿报名</text>
   <!-- 遍历展示组件，子组件仅包含按钮功能，数据由item传入 -->
-
+  <text class="middle-text">志愿报名</text>
   <view class="middle-icon">
     <block wx:for="{{mainIcon}}" wx:key="index">
       <main-icon iconInf="{{item}}" currentTime="{{current}}"></main-icon>

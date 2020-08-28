@@ -1,6 +1,6 @@
 /* 组件基本样式 */
 .wrapper {
-  box-shadow: 0 0 12px 6px rgba(84, 162, 254, 0.05);
+  box-shadow: 0 0 28px 2px rgba(163, 188, 218, 0.2);
   display: inline-block;
   margin-bottom: 30rpx;
   border-radius: 30rpx;
@@ -52,7 +52,7 @@
   color: #5a5d5d;
   font-size: 25rpx;
   line-height: 50rpx;
-  padding: 10rpx 0 0 28rpx;
+  padding: 28rpx 0 0 22.5rpx;
 }
 
 .box-content__inner {

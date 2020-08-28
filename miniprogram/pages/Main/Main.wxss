@@ -11,7 +11,7 @@ page {
 
 .middle-icon {
   height: 812rpx;
-  padding: 30rpx 23rpx 0 22rpx;
+  padding: 40rpx 27.5rpx 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;

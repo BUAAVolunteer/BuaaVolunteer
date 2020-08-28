@@ -28,7 +28,9 @@ Component({
       .doc(id)
       .get()
       .then((res) => {
-        //console.log(res)
+        // console.log(res);
+        if (res.data.title.length > 10)
+          res.data.title = res.data.title.slice(0, 10);
         that.setData({
           imageSrc: res.data.imageSrc,
           title: res.data.title,

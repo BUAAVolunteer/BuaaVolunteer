@@ -14,12 +14,14 @@
         bindtap="choosePic"
         wx:if="{{item.isShow}}"
       >
-        <image class="pic" src="{{item.src}}" />
+        <image mode="widthFix" class="pic" src="{{item.src}}" />
       </view>
       <!-- 未解锁状态 -->
       <view class="wrapper" wx:else>
-        <image class="pic" src="{{item.src}}" />
-        <image class="lock" src="/assets/image/profilepic/lock.png" />
+        <image mode="widthFix" class="pic" src="{{item.src}}" />
+        <view class="lock">
+          <image class="lock__inner" src="/assets/image/profilepic/lock.png" />
+        </view>
       </view>
     </block>
   </view>

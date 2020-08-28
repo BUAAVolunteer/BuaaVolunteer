@@ -13,7 +13,13 @@
   height: 80rpx;
   margin: 5rpx 0 30rpx 5rpx;
   width: 700rpx;
-  padding: 20rpx 0 0 30rpx;
+  padding: 20rpx 0 0 25rpx;
+}
+
+.main-board__inner {
+  align-items: center;
+  display: flex;
+  height: 50%;
 }
 
 .outsider {
@@ -35,19 +41,19 @@
 
 .boardpic-left {
   margin-left: 30rpx;
-  width: 20rpx;
+  width: 16rpx;
   animation: tri1 0.9s ease 0s infinite;
 }
 
 .boardpic-else1 {
   margin-left: 5rpx;
-  width: 20rpx;
+  width: 16rpx;
   animation: tri1 0.9s ease 0.15s infinite;
 }
 
 .boardpic-else2 {
   margin-left: 5rpx;
-  width: 20rpx;
+  width: 16rpx;
   animation: tri1 0.9s ease 0.3s infinite;
 }
 

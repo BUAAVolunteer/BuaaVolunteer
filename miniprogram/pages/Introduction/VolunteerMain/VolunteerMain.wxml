@@ -1,5 +1,5 @@
 <view class="header">
-  <image class="header__img" mode="aspectFill" src="{{baseUrl + title + '.jpg'}}" />
+  <image class="header__img" mode="aspectFill" src="{{imageSrc}}" />
 </view>
 <view class="main">
   <view class="main-upimg">
@@ -11,7 +11,7 @@
         </view>
       </block>
     </view>
-    <view wx:elif="{{title.length <= 10}}" class="main-upimg__inner8">
+    <view wx:else class="main-upimg__inner8">
       <block wx:for="{{title}}">
         <view>
           {{item}}

@@ -121,7 +121,7 @@ Component({
     //新手教程
     forNew: function () {
       wx.navigateTo({
-        url: "",
+        url: "/pages/OuterLink/OuterLink?url=",
       });
     },
 
@@ -176,34 +176,34 @@ Component({
         .where({
           _openid: app.globalData.openid,
         })
-        .get({
-          success: function (res) {
-            console.log(res.data);
-            let data = res.data;
-            if (data.length == 0 || !data[0].campus || !data[0].qqnum) {
-              wx.hideLoading();
-              that.setData({
-                isRegister: 1,
-              });
-            } else {
-              that.setData({
-                isRegister: 0,
-              });
-              wx.hideLoading();
-              that.setData({
-                person_list: res.data,
-                totalscore: res.data[0].score.toFixed(1),
-              });
-            }
-          },
-          fail: function (res) {
+        .get()
+        .then((res) => {
+          console.log(res.data);
+          let data = res.data;
+          if (data.length == 0 || !data[0].campus || !data[0].qqnum) {
             wx.hideLoading();
-            wx.showModal({
-              title: "错误",
-              content: "获取记录失败,请检查网络或反馈给管理员",
-              showCancel: false,
+            that.setData({
+              isRegister: 1,
             });
-          },
+          } else {
+            that.setData({
+              isRegister: 0,
+            });
+            wx.hideLoading();
+            that.setData({
+              person_list: res.data,
+              totalscore: res.data[0].score.toFixed(1),
+            });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          wx.hideLoading();
+          wx.showModal({
+            title: "错误",
+            content: "获取记录失败,请检查网络或反馈给管理员",
+            showCancel: false,
+          });
         });
     },
   },

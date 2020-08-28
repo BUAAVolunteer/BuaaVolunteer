@@ -33,11 +33,11 @@
 @keyframes show-up {
   0% {
     opacity: 0;
-    top: 23%;
+    top: 13%;
   }
   100% {
     opacity: 1;
-    top: 20%;
+    top: 10%;
   }
 }
 

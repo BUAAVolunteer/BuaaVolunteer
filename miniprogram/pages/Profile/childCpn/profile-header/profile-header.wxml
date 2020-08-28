@@ -3,7 +3,7 @@
 <image class="bg forward--left" mode="widthFix" src="/assets/image/profile/forward.png" />
 <image class="bg forward--right" mode="widthFix" src="/assets/image/profile/forward.png" />
 <!-- 头部 -->
-<view wx:if="{{isRegister==true}}" class="header">
+<view wx:if="{{isRegister}}" class="header">
   <!-- 主要部分 -->
   <view class="main">
     <view class="main--image__wrapper" bindtap="callPic">
@@ -41,7 +41,7 @@
 </view>
 
 <!--未注册-->
-<view wx:if="{{isRegister==false}}" class="noRegister_header">
+<view wx:if="{{!isRegister}}" class="noRegister_header">
   <view class="main--image__wrapper">
     <image
       class="main--image__inner"
