@@ -120,7 +120,9 @@ Component({
     },
     //新手教程
     forNew: function () {
-      wx.navigateTo({});
+      wx.navigateTo({
+        url: "",
+      });
     },
 
     //问题反馈
@@ -132,12 +134,15 @@ Component({
     //更新日志
     toLog: function () {
       wx.navigateTo({
-        url: "/pages/Profile/UpdateLog/Updatelog",
+        url: "/pages/Profile/UpdateLog/UpdateLog",
       });
     },
     //积分细则
     toRule: function () {
-      wx.navigateTo({});
+      wx.navigateTo({
+        url:
+          "/pages/OuterLink/OuterLink?url=https://mp.weixin.qq.com/s/YDKfJv7ZASCAnOH3vgNoNw",
+      });
     },
     //蓝协介绍
     toIntroduction: function () {
@@ -159,7 +164,7 @@ Component({
     },
   },
   lifetimes: {
-    created: function () {
+    created() {
       wx.showLoading({
         title: "加载中",
       });

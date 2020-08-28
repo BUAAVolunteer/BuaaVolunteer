@@ -9,18 +9,14 @@ page {
   margin: 25rpx 0 30rpx 50rpx;
 }
 
-.middle-list {
-  height: 650rpx;
-}
-
 .middle-icon {
-  height: auto;
+  height: 812rpx;
   padding: 30rpx 23rpx 0 22rpx;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  overflow: auto;
 }
-
 
 /* 蓝小咕定位 */
 .gugugu {
@@ -28,6 +24,6 @@ page {
   width: 120rpx;
   max-width: 100%;
   position: relative;
-  margin-top: 45rpx;
+  margin-top: -25rpx;
   left: 510rpx;
 }

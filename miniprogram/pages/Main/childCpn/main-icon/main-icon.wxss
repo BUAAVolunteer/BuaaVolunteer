@@ -66,14 +66,12 @@
 .header {
   display: flex;
   justify-content: center;
-  height: 111rpx;
-  padding: 4rpx;
 }
 
 .header-date {
   text-align: center;
   font-weight: bold;
-  margin-top: 15rpx;
+  margin-bottom: 15rpx;
   line-height: 26rpx;
   font-size: 26rpx;
 }
@@ -82,9 +80,6 @@
   height: 500rpx;
   background-color: #bfe6e9;
   border-radius: 5%;
-  width: 85%;
-  margin: 20rpx 5%;
-  margin-bottom: 15rpx;
   padding: 15rpx;
 }
 

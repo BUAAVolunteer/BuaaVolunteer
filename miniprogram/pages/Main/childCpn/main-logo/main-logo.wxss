@@ -36,53 +36,29 @@
 .boardpic-left {
   margin-left: 30rpx;
   width: 20rpx;
-  animation: tri1 0.7s ease 0s infinite;
+  animation: tri1 0.9s ease 0s infinite;
 }
 
 .boardpic-else1 {
   margin-left: 5rpx;
   width: 20rpx;
-  animation: tri2 0.7s ease 0s infinite;
+  animation: tri1 0.9s ease 0.15s infinite;
 }
 
 .boardpic-else2 {
   margin-left: 5rpx;
   width: 20rpx;
-  animation: tri3 0.7s ease 0s infinite;
+  animation: tri1 0.9s ease 0.3s infinite;
 }
 
 @keyframes tri1 {
   0% {
-    opacity: 0.3;
+    opacity: 0.33;
   }
   50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0.6;
-  }
-}
-
-@keyframes tri2 {
-  0% {
-    opacity: 0.6;
-  }
-  50% {
-    opacity: 0.3;
+    opacity: 0.66;
   }
   100% {
     opacity: 1;
-  }
-}
-
-@keyframes tri3 {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.6;
-  }
-  100% {
-    opacity: 0.3;
   }
 }
