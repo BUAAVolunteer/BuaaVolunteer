@@ -6,7 +6,12 @@ Component({
   /**
    * 组件的属性列表
    */
-  properties: {},
+  properties: {
+    show: {
+      type: Boolean,
+      value: false,
+    },
+  },
 
   /**
    * 组件的初始数据
