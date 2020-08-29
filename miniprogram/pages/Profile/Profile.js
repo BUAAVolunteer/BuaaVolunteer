@@ -21,14 +21,33 @@ Component({
   methods: {
     changePic(e) {
       // console.log("子传父", this.data.isShowPic);
-      this.head = this.selectComponent('#head')
-      var person = this.data.person
-      person.avatar = e.detail
-      this.head.changePic(e.detail)
-      this.setData({
-        person,
-        isShowPic: !this.data.isShowPic,
-      });
+      var that = this
+      if (e.detail === "none" || typeof(e.detail) == 'object') {
+        this.setData({
+          isShowPic: !this.data.isShowPic,
+        })
+      } else {
+        wx.showLoading()
+        this.head = this.selectComponent('#head')
+        var person = this.data.person
+        person.avatar = e.detail
+        this.head.changePic(e.detail)
+        wx.cloud.callFunction({
+          name: "answer",
+          data: {
+            type: "avatar",
+            avatar: e.detail,
+            openid: app.globalData.openid
+          }
+        })
+        .then(() => {
+          that.setData({
+            person,
+            isShowPic: !this.data.isShowPic,
+          });
+          wx.hideLoading()
+        })
+      }
     },
     // 打开选择头像页
     openChoose() {
@@ -158,6 +177,7 @@ Component({
         title: "加载中",
       });
       var that = this;
+      console.log(app.globalData)
       var person = {}
       person.campus = app.globalData.campus
       person.name = app.globalData.name
@@ -165,47 +185,14 @@ Component({
       person.qqNum = app.globalData.qqNum
       person.personNum = app.globalData.personNum
       person.avatar = app.globalData.avatar
-      // person.text = app.globalData.text
-      // person.totalDuration = app.globalData.totalDuration
-      // person.totalScore = app.globalData.totalScore.toFixed(1)
-      // person.history = app.globalData.history
-      db.collection("person")
-        .where({
-          _openid: app.globalData.openid,
-        })
-        .field({
-          text: true,
-          totalDuration: true,
-          totalScore: true,
-          history: true
-        })
-        .get()
-        .then((res) => {
-          console.log(res.data);
-          let data = res.data;
-          if (data.length == 0) {
-            wx.hideLoading();
-          } else {
-            person.text = res.data[0].text
-            person.totalDuration = res.data[0].totalDuration
-            person.totalScore = res.data[0].totalScore.toFixed(1)
-            person.history = res.data[0].history
-            console.log(person)
-            that.setData({
-              person,
-            })
-            wx.hideLoading()
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-          wx.hideLoading();
-          wx.showModal({
-            title: "错误",
-            content: "获取记录失败,请检查网络或反馈给管理员",
-            showCancel: false,
-          });
-        });
+      person.text = app.globalData.text
+      person.totalDuration = app.globalData.totalDuration
+      person.totalScore = app.globalData.totalScore.toFixed(1)
+      person.history = app.globalData.history
+      that.setData({
+        person,
+      })
+      wx.hideLoading()
     },
   },
 });

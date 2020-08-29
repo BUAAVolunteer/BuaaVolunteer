@@ -93,6 +93,10 @@ Component({
             app.globalData.text = res.data[0].text;
             app.globalData.totalDuration = res.data[0].totalDuration;
             app.globalData.totalScore = res.data[0].totalScore;
+            app.globalData.history = res.data[0].history;
+            if ('qualification' in res.data[0]) {
+              app.globalData.qualification = res.data[0].qualification
+            }
             app.globalData.isRegister = true;
           }
         })

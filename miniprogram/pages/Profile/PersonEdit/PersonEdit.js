@@ -12,7 +12,7 @@ Component({
     phone: "",
     qqNum: "",
     text: "",
-    index: null,
+    index: 0,
     campus: ["南校区", "北校区"],
   },
 
@@ -124,26 +124,25 @@ Component({
         // 云函数名称
         name: "answer",
         // 传给云函数的参数
-        
         data: {
-         
+          type: "detail",
           id: app.globalData.openid,
           name:that.data.name,
           phone: that.data.phone,
           personNum: that.data.personNum,
           text: that.data.text,
           qqNum: that.data.qqNum,
-          campus: picker[that.data.campus],
+          campus: picker[that.data.index],
         },
         success: function (res) {
-          
           console.log('1',res)
           console.log('2',app.globalData)
           app.globalData.name = that.data.name
           app.globalData.phone = that.data.phone
           app.globalData.personNum = that.data.personNum
           app.globalData.qqNum = that.data.qqNum
-          app.globalData.campus = picker[that.data.campus]
+          app.globalData.campus = picker[that.data.index]
+          app.globalData.text = that.data.text
           app.globalData.isRegister = true
           console.log('3.',that.data)
           wx.hideLoading();

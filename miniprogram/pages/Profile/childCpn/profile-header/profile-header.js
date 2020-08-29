@@ -15,6 +15,7 @@ Component({
         text: "",
         score: 0,
         time: 0,
+        avatar: ""
       },
     },
   },
@@ -24,7 +25,6 @@ Component({
    */
   data: {
     isRegister: app.globalData.isRegister, // 是否注册
-    avatar: app.globalData.avatar, // 用户头像
     isShow: 0,
   },
 
@@ -56,8 +56,9 @@ Component({
       this.triggerEvent("appearance");
     },
     changePic(src) {
+      var picPath = 'person.avatar'
       this.setData({
-        avatar: src
+        [picPath]: src
       })
     }
   },
