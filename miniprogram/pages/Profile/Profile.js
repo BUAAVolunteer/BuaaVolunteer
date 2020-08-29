@@ -42,7 +42,7 @@ Component({
     ],
   },
   methods: {
-    showPic() {
+    changePic() {
       // console.log("子传父", this.data.isShowPic);
       this.setData({
         isShowPic: !this.data.isShowPic,

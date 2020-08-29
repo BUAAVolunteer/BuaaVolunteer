@@ -3,7 +3,7 @@
 </page-meta>
 
 <!-- 头部 -->
-<profile-header class="hide" person="{{person}}" bind:appearance="showPic"></profile-header>
+<profile-header class="hide" person="{{person}}" bind:appearance="changePic"></profile-header>
 
 <!-- 中部 -->
 <view class="middle">
@@ -44,5 +44,8 @@
   </view>
 </view>
 <!-- 头像组件 -->
-<view wx:if="{{isShowPic}}" bindtap="showPic" class="shadow"></view>
-<profile-pic class="profile-pic {{isShowPic ? 'profile-pic--active':''}}"></profile-pic>
+<view wx:if="{{isShowPic}}" bindtap="changePic" class="shadow"></view>
+<profile-pic
+  bind:closePic="changePic"
+  class="profile-pic {{isShowPic ? 'profile-pic--active':''}}"
+></profile-pic>

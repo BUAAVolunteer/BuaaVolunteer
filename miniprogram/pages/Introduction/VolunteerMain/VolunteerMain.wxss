@@ -1,7 +1,6 @@
 .header {
-  /* margin-bottom: -30rpx; */
-  position: absolute;
-  z-index: -2;
+  margin-bottom: -30rpx;
+  position: relative;
 }
 
 .header__img {
@@ -16,13 +15,16 @@
   box-shadow: 0 -5px 5px rgba(0, 0, 0, 0.1);
   padding-top: 30rpx;
   position: relative;
-  top: 391rpx;
 }
 
 .main-upimg,
 .main-downimg {
-  position: relative;
   width: 100%;
+}
+
+.main-downimg {
+  bottom: 0;
+  position: absolute;
 }
 
 .main__img,
@@ -53,15 +55,18 @@
 
 .main-upimg__inner8 {
   font-size: 30rpx;
-  padding: 35rpx 15rpx 35rpx 45rpx;
+  padding: 42rpx 15rpx 35rpx 45rpx;
+  line-height: 30rpx;
 }
 
 .main-middle {
   color: #5a5d5d;
   font-size: 25rpx;
   font-weight: 530;
+  height: calc(100vh - 378px);
   letter-spacing: 2px;
   line-height: 40rpx;
+  overflow: auto;
   padding: 22rpx 58rpx 0;
   text-indent: 2em;
 }

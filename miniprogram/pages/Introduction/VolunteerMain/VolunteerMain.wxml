@@ -23,9 +23,9 @@
     <view>{{text}}</view>
     <view wx:if="{{text2.length!=0}}">{{text2}}</view>
     <view wx:if="{{text3.length!=0}}">{{text3}}</view>
-    <view wx:if="{{text4.length!=0}}">{{text4}}</view>
+    <view wx:if="{{text4.length!=0}}">{{text4}}</view>    
   </view>
-  <view class="main-downimg">
-    <image class="main__img" src="/assets/image/introduction/down.png" mode="widthFix" />
-  </view>
+</view>
+<view class="main-downimg">
+  <image class="main__img" src="/assets/image/introduction/down.png" mode="widthFix" />
 </view>

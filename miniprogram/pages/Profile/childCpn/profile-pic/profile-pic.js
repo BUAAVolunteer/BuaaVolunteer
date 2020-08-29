@@ -6,7 +6,12 @@ Component({
   /**
    * 组件的属性列表
    */
-  properties: {},
+  properties: {
+    show: {
+      type: Boolean,
+      value: false,
+    },
+  },
 
   /**
    * 组件的初始数据
@@ -59,6 +64,10 @@ Component({
         curAvator: e.currentTarget.id,
       });
       // 缺一个，上传头像的方法
+    },
+    // 关闭头像页面
+    closePic() {
+      this.triggerEvent("closePic");
     },
   },
 });
