@@ -13,14 +13,14 @@
       </view>
       <view class="footer">
         <view wx:for="{{detail.button}}">
-          <button
+          <view
             class="{{item.isAblePress ? 'able-btn' : 'unable-btn'}}"
             hover-class="{{item.isAblePress}}"
             id="{{item.ID}}"
             bindtap="buttonPress"
           >
-            <text class="btn-text">{{item.text}}</text>
-          </button>
+            <view class="btn-text">{{item.text}}</view>
+          </view>
         </view>
       </view>
     </view>

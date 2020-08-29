@@ -33,11 +33,11 @@
 @keyframes show-up {
   0% {
     opacity: 0;
-    top: 13%;
+    top: 21%;
   }
   100% {
     opacity: 1;
-    top: 10%;
+    top: 18%;
   }
 }
 
@@ -81,17 +81,19 @@
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  margin: 20rpx;
+  margin: 0 20rpx 20rpx;
 }
 
 .able-btn,
 .unable-btn {
+  align-items: center;
+  border-radius: 30rpx;
   display: flex;
   justify-content: center;
-  margin: 10rpx;
-  border-radius: 20rpx;
-  width: 200rpx;
   height: 70rpx;
+  margin: 10rpx;
+  padding-left: 10rpx;
+  width: 200rpx;
 }
 
 .able-btn {
@@ -103,11 +105,10 @@
 }
 
 .btn-text {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  color: #fff;
   font-weight: bolder;
   font-family: Microsoft YaHei;
-  color: #fff;
   font-size: 25rpx;
+  letter-spacing: 10rpx;
+  text-align: center;
 }

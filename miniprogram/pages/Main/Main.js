@@ -1,9 +1,9 @@
 // pages/main/main.js
 let app = getApp();
 const db = wx.cloud.database();
-var projectList = [] // 页面招募志愿项目数据
-var current = {}  // 服务器时间
-var ID;           //打开的悬浮窗信息在数组中的位置
+var projectList = []; // 页面招募志愿项目数据
+var current = {}; // 服务器时间
+var ID; //打开的悬浮窗信息在数组中的位置
 Component({
   /**
    * 页面的初始数据
@@ -20,8 +20,8 @@ Component({
     hoverDetail: {
       isMaskCancel: true,
       isTitle: false,
-      title: '',
-      isContent:false,
+      title: "",
+      isContent: false,
       type: "show",
       button: [
         {
@@ -37,7 +37,7 @@ Component({
           isAblePress: true,
         },
       ],
-    }
+    },
   },
   // 组件生命周期
   lifetimes: {
@@ -71,7 +71,7 @@ Component({
           });
         })
         .then(() => {
-        /*-----------------个人信息登记------------------------------*/
+          /*-----------------个人信息登记------------------------------*/
           return db
             .collection("person")
             .where({
@@ -89,6 +89,10 @@ Component({
             app.globalData.phone = res.data[0].phone;
             app.globalData.qqNum = res.data[0].qqNum;
             app.globalData.name = res.data[0].name;
+            app.globalData.avatar = res.data[0].avatar;
+            app.globalData.text = res.data[0].text;
+            app.globalData.totalDuration = res.data[0].totalDuration;
+            app.globalData.totalScore = res.data[0].totalScore;
             app.globalData.isRegister = true;
           }
         })
@@ -110,12 +114,11 @@ Component({
           console.log("个人信息登记完成");
         })
         .then(() => {
-          return that.initList()
+          return that.initList();
         })
         .then(() => {
-          console.log("志愿信息登记完成")
+          console.log("志愿信息登记完成");
           wx.hideLoading();
-
         })
         .catch((err) => {
           console.log(err);
@@ -132,106 +135,111 @@ Component({
   methods: {
     initList() {
       this.setData({
-        refreshLoading: true
-      })
-      var that = this
+        refreshLoading: true,
+      });
+      var that = this;
       /*-----------------主页志愿招募数据-----------------------------*/
       db.collection("project")
-      .get()
-      .then((res) => {
-        // console.log(res.data)
-        projectList = res.data
-        // 对得到的项目列表进行排序，详见js中的sort函数
-        projectList.sort(function (a, b) {
-          if (a.date < b.date || (a.date == b.date && a.time < b.time)) {
-            return -1
-          } else {
-            return 1
+        .get()
+        .then((res) => {
+          // console.log(res.data)
+          projectList = res.data;
+          // 对得到的项目列表进行排序，详见js中的sort函数
+          projectList.sort(function (a, b) {
+            if (a.date < b.date || (a.date == b.date && a.time < b.time)) {
+              return -1;
+            } else {
+              return 1;
+            }
+          });
+        })
+        .then(() => {
+          // 获取目前的服务器时间
+          return wx.cloud.callFunction({
+            name: "getTime",
+          });
+        })
+        .then((res) => {
+          console.log(res);
+          var time = res.result.time.split(" ");
+          current.date = time[0];
+          current.time = time[1];
+          app.globalData.current = current;
+          that.setData({
+            refreshLoading: false,
+          });
+        })
+        .then(() => {
+          var isOdd = false;
+          var recruitList = [];
+          var fillList = [];
+          var preList = [];
+          for (let i = 0; i < projectList.length; i++) {
+            var isPre = false;
+            var currentDate = current.date;
+            var currentTime = current.time;
+            var postDate = projectList[i].date;
+            var postTime = projectList[i].time;
+            if (
+              currentDate < postDate ||
+              (currentDate == postDate && currentTime < postTime)
+            ) {
+              isPre = true;
+            }
+            projectList[i].pre = isPre;
+            projectList[i].ID = i;
+            if (!isPre) {
+              recruitList.push(projectList[i]);
+              isOdd = !isOdd;
+            } else if (fillList.length == 2) {
+              preList.push(projectList[i]);
+            } else if (isOdd) {
+              fillList.push(projectList[i]);
+            } else {
+              preList.push(projectList[i]);
+            }
           }
+          that.setData({
+            recruitList,
+            fillList,
+            isOdd,
+            preList,
+          });
         })
-      })
-      .then(() => {
-        // 获取目前的服务器时间
-        return wx.cloud.callFunction({
-          name: "getTime"
-        })
-      })
-      .then(res => {
-        console.log(res)
-        var time = res.result.time.split(' ')
-        current.date = time[0]
-        current.time = time[1]
-        app.globalData.current = current
-        that.setData({
-          refreshLoading: false
-        })
-      })
-      .then(() => {
-        var isOdd = false
-        var recruitList = []
-        var fillList = []
-        var preList = []
-        for (let i = 0; i < projectList.length; i++) {
-          var isPre = false
-          var currentDate = current.date
-          var currentTime = current.time
-          var postDate = projectList[i].date
-          var postTime = projectList[i].time
-          if ( currentDate < postDate || (currentDate == postDate && currentTime < postTime)) {
-            isPre = true
-          }
-          projectList[i].pre = isPre
-          projectList[i].ID = i
-          if (!isPre) {
-            recruitList.push(projectList[i])
-            isOdd = !isOdd
-          } else if (fillList.length == 2) {
-            preList.push(projectList[i])
-          } else if (isOdd) {
-            fillList.push(projectList[i])
-          } else {
-            preList.push(projectList[i])
-          }
-        }
-        that.setData({
-          recruitList,
-          fillList,
-          isOdd,
-          preList
-        })
-      })
-      .then(() => {
-        that.hover = that.selectComponent('#hover')
-      })
+        .then(() => {
+          that.hover = that.selectComponent("#hover");
+        });
     },
 
     openHover(e) {
-      ID = e.detail
-      var hoverDetail = this.data.hoverDetail
-      hoverDetail.button[0].isAblePress = !projectList[ID].pre
+      ID = e.detail;
+      var hoverDetail = this.data.hoverDetail;
+      hoverDetail.button[0].isAblePress = !projectList[ID].pre;
       if (projectList[ID].pre) {
-        hoverDetail.button[0].text = "等待发布"
+        hoverDetail.button[0].text = "等待发布";
       }
       this.setData({
         showDetail: projectList[ID],
         hoverDetail,
-      })
-      this.hover.stateChange()
+      });
+      this.hover.stateChange();
     },
 
     buttonPress(e) {
-      var press = e.detail
-      console.log(press)
-      var that = this
+      var press = e.detail;
+      console.log(press);
+      var that = this;
       if (press === "signUpNow") {
         //进入报名表单
-        if(!(that._judge())) {
-          return
+        if (!that._judge()) {
+          return;
         }
         wx.requestSubscribeMessage({
           tmplIds: ["Ynia8PHxf3L_uWFvZxtPiI-V8hE-wcErHpe0Ygh8O9w"],
           success: (res) => {
-            if (res["Ynia8PHxf3L_uWFvZxtPiI-V8hE-wcErHpe0Ygh8O9w"] === "accept") {
+            if (
+              res["Ynia8PHxf3L_uWFvZxtPiI-V8hE-wcErHpe0Ygh8O9w"] === "accept"
+            ) {
               wx.navigateTo({
                 url: "../Recruit/Form/Form?title=" + projectList[ID].title,
               });
@@ -250,36 +258,37 @@ Component({
             console.error(err);
             reject();
           },
-        })
+        });
       } else if (press === "moreInformation") {
         //进入更多信息页面
         db.collection("introduction")
-        .where({
-          title: projectList[ID].title,
-        })
-        .get()
-        .then(res => {
-          console.log(res);
-          wx.hideLoading();
-          var target_id = res.data[0]._id;
-          wx.navigateTo({
-            url: "../Introduction/VolunteerMain/VolunteerMain?id=" + target_id,
+          .where({
+            title: projectList[ID].title,
+          })
+          .get()
+          .then((res) => {
+            console.log(res);
+            wx.hideLoading();
+            var target_id = res.data[0]._id;
+            wx.navigateTo({
+              url:
+                "../Introduction/VolunteerMain/VolunteerMain?id=" + target_id,
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+            wx.showModal({
+              title: "错误",
+              content: "获取记录失败",
+              showCancel: false,
+            });
           });
-        })
-        .catch(err => {
-          console.log(err);
-          wx.showModal({
-            title: "错误",
-            content: "获取记录失败",
-            showCancel: false,
-          });
-        })
       }
     },
 
     _judge() {
       //用户的合法性检验,以后可加入积分的判断
-      var that = this
+      var that = this;
       // 是否注册
       if (!app.globalData.isRegister) {
         wx.showModal({
@@ -291,22 +300,20 @@ Component({
               url: "../Profile/Profile",
             });
           },
-        })
-        return false
+        });
+        return false;
       }
       // 重复报名
       for (let i = 0; i < projectList[ID].signupList.length; i++) {
-        if (
-          app.globalData.openid === projectList[ID].signupList[i]
-        ) {
+        if (app.globalData.openid === projectList[ID].signupList[i]) {
           wx.showToast({
             title: "请勿重复报名",
             icon: "none",
           });
-          return false
+          return false;
         }
       }
-      return true
+      return true;
     },
   },
 });

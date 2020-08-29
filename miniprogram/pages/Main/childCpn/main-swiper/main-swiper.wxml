@@ -2,7 +2,7 @@
 <swiper
   class="screen-swiper"
   circular="{{true}}"
-  autoplay="{{false}}"
+  autoplay="{{true}}"
   interval="5000"
   duration="500"
   bindchange="currentHandle"

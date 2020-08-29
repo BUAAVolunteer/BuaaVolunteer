@@ -1,67 +1,62 @@
-<list
- class="middle-list"
- refresh-loading="{{refreshLoading}}"
- bindrefresh="initList"
->
-	<!-- 轮播图组件 -->
-	<main-swiper imageList="{{imageList}}"></main-swiper>
-	<!-- logo -->
-	<main-logo></main-logo>
-	<!--text-->
-	<!-- 遍历展示组件，子组件仅包含按钮功能，数据由item传入 -->
-	<text class="middle-text">志愿报名</text>
-	<view class="middle-icon">
-		<block wx:for="{{recruitList}}" wx:key="index">
-			<main-icon iconInf="{{item}}" bind:cardClick="openHover"></main-icon>
-		</block>
-		<view class="fill">
-			<block
-			 wx:for="{{fillList}}"
-			 wx:key="index"
-			 wx:if="{{isOdd}}"
-			>
-				<main-icon iconInf="{{item}}" bind:cardClick="openHover"></main-icon>
-			</block>
-		</view>
-		<block wx:for="{{preList}}" wx:key="index">
-			<main-icon iconInf="{{item}}" bind:cardClick="openHover"></main-icon>
-		</block>
-		<!-- 蓝小咕咕咕咕 -->
-		<view class="bottom-img">
-			<image
-			 class="gugugu"
-			 mode="aspectFit"
-			 src="cloud://volunteer-platform-1v92i.766f-volunteer-platform-1v92i-1300053277/main/小咕小表情.png"
-			/>
-		</view>
-	</view>
+<list class="middle-list" refresh-loading="{{refreshLoading}}" bindrefresh="initList">
+  <!-- 轮播图组件 -->
+  <main-swiper imageList="{{imageList}}"></main-swiper>
+  <!-- logo -->
+  <main-logo></main-logo>
+  <!--text-->
+  <!-- 遍历展示组件，子组件仅包含按钮功能，数据由item传入 -->
+  <text class="middle-text">志愿报名</text>
+  <view class="middle-icon">
+    <block wx:for="{{recruitList}}" wx:key="index">
+      <main-icon iconInf="{{item}}" bind:cardClick="openHover"></main-icon>
+    </block>
+    <view class="fill">
+      <block wx:for="{{fillList}}" wx:key="index" wx:if="{{isOdd}}">
+        <main-icon iconInf="{{item}}" bind:cardClick="openHover"></main-icon>
+      </block>
+    </view>
+    <block wx:for="{{preList}}" wx:key="index">
+      <main-icon iconInf="{{item}}" bind:cardClick="openHover"></main-icon>
+    </block>
+  </view>
+  <!-- 蓝小咕咕咕咕 -->
+  <view class="bottom-img">
+    <image
+      class="gugugu"
+      mode="aspectFit"
+      src="cloud://volunteer-platform-1v92i.766f-volunteer-platform-1v92i-1300053277/main/小咕小表情.png"
+    />
+  </view>
 </list>
 
-<lx-hover
- id="hover"
- detail="{{hoverDetail}}"
- bind:hoverConfirm="buttonPress"
->
-	<view>
-		<view class="header">
-			<text class="header-date">本志愿将于\n{{showDetail.date}}日{{showDetail.time}}\n发布招募</text>
-		</view>
-		<scroll-view scroll-y="{{true}}" class="middle">
-			<text class="items-title">○ 活动时间：</text>
-			<text class="texts">\n{{showDetail.textarea}}\n</text>
-			<text class="items-title">○ 活动地点：</text>
-			<text class="texts">\n{{showDetail.place}}\n</text>
-			<text class="items-title">○ 活动内容：</text>
-			<text class="texts">\n{{showDetail.detail}}\n</text>
-			<text class="items-title">○ 招募人数：</text>
-			<text class="texts">\n{{showDetail.people}}\n</text>
-			<text class="items-title">○ 志愿保障：</text>
-			<text class="texts">\n{{showDetail.assure}}\n</text>
-			<text class="items-title">○ 特别提醒：</text>
-			<text class="texts">\n{{showDetail.require}}\n</text>
-			<text class="items-title">○ 负责人联系方式：</text>
-			<text class="texts">\n{{showDetail.response}}</text>
-		</scroll-view>
-	</view>
+<lx-hover id="hover" detail="{{hoverDetail}}" bind:hoverConfirm="buttonPress">
+  <view>
+    <view class="header">
+      <view class="header-date">
+        {{showDetail.title}}将于
+      </view>
+      <view class="header-date">
+        {{showDetail.date}}日{{showDetail.time}}
+      </view>
+      <view class="header-date">
+        发布招募
+      </view>
+    </view>
+    <scroll-view scroll-y="{{true}}" class="middle">
+      <text class="items-title">○ 活动时间：</text>
+      <text class="texts">\n{{showDetail.textarea}}\n</text>
+      <text class="items-title">○ 活动地点：</text>
+      <text class="texts">\n{{showDetail.place}}\n</text>
+      <text class="items-title">○ 活动内容：</text>
+      <text class="texts">\n{{showDetail.detail}}\n</text>
+      <text class="items-title">○ 招募人数：</text>
+      <text class="texts">\n{{showDetail.people}}\n</text>
+      <text class="items-title">○ 志愿保障：</text>
+      <text class="texts">\n{{showDetail.assure}}\n</text>
+      <text class="items-title">○ 特别提醒：</text>
+      <text class="texts">\n{{showDetail.require}}\n</text>
+      <text class="items-title">○ 负责人联系方式：</text>
+      <text class="texts">\n{{showDetail.response}}</text>
+    </scroll-view>
+  </view>
 </lx-hover>
-

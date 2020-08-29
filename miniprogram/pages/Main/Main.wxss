@@ -10,12 +10,10 @@ page {
 }
 
 .middle-icon {
-  height: 812rpx;
   padding: 40rpx 27.5rpx 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  overflow: auto;
 }
 
 /* 填充部分 */
@@ -31,41 +29,37 @@ page {
   height: 170rpx;
   width: 120rpx;
   max-width: 100%;
-  position: relative;
   margin-top: -25rpx;
-  left: 510rpx;
+  margin-left: 510rpx;
 }
 
 /* 悬浮窗样式 */
-.header {
-  display: flex;
-  justify-content: center;
-}
-
 .header-date {
-  text-align: center;
-  font-weight: bold;
+  color: #5a5d5d;
+  font-size: 30rpx;
+  line-height: 30rpx;
+  letter-spacing: 2px;
   margin-bottom: 15rpx;
-  line-height: 26rpx;
-  font-size: 26rpx;
+  text-align: center;
 }
 
 .middle {
-  height: 500rpx;
   background-color: #bfe6e9;
-  border-radius: 5%;
-  padding: 15rpx;
+  border-radius: 30rpx;
+  color: #5a5d5d;
+  height: 500rpx;
+  line-height: 45rpx;
+  margin: 0 30rpx 5rpx;
+  padding: 10rpx 20rpx;
+  width: 500rpx;
 }
 
 .items-title {
-  font-weight: bold;
-  font-family: Microsoft YaHei;
+  font-weight: normal;
 }
 
 .texts {
   font-weight: normal;
-  font-family: Microsoft YaHei;
-  line-height: 30rpx;
 }
 
 .footer {
