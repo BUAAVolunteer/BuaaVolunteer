@@ -3,7 +3,7 @@
 </page-meta>
 
 <!-- 头部 -->
-<profile-header class="hide" person="{{person}}" bind:appearance="changePic"></profile-header>
+<profile-header class="hide" person="{{person}}" bind:appearance="openChoose" id="head"></profile-header>
 
 <!-- 中部 -->
 <view class="middle">
@@ -11,14 +11,14 @@
     <profile-middle-icon
       icon="/assets/icons/profile/time.png"
       describe="志愿历史："
-      content="{{person.time}} 小时"
+      content="{{person.totalDuration}} 小时"
       bindtap="toHistory"
     />
     <view class="middle--div"></view>
     <profile-middle-icon
       icon="/assets/icons/profile/score.png"
       describe="志愿积分："
-      content="{{person.score}} 分"
+      content="{{person.totalScore}} 分"
       color="blue"
       bindtap="scoreLevel"
     />
@@ -45,7 +45,4 @@
 </view>
 <!-- 头像组件 -->
 <view wx:if="{{isShowPic}}" bindtap="changePic" class="shadow"></view>
-<profile-pic
-  bind:closePic="changePic"
-  class="profile-pic {{isShowPic ? 'profile-pic--active':''}}"
-></profile-pic>
+<profile-pic bind:closePic="changePic" class="profile-pic {{isShowPic ? 'profile-pic--active':''}}"></profile-pic>

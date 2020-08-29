@@ -16,42 +16,31 @@ Component({
     },
     isShowPic: false,
     isRegister: app.globalData.isRegister,
-    buttonsgath: [
-      {
-        navigateUrl: "", // 要跳转到的页面路径    还没出现的新手教程
-      },
-      {
-        navigateUrl: "/pages/Profile/Feedback/Feedback", //问题反馈
-      },
-      {
-        navigateUrl: "/pages/Profile/UpdateLog/Updatelog", //更新日志
-      },
-      {
-        navigateUrl: "", //积分细则
-      },
-      {
-        navigateUrl:
-          "/pages/OuterLink/OuterLink?url=https://mp.weixin.qq.com/s/5bqJNvDXhH8j9iGZ5diyMw",
-        //蓝协介绍
-      },
-      {
-        navigateUrl:
-          "/pages/OuterLink/OuterLink?url=https://mp.weixin.qq.com/s/cgU6BbeFxHXXsWwl5wePTw",
-        //联系我们
-      },
-    ],
+    isAdmin: app.globalData.isAdmin,
   },
   methods: {
-    changePic() {
+    changePic(e) {
       // console.log("子传父", this.data.isShowPic);
+      this.head = this.selectComponent('#head')
+      var person = this.data.person
+      person.avatar = e.detail
+      this.head.changePic(e.detail)
       this.setData({
+        person,
         isShowPic: !this.data.isShowPic,
       });
     },
+    // 打开选择头像页
+    openChoose() {
+      this.setData({
+        isShowPic: !this.data.isShowPic,
+      })
+    },
     //跳转志愿历史
     toHistory: function () {
+      var jsonHistory = JSON.stringify(this.data.person.history)
       wx.navigateTo({
-        url: "/pages/Profile/History/History",
+        url: "/pages/Profile/History/History?history=" + jsonHistory,
       });
     },
     //跳转志愿地图
@@ -67,7 +56,7 @@ Component({
     },
     //志愿积分按钮
     scoreLevel: function () {
-      var score = this.data.person.score;
+      var score = this.data.person.totalScore;
       if (score <= -10) {
         wx.showModal({
           title: "警告",
@@ -160,40 +149,52 @@ Component({
     },
 
     shouldAppear: function () {
-      console.log("succeess");
+      console.log("success");
     },
   },
   lifetimes: {
-    created() {
+    attached() {
       wx.showLoading({
         title: "加载中",
       });
       var that = this;
-      this.setData({
-        isRegister: app.globalData.isRegister,
-      });
+      var person = {}
+      person.campus = app.globalData.campus
+      person.name = app.globalData.name
+      person.phone = app.globalData.phone
+      person.qqNum = app.globalData.qqNum
+      person.personNum = app.globalData.personNum
+      person.avatar = app.globalData.avatar
+      // person.text = app.globalData.text
+      // person.totalDuration = app.globalData.totalDuration
+      // person.totalScore = app.globalData.totalScore.toFixed(1)
+      // person.history = app.globalData.history
       db.collection("person")
         .where({
           _openid: app.globalData.openid,
+        })
+        .field({
+          text: true,
+          totalDuration: true,
+          totalScore: true,
+          history: true
         })
         .get()
         .then((res) => {
           console.log(res.data);
           let data = res.data;
-          if (data.length == 0 || !data[0].campus || !data[0].qqnum) {
+          if (data.length == 0) {
             wx.hideLoading();
-            that.setData({
-              isRegister: 1,
-            });
           } else {
+            person.text = res.data[0].text
+            person.totalDuration = res.data[0].totalDuration
+            person.totalScore = res.data[0].totalScore.toFixed(1)
+            person.history = res.data[0].history
+            console.log(person)
             that.setData({
-              isRegister: 0,
-            });
-            wx.hideLoading();
-            that.setData({
-              person_list: res.data,
-              totalscore: res.data[0].score.toFixed(1),
-            });
+              person,
+            })
+            wx.hideLoading()
           }
         })
         .catch((err) => {

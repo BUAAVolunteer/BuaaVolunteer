@@ -18,7 +18,7 @@ Component({
    */
   data: {
     headList: [], // 头像列表
-    curAvator: app.globalData.avator,
+    curAvatar: app.globalData.avatar,
   },
   /**
    * 组件的生命周期
@@ -33,15 +33,7 @@ Component({
           if (res.data[i].qualification == "") {
             res.data[i].isShow = true;
           } else {
-            let flag = 1;
-            for (let j = 0; j < qualification.length; j++) {
-              if (qualification[j] == res.data[i].qualification) {
-                res.data[i].isShow = true;
-                flag = 0;
-                break;
-              }
-            }
-            if (flag) {
+            if (qualification.indexOf(res.data[i].qualification)) {
               res.data[i].isShow = false;
             }
           }
@@ -59,15 +51,16 @@ Component({
     // 选择头像
     choosePic(e) {
       console.log(e);
-      app.globalData.avator = e.currentTarget.id;
+      app.globalData.avatar = e.currentTarget.id;
       this.setData({
-        curAvator: e.currentTarget.id,
+        curAvatar: e.currentTarget.id,
       });
+      this.triggerEvent("closePic", e.currentTarget.id, {});
       // 缺一个，上传头像的方法
     },
     // 关闭头像页面
     closePic() {
-      this.triggerEvent("closePic");
+      this.triggerEvent("closePic", "none", {});
     },
   },
 });

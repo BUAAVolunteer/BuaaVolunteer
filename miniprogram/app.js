@@ -16,7 +16,7 @@ App({
     }
 
     this.globalData = {
-      avator:
+      avatar:
         "/assets/image/profilepic/common-3.png",
       openid: "",
       isRegister: true,

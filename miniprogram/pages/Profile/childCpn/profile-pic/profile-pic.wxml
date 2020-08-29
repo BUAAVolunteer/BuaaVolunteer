@@ -9,7 +9,7 @@
     <block wx:for="{{headList}}">
       <!-- 正常状态 -->
       <view
-        class="wrapper {{curAvator == item.src ? 'current':''}}"
+        class="wrapper {{curAvatar == item.src ? 'current':''}}"
         id="{{item.src}}"
         bindtap="choosePic"
         wx:if="{{item.isShow}}"

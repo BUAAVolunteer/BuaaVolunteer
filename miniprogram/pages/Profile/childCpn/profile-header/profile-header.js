@@ -24,7 +24,7 @@ Component({
    */
   data: {
     isRegister: app.globalData.isRegister, // 是否注册
-    avator: app.globalData.avator, // 用户头像(暂时无法同步更改)
+    avatar: app.globalData.avatar, // 用户头像
     isShow: 0,
   },
 
@@ -52,8 +52,13 @@ Component({
     },
     // 子传父
     callPic: function () {
-      console.log("try");
+      // console.log("try");
       this.triggerEvent("appearance");
     },
+    changePic(src) {
+      this.setData({
+        avatar: src
+      })
+    }
   },
 });
