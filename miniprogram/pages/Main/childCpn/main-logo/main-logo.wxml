@@ -1,6 +1,6 @@
 <!-- 首页页面logo -->
 <view class="logo-position">
-  <navigator class="board" open-type="navigate" hover-class="navigator-hover">
+  <navigator url="/pages/Main/Bulletin/Bulletin" class="board" open-type="navigate" hover-class="navigator-hover">
     <view class="outsider"></view>
     <view class="main-board">
       <view class="main-board__inner">

@@ -1,0 +1,6 @@
+<!--pages/Main/Bulletin/Bulletin.wxml-->
+<view class="bulletin">
+  <block wx:for="{{bulletinList}}">
+    <bulletin-item bulletin="{{item}}"></bulletin-item>
+  </block>
+</view>

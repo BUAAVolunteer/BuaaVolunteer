@@ -113,6 +113,12 @@
 					"pathName": "pages/Admin/Score/Score",
 					"query": "id=0c928181-1d01-49aa-8675-17d7ba583f51",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "Bulletin",
+					"pathName": "pages/Main/Bulletin/Bulletin",
+					"scene": null
 				}
 			]
 		}

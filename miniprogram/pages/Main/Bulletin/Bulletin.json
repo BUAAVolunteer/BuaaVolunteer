@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "bulletin-item": "../childCpn/bulletin-item/bulletin-item"
+  },
+  "navigationBarTitleText": "近期公告"
+}
