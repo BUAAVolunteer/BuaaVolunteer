@@ -1,34 +1,51 @@
 // pages/Main/Bulletin/Bulletin.js
+let app = getApp();
+const db = wx.cloud.database();
 Component({
   /**
    * 页面的初始数据
    */
   data: {
-    bulletinList: [
-      {
-        year: 2020,
-        month: 8,
-        day: 29,
-        week: "周六",
-        content:
-          "非常抱歉地通知大家，由于临近年终，国家图书馆工作人员的排班接近满额，无法调配出志愿者的岗位，所以本学期国家图书馆志愿项目的招募到14周正式截止，原定于本周六（12月14日）发布的国图招募取消，对此造成的不便请大家谅解。",
-      },
-      {
-        year: 2020,
-        month: 8,
-        day: 29,
-        week: "周六",
-        content:
-          "非常抱歉地通知大家，由于小桔灯孩子们需要在周六日进行补课，本学期的小桔灯志愿项目已全部结束，对此造成的不便请大家谅解。",
-      },
-      {
-        year: 2020,
-        month: 8,
-        day: 29,
-        week: "周六",
-        content:
-          "非常抱歉地通知大家,非常抱歉地通知大家",
-      },
-    ],
+    bulletinList: [],
   },
+
+  lifetimes: {
+    attached() {
+      var that = this
+      db.collection('notice')
+      .count()
+      .then(res => {
+        console.log(res)
+        if (res.total <= 20) {
+          return 0
+        } else {
+          return res.total - 20
+        }
+      })
+      .then(res => {
+        console.log(res)
+        return db.collection('notice').skip(res).get()
+      })
+      .then(res => {
+        console.log(res)
+        let bulletinList = []
+        for (let i = res.data.length - 1; i >= 0; i--) {
+          let item = {}
+          let time = res.data[i].date.split('-')
+          item.year = time[0]
+          item.month = time[1]
+          item.day = time[2]
+          let date = new Date(item.year, item.month - 1, item.day);
+          let weekDay = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"];
+          item.week = weekDay[date.getDay()];
+          item.content = res.data[i].text
+          bulletinList.push(item)
+        }
+        console.log(bulletinList)
+        that.setData({
+          bulletinList,
+        })
+      })
+    }
+  }
 });
