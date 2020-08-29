@@ -1,6 +1,9 @@
 // pages/main/main.js
 let app = getApp();
 const db = wx.cloud.database();
+var projectList = [] // 页面招募志愿项目数据
+var current = {}  // 服务器时间
+var ID;           //打开的悬浮窗信息在数组中的位置
 Component({
   /**
    * 页面的初始数据
@@ -8,10 +11,33 @@ Component({
    */
 
   data: {
-    mainIcon: [], // 页面招募志愿项目数据
+    recruitList: [],
+    fillList: [],
+    isOdd: [],
+    preList: [],
     imageList: [], // 要传入main-swiper的对象数组
-    current: {},
-    refreshLoading: false
+    refreshLoading: false,
+    hoverDetail: {
+      isMaskCancel: true,
+      isTitle: false,
+      title: '',
+      isContent:false,
+      type: "show",
+      button: [
+        {
+          ID: 0,
+          name: "signUpNow",
+          text: "立即报名",
+          isAblePress: true,
+        },
+        {
+          ID: 1,
+          name: "moreInformation",
+          text: "更多信息",
+          isAblePress: true,
+        },
+      ],
+    }
   },
   // 组件生命周期
   lifetimes: {
@@ -114,7 +140,7 @@ Component({
       .get()
       .then((res) => {
         // console.log(res.data)
-        let projectList = res.data
+        projectList = res.data
         // 对得到的项目列表进行排序，详见js中的sort函数
         projectList.sort(function (a, b) {
           if (a.date < b.date || (a.date == b.date && a.time < b.time)) {
@@ -123,9 +149,6 @@ Component({
             return 1
           }
         })
-        that.setData({
-          mainIcon: projectList,
-        });
       })
       .then(() => {
         // 获取目前的服务器时间
@@ -136,15 +159,154 @@ Component({
       .then(res => {
         console.log(res)
         var time = res.result.time.split(' ')
-        var current = {}
         current.date = time[0]
         current.time = time[1]
         app.globalData.current = current
         that.setData({
-          current,
           refreshLoading: false
         })
       })
-    }
+      .then(() => {
+        var isOdd = false
+        var recruitList = []
+        var fillList = []
+        var preList = []
+        for (let i = 0; i < projectList.length; i++) {
+          var isPre = false
+          var currentDate = current.date
+          var currentTime = current.time
+          var postDate = projectList[i].date
+          var postTime = projectList[i].time
+          if ( currentDate < postDate || (currentDate == postDate && currentTime < postTime)) {
+            isPre = true
+          }
+          projectList[i].pre = isPre
+          projectList[i].ID = i
+          if (!isPre) {
+            recruitList.push(projectList[i])
+            isOdd = !isOdd
+          } else if (fillList.length == 2) {
+            preList.push(projectList[i])
+          } else if (isOdd) {
+            fillList.push(projectList[i])
+          } else {
+            preList.push(projectList[i])
+          }
+        }
+        that.setData({
+          recruitList,
+          fillList,
+          isOdd,
+          preList
+        })
+      })
+      .then(() => {
+        that.hover = that.selectComponent('#hover')
+      })
+    },
+
+    openHover(e) {
+      ID = e.detail
+      var hoverDetail = this.data.hoverDetail
+      hoverDetail.button[0].isAblePress = !projectList[ID].pre
+      if (projectList[ID].pre) {
+        hoverDetail.button[0].text = "等待发布"
+      }
+      this.setData({
+        showDetail: projectList[ID],
+        hoverDetail,
+      })
+      this.hover.stateChange()
+    },
+
+    buttonPress(e) {
+      var press = e.detail
+      console.log(press)
+      var that = this
+      if (press === "signUpNow") {
+        //进入报名表单
+        if(!(that._judge())) {
+          return
+        }
+        wx.requestSubscribeMessage({
+          tmplIds: ["Ynia8PHxf3L_uWFvZxtPiI-V8hE-wcErHpe0Ygh8O9w"],
+          success: (res) => {
+            if (res["Ynia8PHxf3L_uWFvZxtPiI-V8hE-wcErHpe0Ygh8O9w"] === "accept") {
+              wx.navigateTo({
+                url: "../Recruit/Form/Form?title=" + projectList[ID].title,
+              });
+            } else {
+              wx.showToast({
+                title: "订阅后才能报名志愿~",
+                duration: 1000,
+                success(data) {
+                  //成功
+                },
+              });
+            }
+          },
+          fail(err) {
+            //失败
+            console.error(err);
+            reject();
+          },
+        })
+      } else if (press === "moreInformation") {
+        //进入更多信息页面
+        db.collection("introduction")
+        .where({
+          title: projectList[ID].title,
+        })
+        .get()
+        .then(res => {
+          console.log(res);
+          wx.hideLoading();
+          var target_id = res.data[0]._id;
+          wx.navigateTo({
+            url: "../Introduction/VolunteerMain/VolunteerMain?id=" + target_id,
+          });
+        })
+        .catch(err => {
+          console.log(err);
+          wx.showModal({
+            title: "错误",
+            content: "获取记录失败",
+            showCancel: false,
+          });
+        })
+      }
+    },
+
+    _judge() {
+      //用户的合法性检验,以后可加入积分的判断
+      var that = this
+      // 是否注册
+      if (!app.globalData.isRegister) {
+        wx.showModal({
+          title: "您尚未注册",
+          content: "请先填写必要信息后再接取志愿",
+          showCancel: false,
+          success: function () {
+            wx.switchTab({
+              url: "../Profile/Profile",
+            });
+          },
+        })
+        return false
+      }
+      // 重复报名
+      for (let i = 0; i < projectList[ID].signupList.length; i++) {
+        if (
+          app.globalData.openid === projectList[ID].signupList[i]
+        ) {
+          wx.showToast({
+            title: "请勿重复报名",
+            icon: "none",
+          });
+          return false
+        }
+      }
+      return true
+    },
   },
 });
