@@ -108,16 +108,10 @@
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "pages/Admin/Score/Score",
-					"pathName": "pages/Admin/Score/Score",
-					"query": "id=0c928181-1d01-49aa-8675-17d7ba583f51",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "Bulletin",
-					"pathName": "pages/Main/Bulletin/Bulletin",
+					"id": 7,
+					"name": "pages/ConfirmHistory/Confirm/Confirm",
+					"pathName": "pages/ConfirmHistory/Confirm/Confirm",
+					"query": "title=北航一日游",
 					"scene": null
 				}
 			]

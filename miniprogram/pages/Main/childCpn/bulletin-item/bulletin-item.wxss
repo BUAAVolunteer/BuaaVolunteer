@@ -5,7 +5,7 @@
   border-radius: 20rpx;
   display: flex;
   height: auto;
-  margin: 30rpx auto 0;
+  margin: 60rpx auto 0;
   width: 650rpx;
 }
 
@@ -17,8 +17,8 @@
   justify-content: center;
   height: 100%;
   line-height: 30rpx;
-  letter-spacing: 3px;
-  padding-left: 2px;
+  letter-spacing: 6rpx;
+  padding-left: 4rpx;
   width: 180rpx;
 }
 
@@ -30,7 +30,7 @@
 }
 
 .line1 {
-  width: 83%;
+  width: 92%;
   display: flex;
   justify-content: space-between;
 }
@@ -42,11 +42,11 @@
 }
 
 .line3 {
-  letter-spacing: 5px;
+  letter-spacing: 10rpx;
 }
 
 .main {
-  border-left: 2px solid #f5f5f5;
+  border-left: 4rpx solid #f5f5f5;
 }
 
 .content {
