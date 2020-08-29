@@ -65,5 +65,9 @@ Component({
       });
       // 缺一个，上传头像的方法
     },
+    // 关闭头像页面
+    closePic() {
+      this.triggerEvent("closePic");
+    },
   },
 });

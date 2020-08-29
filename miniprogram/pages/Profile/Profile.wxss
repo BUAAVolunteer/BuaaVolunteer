@@ -68,10 +68,16 @@ page {
 
 .profile-pic {
   bottom: -550px;
-  display: none;
   position: fixed;
   transition: transform 0.7s ease;
   z-index: 10;
+  animation: hide 0.1s ease forwards;
+}
+
+@keyframes hide {
+  0% {
+    display: none;
+  }
 }
 
 .profile-pic--active {

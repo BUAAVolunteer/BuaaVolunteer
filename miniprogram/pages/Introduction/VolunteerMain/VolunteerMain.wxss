@@ -55,7 +55,8 @@
 
 .main-upimg__inner8 {
   font-size: 30rpx;
-  padding: 35rpx 15rpx 35rpx 45rpx;
+  padding: 42rpx 15rpx 35rpx 45rpx;
+  line-height: 30rpx;
 }
 
 .main-middle {
