@@ -18,7 +18,7 @@ Component({
    */
   data: {
     headList: [], // 头像列表
-    curAvatar: app.globalData.avatar,
+    curAvatar: "",
   },
   /**
    * 组件的生命周期
@@ -41,6 +41,7 @@ Component({
         console.log(res.data);
         this.setData({
           headList: res.data,
+          curAvatar: app.globalData.avatar,
         });
       });
   },
@@ -55,12 +56,10 @@ Component({
       this.setData({
         curAvatar: e.currentTarget.id,
       });
-      this.triggerEvent("closePic", e.currentTarget.id, {});
-      // 缺一个，上传头像的方法
     },
     // 关闭头像页面
     closePic() {
-      this.triggerEvent("closePic", "none", {});
+      this.triggerEvent("closePic", this.data.curAvatar, {});
     },
   },
 });

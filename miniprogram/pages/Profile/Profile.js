@@ -66,7 +66,11 @@ Component({
           isShowPic: !this.data.isShowPic,
         });
       } else {
-        this.loading.showLoading();
+        this.loading.showLoading({
+          isContent: false,
+          content: "",
+          isBig: false,
+        });
         this.head = this.selectComponent("#head");
         let person = this.data.person;
         person.avatar = e.detail;

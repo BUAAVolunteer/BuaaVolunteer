@@ -1,7 +1,7 @@
 <!--components/lx-loading/lx-loading.wxml-->
 <view class="suspended">
   <!-- 阴影 -->
-  <view class="{{onShow ? 'mask' : 'hide'}}"></view>
+  <view class="{{onShow ? 'mask' : 'hide'}} {{isBig ? 'mask--big' : 'mask--small'}}"></view>
   <view class="{{onShow ? 'show' : 'hide'}}">
     <image
       class="img"

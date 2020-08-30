@@ -12,10 +12,16 @@
   height: 100vh;
   top: 0;
   left: 0;
-  /* background-color: rgba(0, 0, 0, 0.5); */
-  background-color: #fbfbfb;
-  /* opacity: 0.3; */
+
   z-index: 1628;
+}
+
+.mask--big {
+  background-color: #fbfbfb;
+}
+
+.mask--small {
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .show {

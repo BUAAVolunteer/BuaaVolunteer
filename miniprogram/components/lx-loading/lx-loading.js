@@ -16,6 +16,10 @@ Component({
       type: String,
       value: "Loading...",
     },
+    isBig: {
+      type: Boolean,
+      value: true,
+    },
   },
 
   /**
@@ -27,8 +31,9 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    showLoading({ isContent = false, content = "" } = {}) {
+    showLoading({ isContent = false, content = "", isBig = true } = {}) {
       this.setData({
+        isBig,
         isContent,
         content,
         onShow: true,
