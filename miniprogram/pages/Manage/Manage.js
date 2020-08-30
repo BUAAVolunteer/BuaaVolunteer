@@ -10,10 +10,9 @@ Component({
   },
   lifetimes: {
     created() {
-      wx.showLoading({
-        title: "加载中",
-      });
-      var that = this;
+      this.loading = this.selectComponent("#loading");
+      this.loading.showLoading();
+      let that = this;
       // 获取目前系统时间
       wx.cloud
         .callFunction({
@@ -37,11 +36,11 @@ Component({
           that.setData({
             projectList,
           });
-          wx.hideLoading();
+          that.loading.hideLoading();
         },
         fail: function (res) {
           //console.log(res)
-          wx.hideLoading();
+          that.loading.hideLoading();
           wx.showModal({
             title: "错误",
             content: "没有找到记录，请检查网络或重启小程序",

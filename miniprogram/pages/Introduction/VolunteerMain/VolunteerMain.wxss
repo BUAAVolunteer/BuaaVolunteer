@@ -67,6 +67,7 @@
   letter-spacing: 2px;
   line-height: 40rpx;
   overflow: auto;
+  -webkit-overflow-scrolling: touch;
   padding: 22rpx 58rpx 0;
   text-indent: 2em;
 }

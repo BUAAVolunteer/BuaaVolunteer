@@ -11,5 +11,13 @@
     <view class="content" wx:if="{{isContent}}">
       {{content}}
     </view>
+    <view class="content--loading" wx:else>
+      <view class="loading">
+        loading
+      </view>
+      <view class="nowrap">
+        ...
+      </view>
+    </view>
   </view>
 </view>

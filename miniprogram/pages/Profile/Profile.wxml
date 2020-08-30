@@ -3,7 +3,13 @@
 </page-meta>
 
 <!-- 头部 -->
-<profile-header class="hide" person="{{person}}" bind:appearance="openChoose" id="head" isRegister="{{isRegister}}"></profile-header>
+<profile-header
+  class="hide"
+  person="{{person}}"
+  bind:appearance="openChoose"
+  id="head"
+  isRegister="{{isRegister}}"
+></profile-header>
 
 <!-- 中部 -->
 <view class="middle">
@@ -45,4 +51,10 @@
 </view>
 <!-- 头像组件 -->
 <view wx:if="{{isShowPic}}" bindtap="changePic" class="shadow"></view>
-<profile-pic bind:closePic="changePic" class="profile-pic {{isShowPic ? 'profile-pic--active':''}}"></profile-pic>
+<profile-pic
+  bind:closePic="changePic"
+  class="profile-pic {{isShowPic ? 'profile-pic--active':''}}"
+></profile-pic>
+
+<!-- 全局加载组件 -->
+<lx-loading id="loading"></lx-loading>

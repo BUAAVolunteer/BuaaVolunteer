@@ -21,3 +21,6 @@
   />
   <lx-button content="提交反馈" color="blue" bindtap="submit" />
 </view>
+
+<!-- 全局加载组件 -->
+<lx-loading id="loading"></lx-loading>

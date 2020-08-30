@@ -6,43 +6,38 @@ Component({
   properties: {
     onShow: {
       type: Boolean,
-      value: false
+      value: false,
     },
     isContent: {
       type: Boolean,
-      value: true
+      value: true,
     },
     content: {
       type: String,
-      value: 'Loading...'
-    }
+      value: "Loading...",
+    },
   },
 
   /**
    * 组件的初始数据
    */
-  data: {
-
-  },
+  data: {},
 
   /**
    * 组件的方法列表
    */
   methods: {
-    showLoading({
-      isContent = false,
-      content = ""
-    } = {}) {
+    showLoading({ isContent = false, content = "" } = {}) {
       this.setData({
         isContent,
         content,
-        onShow: true
-      })
+        onShow: true,
+      });
     },
     hideLoading() {
       this.setData({
-        onShow: false
-      })
-    }
-  }
-})
+        onShow: false,
+      });
+    },
+  },
+});

@@ -30,8 +30,11 @@ Component({
   lifetimes: {
     attached() {
       let that = this;
-      let title = this.properties.title
-      wx.showLoading();
+      let title = this.properties.title;
+
+      this.loading = this.selectComponent("#loading");
+      this.loading.showLoading();
+
       this.setData({
         title,
         originTitle: title,
@@ -43,10 +46,10 @@ Component({
         .get({
           //更新数据库的操作
           success: function (res) {
-            console.log(res)//把data里的信息赋给download？
+            console.log(res); //把data里的信息赋给download？
             if (res.data.length == 0) {
-              wx.hideLoading();
-              return
+              that.loading.hideLoading();
+              return;
             }
             var download = res.data[0];
             that.setData({
@@ -61,13 +64,13 @@ Component({
               place: download.place,
               qqNum: download.qqNum,
             });
-            wx.hideLoading();
+            that.loading.hideLoading();
           },
         });
     },
   },
   methods: {
-    illegalCheck (that) {
+    illegalCheck(that) {
       //console.log(that)
       if (that.data.title === "发布一个新志愿") {
         wx.showModal({
@@ -77,7 +80,10 @@ Component({
         });
         return false;
       }
-      if (that.data.originTitle === "发布一个新志愿" && that.data.place === "") {
+      if (
+        that.data.originTitle === "发布一个新志愿" &&
+        that.data.place === ""
+      ) {
         wx.showModal({
           title: "缺少信息",
           content: "请填写活动地点",
@@ -103,53 +109,51 @@ Component({
         return false;
       }
 
-      console.log(that.data.date)
-      return new Promise ((resolve, reject) => {
-        resolve()
+      console.log(that.data.date);
+      return new Promise((resolve, reject) => {
+        resolve();
       })
-      .then(() => {
-        return wx.cloud.callFunction({
-          name: "getTime",
-        })
-      })
-      .then(res => {
-        console.log(res)
-        //返回值是日期和时间
-        var time = res.result.time.split(" ");
-        var currentTime = time[1];
-        var currentDate = time[0];
-        if (
-          currentDate > that.data.date ||
-          (currentDate === that.data.date && currentTime > that.data.time)
-        ) {
-          console.log(0)
-          wx.showModal({
-            title: "信息错误",
-            content: "志愿发布时间不能在当前时间之前",
-            showCancel: false,
+        .then(() => {
+          return wx.cloud.callFunction({
+            name: "getTime",
           });
-          return false
-        } else {
-          console.log(currentDate)
-          console.log(that.data.date)
-          return true
-        }
-      })
+        })
+        .then((res) => {
+          console.log(res);
+          //返回值是日期和时间
+          var time = res.result.time.split(" ");
+          var currentTime = time[1];
+          var currentDate = time[0];
+          if (
+            currentDate > that.data.date ||
+            (currentDate === that.data.date && currentTime > that.data.time)
+          ) {
+            console.log(0);
+            wx.showModal({
+              title: "信息错误",
+              content: "志愿发布时间不能在当前时间之前",
+              showCancel: false,
+            });
+            return false;
+          } else {
+            console.log(currentDate);
+            console.log(that.data.date);
+            return true;
+          }
+        });
     },
 
     upload: function (e) {
       let that = this;
-      wx.showLoading({
-        title: "加载中",
-      }); //一个延时显示
+      this.loading.showLoading();
       //合法性校验
-      console.log(that)
-      console.log(that.__proto__)
-      that.illegalCheck(that).then(res => {
-        console.log(res)
+      console.log(that);
+      console.log(that.__proto__);
+      that.illegalCheck(that).then((res) => {
+        console.log(res);
         if (!res) {
-          wx.hideLoading();
-          return
+          that.loading.hideLoading();
+          return;
         } else {
           //上传详细信息
           wx.cloud.callFunction({
@@ -173,7 +177,7 @@ Component({
             },
             success: function (e) {
               console.log(e);
-              wx.hideLoading();
+              that.loading.hideLoading();
               wx.showModal({
                 title: "发布成功",
                 content: "志愿发布成功，请编辑报名表单",
@@ -187,7 +191,7 @@ Component({
               });
             },
             fail: function (e) {
-              wx.hideLoading();
+              that.loading.hideLoading();
               console.log(e);
               wx.showModal({
                 title: "发布失败",
@@ -197,7 +201,7 @@ Component({
             },
           });
         }
-      })
+      });
     },
   },
 });
