@@ -56,10 +56,11 @@ Component({
       this.setData({
         curAvatar: e.currentTarget.id,
       });
+      this.triggerEvent("closePic", this.data.curAvatar, {});
     },
     // 关闭头像页面
     closePic() {
-      this.triggerEvent("closePic", this.data.curAvatar, {});
+      this.triggerEvent("closePic", "none", {});
     },
   },
 });

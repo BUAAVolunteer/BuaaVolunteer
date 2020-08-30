@@ -87,7 +87,6 @@ Component({
           .then(() => {
             that.setData({
               person,
-              isShowPic: !this.data.isShowPic,
             });
             that.loading.hideLoading();
           });
