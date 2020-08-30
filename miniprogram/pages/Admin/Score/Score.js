@@ -35,7 +35,7 @@ Component({
       console.log(this.data.projectIndex)
       console.log(this.data.operateIndex)
       this.hover = this.selectComponent("#msg")
-      if (this.data.phone == "" || this.data.phone.length != 11) {
+      if (this.data.volunteerPhone == "" || this.data.volunteerPhone.length != 11) {
         that.hover.showHover({
           isMaskCancel: false,
           title:"信息错误",
@@ -173,8 +173,8 @@ Component({
                 isAblePress: true
               }
             ],
-            success: function(res) {
-              if (res == "no") {
+            success: function(answer) {
+              if (answer == "no") {
                 return
               } else {
                 wx.cloud.callFunction({
