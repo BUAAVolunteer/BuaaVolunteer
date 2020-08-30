@@ -50,9 +50,8 @@ Component({
     attached() {
       let title = this.properties.title;
       //console.log(title)
-      wx.showLoading({
-        title: "加载中",
-      });
+      this.loading = this.selectComponent("#loading");
+      this.loading.showLoading();
       var that = this;
       let formData = {};
       this.setData({
@@ -84,7 +83,7 @@ Component({
             for (let i = 0; i < res.data.length; i++) {
               if (res.data[i].title === title) {
                 formData = res.data[i];
-                console.log(title)
+                console.log(title);
                 break;
               }
             }
@@ -109,7 +108,7 @@ Component({
           }
         })
         .then(() => {
-          console.log(formData)
+          console.log(formData);
           formLinkedList = Util.toLinkedList(formData.formInfo);
           formData.formInfo = formLinkedList.toList();
           cnt = formLinkedList.length;
@@ -117,7 +116,7 @@ Component({
           that.setData({
             formList: formData,
           });
-          wx.hideLoading();
+          that.loading.hideLoading();
         });
     },
   },
@@ -360,8 +359,10 @@ Component({
             //点击取消,默认隐藏弹框
           } else {
             //点击确定
-            wx.showLoading({
-              title: "加载中",
+            that.loading.showLoading({
+              isContent: false,
+              content: "",
+              isBig: false,
             });
             let inf = that.data.formList.formInfo;
             var initList = [["姓名", "手机号", "学号", "QQ号", "校区"]];
@@ -388,7 +389,7 @@ Component({
               },
               success: function (res) {
                 console.log(res);
-                wx.hideLoading();
+                that.loading.hideLoading();
                 wx.showModal({
                   title: "发布成功",
                   content: "成功发布表单",
@@ -402,7 +403,7 @@ Component({
               },
               fail: function (res) {
                 console.log(res);
-                wx.hideLoading();
+                that.loading.hideLoading();
                 wx.showModal({
                   title: "发布失败",
                   content: "数据库初始化失败",

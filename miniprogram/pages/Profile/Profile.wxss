@@ -67,13 +67,32 @@ page {
 }
 
 .profile-pic {
-  position: absolute;
-  z-index: 10;
   bottom: -550px;
+  position: fixed;
   transition: transform 0.7s ease;
+  z-index: 10;
+  animation: hide 0.1s ease forwards;
+}
+
+@keyframes hide {
+  0% {
+    display: none;
+  }
 }
 
 .profile-pic--active {
+  display: block;
   transform: translateY(-550px);
+  /* bottom: 0px; */
 }
 
+.shadow {
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100vh;
+  left: 0;
+  opacity: 0.3;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 9;
+}

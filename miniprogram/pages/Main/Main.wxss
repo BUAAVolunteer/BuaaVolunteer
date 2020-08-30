@@ -2,23 +2,67 @@ page {
   background-color: white;
 }
 
-/* logo图片定位 */
-.logo {
-  margin-top: -50rpx;
+.middle-text {
+  color: #5a5d5d;
+  font-size: 30rpx;
+  font-weight: bold;
+  margin: 25rpx 0 30rpx 50rpx;
 }
 
-/* 中部按钮相对定位 */
 .middle-icon {
-  margin-top: 35rpx;
+  padding: 40rpx 27.5rpx 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+/* 填充部分 */
+.fill {
+  display: inline-block;
+  margin-bottom: 30rpx;
+  height: 444rpx;
+  width: 335rpx;
 }
 
 /* 蓝小咕定位 */
-
 .gugugu {
-  height: 240rpx;
-  width: 210rpx;
+  height: 170rpx;
+  width: 120rpx;
   max-width: 100%;
-  position: relative;
-  margin-top: -98rpx;
-  left: 510rpx;
+  margin-top: -25rpx;
+  margin-left: 510rpx;
+}
+
+/* 悬浮窗样式 */
+.header-date {
+  color: #5a5d5d;
+  font-size: 30rpx;
+  line-height: 30rpx;
+  letter-spacing: 2px;
+  margin-bottom: 15rpx;
+  text-align: center;
+}
+
+.middle {
+  background-color: #bfe6e9;
+  border-radius: 30rpx;
+  color: #5a5d5d;
+  height: 500rpx;
+  line-height: 45rpx;
+  margin: 0 30rpx 5rpx;
+  padding: 10rpx 20rpx;
+  width: 500rpx;
+}
+
+.items-title {
+  font-weight: normal;
+}
+
+.texts {
+  font-weight: normal;
+}
+
+.footer {
+  justify-content: space-around;
+  display: flex;
 }

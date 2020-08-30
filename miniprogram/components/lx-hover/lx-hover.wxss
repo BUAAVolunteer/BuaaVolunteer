@@ -8,8 +8,8 @@
 
 .mask {
   position: fixed;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.5);
@@ -23,6 +23,7 @@
   justify-content: space-between;
   background-color: #fff;
   width: 600rpx;
+  left: calc(50% - 300rpx);
   animation: show-up 0.3s ease-in forwards;
   position: fixed;
   border-radius: 30rpx;
@@ -32,11 +33,11 @@
 @keyframes show-up {
   0% {
     opacity: 0;
-    top: 23%;
+    top: 21%;
   }
   100% {
     opacity: 1;
-    top: 20%;
+    top: 18%;
   }
 }
 
@@ -44,6 +45,7 @@
   position: fixed;
   opacity: 0;
   z-index: -1629;
+  top: 0;
 }
 
 .wrapper {
@@ -79,17 +81,19 @@
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  margin: 20rpx;
+  margin: 0 20rpx 20rpx;
 }
 
 .able-btn,
 .unable-btn {
+  align-items: center;
+  border-radius: 30rpx;
   display: flex;
   justify-content: center;
-  margin: 10rpx;
-  border-radius: 20rpx;
-  width: 200rpx;
   height: 70rpx;
+  margin: 10rpx;
+  padding-left: 10rpx;
+  width: 200rpx;
 }
 
 .able-btn {
@@ -101,11 +105,10 @@
 }
 
 .btn-text {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  color: #fff;
   font-weight: bolder;
   font-family: Microsoft YaHei;
-  color: #fff;
   font-size: 25rpx;
+  letter-spacing: 10rpx;
+  text-align: center;
 }

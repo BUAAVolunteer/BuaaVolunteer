@@ -3,10 +3,10 @@
   "pages": [
     "pages/Main/Main",
     "pages/Main/Activity/Activity",
+    "pages/Main/Bulletin/Bulletin",
+    "pages/Main/Form/Form",
     "pages/Profile/Feedback/Feedback",
     "pages/Profile/UpdateLog/UpdateLog",
-    "pages/Recruit/Recruit",
-    "pages/Recruit/Form/Form",
     "pages/Profile/Profile",
     "pages/Profile/History/History",
     "pages/Profile/Map/Map",
@@ -60,6 +60,10 @@
   },
   "sitemapLocation": "sitemap.json",
   "usingComponents": {
-    "lx-hover": "components/lx-hover/lx-hover"
+    "lx-hover": "components/lx-hover/lx-hover",
+    "lx-loading": "components/lx-loading/lx-loading",
+    "lx-button": "/components/lx-button/lx-button",
+    "lx-input": "/components/lx-input/lx-input",
+    "lx-picker": "/components/lx-picker/lx-picker"
   }
 }

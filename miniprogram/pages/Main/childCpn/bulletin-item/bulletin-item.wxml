@@ -1,0 +1,26 @@
+<!--pages/Main/childCpn/bulletin-item/bulletin-item.wxml-->
+<view class="wrapper">
+  <!-- 时间 -->
+  <view class="time">
+    <view class="line1">
+      <view class="year">
+        {{bulletin.year}}
+      </view>
+      <view class="month">
+        {{bulletin.month}}月
+      </view>
+    </view>
+    <view class="line2">
+      {{bulletin.day}}
+    </view>
+    <view class="line3">
+      {{bulletin.week}}
+    </view>
+  </view>
+  <!-- 内容 -->
+  <view class="main">
+    <view class="content">
+      {{bulletin.content}}
+    </view></view
+  >
+</view>

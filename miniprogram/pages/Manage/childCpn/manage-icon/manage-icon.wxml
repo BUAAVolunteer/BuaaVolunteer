@@ -16,7 +16,7 @@
     <view class="header-text">
       {{project.title}}
     </view>
-    <view class="header-assure" bindtap="openconfirm">
+    <view class="header-assure" bindtap="openConfirm">
       时长确认
     </view>
   </view>
@@ -29,6 +29,7 @@
       navText="详细信息"
     ></lx-nav-pt>
     <lx-nav-pt
+      wx:else
       navUrl="/pages/Manage/Detail/Detail?title={{project.title}}"
       navImg="/assets/icons/manage/detail.png"
       navText="详细信息"
@@ -42,6 +43,7 @@
     ></lx-nav-pt>
     <!--按钮二-->
     <lx-nav-pt
+      wx:else
       navUrl="/pages/Manage/FormEdit/FormEdit?title={{project.title}}"
       navImg="/assets/icons/manage/edit.png"
       navText="编辑表单"

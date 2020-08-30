@@ -1,23 +1,28 @@
 <!--components/lx-hover/lx-hover.wxml-->
 <view class="suspended">
-	<!-- 阴影 -->
-	<view class="{{onShow ? 'mask' : 'hide'}}" bindtap="stateChange"></view>
-	<view class="{{onShow ? 'show' : 'hide'}}">
-		<view class="wrapper">
-			<view class="title" wx:if="{{detail.isTitle}}">
-				{{ detail.title }}
-			</view>
-			<view class="main">
-					<text class="content-text" wx:if="{{detail.isContent}}">{{detail.content}}</text>
-				<slot></slot>
-			</view>
-			<view class="footer">
-				<view wx:for="{{detail.button}}">
-					<button class="{{item.isAblePress ? 'able-btn' : 'unable-btn'}}" hover-class="{{item.isAblePress}}" id="{{item.ID}}" bindtap="buttonPress">
-						<text class="btn-text">{{item.text}}</text>
-					</button>
-				</view>
-			</view>
-		</view>
-	</view>
+  <!-- 阴影 -->
+  <view class="{{onShow ? 'mask' : 'hide'}}" bindtap="stateChange"></view>
+  <view class="{{onShow ? 'show' : 'hide'}}">
+    <view class="wrapper">
+      <view class="title" wx:if="{{detail.isTitle}}">
+        {{ detail.title }}
+      </view>
+      <view class="main">
+        <text class="content-text" wx:if="{{detail.isContent}}">{{detail.content}}</text>
+        <slot></slot>
+      </view>
+      <view class="footer">
+        <view wx:for="{{detail.button}}">
+          <view
+            class="{{item.isAblePress ? 'able-btn' : 'unable-btn'}}"
+            hover-class="{{item.isAblePress}}"
+            id="{{item.ID}}"
+            bindtap="buttonPress"
+          >
+            <view class="btn-text">{{item.text}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
 </view>

@@ -24,7 +24,7 @@ page {
 
 .intro-search__input {
   color: #5a5d5d;
-  font-size: 25rpx;
+  font-size: 12.5px;
   letter-spacing: 3.2px;
   text-align: center;
   width: 90px;

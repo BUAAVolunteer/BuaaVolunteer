@@ -1,5 +1,5 @@
 <view class="header">
-  <image class="header__img" mode="aspectFill" src="{{baseUrl + title + '.jpg'}}" />
+  <image class="header__img" mode="aspectFill" src="{{imageSrc}}" />
 </view>
 <view class="main">
   <view class="main-upimg">
@@ -11,7 +11,7 @@
         </view>
       </block>
     </view>
-    <view wx:elif="{{title.length <= 10}}" class="main-upimg__inner8">
+    <view wx:else class="main-upimg__inner8">
       <block wx:for="{{title}}">
         <view>
           {{item}}
@@ -23,9 +23,12 @@
     <view>{{text}}</view>
     <view wx:if="{{text2.length!=0}}">{{text2}}</view>
     <view wx:if="{{text3.length!=0}}">{{text3}}</view>
-    <view wx:if="{{text4.length!=0}}">{{text4}}</view>
-  </view>
-  <view class="main-downimg">
-    <image class="main__img" src="/assets/image/introduction/down.png" mode="widthFix" />
+    <view wx:if="{{text4.length!=0}}">{{text4}}</view>    
   </view>
 </view>
+<view class="main-downimg">
+  <image class="main__img" src="/assets/image/introduction/down.png" mode="widthFix" />
+</view>
+
+<!-- 全局加载组件 -->
+<lx-loading id="loading"></lx-loading>

@@ -15,16 +15,20 @@ Component({
         text: "",
         score: 0,
         time: 0,
+        avatar: ""
       },
     },
+    isRegister: {
+      type: Boolean,
+      value: false
+    }
   },
 
   /**
    * 组件的初始数据
    */
   data: {
-    isRegister: app.globalData.isRegister,
-    isShow: 0
+    isShow: 0,
   },
 
   /**
@@ -32,33 +36,33 @@ Component({
    */
   methods: {
     //小飞机管理员入口
-    admin: function(){
-      if(app.globalData.isAdmin){
+    admin: function () {
+      if (app.globalData.isAdmin) {
         wx.navigateTo({
-          url: '../Admin/Admin',
+          url: "../Admin/Admin",
         });
-      }else{
+      } else {
         wx.showToast({
-          title: '意外发现小咕的秘密基地\n但是你不能进来啦！',
-          icon: 'none',
+          title: "意外发现小咕的秘密基地\n但是你不能进来啦！",
+          icon: "none",
         });
       }
     },
-
-    toEdit: function(){
+    toEdit: function () {
       wx.navigateTo({
-        url: '/pages/Profile/PersonEdit/PersonEdit'
-      })
+        url: "/pages/Profile/PersonEdit/PersonEdit",
+      });
     },
-
-    callPic :function(){
-      this.triggerEvent('appearance')
-      console.log('try')
-   },
-
-    
-  }
-
-
-
+    // 子传父
+    callPic: function () {
+      // console.log("try");
+      this.triggerEvent("appearance");
+    },
+    changePic(src) {
+      var picPath = 'person.avatar'
+      this.setData({
+        [picPath]: src
+      })
+    }
+  },
 });

@@ -3,44 +3,35 @@
 <image class="bg forward--left" mode="widthFix" src="/assets/image/profile/forward.png" />
 <image class="bg forward--right" mode="widthFix" src="/assets/image/profile/forward.png" />
 <!-- 头部 -->
-<view wx:if="{{isRegister==true}}" class="header">
+<view wx:if="{{isRegister}}" class="header">
   <!-- 主要部分 -->
   <view class="main">
     <view class="main--image__wrapper" bindtap="callPic">
-      <image class="main--image__inner" src="cloud://volunteer-platform-1v92i.766f-volunteer-platform-1v92i-1300053277/要抱抱-小李.png" mode="widthFix" />
+      <image class="main--image__inner" src="{{person.avatar}}" mode="widthFix" />
     </view>
-    <view class="main--name">
-      {{person.name}}
-    </view>
-    <button class="main--btn" bindtap="toEdit">
-      编辑
-    </button>
+    <view class="main--name">{{person.name}}</view>
+    <button class="main--btn" bindtap="toEdit">编辑</button>
   </view>
   <!-- 信息展示 -->
   <view class="aside">
-    <view class="aside--item">
-      学号：{{person.personNum}}
-    </view>
-    <view class="aside--item">
-      {{person.text}}
-    </view>
+    <view class="aside--item">学号：{{person.personNum}}</view>
+    <view class="aside--item">{{person.text}}</view>
     <view class="aside--item"></view>
   </view>
   <!-- 小飞机入口 -->
   <cover-view class="header--fly">
-    
     <cover-image class="header--fly__inner" src="/assets/image/profile/fly.png" bindtap="admin"></cover-image>
-    
-    
   </cover-view>
 </view>
+
 <!--未注册-->
-
-
-<view wx:if="{{isRegister==false}}" class="noRegister_header">
-
+<view wx:if="{{!isRegister}}" class="noRegister_header">
   <view class="main--image__wrapper">
-    <image class="main--image__inner" src="cloud://volunteer-platform-1v92i.766f-volunteer-platform-1v92i-1300053277/要抱抱-小李.png" mode="widthFix"/>
+    <image
+      class="main--image__inner"
+      src="cloud://volunteer-platform-1v92i.766f-volunteer-platform-1v92i-1300053277/要抱抱-小李.png"
+      mode="widthFix"
+    />
   </view>
-  <image class="registerTip" src="/assets/image/profile/tip.png"/>
+  <image class="registerTip" src="/assets/image/profile/tip.png" />
 </view>

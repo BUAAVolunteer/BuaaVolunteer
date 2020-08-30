@@ -4,11 +4,11 @@
 
 <view
   class="main"
-  wx:if="{{history.length == 0}}"
+  wx:if="{{historyList.length == 0}}"
 >
   您还未参加过志愿，快去志愿招募页看看吧！
 </view>
-<view class="item" wx:for="{{history}}" wx:key="index">
+<view class="item" wx:for="{{historyList}}" wx:key="index">
   <history-card history="{{item}}"/>
 </view>
 <view class="footer">

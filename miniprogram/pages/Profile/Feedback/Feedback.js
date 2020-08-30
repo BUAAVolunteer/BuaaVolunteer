@@ -34,6 +34,7 @@ Component({
       let title = this.data.range[this.data.value];
       let text = this.data.text;
       let contact = this.data.contact;
+      let that = this;
       if (title == "") {
         wx.showModal({
           title: "错误",
@@ -50,10 +51,8 @@ Component({
         });
         return;
       }
-      wx.showLoading({
-        title: "请稍后",
-        mask: "true",
-      });
+      this.loading = this.selectComponent("#loading");
+      this.loading.showLoading();
       db.collection("person")
         .where({
           _openid: app.globalData.openid,
@@ -69,7 +68,7 @@ Component({
               check: 0,
             },
             success: function () {
-              wx.hideLoading();
+              that.loading.hideLoading();
               wx.showModal({
                 title: "反馈成功",
                 content: "您的反馈我们已经收到，请耐心等待解答",
@@ -82,7 +81,7 @@ Component({
               });
             },
             fail: function () {
-              wx.hideLoading();
+              that.loading.hideLoading();
               wx.showModal({
                 title: "错误",
                 content: "提交失败，请检查网络或重启小程序",

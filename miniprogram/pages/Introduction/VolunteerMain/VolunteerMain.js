@@ -21,6 +21,8 @@ Component({
    */
   attached() {
     //console.log(options.id)
+    this.loading = this.selectComponent('#loading')
+    this.loading.showLoading()
     let that = this;
     let id = this.properties.id;
     //  调用login云函数获取openid
@@ -28,7 +30,9 @@ Component({
       .doc(id)
       .get()
       .then((res) => {
-        //console.log(res)
+        // console.log(res);
+        if (res.data.title.length > 10)
+          res.data.title = res.data.title.slice(0, 10);
         that.setData({
           imageSrc: res.data.imageSrc,
           title: res.data.title,
@@ -37,11 +41,11 @@ Component({
           text3: res.data.text3,
           text4: res.data.text4,
         });
-        wx.hideLoading();
+        that.loading.hideLoading();
       })
       .catch((err) => {
         console.log(err);
-        wx.hideLoading();
+        that.loading.hideLoading();
         wx.showModal({
           title: "错误",
           content: "没有找到记录",

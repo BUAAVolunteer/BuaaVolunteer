@@ -140,10 +140,10 @@
 
 .noRegister_header {
   align-items: center;
+  background-color: #54a2fe;
   display: flex;
   justify-content: space-between;
-  height: 300rpx;
-  margin: 0rpx 25rpx 0;
+  height: 335rpx;
   padding: 5rpx 60rpx 0;
   z-index: 0;
 }

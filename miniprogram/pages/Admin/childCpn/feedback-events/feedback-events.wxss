@@ -22,12 +22,7 @@
   align-items: flex-start;
   display: flex;
   flex-direction: column;
-  margin-top: 10rpx;
-  padding: 0 20rpx;
-}
-
-.item-title {
-  margin-bottom: 10rpx;
+  padding: 20rpx;
 }
 
 .item-content {
@@ -36,4 +31,5 @@
   word-break: break-word;
   -webkit-line-orient: vertical;
   -webkit-line-clamp: 10;
+  -webkit-overflow-scrolling: touch;
 }

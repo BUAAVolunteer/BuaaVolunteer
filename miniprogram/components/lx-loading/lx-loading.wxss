@@ -1,0 +1,65 @@
+/* components/lx-loading/lx-loading.wxss */
+.suspended {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.mask {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+
+  z-index: 1628;
+}
+
+.mask--big {
+  background-color: #fbfbfb;
+}
+
+.mask--small {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.show {
+  align-items: center;
+  border-radius: 30rpx;
+  background-color: #fbfbfb;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  position: fixed;
+  top: 30%;
+  width: 370rpx;
+  z-index: 1629;
+}
+
+.img {
+  width: 300rpx;
+  height: 300rpx;
+  margin-top: 30rpx;
+  margin-left: 70rpx;
+}
+
+.content,
+.content--loading {
+  color: #5a5d5d;
+  font-family: "Ya Hei";
+  font-size: 25rpx;
+  line-height: 25rpx;
+  letter-spacing: 4rpx;
+  margin: -5rpx 0 15rpx;
+}
+
+.content--loading {
+  display: flex;
+  padding-left: 27rpx;
+}
+
+.hide {
+  display: none;
+}

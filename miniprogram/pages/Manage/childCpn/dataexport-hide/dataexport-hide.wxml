@@ -15,11 +15,11 @@
       </view>
     </view>
     <view class="footer">
-      <button class="footer-btn bg-blue" bind:tap="next">下一条</button>
-      <button class="footer-btn bg-blue" bindtap="back">上一条</button>
+      <view class="footer-btn bg-blue" bind:tap="next">下一条</view>
+      <view class="footer-btn bg-blue" bindtap="back">上一条</view>
     </view>
     <view class="footer">
-      <button class="footer-btn bg-cyan" bind:tap="finish">完成</button>
+      <view class="footer-btn bg-cyan" bind:tap="finish">完成</view>
     </view>
   </view>
 </lx-drawer-left>
