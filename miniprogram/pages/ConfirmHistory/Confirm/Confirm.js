@@ -1,6 +1,6 @@
 const db = wx.cloud.database();
 import Util from '../../../utils/util'
-var LinkedList;
+var LinkedList, initList;
 var time;
 Component({
     /**
@@ -47,6 +47,7 @@ Component({
                 v.isDisabled = true;
                 volunteerList.push(v);
             }
+            initList = volunteerList
             LinkedList = Util.toLinkedList(volunteerList)
             volunteerList = LinkedList.toList()
             time = this.properties.confirmList.time
@@ -60,7 +61,7 @@ Component({
 
     methods: {
         delete: function (e) {
-            var ID = parseInt(e.currentTarget.dataset.ID)
+            var ID = parseInt(e.currentTarget.dataset.id)
             LinkedList.removeAt(ID)
             this.setData({
                 volunteerList: LinkedList.toList()
@@ -74,7 +75,8 @@ Component({
         input: function (e) {
             console.log(e);
             var type = e.currentTarget.dataset.type;
-            var ID = parseInt(e.currentTarget.dataset.ID);
+            console.log(e.currentTarget)
+            var ID = parseInt(e.currentTarget.dataset.id);
             var volunteer = LinkedList.get(ID)
             volunteer[type] = e.detail.value
             if (type === "phone") {
@@ -89,7 +91,7 @@ Component({
             console.log(e);
             this.loading._showLoading();
             var that = this;
-            var ID = e.currentTarget.dataset.ID;
+            var ID = e.currentTarget.dataset.id;
             var phone = this.data.volunteerList[ID].phone;
             if (phone.length != 11) {
                 wx.showModal({
@@ -125,6 +127,7 @@ Component({
                 } else {
                     let volunteer = LinkedList.get(ID)
                     volunteer.name = res.data[0].name
+                    volunteer.isDisabled = true
                     LinkedList.update(ID, volunteer)
                     this.setData({
                         volunteerList: LinkedList.toList()
@@ -182,47 +185,48 @@ Component({
                 data: {
                     title: that.data.title,
                     list: v,
-                    inlist: volunteerList,
-                },
-                success: function (res) {
+                    initList: initList,
+                    date: event.time
+                }
+            })
+            .then((res) => {
+                console.log("DownloadRes", res);
+                if (res.result === "success") {
+                    return Util.default.exportToExcel(formInfo);
+                } else {
                     console.log(res);
-                    wx.cloud.downloadFile({
-                        fileID: res.result.fileID,
-                        success: function (res) {
-                            console.log(res);
-                            wx.saveFile({
-                                tempFilePath: res.tempFilePath,
-                                success: function (res) {
-                                    wx.openDocument({
-                                        filePath: res.savedFilePath,
-                                        success: function () {
-                                            wx.hideLoading();
-                                            wx.showModal({
-                                                title: "导出成功",
-                                                content: "已成功导出,请在自动打开后尽快另存",
-                                                showCancel: false,
-                                                success: function () {
-                                                    wx.redirectTo({
-                                                        url: "../list/list",
-                                                    });
-                                                },
-                                            });
-                                        },
-                                    });
-                                },
-                            });
-                        },
-                        fail: function (res) {
-                            console.log(res);
-                            wx.showModal({
-                                title: "导出失败",
-                                content: "导出失败，请联系管理员",
-                                showCancel: false,
+                    return "data-trans fail";
+                }
+            })
+            .then((res) => {
+                console.log(res);
+                if (res === "data-trans fail") {
+                    wx.showModal({
+                        title: "数据转移失败",
+                        content: "数据转移失败，请联系管理员",
+                        showCancel: false,
+                    });
+                } else if (res.success) {
+                    console.log(res);
+                    wx.showModal({
+                        title: "导出成功",
+                        content: "已成功导出,请在自动打开后尽快另存",
+                        showCancel: false,
+                        success: function () {
+                            wx.redirectTo({
+                                url: "../../Manage/Manage",
                             });
                         },
                     });
-                },
-            });
+                } else {
+                    console.log(res);
+                    wx.showModal({
+                        title: "导出失败",
+                        content: "导出失败，请联系管理员",
+                        showCancel: false,
+                    });
+                }
+            })
         },
     },
 });
