@@ -1,7 +1,11 @@
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
 
-cloud.init()
+cloud.init({
+  env: 'volunteer-platform-1v92i',
+  // env: 'buaalx-w5aor',
+  traceUser: true,
+})
 
 // 云函数入口函数
 exports.main = async (event, context) => {
@@ -12,57 +16,18 @@ exports.main = async (event, context) => {
 	try {
     //在已报名人员中删除记录
     console.log(event.initList)
-    for (let i = 0; i < event.initList.length; i++){
-      for (let j = 0; j < event.initList[i].data.length; j++){
-        db.collection('person').where({
-          phone: event.initList[i].data[j][1]
-        }).update({
-          data:{
-            history: _.pull({
-              signUpTime: event.initList[i].time,
-              title: event.title
-            })
-          }
-        })
-      }
-    }
+    return new Promise((resolve, reject) => {
+      resolve()
+    })
+    .then(() => {
+      deleteSignUp(event, 0)
+    })
+    .then(() => {
+
+    })
 
     //给用户添加记录信息，如果不存在词条则添加
     for (let i = 2; i < event.list.length; i++){
-      let inf = {};
-      let detail = event.list[i][4].split(";");
-      inf.title = event.title;
-      let duration = event.list[i][3];
-      inf.duration = duration.toFixed(0);
-      let score = event.list[i][3] * 0.2;
-      inf.score = score.toFixed(1);
-      for (let j = 0; j < detail.length; j++){
-        if(detail[j] === ""){
-          continue;
-        }else{
-          inf.note = detail[j]
-          let h =db.collection('person').where({
-            phone: event.list[i][2]
-          }).update({
-            data:{
-              duration: _.inc(duration),
-              history: _.push(inf),
-              score: _.inc(score)
-            }
-          })
-          if ((await h).stats.updated == 0){
-            db.collection('person').add({
-              data:{
-                name: event.list[i][1],
-                phone: event.list[i][2],
-                history: [inf],
-                duration: inf.a,
-                score: inf.s
-              }
-            })
-          }
-        }
-      }
       
     }
     
@@ -93,5 +58,67 @@ exports.main = async (event, context) => {
   } catch (e) {
     console.error(e)
     return e
+  }
+}
+
+function deleteSignUp(event, i) {
+  if (i == event.initList.length) {
+    return true
+  } else {
+    return db.collection('person').where({
+      phone: event.initList[i].phone
+    }).update({
+      data:{
+        history: _.pull({
+          signUpTime: event.initList[i].time,
+          title: event.title
+        })
+      }
+    })
+    .then(() => {
+      console.log("complete")
+      return deleteSignUp(event, i-1)
+    })
+  }
+}
+
+function addRecord(event, i) {
+  if (i == event.list.length) {
+    return true
+  } else {
+    let inf = {};
+    let detail = event.list[i][4].split(";");
+    inf.title = event.title;
+    let duration = event.list[i][3];
+    inf.duration = duration.toFixed(0);
+    let score = event.list[i][3] * 0.2;
+    inf.score = score.toFixed(1);
+    for (let j = 0; j < detail.length; j++){
+      if(detail[j] === ""){
+        continue;
+      }else{
+        inf.note = detail[j]
+        let h =db.collection('person').where({
+          phone: event.list[i][2]
+        }).update({
+          data:{
+            duration: _.inc(duration),
+            history: _.push(inf),
+            score: _.inc(score)
+          }
+        })
+        if ((await h).stats.updated == 0){
+          db.collection('person').add({
+            data:{
+              name: event.list[i][1],
+              phone: event.list[i][2],
+              history: [inf],
+              duration: inf.a,
+              score: inf.s
+            }
+          })
+        }
+      }
+    }
   }
 }

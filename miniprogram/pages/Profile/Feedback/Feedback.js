@@ -25,10 +25,43 @@ Component({
       "中甲志愿服务",
       "天文馆志愿",
     ],
-    value: null, // 当前选中
+    value: 0, // 当前选中
     text: "", // 反馈信息
     contact: "", // 联系方式
   },
+
+  lifetimes: {
+    attached() {
+      var that = this
+      this.loading = this.selectComponent("#loading");
+      this.loading.showLoading()
+      wx.cloud.callFunction({
+        name: "GetProject",
+      })
+      .then(res => {
+        console.log(res)
+        var range = ["小程序使用问题",]
+        for (let i = 0; i < res.result.data.length; i++) {
+          range.push(res.result.data[i].title)
+        }
+        console.log(range)
+        that.setData({
+          range,
+        })
+        that.loading.hideLoading()
+      })
+      .catch(err => {
+        console.log(err)
+        that.loading.hideLoading()
+        wx.showModal({
+          title: "错误",
+          content: "发生错误，请检查网络并重新进入页面",
+          showCancel: false
+        })
+      })
+    }
+  },
+
   methods: {
     submit() {
       let title = this.data.range[this.data.value];
@@ -51,8 +84,7 @@ Component({
         });
         return;
       }
-      this.loading = this.selectComponent("#loading");
-      this.loading.showLoading({
+      this.loading._showLoading({
         isContent: false,
         content: "",
         isBig: false,
@@ -64,11 +96,13 @@ Component({
         .get()
         .then((e) => {
           console.log(e.data[0].name);
-          db.collection("deefback").add({
+          db.collection("feedback").add({
             data: {
               name: e.data[0].name,
+              phone: e.data[0].phone,
               title,
-              text,
+              textarea: text,
+              contact,
               check: 0,
             },
             success: function () {
@@ -79,7 +113,7 @@ Component({
                 showCancel: false,
                 success: function () {
                   wx.switchTab({
-                    url: "../main/main",
+                    url: "../../Main/Main",
                   });
                 },
               });

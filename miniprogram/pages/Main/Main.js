@@ -92,7 +92,9 @@ Component({
             app.globalData.phone = res.data[0].phone;
             app.globalData.qqNum = res.data[0].qqNum;
             app.globalData.name = res.data[0].name;
-            app.globalData.avatar = res.data[0].avatar;
+            if ("avatar" in res.data[0] || res.data[0].avatar == "") {
+              app.globalData.avatar = res.data[0].avatar;
+            }
             app.globalData.text = res.data[0].text;
             app.globalData.totalDuration = res.data[0].totalDuration;
             app.globalData.totalScore = res.data[0].totalScore;
