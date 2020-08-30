@@ -53,3 +53,7 @@
   display: flex;
   padding-left: 27rpx;
 }
+
+.hide {
+  display: none;
+}
