@@ -118,6 +118,13 @@
 					"id": -1,
 					"name": "Admin",
 					"pathName": "pages/Admin/Admin",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "Manage",
+					"pathName": "pages/Manage/Manage",
 					"scene": null
 				}
 			]

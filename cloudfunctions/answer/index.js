@@ -43,7 +43,11 @@ exports.main = async(event, context) => {
                             personNum: event.personNum,
                             text: event.text,
                             qqNum: event.qqNum,
-                            campus: event.campus
+                            campus: event.campus,
+                            totalScore: 0,
+                            totalDuration: 0,
+                            history: [],
+                            avatar: ""
                         }
                     })
                 } else {

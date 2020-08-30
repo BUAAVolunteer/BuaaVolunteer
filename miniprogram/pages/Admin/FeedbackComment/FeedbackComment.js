@@ -24,16 +24,12 @@ Component({
 
   lifetimes: {
     created() {
-      wx.showLoading({
-        title: '加载中',
-      })
       db.collection('feedback')
         .get().then(e => {
           console.log(e)//奇奇怪怪不能引用
           this.setData({
             comment_list: e.data
           })
-            wx.hideLoading()
         })
     }
   }

@@ -24,12 +24,12 @@
 <view class="separate" style="" />
 
 <view class="middle">
-  <block wx:for="{{volunteer_list}}" wx:key="index">
+  <block wx:for="{{volunteerList}}" wx:key="index">
     <view
       class="{{ index % 2 == 0 ? 'bg-white' : 'bg-cyan' }}"
-      wx:if="{{delete}}"
-      id="{{item.id}}"
-      data-id="{{item.id}}"
+      wx:if="{{isDelete}}"
+      id="{{item.ID}}"
+      data-id="{{item.ID}}"
       bindtap="delete"
     >
       <image class="middle-titleimg" src="/assets/icons/delete.png" />
@@ -39,20 +39,20 @@
         <input
           value="{{item.name}}"
           data-type="name"
-          data-id="{{item.id}}"
+          data-id="{{item.ID}}"
           bindinput="input"
-          disabled="{{item.d}}"
+          disabled="{{item.isDisabled}}"
         />
       </view>
       <view class="phone">
-        <input value="{{item.phone}}" data-type="phone" data-id="{{item.id}}" bindinput="input" />
+        <input value="{{item.phone}}" data-type="phone" data-id="{{item.ID}}" bindinput="input" />
       </view>
       <view class="middle-btn">
         <image
 		  class="middle-searchbot"
 		  mode="widthFix"
           src="/assets/icons/search.png"
-          data-id="{{item.id}}"
+          data-id="{{item.ID}}"
           bind:tap="search"
         />
       </view>
@@ -62,7 +62,7 @@
           class="duration-input"
           value="{{item.duration}}"
           data-type="duration"
-          data-id="{{item.id}}"
+          data-id="{{item.ID}}"
           bindinput="input"
         />
       </view>
@@ -71,7 +71,7 @@
           class="note-input"
           value="{{item.note}}"
           data-type="note"
-          data-id="{{item.id}}"
+          data-id="{{item.ID}}"
           bindinput="input"
         />
       </view>
@@ -83,7 +83,7 @@
   <view class="footer__btn footer__btn--cyan" bindtap="add">
     添加记录
   </view>
-  <view wx:if="{{delete}}" class="footer__btn footer__btn--orange" bindtap="opendel">
+  <view wx:if="{{isDelete}}" class="footer__btn footer__btn--orange" bindtap="opendel">
     退出编辑
   </view>
   <view wx:else class="footer__btn footer__btn--red" bindtap="opendel">

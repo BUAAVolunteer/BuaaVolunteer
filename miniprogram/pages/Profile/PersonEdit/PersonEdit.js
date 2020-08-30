@@ -111,10 +111,16 @@ Component({
           text: that.data.text,
           qqNum: that.data.qqNum,
           campus: picker[that.data.index],
-        },
-        success: function (res) {
-          console.log("1", res);
-          console.log("2", app.globalData);
+        }
+      })
+      .then(res => {
+        console.log("1", res);
+        console.log("2", app.globalData);
+        return db.collection('person').where({
+          _openid: that.data.openid
+        })
+        .get()
+        .then(res => {
           app.globalData.name = that.data.name;
           app.globalData.phone = that.data.phone;
           app.globalData.personNum = that.data.personNum;
@@ -122,6 +128,9 @@ Component({
           app.globalData.campus = picker[that.data.index];
           app.globalData.text = that.data.text;
           app.globalData.isRegister = true;
+          app.globalData.totalScore = res.data[0].totalScore;
+          app.globalData.totalDuration = res.data[0].totalDuration;
+          app.globalData.history = res.data[0].history;
           console.log("3.", that.data);
           that.loading.hideLoading();
           wx.showModal({
@@ -134,16 +143,17 @@ Component({
               });
             },
           });
-        },
-        fail: function () {
-          that.loading.hideLoading();
-          wx.showModal({
-            title: "错误",
-            content: "请重新填写或反馈管理员",
-            showCancel: false,
-          });
-        },
-      });
+        })
+      })
+      .catch(err => {
+        console.log(err)
+        that.loading.hideLoading();
+        wx.showModal({
+          title: "错误",
+          content: "请重新填写或反馈管理员",
+          showCancel: false,
+        });
+      })
     },
   },
 });

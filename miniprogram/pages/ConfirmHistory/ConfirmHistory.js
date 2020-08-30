@@ -28,7 +28,7 @@ Component({
         .get()
         .then((res) => {
           if (res.data.length) {
-            isRecord = 1;
+            isRecord = true;
             let ConfirmList = res.data[0].historyList;
             console.log(ConfirmList);
             for (let i = 0; i < ConfirmList.length; i++) {
@@ -39,14 +39,14 @@ Component({
               ConfirmList,
             });
           } else {
-            isRecord = 0;
+            isRecord = false;
             wx.showModal({
               title: "错误",
               content: "没有该志愿的确认记录，请先导出报名表",
               showCancel: false,
             });
           }
-          wx.hideLoading();
+          that.loading.hideLoading();
         })
         .catch((err) => {
           console.log(err);
@@ -69,7 +69,7 @@ Component({
       let ID = e.currentTarget.id;
       var confirmList_json = this.data.ConfirmList[ID];
       wx.navigateTo({
-        url: "Confirm/Confirm?confirmList=" + JSON.stringify(confirmList_json),
+        url: "Confirm/Confirm?confirmList=" + JSON.stringify(confirmList_json) + "&title=" + this.properties.title,
       });
     },
   },

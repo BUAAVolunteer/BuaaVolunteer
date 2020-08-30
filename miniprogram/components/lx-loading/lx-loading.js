@@ -39,6 +39,14 @@ Component({
         onShow: true,
       });
     },
+    _showLoading({ isContent = false, content = "", isBig = false } = {}) {
+      this.setData({
+        isBig,
+        isContent,
+        content,
+        onShow: true,
+      });
+    },
     hideLoading() {
       this.setData({
         onShow: false,

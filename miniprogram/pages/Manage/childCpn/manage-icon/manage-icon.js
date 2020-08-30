@@ -11,7 +11,7 @@ Component({
         title: "", // 标题
         date: "", // 招募日期
         time: "", // 招募时间
-        qqnum: "", // qq群号
+        qqNum: "", // qq群号
         open: "", // 是否打开
         check: "", // 状态判断（详见下一节流程图）
       },
@@ -56,5 +56,11 @@ Component({
   /**
    * 组件的方法列表
    */
-  methods: {},
+  methods: {
+    openConfirm() {
+      wx.navigateTo({
+        url: '../ConfirmHistory/ConfirmHistory?title=' + this.properties.project.title,
+      });
+    }
+  },
 });

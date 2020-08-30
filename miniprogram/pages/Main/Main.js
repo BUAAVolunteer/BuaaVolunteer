@@ -193,7 +193,12 @@ Component({
             ) {
               isPre = true;
             }
+            var isInner = false
+            if (projectList[i].innerList.indexOf(app.globalData.openid) != -1) {
+              isInner = true
+            }
             projectList[i].pre = isPre;
+            projectList[i].isInner = isInner
             projectList[i].ID = i;
             if (!isPre) {
               recruitList.push(projectList[i]);
@@ -221,7 +226,7 @@ Component({
     openHover(e) {
       ID = e.detail;
       var hoverDetail = this.data.hoverDetail;
-      hoverDetail.button[0].isAblePress = !projectList[ID].pre;
+      hoverDetail.button[0].isAblePress = (!projectList[ID].pre) || projectList[ID].isInner;
       if (projectList[ID].pre) {
         hoverDetail.button[0].text = "等待发布";
       }
