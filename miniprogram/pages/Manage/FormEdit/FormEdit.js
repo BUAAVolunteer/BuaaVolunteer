@@ -359,7 +359,11 @@ Component({
             //点击取消,默认隐藏弹框
           } else {
             //点击确定
-            that.loading.showLoading();
+            that.loading.showLoading({
+              isContent: false,
+              content: "",
+              isBig: false,
+            });
             let inf = that.data.formList.formInfo;
             var initList = [["姓名", "手机号", "学号", "QQ号", "校区"]];
             for (let i = 0; i < cnt; i++) {

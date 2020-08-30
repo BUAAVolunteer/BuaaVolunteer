@@ -253,7 +253,7 @@ Component({
               res["Ynia8PHxf3L_uWFvZxtPiI-V8hE-wcErHpe0Ygh8O9w"] === "accept"
             ) {
               wx.navigateTo({
-                url: "../Recruit/Form/Form?title=" + projectList[ID].title,
+                url: "./Form/Form?title=" + projectList[ID].title,
               });
             } else {
               wx.showToast({

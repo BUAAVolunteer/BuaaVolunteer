@@ -33,7 +33,7 @@
   </view>
   <!--未注册-->
   <view wx:if="{{!isRegister}}" class="noRegister">
-    <image class="goRegister" src="/assets/image/profile/goregister.png" bindtap="toEdit" />
+    <image class="goRegister" src="/assets/image/profile/register.png" bindtap="toEdit" />
   </view>
   <view class="footer__up">
     <profile-footer-icon type="1" content="新手教程" bindtap="forNew"></profile-footer-icon>

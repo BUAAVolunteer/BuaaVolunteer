@@ -13,7 +13,7 @@
   <!--表单主体-->
   <view class="reports-form">
     <block wx:for="{{formList.formInfo}}" wx:for-index="idx" wx:for-item="items" wx:key="id">
-      <button id="{{items.ID}}" class="but-each" bind:longpress="buttonOpen" bind:tap="offCanvas">
+      <view id="{{items.ID}}" class="but-each" hover-class="navigator-hover" bind:longpress="buttonOpen" bind:tap="offCanvas">
         <!-- 输入框组件 -->
         <block wx:if="{{items.type=='text'}}">
           <text-input id="{{items.ID}}" formInfo="{{items}}" bindinput="childChange" />
@@ -34,7 +34,7 @@
         <block wx:if="{{items.type=='div'}}">
           <text-div id="{{items.ID}}" formInfo="{{items}}" />
         </block>
-      </button>
+      </view>
     </block>
   </view>
 </scroll-view>
@@ -57,11 +57,11 @@
 </view>
 <!--添加组件-->
 <view class="addlist" wx:if="{{checked}}">
-  <button class="button1 but-font" id="text" bindtap="addAll">文本输入</button>
-  <button class="button2 but-font" id="radio" bindtap="addAll">单选组件</button>
-  <button class="button3 but-font" id="checkbox" bindtap="addAll">多选组件</button>
-  <button class="button4 but-font" id="div" bindtap="addAll">分割线</button>
-  <button class="button5 but-font" id="describe" bindtap="addAll">文本描述</button>
+  <view class="button1 but-font" id="text" bindtap="addAll">文本输入</view>
+  <view class="button2 but-font" id="radio" bindtap="addAll">单选组件</view>
+  <view class="button3 but-font" id="checkbox" bindtap="addAll">多选组件</view>
+  <view class="button4 but-font" id="div" bindtap="addAll">分割线</view>
+  <view class="button5 but-font" id="describe" bindtap="addAll">文本描述</view>
 </view>
 
 <!-- 全局加载组件 -->

@@ -145,7 +145,12 @@ Component({
 
     upload: function (e) {
       let that = this;
-      this.loading.showLoading();
+      this.loading.showLoading({
+        isContent: false,
+        content: "",
+        isBig: false,
+      });
+
       //合法性校验
       console.log(that);
       console.log(that.__proto__);
