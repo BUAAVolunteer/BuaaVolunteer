@@ -17,7 +17,7 @@ App({
 
     this.globalData = {
       avatar:
-        "/assets/image/profilepic/common-3.png",
+        "cloud://volunteer-platform-1v92i.766f-volunteer-platform-1v92i-1300053277/头像照片/common/common-1.png",
       openid: "",
       isRegister: false,
       isAdmin: false,
