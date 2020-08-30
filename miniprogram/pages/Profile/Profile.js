@@ -15,8 +15,8 @@ Component({
       time: 10000,
     },
     isShowPic: false,
-    isRegister: app.globalData.isRegister,
-    isAdmin: app.globalData.isAdmin,
+    isRegister: false,
+    isAdmin: false,
   },
   methods: {
     changePic(e) {
@@ -178,20 +178,33 @@ Component({
       });
       var that = this;
       console.log(app.globalData)
-      var person = {}
-      person.campus = app.globalData.campus
-      person.name = app.globalData.name
-      person.phone = app.globalData.phone
-      person.qqNum = app.globalData.qqNum
-      person.personNum = app.globalData.personNum
-      person.avatar = app.globalData.avatar
-      person.text = app.globalData.text
-      person.totalDuration = app.globalData.totalDuration
-      person.totalScore = app.globalData.totalScore.toFixed(1)
-      person.history = app.globalData.history
-      that.setData({
-        person,
-      })
+      if (app.globalData.isRegister) {
+        var person = {}
+        person.campus = app.globalData.campus
+        person.name = app.globalData.name
+        person.phone = app.globalData.phone
+        person.qqNum = app.globalData.qqNum
+        person.personNum = app.globalData.personNum
+        person.avatar = app.globalData.avatar
+        person.text = app.globalData.text
+        person.totalDuration = app.globalData.totalDuration
+        person.totalScore = app.globalData.totalScore.toFixed(1)
+        person.history = app.globalData.history
+        isRegister = app.globalData.isRegister
+        isAdmin = app.globalData.isAdmin
+        that.setData({
+          person,
+          isRegister,
+          isAdmin
+        })
+      } else {
+        isRegister = app.globalData.isRegister
+        isAdmin = app.globalData.isAdmin
+        that.setData({
+          isRegister,
+          isAdmin
+        })
+      }
       wx.hideLoading()
     },
   },

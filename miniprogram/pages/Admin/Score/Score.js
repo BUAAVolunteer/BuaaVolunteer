@@ -12,48 +12,70 @@ Component({
    * 组件的初始数据
    */
   data: {
-    tele: "", //输入的手机号
-    pickname: "", //选定的志愿名称
-    scoreChange: "",//积分变动原因
-    picker: [],
-    picker2: [
-      "提交感想",
-      "优秀感想",
-      "受到表扬",
-      "添加内部名额",
-      "志愿迟到",
-      "受到批评",
-      "其他减分行为",
-      "缺勤但提前说明",
-      "缺勤但未提前说明",
-      "缺勤且未说明"
-
-    ],
+    projectPicker: [],
+    operatePicker: [],
+    operateList: [],
     volunteerName: "",
     volunteerPhone: "",
-    volunteerTime: "",
-    volunteerScore: 0,
-    volunteerID: "",
-    person_list: [{}],
-    index: null,
-    index2: null,
-    isSubmit: 0,
-    hover:"",
+    volunteerDate: "",
+    projectIndex: 0,
+    operateIndex: 0,
+    isScoreOperate: false,
+    isNeedName: false,
   },
 
   /**
    * 组件的方法列表
    */
   methods: {
-    PickerChange(e) {
-      //console.log(e);
-      this.setData({
-        index: this.data.pickname,
-        index2: this.data.scoreChange
-      });
-    },
-
-    identify: function (e) {
+    submit: function () {
+      var that = this
+      var project = this.data.projectPicker[this.data.projectIndex]
+      var operate = this.data.operatePicker[this.data.operateIndex]
+      console.log(this.data.projectIndex)
+      console.log(this.data.operateIndex)
+      this.hover = this.selectComponent("#msg")
+      if (this.data.phone == "" || this.data.phone.length != 11) {
+        that.hover.showHover({
+          isMaskCancel: false,
+          title:"信息错误",
+          content:"请填入正确格式的手机号",
+          button:[
+            {
+              ID: 0,
+              name: "confirm",
+              text: "确认",
+              isAblePress: true
+            }
+          ]
+        })
+        return
+      }
+      if (operate == "添加内部名额") {
+        this._addInnerSign(project)
+      } else if (!that.data.isScoreOperate && that.data.volunteerDate == "") {
+        that.hover.showHover({
+          isMaskCancel: false,
+          title:"选择志愿日期",
+          content:"请选择对应志愿招募的日期",
+          button:[
+            {
+              ID: 0,
+              name: "confirm",
+              text: "确认",
+              isAblePress: true
+            }
+          ],
+          success: res => {
+            that.setData({
+              isScoreOperate: !that.data.isScoreOperate
+            })
+          }
+        })
+      } else {
+        this._operateScore(project, operate)
+      }
+      return
       wx.showLoading({
         mask: true,
       });
@@ -61,8 +83,7 @@ Component({
       var vscore = "";
       var finding = 0;
       var that = this;
-      var picker = this.data.picker;
-      this.hover = this.selectComponent("#msg")
+      var projectPicker = this.data.projectPicker;
       db.collection("person")
         .where({
           //根据电话和项目名称查询志愿
@@ -87,7 +108,6 @@ Component({
                 volunteerID: res.data[0]._openid,
               });
               this.hover.showHover({
-  
                 isMaskCancel: false,
                 title:"信息确认",
                 content:"志愿者信息：",
@@ -113,373 +133,151 @@ Component({
         });
     },
 
-    score_deal: function (e) {
-      wx.showLoading({
-        title: "请稍后",
-        mask: "true",
-      });
-      var scoreChange = this.data.scoreChange;
-      var _id = this.data.volunteerID;
-      var picker = this.data.picker;
-      var title = picker[this.data.index];
-      if (scoreChange === '添加内部名额') {
-        wx.cloud.callFunction({
-          // 云函数名称
-          name: "innerSign",
-          // 传给云函数的参数
-          data: {
-            openid: _id,
-            title: title,
-          },
-        });
-      }
-      else{
-        wx.cloud.callFunction({
-          name: "plus",
-          data: {
-            openid: _id,
-            title: title,
-            scoreChange: scoreChange,
-          }
-        })
-        if (scoreChange === '缺勤但提前说明' || scoreChange === '缺勤但未提前说明' || scoreChange === '缺勤且提前说明') {
-          db.collection('blacklist').add({
-            data: {
-              name: this.data.volunteerName,
-              phone: this.data.tele,
-              title: this.data.picker[this.data.pickname],
-              time: this.data.volunteerTime,
-            },
+    _addInnerSign(project) {
+      var that = this
+      db.collection('person').where({
+        phone: that.data.volunteerPhone
+      })
+      .get()
+      .then(res => {
+        if (res.data.length == 0 || !("_openid" in res.data[0] || res.data[0].openid == "")) {
+          that.hover.showHover({
+            isMaskCancel: false,
+            title:"志愿者未注册",
+            content:"请提醒志愿者在小程序进行注册\n注册后再进行内部名额的添加",
+            button:[
+              {
+                ID: 0,
+                name: "confirm",
+                text: "确认",
+                isAblePress: true
+              }
+            ]
           })
-          db.collection('list').add({
-            data: {
-              duration: "0",
-              phone: this.data.tele,
-              title: this.data.picker[this.data.pickname],
-              note: this.data.date,
-            },
+        } else {
+          that.hover.showHover({
+            isMaskCancel: false,
+            title:"加入内部名额",
+            content:"姓名：" + res.data[0].name + "\n手机号：" + res.data[0].phone + "\n\n确定将其加入\n" + project +"\n的内部名额吗？",
+            button:[
+              {
+                ID: 0,
+                name: "yes",
+                text: "是",
+                isAblePress: true
+              },
+              {
+                ID: 1,
+                name: "no",
+                text: "否",
+                isAblePress: true
+              }
+            ],
+            success: function(res) {
+              if (res == "no") {
+                return
+              } else {
+                wx.cloud.callFunction({
+                  name: "innerSign",
+                  data: {
+                    title: project,
+                    openid: res.data[0]._openid
+                  }
+                })
+              }
+            }
           })
         }
-      } 
+      })
     },
 
-  
-
-    
-
-
-
-/*
-    plus1: function (e) {
-      wx.showLoading({
-        title: "请稍后",
-        mask: "true",
-      });
-      var _id = this.data.volun_id;
-      var picker = this.data.picker;
-      var title = picker[this.data.index];
-      wx.cloud.callFunction({
-        // 云函数名称
-        name: "plus",
-        // 传给云函数的参数
-        data: {
-          openid: _id,
-          title: title,
-          p: 0.5,
-        },
-        success: function (res) {
-          //console.log(res)
-          wx.hideLoading();
-          wx.showModal({
-            title: "增加积分",
-            content: "积分增加成功",
-            showCancel: false,
-          });
-        },
-        fail: console.error,
-      });
+    _operateScore(project, operate) {
+      var that = this
+      db.collection('person').where({
+        phone: that.data.volunteerPhone
+      })
+      .get()
+      .then(res => {
+        if (res.data.length == 0 && !that.data.isNeedName) {
+          that.hover.showHover({
+            isMaskCancel: false,
+            title:"未找到志愿者",
+            content:"请填写志愿者的姓名以添加志愿者",
+            button:[
+              {
+                ID: 0,
+                name: "confirm",
+                text: "确认",
+                isAblePress: true
+              }
+            ],
+            success: () => {
+              that.setData({
+                isNeedName: true
+              })
+            }
+          })
+          return false
+        } else if (that.data.isNeedName && that.data.volunteerName == "") {
+          that.hover.showHover({
+            isMaskCancel: false,
+            title:"信息确实",
+            content:"请填写志愿者的姓名",
+            button:[
+              {
+                ID: 0,
+                name: "confirm",
+                text: "确认",
+                isAblePress: true
+              }
+            ]
+          })
+          return false
+        } else {
+          let name = that.data.isNeedName ? that.data.volunteerName : res.data[0].name
+          that.hover.showHover({
+            isMaskCancel: false,
+            title:"进行积分变动操作",
+            content:"姓名：" + name + "\n手机号：" + res.data[0].phone + "\n志愿项目：" + project + "\n招募时间：" + that.data.volunteerDate + "\n积分变动：" + operate + "\n\n确认进行积分变动吗？",
+            button:[
+              {
+                ID: 0,
+                name: "yes",
+                text: "是",
+                isAblePress: true
+              },
+              {
+                ID: 1,
+                name: "no",
+                text: "否",
+                isAblePress: true
+              }
+            ],
+            success: function(res) {
+              if (res == "no") {
+                return
+              } else {
+                let scoreOperate = that.data.operateList[that.data.operateIndex]
+                wx.cloud.callFunction({
+                  name: "plus",
+                  data: {
+                    title: project,
+                    type: scoreOperate.type,
+                    score: scoreOperate.score,
+                    isBlackList: scoreOperate.isBlackList,
+                    date: that.data.volunteerDate,
+                    phone: res.data[0].phone,
+                    name: name,
+                    isNeedName: that.data.isNeedName,
+                    date: that.data.volunteerDate
+                  }
+                })
+              }
+            }
+          })
+        }
+      })
     },
-
-    plus2: function (e) {
-      wx.showLoading({
-        title: "请稍后",
-        mask: "true",
-      });
-      var _id = this.data.volun_id;
-      var picker = this.data.picker;
-      var title = picker[this.data.index];
-      wx.cloud.callFunction({
-        // 云函数名称
-        name: "plus",
-        // 传给云函数的参数
-        data: {
-          openid: _id,
-          title: title,
-          p: 1,
-        },
-        success: function (res) {
-          //console.log(res)
-          wx.hideLoading();
-          wx.showModal({
-            title: "增加积分",
-            content: "积分增加成功",
-            showCancel: false,
-          });
-        },
-        fail: console.error,
-      });
-    },
-
-    plus3: function (e) {
-      wx.showLoading({
-        title: "请稍后",
-        mask: "true",
-      });
-      var _id = this.data.volun_id;
-      var picker = this.data.picker;
-      var title = picker[this.data.index];
-      wx.cloud.callFunction({
-        // 云函数名称
-        name: "plus",
-        // 传给云函数的参数
-        data: {
-          openid: _id,
-          title: title,
-          p: 1,
-        },
-        success: function (res) {
-          //console.log(res)
-          wx.hideLoading();
-          wx.showModal({
-            title: "增加积分",
-            content: "积分增加成功",
-            showCancel: false,
-          });
-        },
-        fail: console.error,
-      });
-    },
-
-    minus1: function (e) {
-      wx.showLoading({
-        title: "请稍后",
-        mask: "true",
-      });
-      var _id = this.data.volun_id;
-      var picker = this.data.picker;
-      var title = picker[this.data.index];
-      wx.cloud.callFunction({
-        // 云函数名称
-        name: "plus",
-        // 传给云函数的参数
-        data: {
-          openid: _id,
-          title: title,
-          p: -5,
-        },
-        success: function (res) {
-          //console.log(res)
-          wx.hideLoading();
-          wx.showModal({
-            title: "扣除积分",
-            content: "积分扣除成功",
-            showCancel: false,
-          });
-        },
-        fail: console.error,
-      });
-    },
-
-    minus2: function (e) {
-      wx.showLoading({
-        title: "请稍后",
-        mask: "true",
-      });
-      var _id = this.data.volun_id;
-      var picker = this.data.picker;
-      var title = picker[this.data.index];
-      wx.cloud.callFunction({
-        // 云函数名称
-        name: "plus",
-        // 传给云函数的参数
-        data: {
-          openid: _id,
-          title: title,
-          p: -8,
-        },
-        success: function (res) {
-          //console.log(res)
-          wx.hideLoading();
-          wx.showModal({
-            title: "扣除积分",
-            content: "积分扣除成功",
-            showCancel: false,
-          });
-        },
-        fail: console.error,
-      });
-    },
-
-    minus3: function (e) {
-      wx.showLoading({
-        title: "请稍后",
-        mask: "true",
-      });
-      var _id = this.data.volun_id;
-      var picker = this.data.picker;
-      var title = picker[this.data.index];
-      wx.cloud.callFunction({
-        // 云函数名称
-        name: "plus",
-        // 传给云函数的参数
-        data: {
-          openid: _id,
-          title: title,
-          p: -15,
-        },
-        success: function (res) {
-          //console.log(res)
-          wx.hideLoading();
-          wx.showModal({
-            title: "扣除积分",
-            content: "积分扣除成功",
-            showCancel: false,
-          });
-        },
-        fail: console.error,
-      });
-    },
-
-    minus4: function (e) {
-      wx.showLoading({
-        title: "请稍后",
-        mask: "true",
-      });
-      var _id = this.data.volun_id;
-      var picker = this.data.picker;
-      var title = picker[this.data.index];
-      wx.cloud.callFunction({
-        // 云函数名称
-        name: "plus",
-        // 传给云函数的参数
-        data: {
-          openid: _id,
-          title: title,
-          p: -4,
-        },
-        success: function (res) {
-          //console.log(res)
-          wx.hideLoading();
-          wx.showModal({
-            title: "扣除积分",
-            content: "积分扣除成功",
-            showCancel: false,
-          });
-        },
-        fail: console.error,
-      });
-    },
-
-    minus5: function (e) {
-      wx.showLoading({
-        title: "请稍后",
-        mask: "true",
-      });
-      var _id = this.data.volun_id;
-      var picker = this.data.picker;
-      var title = picker[this.data.index];
-      wx.cloud.callFunction({
-        // 云函数名称
-        name: "plus",
-        // 传给云函数的参数
-        data: {
-          openid: _id,
-          title: title,
-          p: -2,
-        },
-        success: function (res) {
-          //console.log(res)
-          wx.hideLoading();
-          wx.showModal({
-            title: "扣除积分",
-            content: "积分扣除成功",
-            showCancel: false,
-          });
-        },
-        fail: console.error,
-      });
-    },
-
-    minus6: function (e) {
-      var _id = this.data.volun_id;
-      var sc = this.data.volun_score;
-      var pl = 0;
-      wx.showActionSheet({
-        itemList: ["1", "2", "3", "4", "5", "6"],
-        success: function (res) {
-          wx.showLoading({
-            title: "请稍后",
-            mask: "true",
-          });
-          pl = 0 - pl - res.tapIndex - 1;
-          //console.log(pl)
-          wx.cloud.callFunction({
-            // 云函数名称
-            name: "plus",
-            // 传给云函数的参数
-            data: {
-              id: _id,
-              basic: sc,
-              p: pl,
-            },
-            success: function (res) {
-              wx.hideLoading();
-              //console.log(res)
-              wx.showModal({
-                title: "扣除积分",
-                content: "积分扣除成功",
-                showCancel: false,
-              });
-            },
-            fail: console.error,
-          });
-        },
-        fail: function (res) {
-          //console.log(res.errMsg)
-          wx.hideLoading();
-          //console.log(res)
-        },
-      });
-    },
-
-    inner: function (e) {
-      wx.showLoading({
-        title: "请稍后",
-        mask: "true",
-      });
-      var _id = this.data.volun_id;
-      var picker = this.data.picker;
-      var title = picker[this.data.index];
-      wx.cloud.callFunction({
-        // 云函数名称
-        name: "innerSign",
-        // 传给云函数的参数
-        data: {
-          openid: _id,
-          title: title,
-        },
-        success: function (res) {
-          //console.log(res)
-          wx.hideLoading();
-          wx.showModal({
-            title: "内部名额",
-            content: "内部名额添加成功",
-            showCancel: false,
-          });
-        },
-        fail: console.error,
-      });
-    },*/
   },
 
   lifetimes: {
@@ -487,23 +285,49 @@ Component({
       wx.showLoading({
         mask: true,
       });
-      var picker = [];
+      var projectPicker = [];
       var that = this;
       this.hover = this.selectComponent("#msg");
-     
-      db.collection("project").get({
-        success: function (res) {
-          for (let i = 0; i < res.data.length; i++) {
-            picker.push(res.data[i].title);
-          }
-
-          that.setData({
-            picker: picker,
-          });
-          wx.hideLoading();
-        },
-      });
-      
+      db.collection("project")
+      .get()
+      .then(res => {
+        for (let i = 0; i < res.data.length; i++) {
+          projectPicker.push(res.data[i].title);
+        }
+        that.setData({
+          projectPicker,
+        });
+      })
+      .then(() => {
+        return db.collection('blacklist').where({
+          name: "积分规则"
+        })
+        .get()
+      })
+      .then(res => {
+        let operatePicker = ["添加内部名额"]
+        for (let i = 0; i < res.data[0].role.length; i++) {
+          operatePicker.push(res.data[0].role[i].type)
+        }
+        that.setData({
+          operateList: res.data[0]
+        })
+        return operatePicker
+      })
+      .then(res => {
+        that.setData({
+          operatePicker: res,
+        })
+        wx.hideLoading();
+      })
+      .catch(err => {
+        console.log(err)
+        wx.showModal({
+          title: "错误",
+          content: "网络出现异常，请返回上一页面后再尝试进入此页面",
+          showCancel: false
+        })
+      })
     },
   },
 });

@@ -1,32 +1,23 @@
 <scroll-view class="wrapper" scroll-y="{{true}}">
-  <view bindsubmit="identify" report-submit="true">
-    <lx-input title="手机号" model:content="{{tele}}" placeholder="请输入11位手机号" />
+  <view report-submit="true">
+    <lx-input title="姓名" model:content="{{volunteerName}}" placeholder="请输入姓名" wx:if="{{isNeedName}}"/>
+    <lx-input title="手机号" model:content="{{volunteerPhone}}" placeholder="请输入11位手机号" />
     <lx-picker
       mode="selector"
-      range="{{picker}}"
+      range="{{projectPicker}}"
       title="项目名称"
-      model:value="pickname"
+      model:value="{{projectIndex}}"
       placeholder="请选择增减积分的志愿项目"
     />
-    <lx-picker title="志愿日期" mode="date" model:content="{{date}}" />
+    <lx-picker wx:if="{{isScoreOperate}}" title="志愿日期" mode="date" model:content="{{volunteerDate}}" />
     <lx-picker
       mode="selector"
-      range="{{picker2}}"
+      range="{{operatePicker}}"
       title="积分变动情况"
-      model:value="scoreChange"
+      model:value="{{operateIndex}}"
       placeholder="请选择积分变动情况"
     />
-    <lx-button content="提交" color="green" width="700rpx" bindtap = "identify"/>
+    <lx-button content="提交" color="green" width="700rpx" bindtap = "submit"/>
   </view>
-  <lx-hover id="msg">
-    <view class="inform">
-    <text class="margin">志愿名称：{{volunteerName}}\n</text>
-    <text class="margin">手机号：{{volunteerPhone}}\n</text>
-    <text class="margin">志愿时长：{{volunteerTime}}\n</text>
-    <text class="margin">志愿积分：{{volunteerScore}}\n\n</text>
-  </view>
-  </lx-hover>
-  
-
-  
+  <lx-hover id="msg"></lx-hover>
 </scroll-view>

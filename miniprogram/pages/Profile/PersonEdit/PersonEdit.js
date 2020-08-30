@@ -20,40 +20,23 @@ Component({
    * 生命周期函数--监听页面加载
    */
   lifetimes: {
-    created() {
+    attached() {
       var that = this;
-      db.collection("person")
-        .where({
-          _openid: app.globalData.openid,
-        })
-        .get({
-          success: function (res) {
-            //console.log(res)
-            if (res.data.length != 0) {
-              that.setData({
-                name: res.data[0].name,
-                phone: res.data[0].phone,
-                personNum: res.data[0].personNum,
-                text: res.data[0].text,
-                qqNum: res.data[0].qqNum,
-              });
-              
-              if (res.data[0].campus === "北校区")
-                that.setData({
-                  index: 1,
-                });
-              else if (res.data[0].campus === "南校区")
-                that.setData({
-                  index: 0,
-                });
-            }
-          },
-          fail: function (res) {
-            wx.showToast({
-              title: "获取信息失败",
-            });
-          },
-        });
+      console.log(app.globalData)
+      var name = app.globalData.name
+      var phone = app.globalData.phone
+      var personNum = app.globalData.personNum
+      var text = app.globalData.text
+      var qqNum = app.globalData.qqNum
+      var index = app.globalData.campus == '南校区' ? 0 : 1
+      this.setData({
+        name,
+        phone,
+        personNum,
+        text,
+        qqNum,
+        index
+      })
     },
   },
   methods: {

@@ -1,6 +1,10 @@
 const cloud = require('wx-server-sdk')
 //环境变量 ID
-cloud.init()
+cloud.init({
+    env: 'volunteer-platform-1v92i',
+    // env: 'buaalx-w5aor',
+    traceUser: true,
+})
 
 const db = cloud.database()
 const _ = db.command
