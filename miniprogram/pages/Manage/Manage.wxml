@@ -17,3 +17,6 @@
     创建一个新志愿
   </navigator>
 </view>
+
+<!-- 全局加载组件 -->
+<lx-loading id="loading"></lx-loading>

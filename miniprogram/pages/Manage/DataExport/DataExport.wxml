@@ -25,3 +25,6 @@
     </button>
   </view>
 </scroll-view>
+
+<!-- 全局加载组件 -->
+<lx-loading id="loading"></lx-loading>

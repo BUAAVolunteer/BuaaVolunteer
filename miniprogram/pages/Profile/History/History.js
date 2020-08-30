@@ -6,7 +6,7 @@ Component({
   properties: {
     history: {
       type: String,
-      value: ""
+      value: "",
     },
   },
 
@@ -48,10 +48,10 @@ Component({
   lifetimes: {
     attached() {
       // 直接从个人界面传参过来
-      var historyList = JSON.parse(this.properties.history)
+      var historyList = JSON.parse(this.properties.history);
       this.setData({
         historyList,
-      })
+      });
     },
   },
 });

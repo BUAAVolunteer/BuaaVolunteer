@@ -70,3 +70,6 @@
   />
   <lx-button bindtap="upload" content="已确认信息" color="blue" />
 </view>
+
+<!-- 全局加载组件 -->
+<lx-loading id="loading"></lx-loading>

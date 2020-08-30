@@ -63,3 +63,6 @@
   <button class="button4 but-font" id="div" bindtap="addAll">分割线</button>
   <button class="button5 but-font" id="describe" bindtap="addAll">文本描述</button>
 </view>
+
+<!-- 全局加载组件 -->
+<lx-loading id="loading"></lx-loading>
