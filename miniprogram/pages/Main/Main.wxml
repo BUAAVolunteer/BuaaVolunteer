@@ -60,3 +60,5 @@
     </scroll-view>
   </view>
 </lx-hover>
+
+<lx-loading id="loading"></lx-loading>

@@ -43,10 +43,11 @@ Component({
   lifetimes: {
     // 生命周期函数，在组件实例刚刚被创建时执行
     created: function () {
+      this.loading = this.selectComponent('#loading')
       let that = this;
-      wx.showLoading({
-        title: "请稍后",
-        mask: true,
+      this.loading.showLoading({
+        isContent: true,
+        content: "请稍后",
       });
       // 调用登录云函数
       wx.cloud
@@ -122,11 +123,11 @@ Component({
         })
         .then(() => {
           console.log("志愿信息登记完成");
-          wx.hideLoading();
+          that.loading.hideLoading();
         })
         .catch((err) => {
           console.log(err);
-          wx.hideLoading();
+          that.loading.hideLoading();
           wx.showModal({
             title: "错误",
             content: "没有找到记录，请检查网络或重启小程序",
