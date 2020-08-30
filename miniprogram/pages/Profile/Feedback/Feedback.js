@@ -52,7 +52,11 @@ Component({
         return;
       }
       this.loading = this.selectComponent("#loading");
-      this.loading.showLoading();
+      this.loading.showLoading({
+        isContent: false,
+        content: "",
+        isBig: false,
+      });
       db.collection("person")
         .where({
           _openid: app.globalData.openid,
