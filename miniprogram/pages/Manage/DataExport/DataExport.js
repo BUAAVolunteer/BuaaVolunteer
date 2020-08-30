@@ -135,53 +135,52 @@ Component({
             formInfo.fileName = that.data.title + " 报名信息表格";
             formInfo.downloadList = DownloadList;
             console.log(formInfo);
-            wx.cloud
-              .callFunction({
-                name: "DownloadSignUp",
-                data: {
-                  title: that.data.title,
-                  time: date,
-                  list: DownloadList,
-                },
-              })
-              .then((res) => {
-                console.log("DownloadRes", res);
-                if (res.result === "success") {
-                  return Util.default.exportToExcel(formInfo);
-                } else {
-                  console.log(res);
-                  return "data-trans fail";
-                }
-              })
-              .then((res) => {
+            wx.cloud.callFunction({
+              name: "DownloadSignUp",
+              data: {
+                title: that.data.title,
+                time: date,
+                list: DownloadList,
+              },
+            })
+            .then((res) => {
+              console.log("DownloadRes", res);
+              if (res.result === "success") {
+                return Util.default.exportToExcel(formInfo);
+              } else {
                 console.log(res);
-                if (res === "data-trans fail") {
-                  wx.showModal({
-                    title: "数据转移失败",
-                    content: "数据转移失败，请联系管理员",
-                    showCancel: false,
-                  });
-                } else if (res.success) {
-                  console.log(res);
-                  wx.showModal({
-                    title: "导出成功",
-                    content: "已成功导出,请在自动打开后尽快另存",
-                    showCancel: false,
-                    success: function () {
-                      wx.redirectTo({
-                        url: "../Manage",
-                      });
-                    },
-                  });
-                } else {
-                  console.log(res);
-                  wx.showModal({
-                    title: "导出失败",
-                    content: "导出失败，请联系管理员",
-                    showCancel: false,
-                  });
-                }
-              });
+                return "data-trans fail";
+              }
+            })
+            .then((res) => {
+              console.log(res);
+              if (res === "data-trans fail") {
+                wx.showModal({
+                  title: "数据转移失败",
+                  content: "数据转移失败，请联系管理员",
+                  showCancel: false,
+                });
+              } else if (res.success) {
+                console.log(res);
+                wx.showModal({
+                  title: "导出成功",
+                  content: "已成功导出,请在自动打开后尽快另存",
+                  showCancel: false,
+                  success: function () {
+                    wx.redirectTo({
+                      url: "../Manage",
+                    });
+                  },
+                });
+              } else {
+                console.log(res);
+                wx.showModal({
+                  title: "导出失败",
+                  content: "导出失败，请联系管理员",
+                  showCancel: false,
+                });
+              }
+            });
           }
         });
     },

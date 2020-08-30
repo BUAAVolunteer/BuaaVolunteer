@@ -11,16 +11,16 @@ exports.main = async (event, context) => {
   const _ = db.command;
 	try {
     //在已报名人员中删除记录
-    console.log(event.inlist)
-    for (let i = 0; i < event.inlist.length; i++){
-      for (let j = 0; j < event.inlist[i].data.length; j++){
+    console.log(event.initList)
+    for (let i = 0; i < event.initList.length; i++){
+      for (let j = 0; j < event.initList[i].data.length; j++){
         db.collection('person').where({
-          phone: event.inlist[i].data[j][1]
+          phone: event.initList[i].data[j][1]
         }).update({
           data:{
             history: _.pull({
-              st: event.inlist[i].time,
-              v: event.title
+              signUpTime: event.initList[i].time,
+              title: event.title
             })
           }
         })
@@ -31,16 +31,16 @@ exports.main = async (event, context) => {
     for (let i = 2; i < event.list.length; i++){
       let inf = {};
       let detail = event.list[i][4].split(";");
-      inf.v = event.title;
+      inf.title = event.title;
       let duration = event.list[i][3];
-      inf.a = duration.toFixed(0);
+      inf.duration = duration.toFixed(0);
       let score = event.list[i][3] * 0.2;
-      inf.s = score.toFixed(1);
+      inf.score = score.toFixed(1);
       for (let j = 0; j < detail.length; j++){
         if(detail[j] === ""){
           continue;
         }else{
-          inf.t = detail[j]
+          inf.note = detail[j]
           let h =db.collection('person').where({
             phone: event.list[i][2]
           }).update({
@@ -66,7 +66,7 @@ exports.main = async (event, context) => {
       
     }
     
-    //删除history中的记录
+    //更新history中的记录
     await db.collection('history').where({
       title: event.title
     }).update({
