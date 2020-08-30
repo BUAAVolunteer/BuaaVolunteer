@@ -18,46 +18,83 @@ Component({
     isRegister: false,
     isAdmin: false,
   },
+  lifetimes: {
+    attached() {
+      this.loading = this.selectComponent("#loading");
+      this.loading.showLoading();
+      var that = this;
+      console.log(app.globalData);
+      if (app.globalData.isRegister) {
+        var person = {};
+        person.campus = app.globalData.campus;
+        person.name = app.globalData.name;
+        person.phone = app.globalData.phone;
+        person.qqNum = app.globalData.qqNum;
+        person.personNum = app.globalData.personNum;
+        person.avatar = app.globalData.avatar;
+        person.text = app.globalData.text;
+        person.totalDuration = app.globalData.totalDuration;
+        person.totalScore = app.globalData.totalScore.toFixed(1);
+        person.history = app.globalData.history;
+        isRegister = app.globalData.isRegister;
+        isAdmin = app.globalData.isAdmin;
+        that.setData({
+          person,
+          isRegister,
+          isAdmin,
+        });
+      } else {
+        isRegister = app.globalData.isRegister;
+        isAdmin = app.globalData.isAdmin;
+        that.setData({
+          isRegister,
+          isAdmin,
+        });
+      }
+      this.loading.hideLoading();
+    },
+  },
   methods: {
     changePic(e) {
       // console.log("子传父", this.data.isShowPic);
-      var that = this
-      if (e.detail === "none" || typeof(e.detail) == 'object') {
+      var that = this;
+      if (e.detail === "none" || typeof e.detail == "object") {
         this.setData({
           isShowPic: !this.data.isShowPic,
-        })
+        });
       } else {
-        wx.showLoading()
-        this.head = this.selectComponent('#head')
-        var person = this.data.person
-        person.avatar = e.detail
-        this.head.changePic(e.detail)
-        wx.cloud.callFunction({
-          name: "answer",
-          data: {
-            type: "avatar",
-            avatar: e.detail,
-            openid: app.globalData.openid
-          }
-        })
-        .then(() => {
-          that.setData({
-            person,
-            isShowPic: !this.data.isShowPic,
+        this.loading.showLoading();
+        this.head = this.selectComponent("#head");
+        let person = this.data.person;
+        person.avatar = e.detail;
+        this.head.changePic(e.detail);
+        wx.cloud
+          .callFunction({
+            name: "answer",
+            data: {
+              type: "avatar",
+              avatar: e.detail,
+              openid: app.globalData.openid,
+            },
+          })
+          .then(() => {
+            that.setData({
+              person,
+              isShowPic: !this.data.isShowPic,
+            });
+            that.loading.hideLoading();
           });
-          wx.hideLoading()
-        })
       }
     },
     // 打开选择头像页
     openChoose() {
       this.setData({
         isShowPic: !this.data.isShowPic,
-      })
+      });
     },
     //跳转志愿历史
     toHistory: function () {
-      var jsonHistory = JSON.stringify(this.data.person.history)
+      var jsonHistory = JSON.stringify(this.data.person.history);
       wx.navigateTo({
         url: "/pages/Profile/History/History?history=" + jsonHistory,
       });
@@ -169,43 +206,6 @@ Component({
 
     shouldAppear: function () {
       console.log("success");
-    },
-  },
-  lifetimes: {
-    attached() {
-      wx.showLoading({
-        title: "加载中",
-      });
-      var that = this;
-      console.log(app.globalData)
-      if (app.globalData.isRegister) {
-        var person = {}
-        person.campus = app.globalData.campus
-        person.name = app.globalData.name
-        person.phone = app.globalData.phone
-        person.qqNum = app.globalData.qqNum
-        person.personNum = app.globalData.personNum
-        person.avatar = app.globalData.avatar
-        person.text = app.globalData.text
-        person.totalDuration = app.globalData.totalDuration
-        person.totalScore = app.globalData.totalScore.toFixed(1)
-        person.history = app.globalData.history
-        isRegister = app.globalData.isRegister
-        isAdmin = app.globalData.isAdmin
-        that.setData({
-          person,
-          isRegister,
-          isAdmin
-        })
-      } else {
-        isRegister = app.globalData.isRegister
-        isAdmin = app.globalData.isAdmin
-        that.setData({
-          isRegister,
-          isAdmin
-        })
-      }
-      wx.hideLoading()
     },
   },
 });

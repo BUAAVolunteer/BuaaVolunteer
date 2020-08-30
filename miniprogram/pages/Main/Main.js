@@ -43,12 +43,9 @@ Component({
   lifetimes: {
     // 生命周期函数，在组件实例刚刚被创建时执行
     created: function () {
-      this.loading = this.selectComponent('#loading')
+      this.loading = this.selectComponent("#loading");
+      this.loading.showLoading();
       let that = this;
-      this.loading.showLoading({
-        isContent: true,
-        content: "请稍后",
-      });
       // 调用登录云函数
       wx.cloud
         .callFunction({
@@ -95,8 +92,8 @@ Component({
             app.globalData.totalDuration = res.data[0].totalDuration;
             app.globalData.totalScore = res.data[0].totalScore;
             app.globalData.history = res.data[0].history;
-            if ('qualification' in res.data[0]) {
-              app.globalData.qualification = res.data[0].qualification
+            if ("qualification" in res.data[0]) {
+              app.globalData.qualification = res.data[0].qualification;
             }
             app.globalData.isRegister = true;
           }

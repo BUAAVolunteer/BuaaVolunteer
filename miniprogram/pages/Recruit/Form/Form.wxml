@@ -34,3 +34,6 @@
   ></button>
   <button wx:else bindtap="getInputValue" class="reports-form-btn">提交</button>
 </view>
+
+<!-- 全局加载组件 -->
+<lx-loading id="loading"></lx-loading>

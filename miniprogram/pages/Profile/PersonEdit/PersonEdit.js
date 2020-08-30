@@ -22,21 +22,21 @@ Component({
   lifetimes: {
     attached() {
       var that = this;
-      console.log(app.globalData)
-      var name = app.globalData.name
-      var phone = app.globalData.phone
-      var personNum = app.globalData.personNum
-      var text = app.globalData.text
-      var qqNum = app.globalData.qqNum
-      var index = app.globalData.campus == '南校区' ? 0 : 1
+      console.log(app.globalData);
+      var name = app.globalData.name;
+      var phone = app.globalData.phone;
+      var personNum = app.globalData.personNum;
+      var text = app.globalData.text;
+      var qqNum = app.globalData.qqNum;
+      var index = app.globalData.campus == "南校区" ? 0 : 1;
       this.setData({
         name,
         phone,
         personNum,
         text,
         qqNum,
-        index
-      })
+        index,
+      });
     },
   },
   methods: {
@@ -52,10 +52,7 @@ Component({
         });
         return;
       }
-      if (
-        this.data.personNum.length == 9 ||
-        this.data.personNum.length == 8
-      ) {
+      if (this.data.personNum.length == 9 || this.data.personNum.length == 8) {
       } else {
         wx.showModal({
           title: "错误",
@@ -95,10 +92,8 @@ Component({
         return;
       }
 
-      wx.showLoading({
-        title: "请稍后",
-        mask: "true",
-      });
+      this.loading = this.selectComponent("#loading");
+      this.loading.showLoading();
       //console.log(app.globalData.openid)
       //console.log(e.detail.value.qqNum)
       //console.log(e.detail.value.campus)
@@ -110,7 +105,7 @@ Component({
         data: {
           type: "detail",
           id: app.globalData.openid,
-          name:that.data.name,
+          name: that.data.name,
           phone: that.data.phone,
           personNum: that.data.personNum,
           text: that.data.text,
@@ -118,17 +113,17 @@ Component({
           campus: picker[that.data.index],
         },
         success: function (res) {
-          console.log('1',res)
-          console.log('2',app.globalData)
-          app.globalData.name = that.data.name
-          app.globalData.phone = that.data.phone
-          app.globalData.personNum = that.data.personNum
-          app.globalData.qqNum = that.data.qqNum
-          app.globalData.campus = picker[that.data.index]
-          app.globalData.text = that.data.text
-          app.globalData.isRegister = true
-          console.log('3.',that.data)
-          wx.hideLoading();
+          console.log("1", res);
+          console.log("2", app.globalData);
+          app.globalData.name = that.data.name;
+          app.globalData.phone = that.data.phone;
+          app.globalData.personNum = that.data.personNum;
+          app.globalData.qqNum = that.data.qqNum;
+          app.globalData.campus = picker[that.data.index];
+          app.globalData.text = that.data.text;
+          app.globalData.isRegister = true;
+          console.log("3.", that.data);
+          that.loading.hideLoading();
           wx.showModal({
             title: "信息更新成功",
             content: "欢迎加入志愿者大家庭",
@@ -141,7 +136,7 @@ Component({
           });
         },
         fail: function () {
-          wx.hideLoading();
+          that.loading.hideLoading();
           wx.showModal({
             title: "错误",
             content: "请重新填写或反馈管理员",
