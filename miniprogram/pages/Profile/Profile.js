@@ -198,8 +198,8 @@ Component({
           isAdmin
         })
       } else {
-        isRegister = app.globalData.isRegister
-        isAdmin = app.globalData.isAdmin
+        var isRegister = app.globalData.isRegister
+        var isAdmin = app.globalData.isAdmin
         that.setData({
           isRegister,
           isAdmin

@@ -3,7 +3,7 @@
 </page-meta>
 
 <!-- 头部 -->
-<profile-header class="hide" person="{{person}}" bind:appearance="openChoose" id="head"></profile-header>
+<profile-header class="hide" person="{{person}}" bind:appearance="openChoose" id="head" isRegister="{{isRegister}}"></profile-header>
 
 <!-- 中部 -->
 <view class="middle">

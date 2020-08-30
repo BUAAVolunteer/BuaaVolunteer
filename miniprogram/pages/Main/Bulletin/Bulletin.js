@@ -11,6 +11,8 @@ Component({
 
   lifetimes: {
     attached() {
+      this.loading = this.selectComponent('#loading')
+      this.loading.showLoading()
       var that = this
       db.collection('notice')
       .count()
@@ -45,6 +47,16 @@ Component({
         that.setData({
           bulletinList,
         })
+        that.loading.hideLoading()
+      })
+      .catch(err => {
+        tht.loading.hideLoading()
+        console.log(err)
+        wx.showModal({
+          title: '出现错误',
+          content: '请检查网络并重新进入此页面',
+          showCancel: false,
+        });
       })
     }
   }

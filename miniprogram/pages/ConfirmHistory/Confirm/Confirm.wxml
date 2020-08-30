@@ -93,3 +93,6 @@
 <view class="footer__btn footer__btn--cyan" bindtap="download">
   确认志愿并导出报名表单
 </view>
+
+<!-- 全局加载组件 -->
+<lx-loading id="loading"></lx-loading>

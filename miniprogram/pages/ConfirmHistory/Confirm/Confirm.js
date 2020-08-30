@@ -18,6 +18,8 @@ Page({
      */
     onLoad: function(options) {
         //options.title = 
+        this.loading = this.selectComponent('#loading')
+        this.loading.showLoading()
         var that = this
         db.collection('history').where({
             title: options.title
@@ -30,6 +32,7 @@ Page({
                         content: '不存在本志愿的记录',
                         showCancel: false
                     })
+                    that.loading.hideLoading()
                 } else {
                     volunHistory = res.data[0].list
                     console.log(volunHistory)
@@ -59,6 +62,7 @@ Page({
                         id: id,
                         title: options.title
                     })
+                    that.loading.hideLoading
                 }
                 console.log(that.data.volunteer_list)
             }

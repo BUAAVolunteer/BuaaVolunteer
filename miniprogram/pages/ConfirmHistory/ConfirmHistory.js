@@ -16,9 +16,8 @@ Component({
   },
   lifetimes: {
     attached() {
-      wx.showLoading({
-        title: "加载中",
-      });
+      this.loading = this.selectComponent('#loading')
+      this.loading.showLoading();
       var that = this;
       console.log(that.properties.title);
       // 获取目前系统时间
@@ -51,7 +50,7 @@ Component({
         })
         .catch((err) => {
           console.log(err);
-          wx.hideLoading();
+          that.loading.hideLoading();
           wx.showModal({
             title: "错误",
             content: "没有找到记录，请检查网络或重启小程序",

@@ -20,3 +20,6 @@
     </view>
   </block>
 </scroll-view>
+
+<!-- 全局加载组件 -->
+<lx-loading id="loading"></lx-loading>

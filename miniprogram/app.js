@@ -19,7 +19,7 @@ App({
       avatar:
         "/assets/image/profilepic/common-3.png",
       openid: "",
-      isRegister: true,
+      isRegister: false,
       isAdmin: false,
       personNum: "",
       campus: "南校区",

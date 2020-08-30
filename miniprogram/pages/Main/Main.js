@@ -45,10 +45,7 @@ Component({
     created: function () {
       this.loading = this.selectComponent('#loading')
       let that = this;
-      this.loading.showLoading({
-        isContent: true,
-        content: "请稍后",
-      });
+      this.loading.showLoading();
       // 调用登录云函数
       wx.cloud
         .callFunction({
@@ -82,8 +79,13 @@ Component({
         })
         .then((res) => {
           // console.log(res.data)
-          if (res.data.length === 0) {
+          if (res.data.length == 0) {
             app.globalData.isRegister = false;
+            wx.showModal({
+              title: "未注册",
+              content: "您尚未注册，请前往个人页面进行注册",
+              showCancel: false
+            })
           } else {
             app.globalData.personNum = res.data[0].personNum;
             app.globalData.campus = res.data[0].campus;

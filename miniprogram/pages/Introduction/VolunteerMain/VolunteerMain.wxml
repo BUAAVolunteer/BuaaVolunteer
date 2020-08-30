@@ -29,3 +29,6 @@
 <view class="main-downimg">
   <image class="main__img" src="/assets/image/introduction/down.png" mode="widthFix" />
 </view>
+
+<!-- 全局加载组件 -->
+<lx-loading id="loading"></lx-loading>

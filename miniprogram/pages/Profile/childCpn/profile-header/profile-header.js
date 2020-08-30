@@ -18,13 +18,16 @@ Component({
         avatar: ""
       },
     },
+    isRegister: {
+      type: Boolean,
+      value: false
+    }
   },
 
   /**
    * 组件的初始数据
    */
   data: {
-    isRegister: app.globalData.isRegister, // 是否注册
     isShow: 0,
   },
 
