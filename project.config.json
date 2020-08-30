@@ -113,6 +113,12 @@
 					"pathName": "pages/ConfirmHistory/Confirm/Confirm",
 					"query": "title=北航一日游",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "Admin",
+					"pathName": "pages/Admin/Admin",
+					"scene": null
 				}
 			]
 		}

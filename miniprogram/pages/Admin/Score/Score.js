@@ -25,6 +25,60 @@ Component({
   },
 
   /**
+   * 组件的生命周期
+   */
+  lifetimes: {
+    created() {
+      this.loading = this.selectComponent('#loading')
+      this.loading.showLoading();
+      var projectPicker = [];
+      var that = this;
+      this.hover = this.selectComponent("#msg");
+      db.collection("project")
+      .get()
+      .then(res => {
+        for (let i = 0; i < res.data.length; i++) {
+          projectPicker.push(res.data[i].title);
+        }
+        that.setData({
+          projectPicker,
+        });
+      })
+      .then(() => {
+        return db.collection('blacklist').where({
+          name: "积分规则"
+        })
+        .get()
+      })
+      .then(res => {
+        let operatePicker = ["添加内部名额"]
+        for (let i = 0; i < res.data[0].role.length; i++) {
+          operatePicker.push(res.data[0].role[i].type)
+        }
+        that.setData({
+          operateList: res.data[0].role
+        })
+        return operatePicker
+      })
+      .then(res => {
+        that.setData({
+          operatePicker: res,
+        })
+        that.loading.hideLoading();
+      })
+      .catch(err => {
+        console.log(err)
+        that.loading.hideLoading()
+        wx.showModal({
+          title: "错误",
+          content: "网络出现异常，请返回上一页面后再尝试进入此页面",
+          showCancel: false
+        })
+      })
+    },
+  },
+
+  /**
    * 组件的方法列表
    */
   methods: {
@@ -73,74 +127,37 @@ Component({
           }
         })
       } else {
-        this._operateScore(project, operate)
+        if (that.data.isNeedName && that.data.volunteerName == "") {
+          that.hover.showHover({
+            isMaskCancel: false,
+            title:"信息缺失",
+            content:"请填写志愿者的姓名",
+            button:[
+              {
+                ID: 0,
+                name: "confirm",
+                text: "确认",
+                isAblePress: true
+              }
+            ]
+          })
+          return false
+        } else {
+          this._operateScore(project, operate)
+        }
       }
-      return
-      wx.showLoading({
-        mask: true,
-      });
-      var vtime = "";
-      var vscore = "";
-      var finding = 0;
-      var that = this;
-      var projectPicker = this.data.projectPicker;
-      db.collection("person")
-        .where({
-          //根据电话和项目名称查询志愿
-          phone: this.data.volunteerPhone,
-        })
-        .get({
-          success: function (res) {
-            //console.log(res)
-            wx.hideLoading();
-            if (res.data.length == 0) {
-              wx.showModal({
-                title: "未能找到志愿者",
-                content: "请输入正确的志愿者和项目信息",
-                showCancel: false,
-              });
-            } else {
-              that.setData({
-                volunteerName: res.data[0].name,
-                volunteerPhone: res.data[0].phone,
-                volunteerTime: res.data[0].duration,
-                volunteerScore: res.data[0].score,
-                volunteerID: res.data[0]._openid,
-              });
-              this.hover.showHover({
-                isMaskCancel: false,
-                title:"信息确认",
-                content:"志愿者信息：",
-                button:[
-                  {
-                    ID: 0,
-                    name: "cancel",
-                    text: "确认",
-                    isAblePress: true  
-                  },
-                  {
-                    ID: 1,
-                    name: "assure",
-                    text: "取消",
-                    isAblePress: true
-                  }
-                ]
-              })
-            }
-            wx.hideLoading();
-          },
-          fail: function (res) { },
-        });
     },
 
     _addInnerSign(project) {
       var that = this
+      this.loading._showLoading()
       db.collection('person').where({
         phone: that.data.volunteerPhone
       })
       .get()
       .then(res => {
         if (res.data.length == 0 || !("_openid" in res.data[0] || res.data[0].openid == "")) {
+          that.loading.hideLoading()
           that.hover.showHover({
             isMaskCancel: false,
             title:"志愿者未注册",
@@ -155,6 +172,7 @@ Component({
             ]
           })
         } else {
+          that.loading.hideLoading()
           that.hover.showHover({
             isMaskCancel: false,
             title:"加入内部名额",
@@ -177,12 +195,46 @@ Component({
               if (answer == "no") {
                 return
               } else {
+                that.loading._showLoading()
                 wx.cloud.callFunction({
                   name: "innerSign",
                   data: {
                     title: project,
                     openid: res.data[0]._openid
                   }
+                })
+                .then(() => {
+                  that.loading.hideLoading()
+                  that.hover.showHover({
+                    isMaskCancel: false,
+                    title:"加入内部名额",
+                    content:"已成功加入内部名额",
+                    button:[
+                      {
+                        ID: 0,
+                        name: "confirm",
+                        text: "确认",
+                        isAblePress: true
+                      }
+                    ],
+                  })
+                })
+                .catch(err => {
+                  console.log(err)
+                  that.loading.hideLoading()
+                  that.hover.showHover({
+                    isMaskCancel: false,
+                    title:"加入内部名额",
+                    content:"加入内部名额失败\n请检查网络并重试",
+                    button:[
+                      {
+                        ID: 0,
+                        name: "confirm",
+                        text: "确认",
+                        isAblePress: true
+                      }
+                    ],
+                  })
                 })
               }
             }
@@ -193,12 +245,14 @@ Component({
 
     _operateScore(project, operate) {
       var that = this
+      this.loading._showLoading()
       db.collection('person').where({
         phone: that.data.volunteerPhone
       })
       .get()
       .then(res => {
         if (res.data.length == 0 && !that.data.isNeedName) {
+          that.loading.hideLoading()
           that.hover.showHover({
             isMaskCancel: false,
             title:"未找到志愿者",
@@ -218,22 +272,8 @@ Component({
             }
           })
           return false
-        } else if (that.data.isNeedName && that.data.volunteerName == "") {
-          that.hover.showHover({
-            isMaskCancel: false,
-            title:"信息确实",
-            content:"请填写志愿者的姓名",
-            button:[
-              {
-                ID: 0,
-                name: "confirm",
-                text: "确认",
-                isAblePress: true
-              }
-            ]
-          })
-          return false
         } else {
+          that.loading.hideLoading()
           let name = that.data.isNeedName ? that.data.volunteerName : res.data[0].name
           that.hover.showHover({
             isMaskCancel: false,
@@ -253,11 +293,15 @@ Component({
                 isAblePress: true
               }
             ],
-            success: function(res) {
-              if (res == "no") {
+            success: function(answer) {
+              if (answer == "no") {
                 return
               } else {
-                let scoreOperate = that.data.operateList[that.data.operateIndex]
+                that.loading._showLoading()
+                let scoreOperate = that.data.operateList[that.data.operateIndex - 1]
+                console.log(that.data.operateList)
+                console.log(that.data.operateIndex)
+                console.log(scoreOperate)
                 wx.cloud.callFunction({
                   name: "plus",
                   data: {
@@ -272,61 +316,43 @@ Component({
                     date: that.data.volunteerDate
                   }
                 })
+                .then(() => {
+                  that.loading.hideLoading()
+                  that.hover.showHover({
+                    isMaskCancel: false,
+                    title:"积分变动",
+                    content:"积分变动操作成功！",
+                    button:[
+                      {
+                        ID: 0,
+                        name: "confirm",
+                        text: "确认",
+                        isAblePress: true
+                      }
+                    ],
+                  })
+                })
+                .catch(err => {
+                  console.log(err)
+                  that.loading.hideLoading()
+                  that.hover.showHover({
+                    isMaskCancel: false,
+                    title:"积分变动",
+                    content:"积分变动失败\n请检查网络并重试",
+                    button:[
+                      {
+                        ID: 0,
+                        name: "confirm",
+                        text: "确认",
+                        isAblePress: true
+                      }
+                    ],
+                  })
+                })
               }
             }
           })
         }
-      })
-    },
-  },
-
-  lifetimes: {
-    created() {
-      wx.showLoading({
-        mask: true,
-      });
-      var projectPicker = [];
-      var that = this;
-      this.hover = this.selectComponent("#msg");
-      db.collection("project")
-      .get()
-      .then(res => {
-        for (let i = 0; i < res.data.length; i++) {
-          projectPicker.push(res.data[i].title);
-        }
-        that.setData({
-          projectPicker,
-        });
-      })
-      .then(() => {
-        return db.collection('blacklist').where({
-          name: "积分规则"
-        })
-        .get()
-      })
-      .then(res => {
-        let operatePicker = ["添加内部名额"]
-        for (let i = 0; i < res.data[0].role.length; i++) {
-          operatePicker.push(res.data[0].role[i].type)
-        }
-        that.setData({
-          operateList: res.data[0]
-        })
-        return operatePicker
-      })
-      .then(res => {
-        that.setData({
-          operatePicker: res,
-        })
-        wx.hideLoading();
-      })
-      .catch(err => {
-        console.log(err)
-        wx.showModal({
-          title: "错误",
-          content: "网络出现异常，请返回上一页面后再尝试进入此页面",
-          showCancel: false
-        })
       })
     },
   },
