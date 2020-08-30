@@ -246,6 +246,7 @@ Component({
         if (!that._judge()) {
           return;
         }
+        console.log(projectList[ID])
         wx.requestSubscribeMessage({
           tmplIds: ["Ynia8PHxf3L_uWFvZxtPiI-V8hE-wcErHpe0Ygh8O9w"],
           success: (res) => {
@@ -253,7 +254,7 @@ Component({
               res["Ynia8PHxf3L_uWFvZxtPiI-V8hE-wcErHpe0Ygh8O9w"] === "accept"
             ) {
               wx.navigateTo({
-                url: "./Form/Form?title=" + projectList[ID].title,
+                url: "./Form/Form?title=" + projectList[ID].title + "&qqNum="  + projectList[ID].qqNum + "&signUpTime=" + projectList[ID].date,
               });
             } else {
               wx.showToast({

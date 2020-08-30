@@ -9,16 +9,23 @@ let uploadList = [], //总上传数据
 let qqNum;
 Component({
   properties: {
-    qqNum: String,
-    title: String,
-    signUpTime: String,
+    qqNum: {
+      type: String,
+      value: ""
+    },
+    title: {
+      type: String,
+      value: ""
+    },
+    signUpTime: {
+      type: String,
+      value: ""
+    },
   },
   /**
    * 页面的初始数据
    */
   data: {
-    title: "",
-    signUpTime: "",
     formList: {},
     loading: false,
   },
@@ -27,62 +34,46 @@ Component({
    * 生命周期函数--监听页面加载
    */
   lifetimes: {
-    created() {
+    attached() {
       this.loading = this.selectComponent("#loading");
       this.loading.showLoading();
-
-      let properties = this.properties;
+      console.log(this.properties)
       //console.log(properties.title, properties.signUpTime)
-      qqNum = properties.qqNum;
+      qqNum = this.properties.qqNum;
       //console.log(qqNum)
-      this.setData({
-        signUpTime: properties.signUpTime,
-      });
       let that = this;
-      let ti = properties.title;
       //获取个人信息
       // TODO：在流程完成后修改为从全局变量获取个人信息，并且规范化变量名
-      db.collection("person")
-        .where({
-          _openid: app.globalData.openid,
-        })
-        .get()
-        .then((res) => {
-          //console.log(res);
-          getName = res.data[0].name;
-          getPhone = res.data[0].phone;
-          getPersonNum = res.data[0].personNum;
-          getQQNum = res.data[0].qqNum;
-          getCampus = res.data[0].campus;
-          //console.log(getName, getPhone, getPersonNum, getQQNum, getCampus);
-          return db
-            .collection("form")
-            .where({
-              title: ti,
-            })
-            .get();
-        })
-        .then((res) => {
-          //console.log(res.data)
-          that.loading.hideLoading();
-          res.data[0].formInfo = res.data[0].formInfo.map(function (n) {
-            n.choose = [];
-            n.input_text = [];
-            return n;
-          });
-          that.setData({
-            formList: res.data[0],
-          });
-          that.watch(); //调用监听方法
-        })
-        .catch((err) => {
-          that.loading.hideLoading();
-          wx.showModal({
-            title: "错误",
-            content: "获取记录失败,请检查网络或反馈给管理员",
-            showCancel: false,
-          });
+      getName = app.globalData.name;
+      getPhone = app.globalData.phone;
+      getPersonNum = app.globalData.personNum;
+      getQQNum = app.globalData.qqNum;
+      getCampus = app.globalData.campus;
+      db.collection("form").where({
+        title: this.properties.title,
+      })
+      .get()
+      .then((res) => {
+        console.log(res.data)
+        that.loading.hideLoading();
+        res.data[0].formInfo = res.data[0].formInfo.map(function (n) {
+          n.choose = [];
+          n.input_text = [];
+          return n;
         });
+        that.setData({
+          formList: res.data[0],
+        });
+        that.watch(); //调用监听方法
+      })
+      .catch((err) => {
+        that.loading.hideLoading();
+        wx.showModal({
+          title: "错误",
+          content: "获取记录失败,请检查网络或反馈给管理员",
+          showCancel: false,
+        });
+      });
     },
   },
   methods: {
