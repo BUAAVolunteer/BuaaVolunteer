@@ -21,6 +21,10 @@ Component({
   lifetimes: {
     attached() {
       this.loading = this.selectComponent("#loading");
+    },
+  },
+  methods: {
+    onShow() {
       this.loading.showLoading();
       var that = this;
       console.log(app.globalData);
@@ -53,8 +57,7 @@ Component({
       }
       this.loading.hideLoading();
     },
-  },
-  methods: {
+
     changePic(e) {
       // console.log("子传父", this.data.isShowPic);
       var that = this;
