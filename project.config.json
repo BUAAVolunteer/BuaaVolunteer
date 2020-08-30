@@ -125,6 +125,7 @@
 					"id": -1,
 					"name": "Manage",
 					"pathName": "pages/Manage/Manage",
+					"query": "",
 					"scene": null
 				}
 			]

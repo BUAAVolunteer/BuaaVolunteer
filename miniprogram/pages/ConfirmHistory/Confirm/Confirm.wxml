@@ -14,6 +14,7 @@
   <view class="phone">
     手机
   </view>
+  <view class="middle-btn"></view>
   <view class="duration">
     时长
   </view>
@@ -49,8 +50,8 @@
       </view>
       <view class="middle-btn">
         <image
-		  class="middle-searchbot"
-		  mode="widthFix"
+          class="middle-searchbot"
+          mode="widthFix"
           src="/assets/icons/search.png"
           data-id="{{item.ID}}"
           bind:tap="search"

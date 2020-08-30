@@ -32,29 +32,24 @@ page {
   background-color: black;
 }
 
+.phone {
+  width: 200rpx;
+}
+
+.name,
+.note {
+  width: 150rpx;
+}
+
+.duration {
+  width: 100rpx;
+}
+
 .middle {
   min-height: 700rpx;
   height: 700rpx;
   overflow-y: auto;
   overflow-x: hidden;
-}
-
-.middle-btn {
-  margin-left: 5rpx;
-  width: 50rpx;
-}
-
-.middle-searchbot {
-  width: 100%;
-  height: 100%;
-}
-
-.middle-titleimg {
-  width: 40rpx;
-  height: 40rpx;
-  position: absolute;
-  left: 20rpx;
-  margin-top: 9rpx;
 }
 
 .uneven,
@@ -74,6 +69,24 @@ page {
 .even {
   background-color: #e6f3f9;
   padding: 7rpx;
+}
+
+.middle-btn {
+  margin-left: 5rpx;
+  width: 40rpx;
+}
+
+.middle-searchbot {
+  width: 100%;
+  height: 100%;
+}
+
+.middle-titleimg {
+  width: 40rpx;
+  height: 40rpx;
+  position: absolute;
+  left: 20rpx;
+  margin-top: 9rpx;
 }
 
 .page-state {
