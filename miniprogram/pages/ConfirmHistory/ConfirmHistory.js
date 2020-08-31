@@ -67,9 +67,9 @@ Component({
     openNav: function (e) {
       console.log(e.currentTarget.id);
       let ID = e.currentTarget.id;
-      var confirmList_json = this.data.ConfirmList[ID];
+      var confirmList_json = this.data.ConfirmList[this.data.ConfirmList.length - ID - 1];
       wx.navigateTo({
-        url: "Confirm/Confirm?confirmList=" + JSON.stringify(confirmList_json) + "&title=" + this.properties.title,
+        url: "Confirm/Confirm?confirmList=" + JSON.stringify(confirmList_json) + "&title=" + this.properties.title + "&listID=" + ID,
       });
     },
   },

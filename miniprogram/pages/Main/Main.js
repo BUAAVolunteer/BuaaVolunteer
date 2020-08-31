@@ -43,6 +43,9 @@ Component({
   lifetimes: {
     // 生命周期函数，在组件实例刚刚被创建时执行
     created: function () {
+      wx.hideTabBar({
+        animation: false,
+      });
       this.loading = this.selectComponent("#loading");
       this.loading.showLoading();
       let that = this;
@@ -127,6 +130,9 @@ Component({
         })
         .then(() => {
           console.log("志愿信息登记完成");
+          wx.showTabBar({
+            animation: false,
+          });
           that.loading.hideLoading();
         })
         .catch((err) => {

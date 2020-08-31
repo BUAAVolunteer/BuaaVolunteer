@@ -1,7 +1,6 @@
 const db = wx.cloud.database();
 import Util from '../../../utils/util'
 var LinkedList, initList;
-var time;
 Component({
     /**
      * 页面的传参
@@ -14,6 +13,10 @@ Component({
         title: {
             type: String,
             value: ""
+        },
+        listID: {
+            type: Number,
+            value: 0
         }
     },
 
@@ -36,6 +39,7 @@ Component({
             this.loading.showLoading();
             var that = this;
             var confirmList = JSON.parse(that.properties.confirmList)
+            console.log(confirmList)
             var volunteerList = []
             for (let j = 1; j < confirmList.data.length; j++) {
                 let v = {};
@@ -50,7 +54,6 @@ Component({
             initList = volunteerList
             LinkedList = Util.toLinkedList(volunteerList)
             volunteerList = LinkedList.toList()
-            time = this.properties.confirmList.time
             this.setData({
                 volunteerList,
                 title: this.properties.title
@@ -146,9 +149,7 @@ Component({
             })
         },
         download: function (e) {
-            wx.showLoading({
-                title: "请稍等",
-            });
+            this.loading._showLoading()
             var that = this;
             var volunteer = this.data.volunteerList;
             var v = [
@@ -165,12 +166,12 @@ Component({
                     volunteer[i].duration === "" ||
                     volunteer[i].note === ""
                 ) {
+                    this.loading.hideLoading()
                     wx.showModal({
                         title: "缺少信息",
                         content: "志愿确认中有信息未填入",
                         showCancel: false,
                     });
-                    wx.hideLoading();
                     return;
                 }
                 input.push(volunteer[i].name);
@@ -180,19 +181,24 @@ Component({
                 v.push(input);
             }
             console.log(v);
+            var formInfo = {}
+            formInfo.title = that.data.title
+            formInfo.fileName = that.data.title + "志愿时长表"
+            formInfo.downloadList = v
             wx.cloud.callFunction({
                 name: "DownloadConfirm",
                 data: {
                     title: that.data.title,
                     list: v,
                     initList: initList,
-                    date: event.time
+                    time: this.data.volunteerList.time,
+                    ID: this.properties.listID
                 }
             })
             .then((res) => {
                 console.log("DownloadRes", res);
                 if (res.result === "success") {
-                    return Util.default.exportToExcel(formInfo);
+                    return Util.exportToExcel(formInfo);
                 } else {
                     console.log(res);
                     return "data-trans fail";
@@ -201,6 +207,7 @@ Component({
             .then((res) => {
                 console.log(res);
                 if (res === "data-trans fail") {
+                    this.loading.hideLoading()
                     wx.showModal({
                         title: "数据转移失败",
                         content: "数据转移失败，请联系管理员",
@@ -208,6 +215,7 @@ Component({
                     });
                 } else if (res.success) {
                     console.log(res);
+                    this.loading.hideLoading()
                     wx.showModal({
                         title: "导出成功",
                         content: "已成功导出,请在自动打开后尽快另存",
@@ -220,6 +228,7 @@ Component({
                     });
                 } else {
                     console.log(res);
+                    this.loading.hideLoading()
                     wx.showModal({
                         title: "导出失败",
                         content: "导出失败，请联系管理员",
