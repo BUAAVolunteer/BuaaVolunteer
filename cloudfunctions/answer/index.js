@@ -47,13 +47,44 @@ exports.main = async(event, context) => {
                             totalScore: 0,
                             totalDuration: 0,
                             history: [],
-                            avatar: ""
+                            avatar: "",
+                            qualification: []
                         }
                     })
                 } else {
                     console.log(res)
                     return res
                 }
+            })
+            .then(() => {
+                return db.collection('blacklist').where(_.or([{
+                    _openid: event.id
+                },
+                {
+                    phone: event.phone
+                }
+                ])).update({
+                    data: {
+                        name: event.name,
+                        phone: event.phone,
+                        _openid: event.id
+                    }
+                })
+            })
+            .then(() => {
+                return db.collection('list').where(_.or([{
+                    _openid: event.id
+                },
+                {
+                    phone: event.phone
+                }
+                ])).update({
+                    data: {
+                        name: event.name,
+                        phone: event.phone,
+                        _openid: event.id
+                    }
+                })
             })
         } else if (event.type === "avatar") {
             return db.collection('person').where({
