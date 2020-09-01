@@ -396,7 +396,7 @@ Component({
                   showCancel: false,
                   success: function (res) {
                     wx.redirectTo({
-                      url: "../Manage",
+                      url: "/pages/Admin/Admin",
                     });
                   },
                 });

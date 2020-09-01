@@ -37,7 +37,6 @@
     <!--不能打开的按钮二-->
     <lx-nav-pt
       wx:if="{{isRecruit}}"
-      navUrl="/pages/Manage/FormEdit/FormEdit?title={{project.title}}"
       navImg="/assets/icons/manage/edit.png"
       navText="编辑表单"
     ></lx-nav-pt>

@@ -41,7 +41,7 @@ Component({
     },
     isRecruit(data) {
       return (
-        data.project.check == 1 &&
+        data.project.check >= 1 &&
         (data.currentDate > data.project.date ||
           (data.currentDate == data.project.date &&
             data.currentTime >= data.project.time))
