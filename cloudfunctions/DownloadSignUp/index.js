@@ -52,6 +52,7 @@ exports.main = async (event, context) => {
         title: event.title
       }).update({
         data:{
+          check: -1,
           signupList: [],
           innerList: []
         }

@@ -159,15 +159,21 @@ Component({
         data: {}
       }).then((res) => {
         // console.log(res)
-        projectList = res.result.data;
+        var initList = res.result.data;
         // 对得到的项目列表进行排序，详见js中的sort函数
-        projectList.sort(function (a, b) {
+        initList.sort(function (a, b) {
           if (a.date < b.date || (a.date == b.date && a.time < b.time)) {
             return -1;
           } else {
             return 1;
           }
         });
+        projectList = []
+        for (let i = 0; i < initList.length; i++) {
+          if (initList[i].check == 1) {
+            projectList.push(initList[i])
+          }
+        }
       })
       .then(() => {
         // 获取目前的服务器时间
@@ -181,9 +187,6 @@ Component({
         current.date = time[0];
         current.time = time[1];
         app.globalData.current = current;
-        that.setData({
-          refreshLoading: false,
-        });
       })
       .then(() => {
         var isOdd = false;
@@ -225,6 +228,7 @@ Component({
           fillList,
           isOdd,
           preList,
+          refreshLoading: false,
         });
       })
       .then(() => {

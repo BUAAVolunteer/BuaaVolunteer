@@ -268,7 +268,7 @@ Component({
           that.hover.showHover({
             isMaskCancel: false,
             title:"进行积分变动操作",
-            content:"姓名：" + name + "\n手机号：" + res.data[0].phone + "\n志愿项目：" + project + "\n招募时间：" + that.data.volunteerDate + "\n积分变动：" + operate + "\n\n确认进行积分变动吗？",
+            content:"姓名：" + name + "\n手机号：" + that.data.volunteerPhone + "\n志愿项目：" + project + "\n招募时间：" + that.data.volunteerDate + "\n积分变动：" + operate + "\n\n确认进行积分变动吗？",
             button:[
               {
                 ID: 0,
@@ -300,7 +300,7 @@ Component({
                     score: scoreOperate.score,
                     isBlackList: scoreOperate.isBlackList,
                     date: that.data.volunteerDate,
-                    phone: res.data[0].phone,
+                    phone: that.data.volunteerPhone,
                     name: name,
                     isNeedName: that.data.isNeedName,
                     date: that.data.volunteerDate
