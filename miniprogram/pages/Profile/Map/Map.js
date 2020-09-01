@@ -30,4 +30,25 @@ Component({
       });
     },
   },
+  methods: {
+    openIntro() {
+      this.hover = this.selectComponent("#msg");
+      this.hover.showHover({
+        title: "解锁规则",
+        isContent: true,
+        content: "这是它的内容",
+        button: [
+          {
+            ID: 0,
+            name: "assure",
+            text: "确认",
+            isAblePress: true,
+          },
+        ],
+        success: function (res) {
+          console.log(res);
+        },
+      });
+    },
+  },
 });

@@ -86,7 +86,6 @@
 .main--name {
   color: #5a5d5d;
   font-size: 30rpx;
-  font-weight: lighter;
   line-height: 30rpx;
   letter-spacing: 1.25px;
   margin-top: 10rpx;
@@ -101,10 +100,11 @@
   justify-content: center;
   height: 45rpx;
   font-size: 25rpx;
+  line-height: 25rpx;
   letter-spacing: 1.25px;
   margin-top: 10rpx;
   opacity: 0.82;
-  padding: 0;
+  padding-left: 1.25px;
   width: 106rpx;
 }
 
@@ -118,7 +118,6 @@
   border-bottom: 2rpx solid #fff;
   display: flex;
   font-size: 30rpx;
-  font-weight: lighter;
   letter-spacing: 1.25px;
   margin: 15rpx 0 5rpx;
   text-indent: 10rpx;
@@ -135,7 +134,7 @@
 
 .header--fly__inner {
   width: 100%;
-  height: 100
+  height: 100;
 }
 
 .noRegister_header {
@@ -153,4 +152,3 @@
   padding: 50rpx;
   flex: 1;
 }
-
