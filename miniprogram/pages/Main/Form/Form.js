@@ -276,7 +276,7 @@ Component({
         });
         wx.showModal({
           title: "错误",
-          content: "您所选择的部分选项已满，请重新选择！",
+          content: "必选项不能为空",
           showCancel: false,
         });
         listItem = [];
