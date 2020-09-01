@@ -1,0 +1,14 @@
+<view class="announce">
+  <view class="header">
+    发布公告
+  </view>
+  <lx-input
+    title="公告内容"
+    model:content="{{announce}}"
+    placeholder="请在这里输入公告内容，公告发布后所有用户可见，如需删除公告请联系管理员。"
+    type="textarea"
+  ></lx-input>
+  <lx-button bindtap="submit" content="发布公告" color="blue"></lx-button>
+</view>
+<!-- 全局加载组件 -->
+<lx-loading id="loading"></lx-loading>

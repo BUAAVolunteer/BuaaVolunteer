@@ -50,7 +50,7 @@ Component({
         that.loading.hideLoading()
       })
       .catch(err => {
-        tht.loading.hideLoading()
+        that.loading.hideLoading()
         console.log(err)
         wx.showModal({
           title: '出现错误',
