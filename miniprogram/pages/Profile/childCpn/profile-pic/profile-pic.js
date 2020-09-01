@@ -58,6 +58,14 @@ Component({
       });
       this.triggerEvent("closePic", this.data.curAvatar, {});
     },
+    chooseLockedPic(e) {
+      let content = e.currentTarget.id;
+      wx.showToast({
+        title: "参与" + content + "解锁",
+        icon: "none",
+        duration: 2000,
+      });
+    },
     // 关闭头像页面
     closePic() {
       this.triggerEvent("closePic", "none", {});

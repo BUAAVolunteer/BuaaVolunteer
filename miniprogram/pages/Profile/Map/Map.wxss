@@ -8,6 +8,14 @@ page {
   width: 750rpx;
 }
 
+.question {
+  position: absolute;
+  top: 460rpx;
+  width: 40rpx;
+  left: 30rpx;
+  height: 40rpx;
+}
+
 .middle-img {
   margin-top: 120rpx;
   margin-bottom: 20rpx;
