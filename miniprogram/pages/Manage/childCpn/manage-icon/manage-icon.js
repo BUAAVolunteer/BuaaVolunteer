@@ -20,7 +20,7 @@ Component({
       type: String,
       value: "",
     },
-    currentDate: {
+    currentTime: {
       type: String,
       value: "",
     },

@@ -6,7 +6,7 @@
     <manage-icon
       project="{{item}}"
       currentDate="{{currentDate}}"
-      currentTime="currentTime"
+      currentTime="{{currentTime}}"
       id="{{index}}"
       bindtap="openNav"
     ></manage-icon>

@@ -72,3 +72,15 @@ scroll-view,
 view {
   box-sizing: border-box;
 }
+
+button {
+  background-color: #fff;
+  border-radius: 0px;
+  font-size: 14px;
+  text-align: left;
+  line-height: 15px;
+}
+
+button::after {
+  display: none;
+}
