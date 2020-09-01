@@ -338,7 +338,7 @@ Component({
                   showCancel: false,
                   success: function () {
                     wx.redirectTo({
-                      url: "../../Profile/History/History",
+                      url: "../Main",
                     });
                   },
                 });

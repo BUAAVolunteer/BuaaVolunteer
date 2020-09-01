@@ -81,49 +81,58 @@ function addRecord(event) {
 }
 
 function addDetail(event, inf, detail, duration, score, i, j) {
-  if (j == detail.length) {
-    return true
-  } else if(detail[j] === ""){
-    addDetail(event, inf, detail, duration, score, i, j + 1)
-  }else{
-    inf.note = detail[j]
-    return db.collection('person').where({
-      phone: event.list[i][2]
-    }).update({
-      data:{
-        totalDuration: _.inc(duration),
-        history: _.push(inf),
-        totalScore: _.inc(score)
+  var pList = []
+  for (let j = 0; j < detail.length; j++) {
+    var p = new Promise ((resolve, reject) => {
+      if(detail[j] === ""){
+        resolve()
+      }else{
+        inf.note = detail[j]
+        resolve(
+          db.collection('person').where({
+            phone: event.list[i][2]
+          }).update({
+            data:{
+              totalDuration: _.inc(duration),
+              history: _.push(inf),
+              totalScore: _.inc(score)
+            }
+          })
+          .then(res => {
+            if (res.stats.updated == 0){
+              return db.collection('person').add({
+                data:{
+                  name: event.list[i][1],
+                  phone: event.list[i][2],
+                  history: [inf],
+                  totalDuration: duration,
+                  totalScore: score
+                }
+              })
+            }
+          })
+          .then(() => {
+            return db.collection('list').add({
+              data: {
+                name: event.list[i][1],
+                phone: event.list[i][2],
+                score: score,
+                duration: duration,
+                note: inf.note,
+                title: event.title
+              }
+            })
+          })
+          .then(() => {
+            console.log("detailAdd" + j)
+            addDetail(event, inf, detail, duration, score, i, j + 1)
+          })
+        )
       }
     })
-    .then(res => {
-      if (res.stats.updated == 0){
-        return db.collection('person').add({
-          data:{
-            name: event.list[i][1],
-            phone: event.list[i][2],
-            history: [inf],
-            totalDuration: duration,
-            totalScore: score
-          }
-        })
-      }
-    })
-    .then(() => {
-      return db.collection('list').add({
-        name: event.list[i][1],
-        phone: event.list[i][2],
-        score: score,
-        duration: duration,
-        note: inf.note,
-        title: event.title
-      })
-    })
-    .then(() => {
-      console.log("detailAdd" + j)
-      addDetail(event, inf, detail, duration, score, i, j + 1)
-    })
+    pList.push(p)
   }
+  return Promise.all(pList)
 }
 
 function confirmUpdate(event) {

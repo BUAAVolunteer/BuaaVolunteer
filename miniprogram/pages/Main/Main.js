@@ -148,6 +148,9 @@ Component({
   },
   // 组件自己的方法
   methods: {
+    onShow() {
+      this.initList()
+    },
     initList() {
       this.setData({
         refreshLoading: true,
