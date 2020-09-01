@@ -5,12 +5,12 @@ Component({
    * 页面的初始数据
    */
   data: {
-    announce: "", // 公告内容
+    text: "", // 公告内容
   },
   methods: {
     submit() {
       let that = this;
-      let text = that.data.announce;
+      let text = that.data.text;
       if (text == "") {
         wx.showToast({
           title: "请填写公告内容",
@@ -25,13 +25,26 @@ Component({
         content: "",
         isBig: false,
       });
-      db.collection("notice")
-        .add({
-          data: {
-            text,
-          },
+      wx.cloud
+        .callFunction({
+          name: "getTime",
         })
         .then((res) => {
+          return res.result.time.split(" ")[0];
+        })
+        .then((date) => {
+          return db.collection("notice").add({
+            data: {
+              text,
+              date,
+            },
+          });
+        })
+        .then((res) => {
+          console.log(res);
+          that.setData({
+            text: "",
+          });
           that.loading.hideLoading();
           wx.navigateTo({
             url: "/pages/Main/Bulletin/Bulletin",
