@@ -185,14 +185,31 @@ Component({
             formInfo.title = that.data.title
             formInfo.fileName = that.data.title + "志愿时长表"
             formInfo.downloadList = v
-            wx.cloud.callFunction({
-                name: "DownloadConfirm",
-                data: {
-                    title: that.data.title,
-                    list: v,
-                    initList: initList,
-                    time: this.data.volunteerList.time,
-                    ID: this.properties.listID
+            return new Promise((resolve, reject) => {
+                resolve()
+            })
+            .then(() => {
+                if (that.properties.confirmList.isCheck) {
+                    wx.showToast({
+                        title: '由于已经确认，此次只导出数据',
+                        icon: 'none',
+                        duration: 1000,
+                        mask: false,
+                    });
+                    var res = {}
+                    res.result = "success"
+                    return res
+                } else {
+                    return wx.cloud.callFunction({
+                        name: "DownloadConfirm",
+                        data: {
+                            title: that.data.title,
+                            list: v,
+                            initList: initList,
+                            time: this.data.volunteerList.time,
+                            ID: this.properties.listID
+                        }
+                    })
                 }
             })
             .then((res) => {
