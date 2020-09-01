@@ -92,12 +92,13 @@ Component({
         open: true,
       });
     },
-    changeCurrent(e) {
+    changeItem(e) {
       console.log(e.detail.type);
       let type = e.detail.type;
       let index = this.data.index;
-      if (type == "next") index = min(this.data.signUpList.length, index + 1);
-      else if (type == "back") index = max(index - 1, 0);
+      if (type == "next")
+        index = Math.min(this.data.signUpList.length - 1, index + 1);
+      else if (type == "back") index = Math.max(index - 1, 0);
       this.setData({
         index,
       });
