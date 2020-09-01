@@ -24,7 +24,7 @@
   <view wx:if="{{project.open}}" class="content">
     <!--不能打开的按钮一-->
     <lx-nav-pt
-      wx:if="{{isRecruit}}"
+      wx:if="{{!isFinish}}"
       navImg="/assets/icons/manage/detail.png"
       navText="详细信息"
     ></lx-nav-pt>
@@ -36,7 +36,7 @@
     ></lx-nav-pt>
     <!--不能打开的按钮二-->
     <lx-nav-pt
-      wx:if="{{isRecruit}}"
+      wx:if="{{!isFinish}}"
       navImg="/assets/icons/manage/edit.png"
       navText="编辑表单"
     ></lx-nav-pt>

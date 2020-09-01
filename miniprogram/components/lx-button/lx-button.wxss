@@ -11,7 +11,7 @@
   font-size: 32rpx;
   font-weight: 500;
   outline: none;
-  padding: 15rpx 0;
+  padding: 25rpx 0;
   white-space: nowrap;
 }
 

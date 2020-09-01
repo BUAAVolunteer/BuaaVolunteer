@@ -41,10 +41,19 @@ Component({
     },
     isRecruit(data) {
       return (
-        data.project.check >= 1 &&
+        data.project.check == 1 &&
         (data.currentDate > data.project.date ||
           (data.currentDate == data.project.date &&
             data.currentTime >= data.project.time))
+      );
+    },
+    isFinish(data) {
+      return (
+        data.project.check < 1 ||
+        (data.project.check == 1 &&
+          (data.currentDate < data.project.date ||
+            (data.currentDate == data.project.date &&
+              data.currentTime < data.project.time)))
       );
     },
   },
@@ -59,8 +68,10 @@ Component({
   methods: {
     openConfirm() {
       wx.navigateTo({
-        url: '../ConfirmHistory/ConfirmHistory?title=' + this.properties.project.title,
+        url:
+          "../ConfirmHistory/ConfirmHistory?title=" +
+          this.properties.project.title,
       });
-    }
+    },
   },
 });

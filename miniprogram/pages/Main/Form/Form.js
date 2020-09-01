@@ -11,15 +11,15 @@ Component({
   properties: {
     qqNum: {
       type: String,
-      value: ""
+      value: "",
     },
     title: {
       type: String,
-      value: ""
+      value: "",
     },
     signUpTime: {
       type: String,
-      value: ""
+      value: "",
     },
   },
   /**
@@ -37,7 +37,7 @@ Component({
     attached() {
       this.loading = this.selectComponent("#loading");
       this.loading.showLoading();
-      console.log(this.properties)
+      console.log(this.properties);
       //console.log(properties.title, properties.signUpTime)
       qqNum = this.properties.qqNum;
       //console.log(qqNum)
@@ -49,31 +49,32 @@ Component({
       getPersonNum = app.globalData.personNum;
       getQQNum = app.globalData.qqNum;
       getCampus = app.globalData.campus;
-      db.collection("form").where({
-        title: this.properties.title,
-      })
-      .get()
-      .then((res) => {
-        console.log(res.data)
-        that.loading.hideLoading();
-        res.data[0].formInfo = res.data[0].formInfo.map(function (n) {
-          n.choose = [];
-          n.input_text = [];
-          return n;
+      db.collection("form")
+        .where({
+          title: this.properties.title,
+        })
+        .get()
+        .then((res) => {
+          console.log(res.data);
+          that.loading.hideLoading();
+          res.data[0].formInfo = res.data[0].formInfo.map(function (n) {
+            n.choose = [];
+            n.input_text = [];
+            return n;
+          });
+          that.setData({
+            formList: res.data[0],
+          });
+          that.watch(); //调用监听方法
+        })
+        .catch((err) => {
+          that.loading.hideLoading();
+          wx.showModal({
+            title: "错误",
+            content: "获取记录失败,请检查网络或反馈给管理员",
+            showCancel: false,
+          });
         });
-        that.setData({
-          formList: res.data[0],
-        });
-        that.watch(); //调用监听方法
-      })
-      .catch((err) => {
-        that.loading.hideLoading();
-        wx.showModal({
-          title: "错误",
-          content: "获取记录失败,请检查网络或反馈给管理员",
-          showCancel: false,
-        });
-      });
     },
   },
   methods: {
@@ -338,7 +339,7 @@ Component({
                   showCancel: false,
                   success: function () {
                     wx.redirectTo({
-                      url: "../../Profile/History/History",
+                      url: "/pages/Main/Main",
                     });
                   },
                 });
