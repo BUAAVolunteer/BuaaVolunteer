@@ -148,6 +148,9 @@ Component({
   },
   // 组件自己的方法
   methods: {
+    onShow() {
+      this.initList()
+    },
     initList() {
       this.setData({
         refreshLoading: true,
@@ -328,6 +331,12 @@ Component({
           },
         });
         return false;
+      }
+      if (app.globalData.totalScore <= -10) {
+        wx.showToast({
+          title: "志愿积分过低",
+          icon: "none",
+        });
       }
       // 重复报名
       for (let i = 0; i < projectList[ID].signupList.length; i++) {

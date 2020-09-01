@@ -17,7 +17,7 @@ exports.main = async (event, context) => {
     let his = {};
     his.time = event.time;
     his.data = event.list;
-    his.isCheck = false;
+    his.isCheck = 0;
     return db.collection('confirm').where({
       title: event.title
     }).update({

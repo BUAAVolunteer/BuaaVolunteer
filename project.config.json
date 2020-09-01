@@ -134,6 +134,12 @@
 					"pathName": "pages/Profile/Map/Map",
 					"query": "title=北航一日游",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/Profile/UpdateLog/UpdateLog",
+					"pathName": "pages/Profile/UpdateLog/UpdateLog",
+					"scene": null
 				}
 			]
 		}
