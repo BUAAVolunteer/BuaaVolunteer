@@ -190,7 +190,7 @@ Component({
                 success: function (res) {
                   //如果成功调用showModal成功，则跳转至链接
                   wx.redirectTo({
-                    url: "../Manage",
+                    url: "/pages/Admin/Admin",
                   });
                 },
               });

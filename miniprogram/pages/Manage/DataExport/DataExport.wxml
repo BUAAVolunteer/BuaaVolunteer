@@ -1,6 +1,6 @@
 <dataexport-hide
-  signupTitle="{{signupTitle}}"
-  signupItem="{{signupItem}}"
+  signupTitle="{{signUpTitle}}"
+  signupItem="{{signUpItem}}"
   open="{{open}}"
   bind:changeItem="changeItem"
   bind:finish="offcanvas"
