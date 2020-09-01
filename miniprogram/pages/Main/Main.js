@@ -154,81 +154,82 @@ Component({
       });
       var that = this;
       /*-----------------主页志愿招募数据-----------------------------*/
-      db.collection("project")
-        .get()
-        .then((res) => {
-          // console.log(res.data)
-          projectList = res.data;
-          // 对得到的项目列表进行排序，详见js中的sort函数
-          projectList.sort(function (a, b) {
-            if (a.date < b.date || (a.date == b.date && a.time < b.time)) {
-              return -1;
-            } else {
-              return 1;
-            }
-          });
-        })
-        .then(() => {
-          // 获取目前的服务器时间
-          return wx.cloud.callFunction({
-            name: "getTime",
-          });
-        })
-        .then((res) => {
-          console.log(res);
-          var time = res.result.time.split(" ");
-          current.date = time[0];
-          current.time = time[1];
-          app.globalData.current = current;
-          that.setData({
-            refreshLoading: false,
-          });
-        })
-        .then(() => {
-          var isOdd = false;
-          var recruitList = [];
-          var fillList = [];
-          var preList = [];
-          for (let i = 0; i < projectList.length; i++) {
-            var isPre = false;
-            var currentDate = current.date;
-            var currentTime = current.time;
-            var postDate = projectList[i].date;
-            var postTime = projectList[i].time;
-            if (
-              currentDate < postDate ||
-              (currentDate == postDate && currentTime < postTime)
-            ) {
-              isPre = true;
-            }
-            var isInner = false
-            if (projectList[i].innerList.indexOf(app.globalData.openid) != -1) {
-              isInner = true
-            }
-            projectList[i].pre = isPre;
-            projectList[i].isInner = isInner
-            projectList[i].ID = i;
-            if (!isPre) {
-              recruitList.push(projectList[i]);
-              isOdd = !isOdd;
-            } else if (fillList.length == 2) {
-              preList.push(projectList[i]);
-            } else if (isOdd) {
-              fillList.push(projectList[i]);
-            } else {
-              preList.push(projectList[i]);
-            }
+      wx.cloud.callFunction({
+        name: "GetProject",
+        data: {}
+      }).then((res) => {
+        // console.log(res)
+        projectList = res.result.data;
+        // 对得到的项目列表进行排序，详见js中的sort函数
+        projectList.sort(function (a, b) {
+          if (a.date < b.date || (a.date == b.date && a.time < b.time)) {
+            return -1;
+          } else {
+            return 1;
           }
-          that.setData({
-            recruitList,
-            fillList,
-            isOdd,
-            preList,
-          });
-        })
-        .then(() => {
-          that.hover = that.selectComponent("#hover");
         });
+      })
+      .then(() => {
+        // 获取目前的服务器时间
+        return wx.cloud.callFunction({
+          name: "getTime",
+        });
+      })
+      .then((res) => {
+        console.log(res);
+        var time = res.result.time.split(" ");
+        current.date = time[0];
+        current.time = time[1];
+        app.globalData.current = current;
+        that.setData({
+          refreshLoading: false,
+        });
+      })
+      .then(() => {
+        var isOdd = false;
+        var recruitList = [];
+        var fillList = [];
+        var preList = [];
+        for (let i = 0; i < projectList.length; i++) {
+          var isPre = false;
+          var currentDate = current.date;
+          var currentTime = current.time;
+          var postDate = projectList[i].date;
+          var postTime = projectList[i].time;
+          if (
+            currentDate < postDate ||
+            (currentDate == postDate && currentTime < postTime)
+          ) {
+            isPre = true;
+          }
+          var isInner = false
+          if (projectList[i].innerList.indexOf(app.globalData.openid) != -1) {
+            isInner = true
+          }
+          projectList[i].pre = isPre;
+          projectList[i].isInner = isInner
+          projectList[i].ID = i;
+          if (!isPre) {
+            recruitList.push(projectList[i]);
+            isOdd = !isOdd;
+          } else if (fillList.length == 2) {
+            preList.push(projectList[i]);
+          } else if (isOdd) {
+            fillList.push(projectList[i]);
+          } else {
+            preList.push(projectList[i]);
+          }
+        }
+        that.setData({
+          recruitList,
+          fillList,
+          isOdd,
+          preList,
+        });
+      })
+      .then(() => {
+        that.hover = that.selectComponent("#hover");
+      });
     },
 
     openHover(e) {
