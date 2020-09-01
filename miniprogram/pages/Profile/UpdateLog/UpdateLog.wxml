@@ -6,7 +6,7 @@
     </view>
     <view class="content">
       <view class="date">
-        <text>{{items.date}}</text>
+        <view class="date__inner">{{items.date}}</view>
         <view class="separate" style=""></view>
       </view>
       <view class="detail">

@@ -1,5 +1,5 @@
 const db = wx.cloud.database();
-import Util from '../../../utils/util'
+import Util from "../../../utils/util";
 var LinkedList, initList;
 Component({
     /**
@@ -12,12 +12,12 @@ Component({
         },
         title: {
             type: String,
-            value: ""
+            value: "",
         },
         listID: {
             type: Number,
-            value: 0
-        }
+            value: 0,
+        },
     },
 
     /**
@@ -38,9 +38,9 @@ Component({
             this.loading = this.selectComponent("#loading");
             this.loading.showLoading();
             var that = this;
-            var confirmList = JSON.parse(that.properties.confirmList)
-            console.log(confirmList)
-            var volunteerList = []
+            var confirmList = JSON.parse(that.properties.confirmList);
+            console.log(confirmList);
+            var volunteerList = [];
             for (let j = 1; j < confirmList.data.length; j++) {
                 let v = {};
                 let l = confirmList.data[j].length;
@@ -51,23 +51,23 @@ Component({
                 v.isDisabled = true;
                 volunteerList.push(v);
             }
-            initList = volunteerList
-            LinkedList = Util.toLinkedList(volunteerList)
-            volunteerList = LinkedList.toList()
+            initList = volunteerList;
+            LinkedList = Util.toLinkedList(volunteerList);
+            volunteerList = LinkedList.toList();
             this.setData({
                 volunteerList,
-                title: this.properties.title
-            })
-            this.loading.hideLoading()
-        }
+                title: this.properties.title,
+            });
+            this.loading.hideLoading();
+        },
     },
 
     methods: {
         delete: function (e) {
-            var ID = parseInt(e.currentTarget.dataset.id)
-            LinkedList.removeAt(ID)
+            var ID = parseInt(e.currentTarget.dataset.id);
+            LinkedList.removeAt(ID);
             this.setData({
-                volunteerList: LinkedList.toList()
+                volunteerList: LinkedList.toList(),
             });
         },
         opendel: function () {
@@ -78,17 +78,17 @@ Component({
         input: function (e) {
             console.log(e);
             var type = e.currentTarget.dataset.type;
-            console.log(e.currentTarget)
+            console.log(e.currentTarget);
             var ID = parseInt(e.currentTarget.dataset.id);
-            var volunteer = LinkedList.get(ID)
-            volunteer[type] = e.detail.value
+            var volunteer = LinkedList.get(ID);
+            volunteer[type] = e.detail.value;
             if (type === "phone") {
-                volunteer.name = ""
+                volunteer.name = "";
             }
-            LinkedList.update(ID, volunteer)
+            LinkedList.update(ID, volunteer);
             this.setData({
-                volunteerList: LinkedList.toList()
-            })
+                volunteerList: LinkedList.toList(),
+            });
         },
         search: function (e) {
             console.log(e);
@@ -105,51 +105,52 @@ Component({
                 this.loading.hideLoading();
                 return;
             }
-            db.collection("person").where({
-                phone,
-            })
-            .field({
-                name: true,
-                phone: true,
-            })
-            .get()
-            .then(res => {
-                that.loading.hideLoading();
-                if (res.data.length == 0) {
-                    wx.showModal({
-                        title: "查找",
-                        content: "数据库中未找到志愿者，\r\n请确认手机号是否填写正确，\r\n或者补全姓名以添加志愿者",
-                        showCancel: false,
-                    });
-                    let volunteer = LinkedList.get(ID)
-                    volunteer.isDisabled = false
-                    LinkedList.update(ID, volunteer)
-                    this.setData({
-                        volunteerList: LinkedList.toList()
-                    })
-                } else {
-                    let volunteer = LinkedList.get(ID)
-                    volunteer.name = res.data[0].name
-                    volunteer.isDisabled = true
-                    LinkedList.update(ID, volunteer)
-                    this.setData({
-                        volunteerList: LinkedList.toList()
-                    })
-                }
-            })
+            db.collection("person")
+                .where({
+                    phone,
+                })
+                .field({
+                    name: true,
+                    phone: true,
+                })
+                .get()
+                .then((res) => {
+                    that.loading.hideLoading();
+                    if (res.data.length == 0) {
+                        wx.showModal({
+                            title: "查找",
+                            content: "数据库中未找到志愿者，\r\n请确认手机号是否填写正确，\r\n或者补全姓名以添加志愿者",
+                            showCancel: false,
+                        });
+                        let volunteer = LinkedList.get(ID);
+                        volunteer.isDisabled = false;
+                        LinkedList.update(ID, volunteer);
+                        this.setData({
+                            volunteerList: LinkedList.toList(),
+                        });
+                    } else {
+                        let volunteer = LinkedList.get(ID);
+                        volunteer.name = res.data[0].name;
+                        volunteer.isDisabled = true;
+                        LinkedList.update(ID, volunteer);
+                        this.setData({
+                            volunteerList: LinkedList.toList(),
+                        });
+                    }
+                });
         },
         add: function (e) {
             console.log(e);
             let v = {
                 isDisable: true,
-            }
-            LinkedList.append(v)
+            };
+            LinkedList.append(v);
             this.setData({
-                volunteerList: LinkedList.toList()
-            })
+                volunteerList: LinkedList.toList(),
+            });
         },
         download: function (e) {
-            this.loading._showLoading()
+            this.loading._showLoading();
             var that = this;
             var volunteer = this.data.volunteerList;
             var v = [
@@ -166,7 +167,7 @@ Component({
                     volunteer[i].duration === "" ||
                     volunteer[i].note === ""
                 ) {
-                    this.loading.hideLoading()
+                    this.loading.hideLoading();
                     wx.showModal({
                         title: "缺少信息",
                         content: "志愿确认中有信息未填入",
@@ -181,17 +182,17 @@ Component({
                 v.push(input);
             }
             console.log(v);
-            var formInfo = {}
-            formInfo.title = that.data.title
-            formInfo.fileName = that.data.title + "志愿时长表"
-            formInfo.downloadList = v
-            return new Promise((resolve, reject) => {
+            var formInfo = {};
+            formInfo.title = that.data.title;
+            formInfo.fileName = that.data.title + "志愿时长表";
+            formInfo.downloadList = v;
+            return new Promise ((resolve, reject) => {
                 resolve()
             })
             .then(() => {
                 if (that.properties.confirmList.isCheck) {
                     wx.showToast({
-                        title: '由于已经确认，此次只导出数据',
+                        title: '由于时长已经确认，此次仅导出时长表',
                         icon: 'none',
                         duration: 1000,
                         mask: false,
@@ -207,8 +208,8 @@ Component({
                             list: v,
                             initList: initList,
                             time: this.data.volunteerList.time,
-                            ID: this.properties.listID
-                        }
+                            ID: this.properties.listID,
+                        },
                     })
                 }
             })
@@ -224,7 +225,7 @@ Component({
             .then((res) => {
                 console.log(res);
                 if (res === "data-trans fail") {
-                    this.loading.hideLoading()
+                    this.loading.hideLoading();
                     wx.showModal({
                         title: "数据转移失败",
                         content: "数据转移失败，请联系管理员",
@@ -232,7 +233,7 @@ Component({
                     });
                 } else if (res.success) {
                     console.log(res);
-                    this.loading.hideLoading()
+                    this.loading.hideLoading();
                     wx.showModal({
                         title: "导出成功",
                         content: "已成功导出,请在自动打开后尽快另存",
@@ -245,14 +246,14 @@ Component({
                     });
                 } else {
                     console.log(res);
-                    this.loading.hideLoading()
+                    this.loading.hideLoading();
                     wx.showModal({
                         title: "导出失败",
                         content: "导出失败，请联系管理员",
                         showCancel: false,
                     });
                 }
-            })
+            });
         },
     },
 });
