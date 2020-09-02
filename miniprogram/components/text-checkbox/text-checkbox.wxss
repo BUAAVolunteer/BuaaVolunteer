@@ -2,8 +2,9 @@
 
 /* 整体容器 */
 .reports-form-box {
-  margin-bottom: 30rpx;
-  margin-left: 28rpx;
+  margin: 30rpx auto 0;
+  width: 90%;
+  font-family: 微软雅黑;
 }
 
 /* 标题 */
@@ -26,17 +27,25 @@
   flex-direction: column;
 }
 
+.radio-wrapper {
+  margin: 10rpx 0;
+}
+
 .radio-item {
-  width: 100%;
-  display: block;
-  text-align: center;
-  margin: 13rpx 5rpx;
+  margin: 0 5rpx;
+}
+
+.radio-item--describe {
+  font-weight: lighter;
+  font-size: 20rpx;
+  line-height: 20rpx;
 }
 
 /* 说明类字体 */
 .form-describe {
-  font-size: 20rpx;
+  font-size: 25rpx;
   font-weight: lighter;
+  line-height: 25rpx;
 }
 
 .mt-10 {
@@ -45,4 +54,8 @@
 
 .ml-20 {
   margin-left: 20rpx;
+}
+
+.grey {
+  color: #999;
 }

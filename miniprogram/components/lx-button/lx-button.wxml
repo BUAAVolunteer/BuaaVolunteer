@@ -1,6 +1,6 @@
 <!--components/lx-button/lx-button.wxml-->
 <view class="wrapper" style="width:{{width}};">
-  <button class="button {{color}}">
+  <button hover-class="none" class="button {{color}}" loading="{{loading}}">
     <view>
       {{content}}
     </view>

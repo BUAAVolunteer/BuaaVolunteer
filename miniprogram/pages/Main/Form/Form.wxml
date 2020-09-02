@@ -22,18 +22,14 @@
     <text-div id="{{items.ID}}" formInfo="{{items}}" />
   </block>
 </block>
-
-<view class="reports-form form-center">
-  <!-- 并提交订单 -->
-  <button
-    wx:if="{{loading}}"
-    loading="{{true}}"
-    style="background-color: var(--grey);"
-    hover-class="none"
-    class="reports-form-btn"
-  ></button>
-  <button wx:else bindtap="getInputValue" class="reports-form-btn">提交</button>
-</view>
+<!-- 底部按钮 -->
+<lx-button
+  class="footer"
+  bindtap="getInputValue"
+  loading="{{loading}}"
+  content="提交"
+  color="blue"
+></lx-button>
 
 <!-- 全局加载组件 -->
 <lx-loading id="loading"></lx-loading>
