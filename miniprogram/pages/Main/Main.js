@@ -62,13 +62,15 @@ Component({
         })
         /*-----------------主页轮播图地址-----------------------------*/
         .then(() => {
-          return db.collection("main").get();
+          return db.collection("official").where({
+            name: "首页展示"
+          }).get();
         })
         .then((res) => {
-          console.log(res.data);
+          console.log(res.data[0].main);
           // 获取到的地址数组
           that.setData({
-            imageList: res.data,
+            imageList: res.data[0].main,
           });
         })
         .then(() => {
@@ -245,6 +247,8 @@ Component({
       hoverDetail.button[0].isAblePress = (!projectList[ID].pre) || projectList[ID].isInner;
       if (projectList[ID].pre) {
         hoverDetail.button[0].text = "等待发布";
+      } else {
+        hoverDetail.button[0].text = "立即报名";
       }
       this.setData({
         showDetail: projectList[ID],
@@ -298,6 +302,14 @@ Component({
           .then((res) => {
             console.log(res);
             wx.hideLoading();
+            if (res.data.length == 0) {
+              wx.showModal({
+                title: "临时志愿",
+                content: "非常抱歉，临时志愿没有详细介绍",
+                showCancel: false
+              })
+              return
+            }
             var target_id = res.data[0]._id;
             wx.navigateTo({
               url:

@@ -338,7 +338,7 @@ Component({
                     "请留意微信消息，并加入\nqq群:" + qqNum + "\n以便志愿开展",
                   showCancel: false,
                   success: function () {
-                    wx.redirectTo({
+                    wx.switchTab({
                       url: "/pages/Main/Main",
                     });
                   },

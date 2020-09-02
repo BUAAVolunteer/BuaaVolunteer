@@ -47,7 +47,7 @@ Component({
         });
       })
       .then(() => {
-        return db.collection('blacklist').where({
+        return db.collection('official').where({
           name: "积分规则"
         })
         .get()

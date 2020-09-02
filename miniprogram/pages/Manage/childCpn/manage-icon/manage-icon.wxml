@@ -49,7 +49,7 @@
     ></lx-nav-pt>
     <!--按钮三-->
     <lx-nav-pt
-      navUrl="/pages/Manage/DataExport/DataExport?title={{project.title}}"
+      navUrl="/pages/Manage/DataExport/DataExport?title={{project.title}}&date={{project.date}}"
       navImg="/assets/icons/manage/down.png"
       navText="导出数据"
     ></lx-nav-pt>

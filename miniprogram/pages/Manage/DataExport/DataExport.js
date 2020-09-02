@@ -1,7 +1,5 @@
 const db = wx.cloud.database();
-var max, iv;
-var limlist = [{}];
-var date = "";
+var iv;
 var watcher = null;
 const computedBehavior = require("miniprogram-computed");
 const Util = require("../../../utils/util");
@@ -40,7 +38,6 @@ Component({
   lifetimes: {
     attached() {
       var title = this.properties.title;
-      date = this.properties.date;
       console.log(title);
       this.loading = this.selectComponent("#loading");
       this.loading.showLoading();
@@ -110,7 +107,7 @@ Component({
       for (let i = 0; i < that.data.signUpList.length; i++) {
         DownloadList.push(that.data.signUpList[i]);
       }
-      console.log(date);
+      console.log(that.properties.date);
       //console.log(DownloadList)
       db.collection("project")
         .where({
@@ -141,7 +138,7 @@ Component({
                 name: "DownloadSignUp",
                 data: {
                   title: that.data.title,
-                  time: date,
+                  time: that.properties.date,
                   list: DownloadList,
                 },
               })
