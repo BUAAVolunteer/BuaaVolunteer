@@ -6,7 +6,9 @@
     <text wx:if="{{formInfo.isForce}}" class="force-text">*</text>
   </view>
   <!-- 描述 -->
-  <view wx:if="{{formInfo.describe.length>0}}" class="form-describe mt-10">{{formInfo.describe}}</view>
+  <view wx:if="{{formInfo.describe.length>0}}" class="form-describe mt-10"
+    >{{formInfo.describe}}</view
+  >
   <!-- 主体 -->
   <checkbox-group bindchange="checkboxChange">
     <!-- 选项 -->
@@ -14,13 +16,18 @@
       <block wx:for="{{formInfo.option}}">
         <checkbox
           disabled="{{formInfo.isLimit && item.limit <= 0}}"
+          class="radio-wrapper {{(formInfo.isLimit&&item.limit<=0)?'grey':''}}"
           value="{{item.name}},{{item.ID}},{{item.duration}}"
           wx:key="id"
         >
           <view class="radio-item">
             {{item.name}}
-            <text wx:if="{{formInfo.isLimit}}" class="form-describe ml-20">剩余{{item.limit}}</text>
-            <text wx:if="{{formInfo.isDuration}}" class="form-describe ml-20">时长{{item.duration}}</text>
+            <text wx:if="{{formInfo.isLimit}}" class="radio-item-describe ml-20"
+              >剩余{{item.limit}}</text
+            >
+            <text wx:if="{{formInfo.isDuration}}" class="radio-item-describe ml-20"
+              >时长{{item.duration}}</text
+            >
           </view>
         </checkbox>
       </block>

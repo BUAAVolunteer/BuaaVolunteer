@@ -1,6 +1,7 @@
 /* components/lx-button/lx-button.wxss */
 .wrapper {
   padding: 20rpx 0rpx;
+  margin: 0 auto;
 }
 
 .button {

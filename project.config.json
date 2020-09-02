@@ -25,7 +25,7 @@
 			"outputPath": ""
 		},
 		"useIsolateContext": true,
-		"useCompilerModule": false,
+		"useCompilerModule": true,
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"appid": "wxbef368e6c04e1ca1",
@@ -139,6 +139,14 @@
 					"id": -1,
 					"name": "pages/Profile/UpdateLog/UpdateLog",
 					"pathName": "pages/Profile/UpdateLog/UpdateLog",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/Main/Form/Form",
+					"pathName": "pages/Main/Form/Form",
+					"query": "title=北航一日游",
 					"scene": null
 				}
 			]

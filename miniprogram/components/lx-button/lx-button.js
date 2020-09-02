@@ -4,6 +4,10 @@ Component({
    * 组件的属性列表
    */
   properties: {
+    loading: {
+      type: Boolean,
+      value: false,
+    },
     content: {
       // 按钮内容
       type: String,
