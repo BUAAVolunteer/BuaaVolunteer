@@ -10,6 +10,7 @@
   <lx-input
     title="问题描述"
     type="textarea"
+    showText="{{showText}}"
     model:content="{{text}}"
     placeholder="请详细描述你的问题~"
   />

@@ -22,6 +22,7 @@ Component({
     assure: "", // 志愿者保障
     require: "", // 特别提醒
     response: "", // 负责人联系方式
+    showText: true, // 展示textarea的内容
   },
 
   /**
@@ -150,7 +151,9 @@ Component({
         content: "",
         isBig: false,
       });
-
+      this.setData({
+        showText: false,
+      });
       //合法性校验
       console.log(that);
       console.log(that.__proto__);
@@ -158,6 +161,9 @@ Component({
         console.log(res);
         if (!res) {
           that.loading.hideLoading();
+          that.setData({
+            showText: true
+          })
           return;
         } else {
           //上传详细信息
@@ -183,6 +189,9 @@ Component({
             success: function (e) {
               console.log(e);
               that.loading.hideLoading();
+              that.setData({
+                showText: true
+              })
               wx.showModal({
                 title: "发布成功",
                 content: "志愿发布成功，请编辑报名表单",
@@ -197,6 +206,9 @@ Component({
             },
             fail: function (e) {
               that.loading.hideLoading();
+              that.setData({
+                showText: true
+              })
               console.log(e);
               wx.showModal({
                 title: "发布失败",

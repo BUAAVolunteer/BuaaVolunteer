@@ -6,44 +6,53 @@ Component({
    * 页面的初始数据
    */
   data: {
-    range: [
-      "小程序使用问题",
-    ],
+    range: ["小程序使用问题"],
     value: 0, // 当前选中
     text: "", // 反馈信息
     contact: "", // 联系方式
+    showText: true, // 是否展示textarea
   },
 
   lifetimes: {
     attached() {
-      var that = this
+      var that = this;
       this.loading = this.selectComponent("#loading");
-      this.loading.showLoading()
-      wx.cloud.callFunction({
-        name: "GetProject",
-      })
-      .then(res => {
-        console.log(res)
-        var range = ["小程序使用问题",]
-        for (let i = 0; i < res.result.data.length; i++) {
-          range.push(res.result.data[i].title)
-        }
-        console.log(range)
-        that.setData({
-          range,
+      this.loading.showLoading();
+      this.setData({
+        showText: false,
+      });
+      wx.cloud
+        .callFunction({
+          name: "GetProject",
         })
-        that.loading.hideLoading()
-      })
-      .catch(err => {
-        console.log(err)
-        that.loading.hideLoading()
-        wx.showModal({
-          title: "错误",
-          content: "发生错误，请检查网络并重新进入页面",
-          showCancel: false
+        .then((res) => {
+          console.log(res);
+          var range = ["小程序使用问题"];
+          for (let i = 0; i < res.result.data.length; i++) {
+            range.push(res.result.data[i].title);
+          }
+          console.log(range);
+          that.setData({
+            range,
+          });
+          that.loading.hideLoading();
+          that.setData({
+            showText: true,
+          });
         })
-      })
-    }
+        .catch((err) => {
+          console.log(err);
+          that.loading.hideLoading();
+          that.setData({
+            showText: true,
+          });
+          wx.showModal({
+            title: "错误",
+            content: "发生错误，请检查网络并重新进入页面",
+            showCancel: false,
+          });
+        });
+    },
   },
 
   methods: {
@@ -68,10 +77,13 @@ Component({
         });
         return;
       }
-      this.loading._showLoading({
+      this.loading.showLoading({
         isContent: false,
         content: "",
         isBig: false,
+      });
+      this.setData({
+        showText: false,
       });
       db.collection("person")
         .where({
@@ -91,6 +103,9 @@ Component({
             },
             success: function () {
               that.loading.hideLoading();
+              that.setData({
+                showText: true,
+              });
               wx.showModal({
                 title: "反馈成功",
                 content: "您的反馈我们已经收到，请耐心等待解答",
@@ -104,6 +119,9 @@ Component({
             },
             fail: function () {
               that.loading.hideLoading();
+              that.setData({
+                showText: true,
+              });
               wx.showModal({
                 title: "错误",
                 content: "提交失败，请检查网络或重启小程序",

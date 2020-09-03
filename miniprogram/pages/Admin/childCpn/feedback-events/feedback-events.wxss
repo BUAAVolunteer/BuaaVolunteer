@@ -1,4 +1,8 @@
 /* pages/Admin/childCpn/feedback-events/feedback-events.wxss */
+.feedbacks {
+  overflow: auto;
+  height: 90%;
+}
 
 .eventscard {
   background-color: #fff;
