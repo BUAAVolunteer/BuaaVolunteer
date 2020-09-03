@@ -9,11 +9,16 @@
   border-radius: 4px;
   display: flex;
   justify-content: center;
-  font-size: 32rpx;
-  font-weight: 500;
   outline: none;
   padding: 25rpx 0;
-  white-space: nowrap;
+}
+
+.button__inner {
+  align-items: center;
+  display: flex;
+  font-size: 32rpx;
+  font-weight: 500;
+  line-height: 32rpx;
 }
 
 .white {

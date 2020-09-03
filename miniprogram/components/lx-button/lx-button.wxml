@@ -1,7 +1,7 @@
 <!--components/lx-button/lx-button.wxml-->
 <view class="wrapper" style="width:{{width}};">
   <button hover-class="none" class="button {{color}}" loading="{{loading}}">
-    <view>
+    <view class="button__inner">
       {{content}}
     </view>
   </button>

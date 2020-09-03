@@ -22,10 +22,10 @@
         >
           <view class="radio-item">
             {{item.name}}
-            <text wx:if="{{formInfo.isLimit}}" class="radio-item-describe ml-20"
+            <text wx:if="{{formInfo.isLimit}}" class="radio-item--describe ml-20"
               >剩余{{item.limit}}</text
             >
-            <text wx:if="{{formInfo.isDuration}}" class="radio-item-describe ml-20"
+            <text wx:if="{{formInfo.isDuration}}" class="radio-item--describe ml-20"
               >时长{{item.duration}}</text
             >
           </view>
