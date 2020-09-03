@@ -249,15 +249,16 @@ Component({
 
           //计算时长，添加时间备注
           if (v.isDuration)
-            duration = v.choose.reduce(function (preVlaue, n) {
-              return preVlaue + n.duration;
+            duration += v.choose.reduce(function (preValue, n) {
+              return preValue + n.duration;
             }, 0);
 
-          if (v.isNote)
+          if (v.isNote) {
             for (let i = 0; i < v.choose.length; i++) {
               let m = v.choose[i].value;
               detail = detail + v.option[m].detail + ";";
             }
+          }
         } else {
           //不合法情况
           //页面初始化
