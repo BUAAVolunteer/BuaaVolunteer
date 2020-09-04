@@ -73,7 +73,7 @@ Component({
   methods: {
     illegalCheck(that) {
       //console.log(that)
-      var success
+      var success = true
       console.log("qqNum", that.data.qqNum);
       if (that.data.title === "发布一个新志愿") {
         wx.showModal({
@@ -91,21 +91,21 @@ Component({
           content: "请填写活动地点",
           showCancel: false,
         });
-        success = false;
+        success = success && false;
       }else if (!that.data.textarea || that.data.textarea === "") {
         wx.showModal({
           title: "缺少信息",
           content: "请填写志愿开展日期",
           showCancel: false,
         });
-        success = false;
+        success = success && false;
       }else if (!that.data.qqNum || that.data.qqNum === "") {
         wx.showModal({
           title: "缺少信息",
           content: "请填写志愿QQ群号",
           showCancel: false,
         });
-        success = false;
+        success = success && false;
       }
 
       console.log(that.data.date);
@@ -133,11 +133,11 @@ Component({
               content: "志愿发布时间不能在当前时间之前",
               showCancel: false,
             });
-            success = false;
+            success = success && false;
           } else {
             console.log(currentDate);
             console.log(that.data.date);
-            success = true;
+            success = success && true;
           }
         })
         .then(() => {
