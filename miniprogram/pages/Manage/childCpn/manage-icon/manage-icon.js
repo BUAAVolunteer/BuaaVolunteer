@@ -68,9 +68,7 @@ Component({
   methods: {
     openConfirm() {
       wx.navigateTo({
-        url:
-          "../ConfirmHistory/ConfirmHistory?title=" +
-          this.properties.project.title,
+        url: "../ConfirmHistory/ConfirmHistory?title=" + this.properties.project.title,
       });
     },
   },

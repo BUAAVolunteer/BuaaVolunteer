@@ -73,15 +73,16 @@ Component({
   methods: {
     illegalCheck(that) {
       //console.log(that)
+      var success
+      console.log("qqNum", that.data.qqNum);
       if (that.data.title === "发布一个新志愿") {
         wx.showModal({
           title: "缺少信息",
           content: "请填写活动名称",
           showCancel: false,
         });
-        return false;
-      }
-      if (
+        success = false;
+      }else if (
         that.data.originTitle === "发布一个新志愿" &&
         that.data.place === ""
       ) {
@@ -90,24 +91,21 @@ Component({
           content: "请填写活动地点",
           showCancel: false,
         });
-        return false;
-      }
-      if (!that.data.textarea || that.data.textarea === "") {
+        success = false;
+      }else if (!that.data.textarea || that.data.textarea === "") {
         wx.showModal({
           title: "缺少信息",
           content: "请填写志愿开展日期",
           showCancel: false,
         });
-        return false;
-      }
-      console.log("qqNum", that.data.qqNum);
-      if (!that.data.qqNum || that.data.qqNum === "") {
+        success = false;
+      }else if (!that.data.qqNum || that.data.qqNum === "") {
         wx.showModal({
           title: "缺少信息",
           content: "请填写志愿QQ群号",
           showCancel: false,
         });
-        return false;
+        success = false;
       }
 
       console.log(that.data.date);
@@ -135,13 +133,16 @@ Component({
               content: "志愿发布时间不能在当前时间之前",
               showCancel: false,
             });
-            return false;
+            success = false;
           } else {
             console.log(currentDate);
             console.log(that.data.date);
-            return true;
+            success = true;
           }
-        });
+        })
+        .then(() => {
+          return success
+        })
     },
 
     upload: function (e) {
