@@ -42,10 +42,7 @@
 }
 
 .hide {
-  position: fixed;
-  opacity: 0;
-  z-index: -1629;
-  top: 0;
+  display: none;
 }
 
 .wrapper {
