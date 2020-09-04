@@ -19,14 +19,15 @@ App({
       avatar:
         "cloud://volunteer-platform-1v92i.766f-volunteer-platform-1v92i-1300053277/头像照片/common/common-1.png",
       openid: "",
+      name: "",
+      phone: "",
+      personNum: "",
+      text: "",
+      qqNum: "",
       isRegister: false,
       isAdmin: false,
-      personNum: "",
       campus: "南校区",
-      phone: "",
-      qqNum: "",
-      name: "",
-      qualification: ["20201204"],
+      qualification: [""],
     };
   },
 });
