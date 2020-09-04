@@ -67,6 +67,7 @@ Component({
    */
   methods: {
     openConfirm() {
+      console.log('嘤嘤嘤')
       wx.navigateTo({
         url:
           "../ConfirmHistory/ConfirmHistory?title=" +

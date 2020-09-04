@@ -16,7 +16,7 @@
     <view class="header-text">
       {{project.title}}
     </view>
-    <view class="header-assure" bindtap="openConfirm">
+    <view class="header-assure" catchtap="openConfirm">
       时长确认
     </view>
   </view>

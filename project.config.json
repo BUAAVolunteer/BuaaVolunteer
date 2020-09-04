@@ -1,155 +1,159 @@
 {
-	"miniprogramRoot": "miniprogram/",
-	"cloudfunctionRoot": "cloudfunctions/",
-	"setting": {
-		"urlCheck": true,
-		"es6": true,
-		"enhance": false,
-		"postcss": true,
-		"preloadBackgroundData": false,
-		"minified": true,
-		"newFeature": true,
-		"coverView": true,
-		"nodeModules": true,
-		"autoAudits": true,
-		"showShadowRootInWxmlPanel": true,
-		"scopeDataCheck": false,
-		"uglifyFileName": false,
-		"checkInvalidKey": true,
-		"checkSiteMap": true,
-		"uploadWithSourceMap": true,
-		"compileHotReLoad": false,
-		"babelSetting": {
-			"ignore": [],
-			"disablePlugins": [],
-			"outputPath": ""
-		},
-		"useIsolateContext": true,
-		"useCompilerModule": false,
-		"userConfirmedUseCompilerModuleSwitch": false
-	},
-	"appid": "wxbef368e6c04e1ca1",
-	"projectname": "volunteer",
-	"libVersion": "2.12.0",
-	"simulatorType": "wechat",
-	"simulatorPluginLibVersion": {},
-	"cloudfunctionTemplateRoot": "cloudfunctionTemplate",
-	"compileType": "miniprogram",
-	"condition": {
-		"search": {
-			"current": -1,
-			"list": []
-		},
-		"conversation": {
-			"current": -1,
-			"list": []
-		},
-		"plugin": {
-			"current": -1,
-			"list": []
-		},
-		"game": {
-			"list": []
-		},
-		"gamePlugin": {
-			"current": -1,
-			"list": []
-		},
-		"miniprogram": {
-			"current": -1,
-			"list": [
-				{
-					"id": 0,
-					"name": "pages/Profile/Profile",
-					"pathName": "pages/Profile/Profile",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 4,
-					"name": "PersonEdit",
-					"pathName": "pages/Profile/PersonEdit/PersonEdit",
-					"query": "score=0",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "History",
-					"pathName": "pages/Profile/History/History",
-					"query": "score=0",
-					"scene": null
-				},
-				{
-					"id": 7,
-					"name": "Detail",
-					"pathName": "pages/Manage/Detail/Detail",
-					"query": "title=发布一个新志愿",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "Main",
-					"pathName": "pages/Main/Main",
-					"query": "title=发布一个新志愿",
-					"scene": null
-				},
-				{
-					"id": 5,
-					"name": "VolunteerMain",
-					"pathName": "pages/Introduction/VolunteerMain/VolunteerMain",
-					"query": "id=0c928181-1d01-49aa-8675-17d7ba583f51",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "Introduction",
-					"pathName": "pages/Introduction/Introduction",
-					"query": "id=0c928181-1d01-49aa-8675-17d7ba583f51",
-					"scene": null
-				},
-				{
-					"id": 7,
-					"name": "pages/ConfirmHistory/Confirm/Confirm",
-					"pathName": "pages/ConfirmHistory/Confirm/Confirm",
-					"query": "title=北航一日游",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "Admin",
-					"pathName": "pages/Admin/Admin",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "Manage",
-					"pathName": "pages/Manage/Manage",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/Profile/Map/Map",
-					"pathName": "pages/Profile/Map/Map",
-					"query": "title=北航一日游",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/Profile/UpdateLog/UpdateLog",
-					"pathName": "pages/Profile/UpdateLog/UpdateLog",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/Main/Form/Form",
-					"pathName": "pages/Main/Form/Form",
-					"query": "title=北航一日游",
-					"scene": null
-				}
-			]
-		}
-	}
+  "miniprogramRoot": "miniprogram/",
+  "cloudfunctionRoot": "cloudfunctions/",
+  "setting": {
+    "urlCheck": true,
+    "es6": true,
+    "enhance": false,
+    "postcss": true,
+    "preloadBackgroundData": false,
+    "minified": true,
+    "newFeature": true,
+    "coverView": true,
+    "nodeModules": true,
+    "autoAudits": true,
+    "showShadowRootInWxmlPanel": true,
+    "scopeDataCheck": false,
+    "uglifyFileName": false,
+    "checkInvalidKey": true,
+    "checkSiteMap": true,
+    "uploadWithSourceMap": true,
+    "compileHotReLoad": false,
+    "useMultiFrameRuntime": false,
+    "useApiHook": true,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
+    "useIsolateContext": true,
+    "useCompilerModule": true,
+    "userConfirmedUseCompilerModuleSwitch": false,
+    "packNpmManually": false,
+    "packNpmRelationList": []
+  },
+  "appid": "wxbef368e6c04e1ca1",
+  "projectname": "volunteer",
+  "libVersion": "2.12.0",
+  "simulatorType": "wechat",
+  "simulatorPluginLibVersion": {},
+  "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
+  "compileType": "miniprogram",
+  "condition": {
+    "search": {
+      "current": -1,
+      "list": []
+    },
+    "conversation": {
+      "current": -1,
+      "list": []
+    },
+    "plugin": {
+      "current": -1,
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "current": -1,
+      "list": []
+    },
+    "miniprogram": {
+      "current": -1,
+      "list": [
+        {
+          "id": 0,
+          "name": "pages/Profile/Profile",
+          "pathName": "pages/Profile/Profile",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 4,
+          "name": "PersonEdit",
+          "pathName": "pages/Profile/PersonEdit/PersonEdit",
+          "query": "score=0",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "History",
+          "pathName": "pages/Profile/History/History",
+          "query": "score=0",
+          "scene": null
+        },
+        {
+          "id": 7,
+          "name": "Detail",
+          "pathName": "pages/Manage/Detail/Detail",
+          "query": "title=发布一个新志愿",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "Main",
+          "pathName": "pages/Main/Main",
+          "query": "title=发布一个新志愿",
+          "scene": null
+        },
+        {
+          "id": 5,
+          "name": "VolunteerMain",
+          "pathName": "pages/Introduction/VolunteerMain/VolunteerMain",
+          "query": "id=0c928181-1d01-49aa-8675-17d7ba583f51",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "Introduction",
+          "pathName": "pages/Introduction/Introduction",
+          "query": "id=0c928181-1d01-49aa-8675-17d7ba583f51",
+          "scene": null
+        },
+        {
+          "id": 7,
+          "name": "pages/ConfirmHistory/Confirm/Confirm",
+          "pathName": "pages/ConfirmHistory/Confirm/Confirm",
+          "query": "title=北航一日游",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "Admin",
+          "pathName": "pages/Admin/Admin",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "Manage",
+          "pathName": "pages/Manage/Manage",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/Profile/Map/Map",
+          "pathName": "pages/Profile/Map/Map",
+          "query": "title=北航一日游",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/Profile/UpdateLog/UpdateLog",
+          "pathName": "pages/Profile/UpdateLog/UpdateLog",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/Main/Form/Form",
+          "pathName": "pages/Main/Form/Form",
+          "query": "title=北航一日游",
+          "scene": null
+        }
+      ]
+    }
+  }
 }
