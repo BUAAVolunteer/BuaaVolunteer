@@ -302,6 +302,7 @@ Component({
           value: "",
         };
         role.msg = title.length > 10 ? "必填项不能为空" : title + "不能为空";
+        role.type = "notnull";
         this.setData({
           "formItem.role": role,
           "formItem.isForce": true,
@@ -309,6 +310,11 @@ Component({
       } else
         this.setData({
           "formItem.isForce": false,
+          "formItem.role": {
+            msg: "",
+            type: "",
+            value: "",
+          },
         });
       this._trigger();
     },
