@@ -109,7 +109,7 @@ Component({
       }
       console.log(that.properties.date);
       //console.log(DownloadList)
-      db.collection("project")
+      return db.collection("project")
         .where({
           title: that.data.title,
         })
@@ -118,7 +118,7 @@ Component({
         })
         .get()
         .then((res) => {
-          //console.log(res)
+          console.log(res)
           if (res.data[0].check != 2) {
             wx.showModal({
               title: "报名未完成",
