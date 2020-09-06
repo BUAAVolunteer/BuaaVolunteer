@@ -1,6 +1,7 @@
 /* components/lx-button/lx-button.wxss */
 .wrapper {
   padding: 20rpx 0rpx;
+  margin: 0 auto;
 }
 
 .button {
@@ -8,11 +9,16 @@
   border-radius: 4px;
   display: flex;
   justify-content: center;
+  outline: none;
+  padding: 25rpx 0;
+}
+
+.button__inner {
+  align-items: center;
+  display: flex;
   font-size: 32rpx;
   font-weight: 500;
-  outline: none;
-  padding: 15rpx 0;
-  white-space: nowrap;
+  line-height: 32rpx;
 }
 
 .white {

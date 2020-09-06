@@ -31,10 +31,10 @@ Component({
    */
   methods: {
     next() {
-      this.triggerEvent("changeCurrent", { type: "next" });
+      this.triggerEvent("changeItem", { type: "next" });
     },
     back() {
-      this.triggerEvent("changeCurrent", { type: "back" });
+      this.triggerEvent("changeItem", { type: "back" });
     },
     finish() {
       this.triggerEvent("finish");

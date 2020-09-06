@@ -1,76 +1,15 @@
 /* pages/forms/forms.wxss */
-
-page {
-    background-color: white;
-    height: 80%;
-}
-
 .reports-header {
-    display: flex;
-    padding: 20rpx 0rpx;
-    align-items: center;
-    justify-content: center;
-    font-size: 34rpx;
-    font-family: PingFang-SC-Bold;
-    font-weight: bold;
-    letter-spacing: 2rpx;
+  display: flex;
+  padding: 20rpx 0rpx;
+  align-items: center;
+  justify-content: center;
+  font-size: 34rpx;
+  font-family: PingFang-SC-Bold;
+  font-weight: bold;
+  letter-spacing: 2rpx;
 }
 
-.reports-form-btn {
-    width: 694rpx;
-    height: 90rpx;
-    background: green;
-    border-radius: 10rpx;
-    font-size: 36rpx;
-    font-family: PingFang-SC-Bold;
-    font-weight: bold;
-    color: rgba(255, 255, 255, 1);
-    text-align: center;
-    line-height: 90rpx;
-}
-
-.form-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-bottom: 100rpx;
-}
-
-/*右侧展示层  */
-
-.page-top {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 750rpx;
-    height: 100%;
-    background-color: white;
-    z-index: 0;
-    transition: All 0.4s ease;
-    -webkit-transition: All 0.4s ease;
-}
-
-.page-state {
-    transform: rotate(0deg) scale(1) translate(60%, 0%);
-    -webkit-transform: rotate(0deg) scale(1) translate(60%, 0%);
-}
-
-.imgw {
-    width: 100%;
-}
-
-
-/*右侧遮罩层  */
-
-.page-mask {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-}
-
-.page-mask-show {
-    display: none;
+.footer {
+  margin: 0 20rpx;
 }

@@ -10,7 +10,7 @@
     <block wx:for="{{recruitList}}" wx:key="index">
       <main-icon iconInf="{{item}}" bind:cardClick="openHover"></main-icon>
     </block>
-    <view class="fill">
+    <view class="fill" wx:if="{{isOdd}}">
       <block wx:for="{{fillList}}" wx:key="index" wx:if="{{isOdd}}">
         <main-icon iconInf="{{item}}" bind:cardClick="openHover"></main-icon>
       </block>

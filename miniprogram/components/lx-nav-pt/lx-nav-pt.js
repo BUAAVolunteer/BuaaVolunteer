@@ -44,12 +44,24 @@ Component({
         wx.navigateTo({
           url: properties.navUrl,
         });
-      else
-        wx.showModal({
+      else {
+        this.hover = this.selectComponent("#msg");
+        this.hover.showHover({
           title: properties.modelTitle,
           content: properties.modelContent,
-          showCancel: false,
+          button: [
+            {
+              ID: 0,
+              name: "assure",
+              text: "确认",
+              isAblePress: true,
+            },
+          ],
+          success: function (res) {
+            console.log(res);
+          },
         });
+      }
     },
   },
 });

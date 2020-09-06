@@ -25,22 +25,24 @@ Component({
    */
   created() {
     // head获取所有头像信息
-    db.collection("head")
+    db.collection("official").where({
+      name: "头像"
+    })
       .get()
       .then((res) => {
         let qualification = app.globalData.qualification;
-        for (let i = 0; i < res.data.length; i++) {
-          if (res.data[i].qualification == "") {
-            res.data[i].isShow = true;
+        for (let i = 0; i < res.data[0].head.length; i++) {
+          if (res.data[0].head[i].qualification == "") {
+            res.data[0].head[i].isShow = true;
           } else {
-            if (qualification.indexOf(res.data[i].qualification)) {
-              res.data[i].isShow = false;
+            if (qualification.indexOf(res.data[0].head[i].qualification)) {
+              res.data[0].head[i].isShow = false;
             }
           }
         }
-        console.log(res.data);
+        console.log(res.data[0].head);
         this.setData({
-          headList: res.data,
+          headList: res.data[0].head,
           curAvatar: app.globalData.avatar,
         });
       });
@@ -57,6 +59,14 @@ Component({
         curAvatar: e.currentTarget.id,
       });
       this.triggerEvent("closePic", this.data.curAvatar, {});
+    },
+    chooseLockedPic(e) {
+      let content = e.currentTarget.id;
+      wx.showToast({
+        title: "参与" + content + "解锁",
+        icon: "none",
+        duration: 2000,
+      });
     },
     // 关闭头像页面
     closePic() {

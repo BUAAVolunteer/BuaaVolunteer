@@ -35,7 +35,7 @@
     >
       <image class="middle-titleimg" src="/assets/icons/delete.png" />
     </view>
-    <view class="{{ index % 2 == 0 ? 'uneven' : 'even' }} {{delete ? 'page-state' : ''}}">
+    <view class="{{ index % 2 == 0 ? 'uneven' : 'even' }} {{isDelete ? 'page-state' : ''}}">
       <view class="name">
         <input
           value="{{item.name}}"

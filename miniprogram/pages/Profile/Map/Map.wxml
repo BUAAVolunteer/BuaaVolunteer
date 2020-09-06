@@ -1,12 +1,9 @@
 <!--<view class="bg" style="opacity:{{1}}" >
     <image style="height:100%" src='../../image/map-bg.png' class="bg-image" mode="scaleToFill"/>
 </view>-->
-<image class="img" mode="widthFix" src="/assets/image/top.png" />
-<image
-  class="middle-img"
-  mode="widthFix"
-  src="/assets/image/middle.png"
-/>
+<image class="img" mode="widthFix" src="/assets/image/map/top.png" />
+<image bindtap="openIntro" class="question" mode="widthFix" src="/assets/icons/map-question.png" />
+<image class="middle-img" mode="widthFix" src="/assets/image/map/middle.png" />
 
 <map-middle-icon step="1" isShow="{{ admin >= 1 }}"></map-middle-icon>
 <map-middle-icon step="2" isShow="{{ admin >= 2 }}"></map-middle-icon>
@@ -15,4 +12,6 @@
 <map-middle-icon step="5" isShow="{{ admin >= 5 }}"></map-middle-icon>
 <map-middle-icon step="6" isShow="{{ admin >= 6 }}"></map-middle-icon>
 
-<image class="bottom-img" mode="widthFix" src="/assets/image/bottom.png" />
+<image class="bottom-img" mode="widthFix" src="/assets/image/map/bottom.png" />
+
+<lx-hover id="msg"></lx-hover>

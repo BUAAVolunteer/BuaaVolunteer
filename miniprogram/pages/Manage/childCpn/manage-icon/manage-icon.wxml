@@ -16,7 +16,7 @@
     <view class="header-text">
       {{project.title}}
     </view>
-    <view class="header-assure" bindtap="openConfirm">
+    <view class="header-assure" catchtap="openConfirm">
       时长确认
     </view>
   </view>
@@ -24,7 +24,7 @@
   <view wx:if="{{project.open}}" class="content">
     <!--不能打开的按钮一-->
     <lx-nav-pt
-      wx:if="{{isRecruit}}"
+      wx:if="{{!isFinish}}"
       navImg="/assets/icons/manage/detail.png"
       navText="详细信息"
     ></lx-nav-pt>
@@ -36,8 +36,7 @@
     ></lx-nav-pt>
     <!--不能打开的按钮二-->
     <lx-nav-pt
-      wx:if="{{isRecruit}}"
-      navUrl="/pages/Manage/FormEdit/FormEdit?title={{project.title}}"
+      wx:if="{{!isFinish}}"
       navImg="/assets/icons/manage/edit.png"
       navText="编辑表单"
     ></lx-nav-pt>
@@ -50,7 +49,7 @@
     ></lx-nav-pt>
     <!--按钮三-->
     <lx-nav-pt
-      navUrl="/pages/Manage/DataExport/DataExport?title={{project.title}}"
+      navUrl="/pages/Manage/DataExport/DataExport?title={{project.title}}&date={{project.date}}"
       navImg="/assets/icons/manage/down.png"
       navText="导出数据"
     ></lx-nav-pt>

@@ -17,7 +17,7 @@ exports.main = async (event, context) => {
     //这个云函数只负责数据的导出
     //将数据添加到excel里
     //1,定义excel表格名
-    let dataCVS = 'SignUpData/' + event.fileName + '.xlsx'
+    let dataCVS = '导出数据/' + event.fileName + '.xlsx'
     console.log(event)
     //2，把数据保存到excel里
     return new Promise (function (resolve,reject) {

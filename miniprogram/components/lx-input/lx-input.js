@@ -29,6 +29,10 @@ Component({
       type: Boolean,
       value: true,
     },
+    showText: {
+      type: Boolean,
+      value: true,
+    },
     width: {
       type: String,
       value: "700rpx",

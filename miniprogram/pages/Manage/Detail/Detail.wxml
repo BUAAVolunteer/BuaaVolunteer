@@ -42,18 +42,21 @@
 
   <lx-input
     title="志愿者保障"
+    showText="{{showText}}"
     type="textarea"
     model:content="{{assure}}"
     placeholder="请在这里填写志愿者保障，例：5h志愿时长"
   />
   <lx-input
     title="特别提醒"
+    showText="{{showText}}"
     type="textarea"
     model:content="{{require}}"
     placeholder="请在这里填写特别提醒，例：请志愿者记得携带身份证或学生证"
   />
   <lx-input
     title="负责人联系方式"
+    showText="{{showText}}"
     type="textarea"
     model:content="{{response}}"
     placeholder="曹老师 电话：12312312312 或 刘师傅 QQ：1212122121"

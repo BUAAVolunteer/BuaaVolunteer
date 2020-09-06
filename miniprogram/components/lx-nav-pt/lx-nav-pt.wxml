@@ -7,3 +7,5 @@
     {{navText}}
   </view>
 </view>
+<!-- 悬浮窗 -->
+<lx-hover id="msg"></lx-hover>

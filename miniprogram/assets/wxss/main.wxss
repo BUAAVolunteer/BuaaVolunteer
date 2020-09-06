@@ -72,3 +72,66 @@ scroll-view,
 view {
   box-sizing: border-box;
 }
+
+button {
+  background-color: #fff;
+  border-radius: 0px;
+  font-size: 14px;
+  text-align: left;
+  line-height: 15px;
+}
+
+button::after {
+  display: none;
+}
+
+/* switch,
+checkbox,
+radio {
+  position: relative;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+switch .wx-switch-input::before,
+checkbox .wx-checkbox-input::before,
+radio .wx-radio-input::before,
+radio .radio::before {
+  display: none;
+}
+
+switch .wx-switch-input::after,
+checkbox .wx-checkbox-input::after,
+radio .wx-radio-input::after,
+radio .radio::after {
+  display: none;
+} */
+
+/* 单选按钮样式*/
+checkbox .wx-checkbox-input,
+radio .wx-radio-input {
+  width: 40rpx;
+  height: 40rpx;
+  border: 2rpx solid #999;
+  border-radius: 100%;
+  background: none !important;
+}
+
+/*单选按钮选中后内部样式*/
+checkbox .wx-checkbox-input.wx-checkbox-input-checked,
+radio .wx-radio-input.wx-radio-input-checked {
+  border-color: #3cbcee;
+}
+
+checkbox .wx-checkbox-input.wx-checkbox-input-checked::before,
+radio .wx-radio-input.wx-radio-input-checked::before {
+  background: #3cbcee;
+  border-radius: 100%;
+  content: "";
+  height: 40%;
+  transform: translate(-50%, -50%) scale(1);
+  -webkit-transform: translate(-50%, -50%) scale(1);
+  width: 40%;
+}

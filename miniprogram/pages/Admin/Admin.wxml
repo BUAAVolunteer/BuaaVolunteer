@@ -1,17 +1,17 @@
 <!--pages/Admin/Admin.wxml-->
 <view class="swiper-tab">
   <view class="swiper-title">
-    <view class="tab-item {{currentTab==0?'active':''}}" data-current="0" bindtap="swichNav"
-      >发布招募</view
-    >
-    <view class="tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="swichNav"
-      >审核反馈</view
-    >
-    <view class="tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="swichNav"
-      >管理积分</view
-    >
-    <view class="tab-item {{currentTab==3?'active':''}}" data-current="3" bindtap="swichNav"
-      >处理缺勤
+    <view class="tab-item {{currentTab==0?'active':''}}" data-current="0" bindtap="swichNav">
+      发布招募
+    </view>
+    <view class="tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="swichNav">
+      审核反馈
+    </view>
+    <view class="tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="swichNav">
+      管理积分
+    </view>
+    <view class="tab-item {{ currentTab == 3 ? 'active' : ''}}" data-current="3" bindtap="swichNav">
+      发布公告
     </view>
   </view>
 </view>
@@ -28,7 +28,7 @@
       <Score></Score>
     </swiper-item>
     <swiper-item>
-      <Absence></Absence>
+      <Announce></Announce>
     </swiper-item>
   </swiper>
 </view>

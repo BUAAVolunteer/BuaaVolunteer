@@ -1,5 +1,4 @@
 <!--杝述文本-->
 <view wx:if="{{formInfo.label.length>0}}" class="form-describe-middle">
-	{{formInfo.label}}
+  {{formInfo.label}}
 </view>
-

@@ -1,10 +1,9 @@
 <dataexport-hide
-  signupTitle="{{signupTitle}}"
-  signupItem="{{signupItem}}"
+  signupTitle="{{signUpTitle}}"
+  signupItem="{{signUpItem}}"
   open="{{open}}"
   bind:changeItem="changeItem"
   bind:finish="offcanvas"
-  bind:delete="delete"
 ></dataexport-hide>
 
 <scroll-view scroll-y="{{true}}" class="wrapper {{open ? 'page-state' : ''}}">

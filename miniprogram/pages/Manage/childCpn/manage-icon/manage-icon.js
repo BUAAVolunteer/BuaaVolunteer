@@ -20,7 +20,7 @@ Component({
       type: String,
       value: "",
     },
-    currentDate: {
+    currentTime: {
       type: String,
       value: "",
     },
@@ -47,6 +47,15 @@ Component({
             data.currentTime >= data.project.time))
       );
     },
+    isFinish(data) {
+      return (
+        data.project.check < 1 ||
+        (data.project.check == 1 &&
+          (data.currentDate < data.project.date ||
+            (data.currentDate == data.project.date &&
+              data.currentTime < data.project.time)))
+      );
+    },
   },
   /**
    * 组件的初始数据
@@ -58,9 +67,10 @@ Component({
    */
   methods: {
     openConfirm() {
+      console.log('嘤嘤嘤')
       wx.navigateTo({
-        url: '../ConfirmHistory/ConfirmHistory?title=' + this.properties.project.title,
+        url: "../ConfirmHistory/ConfirmHistory?title=" + this.properties.project.title,
       });
-    }
+    },
   },
 });

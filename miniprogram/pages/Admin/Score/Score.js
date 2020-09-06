@@ -34,18 +34,20 @@ Component({
       var projectPicker = [];
       var that = this;
       this.hover = this.selectComponent("#msg");
-      db.collection("project")
-      .get()
+      wx.cloud.callFunction({
+        name: "GetProject",
+        data: {}
+      })
       .then(res => {
-        for (let i = 0; i < res.data.length; i++) {
-          projectPicker.push(res.data[i].title);
+        for (let i = 0; i < res.result.data.length; i++) {
+          projectPicker.push(res.result.data[i].title);
         }
         that.setData({
           projectPicker,
         });
       })
       .then(() => {
-        return db.collection('blacklist').where({
+        return db.collection('official').where({
           name: "积分规则"
         })
         .get()
@@ -90,61 +92,38 @@ Component({
       console.log(this.data.operateIndex)
       this.hover = this.selectComponent("#msg")
       if (this.data.volunteerPhone == "" || this.data.volunteerPhone.length != 11) {
-        that.hover.showHover({
-          isMaskCancel: false,
-          title:"信息错误",
-          content:"请填入正确格式的手机号",
-          button:[
-            {
-              ID: 0,
-              name: "confirm",
-              text: "确认",
-              isAblePress: true
-            }
-          ]
-        })
+        wx.showToast({
+          title: '请填入正确格式的手机号',
+          icon: 'none',
+          duration: 1500,
+          mask: false,
+        });
         return
       }
       if (operate == "添加内部名额") {
         this._addInnerSign(project)
       } else if (!that.data.isScoreOperate && that.data.volunteerDate == "") {
-        that.hover.showHover({
-          isMaskCancel: false,
-          title:"选择志愿日期",
-          content:"请选择对应志愿招募的日期",
-          button:[
-            {
-              ID: 0,
-              name: "confirm",
-              text: "确认",
-              isAblePress: true
-            }
-          ],
+        wx.showToast({
+          title: '请选择对应志愿招募的日期',
+          icon: 'none',
+          duration: 1500,
+          mask: false,
           success: res => {
             that.setData({
               isScoreOperate: !that.data.isScoreOperate
             })
           }
-        })
+        });
+      } else if (that.data.isNeedName && that.data.volunteerName == "") {
+        wx.showToast({
+          title: '请填写志愿者的姓名',
+          icon: 'none',
+          duration: 1500,
+          mask: false,
+        });
+        return false
       } else {
-        if (that.data.isNeedName && that.data.volunteerName == "") {
-          that.hover.showHover({
-            isMaskCancel: false,
-            title:"信息缺失",
-            content:"请填写志愿者的姓名",
-            button:[
-              {
-                ID: 0,
-                name: "confirm",
-                text: "确认",
-                isAblePress: true
-              }
-            ]
-          })
-          return false
-        } else {
-          this._operateScore(project, operate)
-        }
+        this._operateScore(project, operate)
       }
     },
 
@@ -205,19 +184,12 @@ Component({
                 })
                 .then(() => {
                   that.loading.hideLoading()
-                  that.hover.showHover({
-                    isMaskCancel: false,
-                    title:"加入内部名额",
-                    content:"已成功加入内部名额",
-                    button:[
-                      {
-                        ID: 0,
-                        name: "confirm",
-                        text: "确认",
-                        isAblePress: true
-                      }
-                    ],
-                  })
+                  wx.showToast({
+                    title: '已成功加入内部名额',
+                    icon: 'none',
+                    duration: 2000,
+                    mask: false,
+                  });
                 })
                 .catch(err => {
                   console.log(err)
@@ -256,19 +228,37 @@ Component({
           that.hover.showHover({
             isMaskCancel: false,
             title:"未找到志愿者",
-            content:"请填写志愿者的姓名以添加志愿者",
+            content:"确认志愿者手机号填写无误吗？",
             button:[
               {
                 ID: 0,
-                name: "confirm",
-                text: "确认",
+                name: "yes",
+                text: "是",
+                isAblePress: true
+              },
+              {
+                ID: 1,
+                name: "no",
+                text: "否",
                 isAblePress: true
               }
             ],
-            success: () => {
-              that.setData({
-                isNeedName: true
-              })
+            success: res => {
+              if (res === "no") {
+                return
+              } else {
+                wx.showToast({
+                  title: '请填写志愿者姓名',
+                  icon: 'none',
+                  duration: 2000,
+                  mask: false,
+                  success: () => {
+                    that.setData({
+                      isNeedName: true
+                    })
+                  }
+                });
+              }
             }
           })
           return false
@@ -278,7 +268,7 @@ Component({
           that.hover.showHover({
             isMaskCancel: false,
             title:"进行积分变动操作",
-            content:"姓名：" + name + "\n手机号：" + res.data[0].phone + "\n志愿项目：" + project + "\n招募时间：" + that.data.volunteerDate + "\n积分变动：" + operate + "\n\n确认进行积分变动吗？",
+            content:"姓名：" + name + "\n手机号：" + that.data.volunteerPhone + "\n志愿项目：" + project + "\n招募时间：" + that.data.volunteerDate + "\n积分变动：" + operate + "\n\n确认进行积分变动吗？",
             button:[
               {
                 ID: 0,
@@ -310,7 +300,7 @@ Component({
                     score: scoreOperate.score,
                     isBlackList: scoreOperate.isBlackList,
                     date: that.data.volunteerDate,
-                    phone: res.data[0].phone,
+                    phone: that.data.volunteerPhone,
                     name: name,
                     isNeedName: that.data.isNeedName,
                     date: that.data.volunteerDate
@@ -318,19 +308,12 @@ Component({
                 })
                 .then(() => {
                   that.loading.hideLoading()
-                  that.hover.showHover({
-                    isMaskCancel: false,
-                    title:"积分变动",
-                    content:"积分变动操作成功！",
-                    button:[
-                      {
-                        ID: 0,
-                        name: "confirm",
-                        text: "确认",
-                        isAblePress: true
-                      }
-                    ],
-                  })
+                  wx.showToast({
+                    title: '积分变动操作成功！',
+                    icon: 'none',
+                    duration: 2000,
+                    mask: false
+                  });
                 })
                 .catch(err => {
                   console.log(err)

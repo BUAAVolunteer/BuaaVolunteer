@@ -22,6 +22,7 @@ Component({
     assure: "", // 志愿者保障
     require: "", // 特别提醒
     response: "", // 负责人联系方式
+    showText: true, // 展示textarea的内容
   },
 
   /**
@@ -72,15 +73,16 @@ Component({
   methods: {
     illegalCheck(that) {
       //console.log(that)
+      var success = true
+      console.log("qqNum", that.data.qqNum);
       if (that.data.title === "发布一个新志愿") {
         wx.showModal({
           title: "缺少信息",
           content: "请填写活动名称",
           showCancel: false,
         });
-        return false;
-      }
-      if (
+        success = false;
+      }else if (
         that.data.originTitle === "发布一个新志愿" &&
         that.data.place === ""
       ) {
@@ -89,24 +91,21 @@ Component({
           content: "请填写活动地点",
           showCancel: false,
         });
-        return false;
-      }
-      if (!that.data.textarea || that.data.textarea === "") {
+        success = success && false;
+      }else if (!that.data.textarea || that.data.textarea === "") {
         wx.showModal({
           title: "缺少信息",
           content: "请填写志愿开展日期",
           showCancel: false,
         });
-        return false;
-      }
-      console.log("qqNum", that.data.qqNum);
-      if (!that.data.qqNum || that.data.qqNum === "") {
+        success = success && false;
+      }else if (!that.data.qqNum || that.data.qqNum === "") {
         wx.showModal({
           title: "缺少信息",
           content: "请填写志愿QQ群号",
           showCancel: false,
         });
-        return false;
+        success = success && false;
       }
 
       console.log(that.data.date);
@@ -134,13 +133,16 @@ Component({
               content: "志愿发布时间不能在当前时间之前",
               showCancel: false,
             });
-            return false;
+            success = success && false;
           } else {
             console.log(currentDate);
             console.log(that.data.date);
-            return true;
+            success = success && true;
           }
-        });
+        })
+        .then(() => {
+          return success
+        })
     },
 
     upload: function (e) {
@@ -150,7 +152,9 @@ Component({
         content: "",
         isBig: false,
       });
-
+      this.setData({
+        showText: false,
+      });
       //合法性校验
       console.log(that);
       console.log(that.__proto__);
@@ -158,6 +162,9 @@ Component({
         console.log(res);
         if (!res) {
           that.loading.hideLoading();
+          that.setData({
+            showText: true
+          })
           return;
         } else {
           //上传详细信息
@@ -183,6 +190,9 @@ Component({
             success: function (e) {
               console.log(e);
               that.loading.hideLoading();
+              that.setData({
+                showText: true
+              })
               wx.showModal({
                 title: "发布成功",
                 content: "志愿发布成功，请编辑报名表单",
@@ -190,13 +200,16 @@ Component({
                 success: function (res) {
                   //如果成功调用showModal成功，则跳转至链接
                   wx.redirectTo({
-                    url: "../Manage",
+                    url: "/pages/Admin/Admin",
                   });
                 },
               });
             },
             fail: function (e) {
               that.loading.hideLoading();
+              that.setData({
+                showText: true
+              })
               console.log(e);
               wx.showModal({
                 title: "发布失败",

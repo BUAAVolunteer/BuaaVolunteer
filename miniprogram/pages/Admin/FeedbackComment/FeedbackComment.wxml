@@ -6,7 +6,10 @@
 <view class="noevent" wx:if="{{comment_list.length == 0}}">
   暂无反馈信息
 </view>
-<view wx:else>
+<scroll-view class="event" wx:else scroll-y="{{true}}">
   <!-- 组件传参，properties里写的都是要传入的 -->
-  <feedback-events comment_list="{{comment_list}}"></feedback-events>
-</view>
+  <!-- <feedback-events commentList="{{comment_list}}"></feedback-events> -->
+  <block wx:for="{{comment_list}}" wx:key="index">
+    <feedback-events comment="{{item}}"></feedback-events>
+  </block>
+</scroll-view>

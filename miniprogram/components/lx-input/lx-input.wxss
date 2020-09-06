@@ -12,7 +12,7 @@
 }
 
 .textarea {
-  height: 240rpx;
+  height: 280rpx;
 }
 
 .textarea-header,

@@ -11,15 +11,15 @@ Component({
   properties: {
     qqNum: {
       type: String,
-      value: ""
+      value: "",
     },
     title: {
       type: String,
-      value: ""
+      value: "",
     },
     signUpTime: {
       type: String,
-      value: ""
+      value: "",
     },
   },
   /**
@@ -37,7 +37,7 @@ Component({
     attached() {
       this.loading = this.selectComponent("#loading");
       this.loading.showLoading();
-      console.log(this.properties)
+      console.log(this.properties);
       //console.log(properties.title, properties.signUpTime)
       qqNum = this.properties.qqNum;
       //console.log(qqNum)
@@ -49,31 +49,32 @@ Component({
       getPersonNum = app.globalData.personNum;
       getQQNum = app.globalData.qqNum;
       getCampus = app.globalData.campus;
-      db.collection("form").where({
-        title: this.properties.title,
-      })
-      .get()
-      .then((res) => {
-        console.log(res.data)
-        that.loading.hideLoading();
-        res.data[0].formInfo = res.data[0].formInfo.map(function (n) {
-          n.choose = [];
-          n.input_text = [];
-          return n;
+      db.collection("form")
+        .where({
+          title: this.properties.title,
+        })
+        .get()
+        .then((res) => {
+          console.log(res.data);
+          that.loading.hideLoading();
+          res.data[0].formInfo = res.data[0].formInfo.map(function (n) {
+            n.choose = [];
+            n.input_text = [];
+            return n;
+          });
+          that.setData({
+            formList: res.data[0],
+          });
+          that.watch(); //调用监听方法
+        })
+        .catch((err) => {
+          that.loading.hideLoading();
+          wx.showModal({
+            title: "错误",
+            content: "获取记录失败,请检查网络或反馈给管理员",
+            showCancel: false,
+          });
         });
-        that.setData({
-          formList: res.data[0],
-        });
-        that.watch(); //调用监听方法
-      })
-      .catch((err) => {
-        that.loading.hideLoading();
-        wx.showModal({
-          title: "错误",
-          content: "获取记录失败,请检查网络或反馈给管理员",
-          showCancel: false,
-        });
-      });
     },
   },
   methods: {
@@ -248,15 +249,16 @@ Component({
 
           //计算时长，添加时间备注
           if (v.isDuration)
-            duration = v.choose.reduce(function (preVlaue, n) {
-              return preVlaue + n.duration;
+            duration += v.choose.reduce(function (preValue, n) {
+              return preValue + n.duration;
             }, 0);
 
-          if (v.isNote)
+          if (v.isNote) {
             for (let i = 0; i < v.choose.length; i++) {
               let m = v.choose[i].value;
               detail = detail + v.option[m].detail + ";";
             }
+          }
         } else {
           //不合法情况
           //页面初始化
@@ -276,7 +278,7 @@ Component({
         });
         wx.showModal({
           title: "错误",
-          content: "您所选择的部分选项已满，请重新选择！",
+          content: "必选项不能为空",
           showCancel: false,
         });
         listItem = [];
@@ -337,8 +339,8 @@ Component({
                     "请留意微信消息，并加入\nqq群:" + qqNum + "\n以便志愿开展",
                   showCancel: false,
                   success: function () {
-                    wx.redirectTo({
-                      url: "../../Profile/History/History",
+                    wx.switchTab({
+                      url: "/pages/Main/Main",
                     });
                   },
                 });

@@ -26,11 +26,19 @@
   </view>
   <view class="textarea-content">
     <textarea
+      wx:if="{{showText}}"
       auto-height="{{false}}"
       class="textarea-content__inner"
       maxlength="-1"
       model:value="{{content}}"
       placeholder="{{placeholder}}"
+    />
+    <!-- 隐藏文本 -->
+    <textarea
+      wx:else
+      auto-height="{{false}}"
+      class="textarea-content__inner"
+      maxlength="-1"
     />
   </view>
 </view>

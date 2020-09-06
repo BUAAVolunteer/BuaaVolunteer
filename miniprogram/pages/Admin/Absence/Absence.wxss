@@ -1,4 +1,0 @@
-/* pages/Admin/Absence/Absence.wxss */
-.wrapper {
-  padding: 20rpx;
-}

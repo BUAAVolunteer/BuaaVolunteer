@@ -1,7 +1,5 @@
 const db = wx.cloud.database();
-var max, iv;
-var limlist = [{}];
-var date = "";
+var iv;
 var watcher = null;
 const computedBehavior = require("miniprogram-computed");
 const Util = require("../../../utils/util");
@@ -29,7 +27,7 @@ Component({
   },
   behaviors: [computedBehavior], // 代表页面中可以使用computed扩展方法
   computed: {
-    signupItem(data) {
+    signUpItem(data) {
       if (data.index == -1) return [];
       else return data.signUpList[data.index].slice(0, -3);
     },
@@ -40,7 +38,6 @@ Component({
   lifetimes: {
     attached() {
       var title = this.properties.title;
-      date = this.properties.date;
       console.log(title);
       this.loading = this.selectComponent("#loading");
       this.loading.showLoading();
@@ -92,12 +89,13 @@ Component({
         open: true,
       });
     },
-    changeCurrent(e) {
+    changeItem(e) {
       console.log(e.detail.type);
       let type = e.detail.type;
       let index = this.data.index;
-      if (type == "next") index = min(this.data.signUpList.length, index + 1);
-      else if (type == "back") index = max(index - 1, 0);
+      if (type == "next")
+        index = Math.min(this.data.signUpList.length - 1, index + 1);
+      else if (type == "back") index = Math.max(index - 1, 0);
       this.setData({
         index,
       });
@@ -109,7 +107,7 @@ Component({
       for (let i = 0; i < that.data.signUpList.length; i++) {
         DownloadList.push(that.data.signUpList[i]);
       }
-      console.log(date);
+      console.log(that.properties.date);
       //console.log(DownloadList)
       db.collection("project")
         .where({
@@ -121,7 +119,7 @@ Component({
         .get()
         .then((res) => {
           //console.log(res)
-          if (res.data[0].check != -1) {
+          if (res.data[0].check != 2) {
             wx.showModal({
               title: "报名未完成",
               content: "报名尚未完成，请等待完成后再导出",
@@ -135,52 +133,53 @@ Component({
             formInfo.fileName = that.data.title + " 报名信息表格";
             formInfo.downloadList = DownloadList;
             console.log(formInfo);
-            wx.cloud.callFunction({
-              name: "DownloadSignUp",
-              data: {
-                title: that.data.title,
-                time: date,
-                list: DownloadList,
-              },
-            })
-            .then((res) => {
-              console.log("DownloadRes", res);
-              if (res.result === "success") {
-                return Util.default.exportToExcel(formInfo);
-              } else {
+            wx.cloud
+              .callFunction({
+                name: "DownloadSignUp",
+                data: {
+                  title: that.data.title,
+                  time: that.properties.date,
+                  list: DownloadList,
+                },
+              })
+              .then((res) => {
+                console.log("DownloadRes", res);
+                if (res.result === "success") {
+                  return Util.default.exportToExcel(formInfo);
+                } else {
+                  console.log(res);
+                  return "data-trans fail";
+                }
+              })
+              .then((res) => {
                 console.log(res);
-                return "data-trans fail";
-              }
-            })
-            .then((res) => {
-              console.log(res);
-              if (res === "data-trans fail") {
-                wx.showModal({
-                  title: "数据转移失败",
-                  content: "数据转移失败，请联系管理员",
-                  showCancel: false,
-                });
-              } else if (res.success) {
-                console.log(res);
-                wx.showModal({
-                  title: "导出成功",
-                  content: "已成功导出,请在自动打开后尽快另存",
-                  showCancel: false,
-                  success: function () {
-                    wx.redirectTo({
-                      url: "../Manage",
-                    });
-                  },
-                });
-              } else {
-                console.log(res);
-                wx.showModal({
-                  title: "导出失败",
-                  content: "导出失败，请联系管理员",
-                  showCancel: false,
-                });
-              }
-            });
+                if (res === "data-trans fail") {
+                  wx.showModal({
+                    title: "数据转移失败",
+                    content: "数据转移失败，请联系管理员",
+                    showCancel: false,
+                  });
+                } else if (res.success) {
+                  console.log(res);
+                  wx.showModal({
+                    title: "导出成功",
+                    content: "已成功导出,请在自动打开后尽快另存",
+                    showCancel: false,
+                    success: function () {
+                      wx.redirectTo({
+                        url: "/pages/Admin/Admin",
+                      });
+                    },
+                  });
+                } else {
+                  console.log(res);
+                  wx.showModal({
+                    title: "导出失败",
+                    content: "导出失败，请联系管理员",
+                    showCancel: false,
+                  });
+                }
+              });
           }
         });
     },
