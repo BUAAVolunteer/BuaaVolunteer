@@ -117,7 +117,7 @@ Component({
         console.log("1", res);
         console.log("2", app.globalData);
         return db.collection('person').where({
-          _openid: that.data.openid
+          _openid: app.globalData.openid
         })
         .get()
         .then(res => {
