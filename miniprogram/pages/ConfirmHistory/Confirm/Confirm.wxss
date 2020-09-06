@@ -93,7 +93,8 @@ page {
   transform: translate(10%, 0%);
 }
 
-.footer {
+.footer
+.bottom {
   display: flex;
   justify-content: space-around;
 }

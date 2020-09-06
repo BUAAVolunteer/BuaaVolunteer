@@ -64,6 +64,9 @@ function addRecord(event) {
   var promiseList = []
   for (let i = 2; i < event.list.length; i++) {
     let p = new Promise((resolve, reject) => {
+      resolve()
+    })
+    .then(() => {
       console.log(i)
       let inf = {};
       let detail = event.list[i][4].split(";");
@@ -73,7 +76,7 @@ function addRecord(event) {
       let score = event.list[i][3] * 0.2;
       inf.score = score.toFixed(1);
       console.log("recordAdd" + i)
-      resolve(addDetail(event, inf, detail, duration, score, i, 0))
+      addDetail(event, inf, detail, duration, score, i, 0)
     })
     promiseList.push(p)
   }
@@ -84,50 +87,50 @@ function addDetail(event, inf, detail, duration, score, i, j) {
   var pList = []
   for (let j = 0; j < detail.length; j++) {
     var p = new Promise ((resolve, reject) => {
+      resolve()
+    })
+    .then(() => {
       if(detail[j] === ""){
-        resolve()
+        return true
       }else{
         inf.note = detail[j]
-        resolve(
-          db.collection('person').where({
-            phone: event.list[i][2]
-          }).update({
-            data:{
-              totalDuration: _.inc(duration),
-              history: _.push(inf),
-              totalScore: _.inc(score)
-            }
-          })
-          .then(res => {
-            if (res.stats.updated == 0){
-              return db.collection('person').add({
-                data:{
-                  name: event.list[i][1],
-                  phone: event.list[i][2],
-                  history: [inf],
-                  totalDuration: duration,
-                  totalScore: score
-                }
-              })
-            }
-          })
-          .then(() => {
-            return db.collection('list').add({
-              data: {
+        return db.collection('person').where({
+          phone: event.list[i][2]
+        }).update({
+          data:{
+            totalDuration: _.inc(duration),
+            history: _.push(inf),
+            totalScore: _.inc(score)
+          }
+        })
+        .then(res => {
+          if (res.stats.updated == 0){
+            return db.collection('person').add({
+              data:{
                 name: event.list[i][1],
                 phone: event.list[i][2],
-                score: score,
-                duration: duration,
-                note: inf.note,
-                title: event.title
+                history: [inf],
+                totalDuration: duration,
+                totalScore: score
               }
             })
+          }
+        })
+        .then(() => {
+          return db.collection('list').add({
+            data: {
+              name: event.list[i][1],
+              phone: event.list[i][2],
+              score: score,
+              duration: duration,
+              note: inf.note,
+              title: event.title
+            }
           })
-          .then(() => {
-            console.log("detailAdd" + j)
-            addDetail(event, inf, detail, duration, score, i, j + 1)
-          })
-        )
+        })
+        .then(() => {
+          console.log("detailAdd" + j)
+        })
       }
     })
     pList.push(p)
