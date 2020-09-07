@@ -28,6 +28,7 @@ Component({
       this.setData({
         admin,
       });
+      console.log(admin)
     },
   },
   methods: {
