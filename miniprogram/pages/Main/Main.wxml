@@ -33,7 +33,7 @@
   <view>
     <view class="header">
       <view class="header-date">
-        {{showDetail.title}}将于
+        {{showDetail.title}}
       </view>
       <view class="header-date">
         {{showDetail.date}}日{{showDetail.time}}

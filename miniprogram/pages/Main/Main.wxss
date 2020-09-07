@@ -38,9 +38,10 @@ page {
   color: #5a5d5d;
   font-size: 30rpx;
   line-height: 30rpx;
-  letter-spacing: 2px;
+  letter-spacing: 3rpx;
   margin-bottom: 15rpx;
   text-align: center;
+  padding-left: 3rpx;
 }
 
 .middle {
