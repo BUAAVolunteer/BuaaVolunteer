@@ -36,7 +36,7 @@ Component({
           if (res.data[0].head[i].qualification == "") {
             res.data[0].head[i].isShow = true;
           } else {
-            if (qualification.indexOf(res.data[0].head[i].qualification)) {
+            if (qualification.indexOf(res.data[0].head[i].qualification) == -1) {
               res.data[0].head[i].isShow = false;
             }
           }

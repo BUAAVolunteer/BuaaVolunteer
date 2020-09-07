@@ -289,7 +289,6 @@ Component({
           fail(err) {
             //失败
             console.error(err);
-            reject();
           },
         });
       } else if (press === "moreInformation") {

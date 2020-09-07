@@ -139,6 +139,7 @@ Component({
                     }
                 });
         },
+
         add: function (e) {
             console.log(e);
             let v = {
@@ -149,6 +150,48 @@ Component({
                 volunteerList: LinkedList.toList(),
             });
         },
+
+        save() {
+            this.loading._showLoading()
+            var that = this
+            var volunteer = this.data.volunteerList
+            var v = [["姓名","联系方式（电话号码）","志愿时长","志愿备注"],]
+            for (let i = 0; i < volunteer.length; i++) {
+                let input = []
+                input.push(volunteer[i].name);
+                input.push(volunteer[i].phone);
+                input.push(parseInt(volunteer[i].duration));
+                input.push(volunteer[i].note);
+                v.push(input);
+            }
+            wx.cloud.callFunction({
+                name: "saveConfirm",
+                data: {
+                    list: v,
+                    title: that.data.title,
+                    ID: that.properties.listID,
+                }
+            })
+            .then(() => {
+                that.loading.hideLoading()
+                wx.showToast({
+                    title: '数据已保存',
+                    icon: 'none',
+                    duration: 1000,
+                    mask: false,
+                });
+            })
+            .catch(err => {
+                that.loading.hideLoading()
+                console.log(err)
+                wx.showModal({
+                    title: "错误",
+                    content: "保存数据出现错误，请重试",
+                    showCancel: false
+                })
+            })
+        },
+
         download: function (e) {
             this.loading._showLoading();
             var that = this;
@@ -207,8 +250,8 @@ Component({
                             title: that.data.title,
                             list: v,
                             initList: initList,
-                            time: this.data.volunteerList.time,
-                            ID: this.properties.listID,
+                            time: that.data.confirmList.time,
+                            ID: that.properties.listID,
                         },
                     })
                 }

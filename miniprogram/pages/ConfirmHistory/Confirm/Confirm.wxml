@@ -91,8 +91,13 @@
     删除记录
   </view>
 </view>
-<view class="footer__btn footer__btn--cyan" bindtap="download">
-  确认志愿并导出报名表单
+<view class="bottom">
+  <view class="footer__btn footer__btn--cyan" bindtap="save">
+    保存信息
+  </view>
+  <view class="footer__btn footer__btn--cyan" bindtap="download">
+    确认志愿并导出报名表单
+  </view>
 </view>
 
 <!-- 全局加载组件 -->

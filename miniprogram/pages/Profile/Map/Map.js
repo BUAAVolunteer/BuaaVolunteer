@@ -3,12 +3,7 @@ const db = wx.cloud.database();
 const _ = db.command;
 const app = getApp();
 Component({
-  properties: {
-    score: {
-      type: Number,
-      value: 0,
-    },
-  },
+  properties: {  },
   /**
    * 页面的初始数据
    */
@@ -17,7 +12,8 @@ Component({
   },
   lifetimes: {
     attached() {
-      let score = this.properties.score;
+      // console.log(this.properties)
+      let score = app.globalData.totalScore;
       let admin = 0;
       if (score >= 0 && score <= 10) admin = 1;
       else if (score > 10 && score <= 15) admin = 2;
