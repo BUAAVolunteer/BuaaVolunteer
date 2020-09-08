@@ -2,6 +2,7 @@
 const db = wx.cloud.database();
 const _ = db.command;
 const app = getApp();
+let count = 0;
 Component({
   /**
    * 页面的初始数据
@@ -16,7 +17,7 @@ Component({
     },
     isShowPic: false,
     isRegister: false,
-    isAdmin: false,
+    isSurprise: false,
   },
   lifetimes: {
     attached() {
@@ -41,18 +42,14 @@ Component({
         person.totalScore = app.globalData.totalScore.toFixed(1);
         person.history = app.globalData.history;
         var isRegister = app.globalData.isRegister;
-        var isAdmin = app.globalData.isAdmin;
         that.setData({
           person,
           isRegister,
-          isAdmin,
         });
       } else {
         var isRegister = app.globalData.isRegister;
-        var isAdmin = app.globalData.isAdmin;
         that.setData({
           isRegister,
-          isAdmin,
         });
       }
       this.loading.hideLoading();
@@ -212,6 +209,23 @@ Component({
 
     shouldAppear: function () {
       console.log("success");
+    },
+    surprise() {
+      count += 1;
+      this.setData({
+        isSurprise: true,
+      });
+      if (count > 3) {
+        wx.showModal({
+          title: "不开心",
+          content: "隔壁北邮小程序都5.0了T_T",
+        });
+      } else {
+        
+        this.setData({
+          isSurprise: false,
+        });
+      }
     },
   },
 });

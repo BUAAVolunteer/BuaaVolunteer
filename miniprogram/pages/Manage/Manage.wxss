@@ -21,7 +21,6 @@
 }
 
 .footer {
-  margin-top: 40rpx;
   display: flex;
   justify-content: center;
 }
@@ -34,6 +33,6 @@
   font-size: 30rpx;
   font-weight: bold;
   justify-content: center;
-  padding: 20rpx 0;
+  padding: 20rpx;
   width: 90vw;
 }

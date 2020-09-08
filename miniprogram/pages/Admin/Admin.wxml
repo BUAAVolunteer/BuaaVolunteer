@@ -10,7 +10,7 @@
     <view class="tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="swichNav">
       管理积分
     </view>
-    <view class="tab-item {{ currentTab == 3 ? 'active' : ''}}" data-current="3" bindtap="swichNav">
+    <view class="tab-item {{currentTab==3?'active':''}}" data-current="3" bindtap="swichNav">
       发布公告
     </view>
   </view>

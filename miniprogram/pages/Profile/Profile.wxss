@@ -96,3 +96,8 @@ page {
   width: 100vw;
   z-index: 9;
 }
+
+.rotate {
+  transform: rotate(360deg);
+  transition: transform .5s ease;
+}
