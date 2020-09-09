@@ -4,6 +4,7 @@ const _ = db.command;
 const app = getApp();
 let count = 0;
 let flag = 0;
+var article;
 Component({
   /**
    * 页面的初始数据
@@ -23,6 +24,12 @@ Component({
   lifetimes: {
     attached() {
       this.loading = this.selectComponent("#loading");
+      db.collection('official').where({
+        name: "相关推送"
+      }).get()
+      .then(res => {
+        article = res.data[0].article
+      })
     },
   },
   methods: {
@@ -170,7 +177,7 @@ Component({
     //新手教程
     forNew: function () {
       wx.navigateTo({
-        url: "/pages/OuterLink/OuterLink?url=",
+        url: "/pages/OuterLink/OuterLink?url=" + article.forNew,
       });
     },
 
@@ -190,21 +197,21 @@ Component({
     toRule: function () {
       wx.navigateTo({
         url:
-          "/pages/OuterLink/OuterLink?url=https://mp.weixin.qq.com/s/YDKfJv7ZASCAnOH3vgNoNw",
+          "/pages/OuterLink/OuterLink?url=" + article.toRule,
       });
     },
     //蓝协介绍
     toIntroduction: function () {
       wx.navigateTo({
         url:
-          "/pages/OuterLink/OuterLink?url=https://mp.weixin.qq.com/s/5bqJNvDXhH8j9iGZ5diyMw",
+          "/pages/OuterLink/OuterLink?url=" + article.toIntroduction,
       });
     },
     //联系我们
     contact: function () {
       wx.navigateTo({
         url:
-          "/pages/OuterLink/OuterLink?url=https://mp.weixin.qq.com/s/cgU6BbeFxHXXsWwl5wePTw",
+          "/pages/OuterLink/OuterLink?url=" + article.contact,
       });
     },
 
