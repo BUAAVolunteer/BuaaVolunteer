@@ -37,9 +37,22 @@ page {
   top: -25rpx;
 }
 
+.gugugu--fadein {
+  animation: toleft 1s ease forwards;
+}
+
+@keyframes toleft {
+  0% {
+    right: -120rpx;
+  }
+  100% {
+    right: 30rpx;
+  }
+}
+
 .gugugu--active {
-  transform: translateX(-1050rpx);
-  transition: transform 1s ease;
+  transform: translateX(-750rpx);
+  transition: transform 1s;
 }
 
 /* 悬浮窗样式 */
