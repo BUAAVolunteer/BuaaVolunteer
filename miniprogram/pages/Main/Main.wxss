@@ -24,13 +24,22 @@ page {
   width: 335rpx;
 }
 
+.bottom-img {
+  position: relative;
+}
+
 /* 蓝小咕定位 */
 .gugugu {
   height: 170rpx;
   width: 120rpx;
-  max-width: 100%;
-  margin-top: -25rpx;
-  margin-left: 510rpx;
+  position: absolute;
+  right: 30rpx;
+  top: -25rpx;
+}
+
+.gugugu--active {
+  transform: translateX(-1050rpx);
+  transition: transform 1s ease;
 }
 
 /* 悬浮窗样式 */

@@ -3,6 +3,7 @@ const db = wx.cloud.database();
 const _ = db.command;
 const app = getApp();
 let count = 0;
+let flag = 0;
 Component({
   /**
    * 页面的初始数据
@@ -212,20 +213,32 @@ Component({
     },
     surprise() {
       count += 1;
+      this.hover = this.selectComponent("#msg");
+      if (count >= 10) {
+        wx.showToast({
+          title: "再转就要晕了_(¦3」∠)_",
+          icon: "none",
+          duration: 2000,
+        });
+        count = 0;
+        flag = 0;
+      } else if (count >= 3 && flag == 0) {
+        wx.showToast({
+          title: "隔壁北邮小程序都5.0了(哭)",
+          icon: "none",
+          duration: 2000,
+        });
+        flag = 1;
+      }
+      let that = this;
       this.setData({
         isSurprise: true,
       });
-      if (count > 3) {
-        wx.showModal({
-          title: "不开心",
-          content: "隔壁北邮小程序都5.0了T_T",
-        });
-      } else {
-        
-        this.setData({
+      setTimeout(function () {
+        that.setData({
           isSurprise: false,
         });
-      }
+      }, 700);
     },
   },
 });
