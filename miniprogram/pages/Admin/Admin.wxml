@@ -10,9 +10,6 @@
     <view class="tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="swichNav">
       管理积分
     </view>
-    <view class="tab-item {{currentTab==3?'active':''}}" data-current="3" bindtap="swichNav">
-      发布公告
-    </view>
   </view>
 </view>
 
@@ -26,9 +23,6 @@
     </swiper-item>
     <swiper-item>
       <Score></Score>
-    </swiper-item>
-    <swiper-item>
-      <Announce></Announce>
     </swiper-item>
   </swiper>
 </view>

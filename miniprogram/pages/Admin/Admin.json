@@ -4,7 +4,6 @@
   "usingComponents": {
     "FeedbackComment": "/pages/Admin/FeedbackComment/FeedbackComment",
     "Score": "/pages/Admin/Score/Score",
-    "Announce": "/pages/Admin/Announce/Announce",
     "Manage": "/pages/Manage/Manage"
   }
 }
