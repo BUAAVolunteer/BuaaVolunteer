@@ -18,6 +18,15 @@ exports.main = async (event, context) => {
 		return promise = new Promise(function (resolve,reject) {
 			resolve();
 		})
+		.then(()=> {
+			return db.collection('person').where({
+				phone: event.list[0][1]
+			}).update({
+				data:{
+					qualification: ["测试1"]
+				}
+			})
+		})
 		.then(() => {
 			return signUpCheck(event);
 		})
