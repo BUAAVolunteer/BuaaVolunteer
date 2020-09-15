@@ -1,9 +1,0 @@
-/* pages/Admin/Announce/Announce.wxss */
-.announce {
-  padding: 20rpx;
-}
-
-.header {
-  font: var(--title);
-  margin: 20rpx 0;
-}

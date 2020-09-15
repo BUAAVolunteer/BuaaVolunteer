@@ -24,13 +24,35 @@ page {
   width: 335rpx;
 }
 
+.bottom-img {
+  position: relative;
+}
+
 /* 蓝小咕定位 */
 .gugugu {
   height: 170rpx;
   width: 120rpx;
-  max-width: 100%;
-  margin-top: -25rpx;
-  margin-left: 510rpx;
+  position: absolute;
+  right: 30rpx;
+  top: -25rpx;
+}
+
+.gugugu--fadein {
+  animation: toleft 1s ease forwards;
+}
+
+@keyframes toleft {
+  0% {
+    right: -120rpx;
+  }
+  100% {
+    right: 30rpx;
+  }
+}
+
+.gugugu--active {
+  transform: translateX(-750rpx);
+  transition: transform 1s;
 }
 
 /* 悬浮窗样式 */
@@ -38,9 +60,10 @@ page {
   color: #5a5d5d;
   font-size: 30rpx;
   line-height: 30rpx;
-  letter-spacing: 2px;
+  letter-spacing: 3rpx;
   margin-bottom: 15rpx;
   text-align: center;
+  padding-left: 3rpx;
 }
 
 .middle {

@@ -33,7 +33,7 @@ Component({
       this.hover.showHover({
         title: "解锁规则",
         isContent: true,
-        content: "这是它的内容",
+        content: "参与更多志愿活动\n积累志愿积分\n提升志愿星级\n一起探索新的志愿地图！",
         button: [
           {
             ID: 0,

@@ -38,6 +38,7 @@ Component({
         },
       ],
     },
+    isSurprise: false, // 彩蛋
   },
   // 组件生命周期
   lifetimes: {
@@ -62,9 +63,12 @@ Component({
         })
         /*-----------------主页轮播图地址-----------------------------*/
         .then(() => {
-          return db.collection("official").where({
-            name: "首页展示"
-          }).get();
+          return db
+            .collection("official")
+            .where({
+              name: "首页展示",
+            })
+            .get();
         })
         .then((res) => {
           console.log(res.data[0].main);
@@ -89,8 +93,8 @@ Component({
             wx.showModal({
               title: "未注册",
               content: "您尚未注册，请前往个人页面进行注册",
-              showCancel: false
-            })
+              showCancel: false,
+            });
           } else {
             app.globalData.personNum = res.data[0].personNum;
             app.globalData.campus = res.data[0].campus;
@@ -151,7 +155,7 @@ Component({
   // 组件自己的方法
   methods: {
     onShow() {
-      this.initList()
+      this.initList();
     },
     initList() {
       this.setData({
@@ -159,92 +163,95 @@ Component({
       });
       var that = this;
       /*-----------------主页志愿招募数据-----------------------------*/
-      wx.cloud.callFunction({
-        name: "GetProject",
-        data: {}
-      }).then((res) => {
-        // console.log(res)
-        var initList = res.result.data;
-        // 对得到的项目列表进行排序，详见js中的sort函数
-        initList.sort(function (a, b) {
-          if (a.date < b.date || (a.date == b.date && a.time < b.time)) {
-            return -1;
-          } else {
-            return 1;
+      wx.cloud
+        .callFunction({
+          name: "GetProject",
+          data: {},
+        })
+        .then((res) => {
+          // console.log(res)
+          var initList = res.result.data;
+          // 对得到的项目列表进行排序，详见js中的sort函数
+          initList.sort(function (a, b) {
+            if (a.date < b.date || (a.date == b.date && a.time < b.time)) {
+              return -1;
+            } else {
+              return 1;
+            }
+          });
+          projectList = [];
+          for (let i = 0; i < initList.length; i++) {
+            if (initList[i].check == 1) {
+              projectList.push(initList[i]);
+            }
           }
+        })
+        .then(() => {
+          // 获取目前的服务器时间
+          return wx.cloud.callFunction({
+            name: "getTime",
+          });
+        })
+        .then((res) => {
+          console.log(res);
+          var time = res.result.time.split(" ");
+          current.date = time[0];
+          current.time = time[1];
+          app.globalData.current = current;
+        })
+        .then(() => {
+          var isOdd = false;
+          var recruitList = [];
+          var fillList = [];
+          var preList = [];
+          for (let i = 0; i < projectList.length; i++) {
+            var isPre = false;
+            var currentDate = current.date;
+            var currentTime = current.time;
+            var postDate = projectList[i].date;
+            var postTime = projectList[i].time;
+            if (
+              currentDate < postDate ||
+              (currentDate == postDate && currentTime < postTime)
+            ) {
+              isPre = true;
+            }
+            var isInner = false;
+            if (projectList[i].innerList.indexOf(app.globalData.openid) != -1) {
+              isInner = true;
+            }
+            projectList[i].pre = isPre;
+            projectList[i].isInner = isInner;
+            projectList[i].ID = i;
+            if (!isPre) {
+              recruitList.push(projectList[i]);
+              isOdd = !isOdd;
+            } else if (fillList.length == 2) {
+              preList.push(projectList[i]);
+            } else if (isOdd) {
+              fillList.push(projectList[i]);
+            } else {
+              preList.push(projectList[i]);
+            }
+          }
+          that.setData({
+            recruitList,
+            fillList,
+            isOdd,
+            preList,
+            refreshLoading: false,
+          });
+        })
+        .then(() => {
+          that.hover = that.selectComponent("#hover");
         });
-        projectList = []
-        for (let i = 0; i < initList.length; i++) {
-          if (initList[i].check == 1) {
-            projectList.push(initList[i])
-          }
-        }
-      })
-      .then(() => {
-        // 获取目前的服务器时间
-        return wx.cloud.callFunction({
-          name: "getTime",
-        });
-      })
-      .then((res) => {
-        console.log(res);
-        var time = res.result.time.split(" ");
-        current.date = time[0];
-        current.time = time[1];
-        app.globalData.current = current;
-      })
-      .then(() => {
-        var isOdd = false;
-        var recruitList = [];
-        var fillList = [];
-        var preList = [];
-        for (let i = 0; i < projectList.length; i++) {
-          var isPre = false;
-          var currentDate = current.date;
-          var currentTime = current.time;
-          var postDate = projectList[i].date;
-          var postTime = projectList[i].time;
-          if (
-            currentDate < postDate ||
-            (currentDate == postDate && currentTime < postTime)
-          ) {
-            isPre = true;
-          }
-          var isInner = false
-          if (projectList[i].innerList.indexOf(app.globalData.openid) != -1) {
-            isInner = true
-          }
-          projectList[i].pre = isPre;
-          projectList[i].isInner = isInner
-          projectList[i].ID = i;
-          if (!isPre) {
-            recruitList.push(projectList[i]);
-            isOdd = !isOdd;
-          } else if (fillList.length == 2) {
-            preList.push(projectList[i]);
-          } else if (isOdd) {
-            fillList.push(projectList[i]);
-          } else {
-            preList.push(projectList[i]);
-          }
-        }
-        that.setData({
-          recruitList,
-          fillList,
-          isOdd,
-          preList,
-          refreshLoading: false,
-        });
-      })
-      .then(() => {
-        that.hover = that.selectComponent("#hover");
-      });
     },
 
     openHover(e) {
       ID = e.detail;
       var hoverDetail = this.data.hoverDetail;
-      hoverDetail.button[0].isAblePress = (!projectList[ID].pre) || projectList[ID].isInner;
+      hoverDetail.button[0].isAblePress =
+        !projectList[ID].pre || projectList[ID].isInner;
       if (projectList[ID].pre) {
         hoverDetail.button[0].text = "等待发布";
       } else {
@@ -266,7 +273,7 @@ Component({
         if (!that._judge()) {
           return;
         }
-        console.log(projectList[ID])
+        console.log(projectList[ID]);
         wx.requestSubscribeMessage({
           tmplIds: ["Ynia8PHxf3L_uWFvZxtPiI-V8hE-wcErHpe0Ygh8O9w"],
           success: (res) => {
@@ -274,7 +281,13 @@ Component({
               res["Ynia8PHxf3L_uWFvZxtPiI-V8hE-wcErHpe0Ygh8O9w"] === "accept"
             ) {
               wx.navigateTo({
-                url: "./Form/Form?title=" + projectList[ID].title + "&qqNum="  + projectList[ID].qqNum + "&signUpTime=" + projectList[ID].date,
+                url:
+                  "./Form/Form?title=" +
+                  projectList[ID].title +
+                  "&qqNum=" +
+                  projectList[ID].qqNum +
+                  "&signUpTime=" +
+                  projectList[ID].date,
               });
             } else {
               wx.showToast({
@@ -305,9 +318,9 @@ Component({
               wx.showModal({
                 title: "临时志愿",
                 content: "非常抱歉，临时志愿没有详细介绍",
-                showCancel: false
-              })
-              return
+                showCancel: false,
+              });
+              return;
             }
             var target_id = res.data[0]._id;
             wx.navigateTo({
@@ -325,7 +338,17 @@ Component({
           });
       }
     },
-
+    surprise() {
+      let that = this;
+      this.setData({
+        isSurprise: true,
+      });
+      setTimeout(function () {
+        that.setData({
+          isSurprise: false,
+        });
+      }, 1000);
+    },
     _judge() {
       //用户的合法性检验,以后可加入积分的判断
       var that = this;

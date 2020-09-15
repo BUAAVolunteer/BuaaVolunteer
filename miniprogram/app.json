@@ -14,7 +14,6 @@
     "pages/Admin/Admin",
     "pages/Admin/FeedbackComment/FeedbackComment",
     "pages/Admin/Score/Score",
-    "pages/Admin/Announce/Announce",
     "pages/Manage/Manage",
     "pages/Manage/FormEdit/FormEdit",
     "pages/Manage/Detail/Detail",

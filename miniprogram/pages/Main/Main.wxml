@@ -22,7 +22,8 @@
   <!-- 蓝小咕咕咕咕 -->
   <view class="bottom-img">
     <image
-      class="gugugu"
+      bindtap="surprise"
+      class="gugugu {{isSurprise?'gugugu--active':'gugugu--fadein'}}"
       mode="aspectFit"
       src="cloud://volunteer-platform-1v92i.766f-volunteer-platform-1v92i-1300053277/main/小咕小表情.png"
     />
@@ -33,7 +34,7 @@
   <view>
     <view class="header">
       <view class="header-date">
-        {{showDetail.title}}将于
+        {{showDetail.title}}
       </view>
       <view class="header-date">
         {{showDetail.date}}日{{showDetail.time}}

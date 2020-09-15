@@ -62,4 +62,5 @@
   overflow: auto;
   padding-right: 50rpx;
   width: 443rpx;
+  -webkit-overflow-scrolling: touch;
 }

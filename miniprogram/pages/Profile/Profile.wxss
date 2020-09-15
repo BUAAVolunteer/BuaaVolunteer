@@ -46,6 +46,7 @@ page {
   margin: 40rpx auto 0;
   height: 231rpx;
   width: 187rpx;
+  position: relative;
 }
 
 .gugugu image {
@@ -95,4 +96,9 @@ page {
   top: 0;
   width: 100vw;
   z-index: 9;
+}
+
+.rotate {
+  transform: rotateY(360deg);
+  transition: transform 0.7s ease;
 }

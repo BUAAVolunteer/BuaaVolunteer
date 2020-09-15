@@ -30,6 +30,7 @@ Component({
     })
       .get()
       .then((res) => {
+        console.log(app.globalData.qualification)
         let qualification = app.globalData.qualification;
         console.log(qualification)
         for (let i = 0; i < res.data[0].head.length; i++) {
@@ -38,6 +39,8 @@ Component({
           } else {
             if (qualification.indexOf(res.data[0].head[i].qualification) == -1) {
               res.data[0].head[i].isShow = false;
+            } else {
+              res.data[0].head[i].isShow = true
             }
           }
         }

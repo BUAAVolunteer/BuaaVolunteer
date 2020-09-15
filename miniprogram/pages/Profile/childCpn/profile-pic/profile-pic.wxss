@@ -13,8 +13,8 @@
 }
 
 .cross {
-  height: 30rpx;
-  width: 30rpx;
+  height: 40rpx;
+  width: 40rpx;
 }
 
 .head {
@@ -39,6 +39,7 @@
   margin: 0 30rpx;
   overflow: auto;
   padding-bottom: 60rpx;
+  -webkit-overflow-scrolling: touch;
 }
 
 .wrapper {
