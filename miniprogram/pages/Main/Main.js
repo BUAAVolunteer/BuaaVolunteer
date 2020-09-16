@@ -250,6 +250,17 @@ Component({
     openHover(e) {
       ID = e.detail;
       var hoverDetail = this.data.hoverDetail;
+      var pre = projectList[ID].pre
+      if (typeof(pre) == "undefined" || (!pre && pre != 0) || isNaN(pre)){
+        wx.showToast({
+          title: '请等待加载完成',
+          icon: 'none',
+          image: '',
+          duration: 1000,
+          mask: true,
+        });
+        return
+      }
       hoverDetail.button[0].isAblePress =
         !projectList[ID].pre || projectList[ID].isInner;
       if (projectList[ID].pre) {
