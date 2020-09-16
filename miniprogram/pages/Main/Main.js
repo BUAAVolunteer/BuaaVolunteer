@@ -27,8 +27,8 @@ Component({
         {
           ID: 0,
           name: "signUpNow",
-          text: "立即报名",
-          isAblePress: true,
+          text: "等待发布",
+          isAblePress: false,
         },
         {
           ID: 1,
