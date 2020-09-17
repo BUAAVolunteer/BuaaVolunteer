@@ -43,7 +43,6 @@ Component({
       //console.log(qqNum)
       let that = this;
       //获取个人信息
-      // TODO：在流程完成后修改为从全局变量获取个人信息，并且规范化变量名
       getName = app.globalData.name;
       getPhone = app.globalData.phone;
       getPersonNum = app.globalData.personNum;
@@ -170,14 +169,14 @@ Component({
       let addList = "formList.formInfo[" + ID + "].";
       if (type == "checkbox" || type == "radio") {
         let choose = e.detail.choose;
-        let addl = addList + "choose";
+        let addPath = addList + "choose";
         this.setData({
-          [addl]: choose,
+          [addPath]: choose,
         });
       }
-      let addl = addList + "input_text";
+      let addPath = addList + "input_text";
       this.setData({
-        [addl]: input_text,
+        [addPath]: input_text,
       });
     },
     getInputValue: function () {
@@ -187,6 +186,8 @@ Component({
       this.setData({
         loading: true,
       });
+      this.loading._showloading()
+      listItem = []
       listItem.push(getName);
       listItem.push(getPhone);
       listItem.push(getPersonNum);
@@ -194,6 +195,7 @@ Component({
       listItem.push(getCampus);
 
       let that = this;
+      uploadList = [];
       let duration = 0;
       let detail = "";
 
@@ -283,6 +285,7 @@ Component({
         });
         listItem = [];
         //that.watch();
+        this.loading.hideLoading()
         return;
       }
       listItem.push(app.globalData.openid);
@@ -292,13 +295,12 @@ Component({
       console.log(listItem);
       uploadList.push(listItem);
       listItem = [];
-      console.log(uploadList);
       wx.cloud.callFunction({
         name: "uploadData",
         data: {
           title: that.data.formList.title,
           signUpTime: that.data.signUpTime,
-          list: uploadList,
+          list: listItem,
           limit: limit,
         },
         success: function (res) {
@@ -317,6 +319,7 @@ Component({
               },
             });
             //that.watch();
+            that.loading.hideLoading()
             return;
           } else {
             //发送订阅消息
@@ -332,6 +335,7 @@ Component({
                 that.setData({
                   loading: false,
                 });
+                that.loading.hideLoading()
                 //成功提示
                 wx.showModal({
                   title: "提交成功",
