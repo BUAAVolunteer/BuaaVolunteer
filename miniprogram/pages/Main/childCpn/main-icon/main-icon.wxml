@@ -3,6 +3,7 @@
   <view class="middle-nav" bindtap="volunteer">
     <!-- background -->
     <image wx:if="{{iconInf.pre}}" class="middle-icon" src="/assets/image/main/pre.png" />
+    <image wx:elif="{{iconInf.isComplete}}" class="middle-icon" src="/assets/image/main/complete.png" />
     <image wx:else class="middle-icon--show" src="/assets/image/main/show.png" />
     <view class="box">
       <view class="box-header">
@@ -12,7 +13,7 @@
         />
         <view class="box-header__text">{{iconInf.title}}</view>
       </view>
-      <view class="box-content" wx:if="{{!iconInf.pre}}">
+      <view class="box-content" wx:if="{{!iconInf.pre || iconInf.isComplete}}">
         <view>时间:</view>
         <view class="box-content__inner">{{iconInf.textarea}}</view>
         <view>地点:</view>
