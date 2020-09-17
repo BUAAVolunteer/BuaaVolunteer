@@ -20,7 +20,7 @@ exports.main = async (event, context) => {
 		})
 		.then(()=> {
 			return db.collection('person').where({
-				phone: event.list[1]
+				phone: event.list[0][1]
 			}).update({
 				data:{
 					qualification: ["测试1"]
@@ -39,8 +39,8 @@ exports.main = async (event, context) => {
 			//记录已经报名成功的人的openid
 			success = res
 			if (res) {
-				var l = uploadList.length - 3
-				var openid = uploadList[l]
+				var l = uploadList[0].length - 3
+				var openid = uploadList[0][l]
 				console.log(openid)
 				return db.collection('project').where({
 					title: event.title
@@ -202,7 +202,7 @@ function afterSuccess(event) {
 	inf.score = "待定";
 	inf.signUpTime = event.signUpTime;
 	console.log(inf)
-	let phone = event.list[1];
+	let phone = event.list[0][1];
 	return db.collection('person').where({
 		phone: phone
 	}).update({

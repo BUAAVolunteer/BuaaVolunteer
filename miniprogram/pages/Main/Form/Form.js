@@ -144,7 +144,7 @@ Component({
       this.setData({
         loading: true,
       });
-      this.loading._showloading()
+      this.loading._showLoading()
 
       // -----------个人信息的push-----------
       listItem = []
@@ -257,13 +257,12 @@ Component({
       console.log(limit);
       console.log(listItem);
       uploadList.push(listItem);
-      listItem = [];
       wx.cloud.callFunction({
         name: "uploadData",
         data: {
           title: that.data.formList.title,
           signUpTime: that.data.signUpTime,
-          list: listItem,
+          list: uploadList,
           limit: limit,
         },
         success: function (res) {

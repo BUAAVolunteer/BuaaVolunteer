@@ -209,7 +209,6 @@ Component({
             var currentTime = current.time;
             var postDate = initList[j].date;
             var postTime = initList[j].time;
-            console.log("start check")
             if (
               (currentDate < postDate ||
               (currentDate == postDate && currentTime < postTime)) &&
@@ -217,8 +216,9 @@ Component({
             ) {
               isPre = true;
               isNeedAdd = true
+            } else if (initList[j].check == 1) {
+              isNeedAdd = true
             } else if ((currentDate == postDate) && initList[j].check == 2) {
-              console.log("check yes")
               isComplete = true
               isNeedAdd = true
             }
