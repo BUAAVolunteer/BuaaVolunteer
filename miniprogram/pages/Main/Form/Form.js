@@ -7,6 +7,7 @@ let getName, getPhone, getPersonNum, getQQNum, getCampus; //person集合获取�
 let uploadList = [], //总上传数据
   listItem = []; //一个人的信息
 let qqNum;
+let isPress = false;
 Component({
   properties: {
     qqNum: {
@@ -140,6 +141,10 @@ Component({
       });
     },
     getInputValue: function () {
+      if (isPress) {
+        return
+      }
+      isPress = true
       // -----------最后进行数据处理并且上传的方法-----------
       this.setData({
         loading: true,
@@ -281,6 +286,7 @@ Component({
               },
             });
             //that.watch();
+            isPress = false
             that.loading.hideLoading()
             return;
           } else {
@@ -298,6 +304,7 @@ Component({
                   loading: false,
                 });
                 that.loading.hideLoading()
+                isPress = false
                 //成功提示
                 wx.showModal({
                   title: "提交成功",
