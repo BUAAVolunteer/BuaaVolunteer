@@ -9,7 +9,7 @@
       <view class="box-header">
         <image
           class="box-header__pics"
-          src="/assets/image/project/{{iconInf.title}}.jpg"
+          src="/assets/image/project/{{iconInf._id}}.jpg"
         />
         <view class="box-header__text">{{iconInf.title}}</view>
       </view>
