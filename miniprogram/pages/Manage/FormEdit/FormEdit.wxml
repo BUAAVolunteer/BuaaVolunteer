@@ -41,7 +41,7 @@
 
 <!--底部组件-->
 <!--悬浮按钮第一层-->
-<view class="footer {{button ? 'button-common-hide' : 'button-common'}}">
+<view class="footer button-common {{button ? 'button-common-hide' : ''}}">
   <formedit-icon iconSrc="/assets/icons/formedit/add.png" bindtap="add"></formedit-icon>
   <formedit-icon iconSrc="/assets/icons/formedit/submit.png" bindtap="submit"></formedit-icon>
 </view>

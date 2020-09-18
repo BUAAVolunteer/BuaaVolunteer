@@ -92,10 +92,6 @@ page {
   margin-top: 9rpx;
 }
 
-.page-state {
-  /* transform: translate(10%, 0%); */
-}
-
 .footer
 .bottom {
   display: flex;
