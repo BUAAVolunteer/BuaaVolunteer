@@ -68,6 +68,7 @@ page {
 }
 
 .profile-pic {
+  display: none;
   bottom: -550px;
   position: fixed;
   transition: transform 0.7s ease;

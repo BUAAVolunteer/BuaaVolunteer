@@ -1,7 +1,7 @@
 // pages/main/main.js
 let app = getApp();
 const db = wx.cloud.database();
-var projectList = []; // 页面招募志愿项目数据
+var projectList, initList; // 页面招募志愿项目数据
 var current = {}; // 服务器时间
 var ID; //打开的悬浮窗信息在数组中的位置
 Component({
@@ -27,8 +27,8 @@ Component({
         {
           ID: 0,
           name: "signUpNow",
-          text: "立即报名",
-          isAblePress: true,
+          text: "等待发布",
+          isAblePress: false,
         },
         {
           ID: 1,
@@ -170,7 +170,7 @@ Component({
         })
         .then((res) => {
           // console.log(res)
-          var initList = res.result.data;
+          initList = res.result.data;
           // 对得到的项目列表进行排序，详见js中的sort函数
           initList.sort(function (a, b) {
             if (a.date < b.date || (a.date == b.date && a.time < b.time)) {
@@ -179,12 +179,6 @@ Component({
               return 1;
             }
           });
-          projectList = [];
-          for (let i = 0; i < initList.length; i++) {
-            if (initList[i].check == 1) {
-              projectList.push(initList[i]);
-            }
-          }
         })
         .then(() => {
           // 获取目前的服务器时间
@@ -204,36 +198,55 @@ Component({
           var recruitList = [];
           var fillList = [];
           var preList = [];
-          for (let i = 0; i < projectList.length; i++) {
+          projectList = [];
+          var i = 0
+          console.log(initList)
+          for (let j = 0; j < initList.length; j++) {
             var isPre = false;
+            var isComplete = false
+            var isNeedAdd = false
             var currentDate = current.date;
             var currentTime = current.time;
-            var postDate = projectList[i].date;
-            var postTime = projectList[i].time;
+            var postDate = initList[j].date;
+            var postTime = initList[j].time;
             if (
-              currentDate < postDate ||
-              (currentDate == postDate && currentTime < postTime)
+              (currentDate < postDate ||
+              (currentDate == postDate && currentTime < postTime)) &&
+              initList[j].check == 1
             ) {
               isPre = true;
+              isNeedAdd = true
+            } else if (initList[j].check == 1) {
+              isNeedAdd = true
+            } else if ((currentDate == postDate) && initList[j].check == 2) {
+              isComplete = true
+              isNeedAdd = true
             }
-            var isInner = false;
-            if (projectList[i].innerList.indexOf(app.globalData.openid) != -1) {
-              isInner = true;
-            }
-            projectList[i].pre = isPre;
-            projectList[i].isInner = isInner;
-            projectList[i].ID = i;
-            if (!isPre) {
-              recruitList.push(projectList[i]);
-              isOdd = !isOdd;
-            } else if (fillList.length == 2) {
-              preList.push(projectList[i]);
-            } else if (isOdd) {
-              fillList.push(projectList[i]);
-            } else {
-              preList.push(projectList[i]);
+            if (isNeedAdd) {
+              projectList.push(initList[j])
+              projectList[i].isComplete = isComplete
+              var isInner = false;
+              if (projectList[i].innerList.indexOf(app.globalData.openid) != -1) {
+                isInner = true;
+              }
+              projectList[i].pre = isPre;
+              projectList[i].isInner = isInner;
+              projectList[i].ID = i;
+              if (!isPre) {
+                recruitList.push(projectList[i]);
+                isOdd = !isOdd;
+              } else if (fillList.length == 2) {
+                preList.push(projectList[i]);
+              } else if (isOdd) {
+                fillList.push(projectList[i]);
+              } else {
+                preList.push(projectList[i]);
+              }
+              i += 1
             }
           }
+          console.log(projectList)
+          console.log(initList)
           that.setData({
             recruitList,
             fillList,
@@ -250,12 +263,26 @@ Component({
     openHover(e) {
       ID = e.detail;
       var hoverDetail = this.data.hoverDetail;
+      var pre = projectList[ID].pre
+      if (typeof(pre) == "undefined" || (!pre && pre != 0) || isNaN(pre)){
+        wx.showToast({
+          title: '请等待加载完成',
+          icon: 'none',
+          image: '',
+          duration: 1000,
+          mask: true,
+        });
+        return
+      }
       hoverDetail.button[0].isAblePress =
-        !projectList[ID].pre || projectList[ID].isInner;
+        (!projectList[ID].pre || projectList[ID].isInner) && !projectList[ID].isComplete;
       if (projectList[ID].pre) {
         hoverDetail.button[0].text = "等待发布";
       } else {
         hoverDetail.button[0].text = "立即报名";
+      }
+      if (projectList[ID].isComplete) {
+        hoverDetail.button[0].text = "报名结束"
       }
       this.setData({
         showDetail: projectList[ID],
