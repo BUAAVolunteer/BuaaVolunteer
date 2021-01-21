@@ -50,7 +50,7 @@ class Util {
                 exportList : exportInfo.downloadList
             }
         }).then(res => {
-            //console.log(res)
+            console.log(res)
             //下载Excel
             return wx.cloud.downloadFile({
                 fileID: res.result.fileID
@@ -65,7 +65,9 @@ class Util {
             //console.log(res.savedFilePath)
             //自动打开Excel
             return wx.openDocument({
-                filePath: res.savedFilePath
+                filePath: res.savedFilePath,
+                fileType: "xlsx",
+                showMenu: true
             })
         }).then(res => {
             let returnData = {};
