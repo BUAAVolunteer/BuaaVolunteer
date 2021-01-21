@@ -15,7 +15,7 @@ Component({
     },
   },
   lifetimes:{
-    created() {
+    attached() {
       console.log(this.properties.history)
     },
   },
