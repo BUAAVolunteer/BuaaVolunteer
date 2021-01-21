@@ -59,7 +59,8 @@ class Util {
             //console.log(res.tempFilePath)
             //保存Excel
             return wx.saveFile({
-                tempFilePath: res.tempFilePath
+                tempFilePath: res.tempFilePath,
+                filePath: wx.env.USER_DATA_PATH + '/' + exportInfo.fileName + ".xlsx"
             })
         }).then(res => {
             //console.log(res.savedFilePath)
