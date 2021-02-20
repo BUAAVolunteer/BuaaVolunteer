@@ -4,33 +4,49 @@ Component({
   /**
    * 组件的属性列表
    */
-  properties: {
-
-  },
+  properties: {},
 
   /**
    * 组件的初始数据
    */
   data: {
-    
+    comment_list: [],
   },
 
   /**
    * 组件的方法列表
    */
   methods: {
-
+    deleteItem(e) {
+      let index = parseInt(e.currentTarget.id);
+      let _id = this.data.comment_list[index]._id;
+      db.collection("feedback")
+        .doc(_id)
+        .remove()
+        .then(
+          this.setData({
+            comment_list: this.data.comment_list.splice(index, 1),
+          })
+        );
+    },
   },
-
+  /**
+   * 组件的生命周期
+   */
   lifetimes: {
     created() {
-      db.collection('feedback')
-        .get().then(e => {
-          console.log(e)//奇奇怪怪不能引用
+      db.collection("feedback")
+        .get()
+        .then((e) => {
+          let comment_list = e.data.map((n) => {
+            n.open = false;
+            return n;
+          });
+          console.log(comment_list);
           this.setData({
-            comment_list: e.data
-          })
-        })
-    }
-  }
-})
+            comment_list,
+          });
+        });
+    },
+  },
+});

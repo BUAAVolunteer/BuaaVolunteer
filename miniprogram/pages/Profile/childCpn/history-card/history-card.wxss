@@ -3,8 +3,8 @@
   border-radius: 5px;
   height: 250rpx;
   margin: 30rpx auto;
-  padding: 20rpx 100rpx;
-  width: 75vw;  
+  padding: 20rpx 90rpx;
+  width: 75vw;
 }
 
 .wrapper {

@@ -29,7 +29,6 @@
     />
   </view>
 </list>
-
 <lx-hover id="hover" detail="{{hoverDetail}}" bind:hoverConfirm="buttonPress">
   <view>
     <view class="header">

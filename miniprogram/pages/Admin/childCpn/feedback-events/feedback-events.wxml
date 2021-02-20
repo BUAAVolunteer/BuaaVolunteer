@@ -1,8 +1,53 @@
 <!--pages/Admin/childCpn/feedback-events/feedback-events.wxml-->
-<view class="eventscard">
-  <view class="title">项目名称：{{comment.title}}</view>
-  <view class="title">昵称：{{comment.name}}</view>
-  <view class="item">
-    <view class="item-content">{{comment.textarea}}</view>
+<!-- 回复反馈组件，以check区分是否已处理 -->
+<view
+  class="comment {{open?'animation--all':''}}"
+  style="background-color: {{check?'#7DBE80':'#535353'}}"
+>
+  <!-- 反馈项目 -->
+  <view class="comment__title">
+    <text>{{comment.title}}</text>
+  </view>
+  <!-- 反馈时间 -->
+  <view class="comment__time">
+    <text>2020-12-27 23：58</text>
+  </view>
+  <!-- 反馈内容 -->
+  <view class="comment__content">
+    {{comment.textarea}}
+  </view>
+  <!-- 反馈部分，以check区分展示状态 -->
+  <view
+    class="{{check?'comment__textarea--display':'comment__textarea'}} {{open?'animation--jumpin':''}}"
+  >
+    <!-- 若已回复，直接展示内容 -->
+    <text wx:if="{{check}}">回 复 ：{{comment.content}}</text>
+    <!-- 否则，展示可回复的输入框 -->
+    <textarea
+      wx:else
+      auto-height="{{true}}"
+      placeholder="回 复 ："
+      placeholder-class="input-placeholder"
+      model:value="{{content}}"
+    ></textarea>
+  </view>
+  <!-- 针对未处理comment可执行的操作 -->
+  <view wx:if="{{!check}}" class="comment__action">
+    <!-- 回复（打开和收起回复框） -->
+    <view class="action__comment {{open?'animation--toleft':'animation--toright'}}" bindtap="open">
+      <image src="/assets/icons/feedback/comment.png" />
+    </view>
+    <!-- 提交回复 -->
+    <view class="action__send">
+      <image
+        class="{{open?'animation--rotatein':''}}"
+        src="/assets/icons/feedback/submit.png"
+        bindtap="submit"
+      />
+    </view>
+    <!-- 删除comment -->
+    <view class="action__delete {{open?'animation--toright ':'animation--toleft'}}">
+      <image src="/assets/icons/feedback/delete.png" bindtap="delete" />
+    </view>
   </view>
 </view>

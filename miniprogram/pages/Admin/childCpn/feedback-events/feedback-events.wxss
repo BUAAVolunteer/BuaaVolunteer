@@ -1,39 +1,195 @@
-/* pages/Admin/childCpn/feedback-events/feedback-events.wxss */
-.feedbacks {
-  overflow: auto;
-  height: 90%;
+.comment {
+  border-radius: 20rpx;
+  color: #fff;
+  margin: 30rpx auto;
+  padding: 45rpx 30rpx 30rpx;
+  width: 650rpx;
 }
 
-.eventscard {
-  background-color: #fff;
-  border: 1rpx solid var(--greyLight);
+.comment__title {
+  font-size: 27.17rpx;
+  letter-spacing: 5rpx;
+  margin-bottom: 8rpx;
+}
+
+.comment__time {
+  font-size: 22.64rpx;
+  letter-spacing: 5.5rpx;
+  margin-bottom: 15rpx;
+}
+
+.comment__textarea--display,
+.comment__textarea {
+  border-radius: 20rpx;
+  font-size: 23rpx;
+  color: #fff;
+  margin-left: -10rpx;
+  padding: 25rpx;
+  width: 610rpx;
+}
+
+.comment__textarea {
+  display: none;
+  margin-bottom: 30rpx;
+}
+
+.comment__textarea--display {
+  background-color: #99CF9C;
+}
+
+.comment__textarea textarea {
+  min-height: 25rpx;
+}
+
+.input-placeholder {
+  color: lightgray;
+}
+
+.comment__content {
+  font-size: 27rpx;
+  letter-spacing: 3.63rpx;
+  line-height: 40rpx;
+  margin-bottom: 20rpx;
+}
+
+.comment__action {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 0 auto;
-  margin-top: 30rpx;
-  width: 90%;
-  box-shadow: var(--box-shadow-common);
+  justify-content: space-between;
 }
 
-.title {
-  display: flex;
-  margin: 20rpx;
-  overflow: hidden;
+.action__comment image,
+.action__delete image {
+  width: 30rpx;
+  height: 30rpx;
 }
 
-.item {
-  align-items: flex-start;
-  display: flex;
-  flex-direction: column;
-  padding: 20rpx;
+.action__comment {
+  margin-left: 120rpx;
 }
 
-.item-content {
-  display: -webkit-box;
-  text-align: left;
-  word-break: break-word;
-  -webkit-line-orient: vertical;
-  -webkit-line-clamp: 10;
-  -webkit-overflow-scrolling: touch;
+.action__delete {
+  margin-right: 120rpx;
+}
+
+.action__send image {
+  width: 0;
+  height: 0;
+}
+
+.action__delete,
+.action__send image {
+  transition: all 0.65s ease;
+}
+
+
+
+/*------------下面为动画---------------*/
+
+.animation--all {
+  animation: shake 0.5s forwards;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateY(0rpx);
+  }
+
+  50% {
+    transform: translateY(-10rpx);
+  }
+
+  80% {
+    transform: translateY(10rpx);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.animation--toleft {
+  animation: toleft 0.85s forwards;
+}
+
+.animation--toright {
+  animation: toright 0.85s forwards;
+}
+
+@keyframes toleft {
+  0% {
+    transform: translateX(0);
+  }
+
+  40% {
+    transform: translateX(-60rpx) rotate(-8deg);
+  }
+
+  60% {
+    transform: translateX(-40rpx) rotate(20deg);
+  }
+
+  100% {
+    transform: translateX(-50rpx) rotate(0);
+  }
+}
+
+@keyframes toright {
+  0% {
+    transform: translateX(0);
+  }
+
+  40% {
+    transform: translateX(60rpx) rotate(8deg);
+  }
+
+  60% {
+    transform: translateX(40rpx) rotate(-20deg);
+  }
+
+  100% {
+    transform: translateX(50rpx) rotate(0);
+  }
+}
+
+.animation--rotatein {
+  animation: rotatein 0.65s forwards;
+}
+
+@keyframes rotatein {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    width: 30rpx;
+    height: 30rpx;
+    transform: rotate(360deg);
+  }
+}
+
+.animation--jumpin {
+  display: block;
+  animation: jumpin 0.5s forwards;
+}
+
+@keyframes jumpin {
+  0% {
+    transform: translateY(0rpx);
+    width: 0;
+    background-color: #535353;
+  }
+
+  50% {
+    transform: translateY(-25rpx);
+    width: 610rpx;
+  }
+
+  80% {
+    transform: translateY(30rpx);
+  }
+
+  100% {
+    transform: translateY(0);
+    background-color: #707070;
+  }
 }

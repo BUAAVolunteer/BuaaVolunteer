@@ -19,48 +19,41 @@
     "checkSiteMap": true,
     "uploadWithSourceMap": true,
     "compileHotReLoad": false,
-    "useMultiFrameRuntime": false,
+    "useMultiFrameRuntime": true,
     "useApiHook": true,
+    "useApiHostProcess": true,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
       "outputPath": ""
     },
+    "bundle": false,
     "useIsolateContext": true,
     "useCompilerModule": true,
     "userConfirmedUseCompilerModuleSwitch": false,
+    "userConfirmedBundleSwitch": false,
     "packNpmManually": false,
-    "packNpmRelationList": []
+    "packNpmRelationList": [],
+    "minifyWXSS": true
   },
   "appid": "wxbef368e6c04e1ca1",
   "projectname": "volunteer",
-  "libVersion": "2.12.0",
+  "libVersion": "2.14.1",
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
   "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
   "compileType": "miniprogram",
   "condition": {
-    "search": {
-      "current": -1,
-      "list": []
-    },
-    "conversation": {
-      "current": -1,
-      "list": []
-    },
     "plugin": {
-      "current": -1,
       "list": []
     },
     "game": {
       "list": []
     },
     "gamePlugin": {
-      "current": -1,
       "list": []
     },
     "miniprogram": {
-      "current": -1,
       "list": [
         {
           "id": 0,
@@ -151,6 +144,17 @@
           "name": "pages/Main/Form/Form",
           "pathName": "pages/Main/Form/Form",
           "query": "title=北航一日游",
+          "scene": null
+        },
+        {
+          "name": "Feedback",
+          "pathName": "pages/Profile/Feedback/Feedback",
+          "query": "id=0c928181-1d01-49aa-8675-17d7ba583f51",
+          "scene": null
+        },
+        {
+          "name": "FeedbackComment",
+          "pathName": "pages/Admin/FeedbackComment/FeedbackComment",
           "scene": null
         }
       ]
