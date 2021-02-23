@@ -20,12 +20,14 @@ Component({
     deleteItem(e) {
       let index = parseInt(e.currentTarget.id);
       let _id = this.data.comment_list[index]._id;
+      let list = this.data.comment_list;
+      list.splice(index, 1);
       db.collection("feedback")
         .doc(_id)
         .remove()
         .then(
           this.setData({
-            comment_list: this.data.comment_list.splice(index, 1),
+            comment_list: list,
           })
         );
     },

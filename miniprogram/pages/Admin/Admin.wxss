@@ -27,8 +27,6 @@
   height: 100%;
   display: flex;
   position: fixed;
-  text-align: center;
-  font-weight: bold;
 }
 
 .swiper-title {

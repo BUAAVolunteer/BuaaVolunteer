@@ -4,50 +4,54 @@
   class="comment {{open?'animation--all':''}}"
   style="background-color: {{check?'#7DBE80':'#535353'}}"
 >
-  <!-- 反馈项目 -->
-  <view class="comment__title">
-    <text>{{comment.title}}</text>
+  <view class="comment__main">
+     <!-- 反馈项目 -->
+    <view class="comment__main__title">
+      项目: {{comment.title}}
+    </view>
+    <!-- 反馈时间 -->
+    <view class="comment__main__time">
+      {{comment.time}}
+    </view>
+    <!-- 反馈内容 -->
+    <view class="comment__main__content">
+      {{comment.name}} {{comment.contact}}: {{comment.textarea}}
+    </view>
   </view>
-  <!-- 反馈时间 -->
-  <view class="comment__time">
-    <text>2020-12-27 23：58</text>
-  </view>
-  <!-- 反馈内容 -->
-  <view class="comment__content">
-    {{comment.textarea}}
-  </view>
-  <!-- 反馈部分，以check区分展示状态 -->
-  <view
-    class="{{check?'comment__textarea--display':'comment__textarea'}} {{open?'animation--jumpin':''}}"
-  >
+   <!-- 反馈部分，以check区分展示状态 -->
+  <view class="{{check?'comment__input--display':'comment__input'}} {{open?'animation--input':''}}">
     <!-- 若已回复，直接展示内容 -->
-    <text wx:if="{{check}}">回 复 ：{{comment.content}}</text>
+    <view wx:if="{{check}}">回复：{{content}}</view>
     <!-- 否则，展示可回复的输入框 -->
     <textarea
       wx:else
       auto-height="{{true}}"
-      placeholder="回 复 ："
+      placeholder="回复："
       placeholder-class="input-placeholder"
+      maxlength="-1"
       model:value="{{content}}"
     ></textarea>
   </view>
   <!-- 针对未处理comment可执行的操作 -->
-  <view wx:if="{{!check}}" class="comment__action">
-    <!-- 回复（打开和收起回复框） -->
-    <view class="action__comment {{open?'animation--toleft':'animation--toright'}}" bindtap="open">
-      <image src="/assets/icons/feedback/comment.png" />
-    </view>
+  <view class="comment__action" wx:if="{{!check}}">
+     <!-- 回复（打开和收起回复框） -->
+    <image
+      bindtap="open"
+      class="comment__action__open  {{open?'animation--toleft':'animation--toright'}}"
+      src="/assets/icons/feedback/comment.png"
+    />
     <!-- 提交回复 -->
-    <view class="action__send">
-      <image
-        class="{{open?'animation--rotatein':''}}"
-        src="/assets/icons/feedback/submit.png"
-        bindtap="submit"
-      />
-    </view>
+    <image
+      bindtap="submit"
+      class="comment__action__submit {{open?'animation--submit':''}}"
+      src="/assets/icons/feedback/submit.png"
+    />
     <!-- 删除comment -->
-    <view class="action__delete {{open?'animation--toright ':'animation--toleft'}}">
-      <image src="/assets/icons/feedback/delete.png" bindtap="delete" />
-    </view>
+    <image
+      bindtap="delete"
+      class="comment__action__delete {{open?'animation--toright':'animation--toleft'}}"
+      src="/assets/icons/feedback/delete.png"
+    />
   </view>
 </view>
+

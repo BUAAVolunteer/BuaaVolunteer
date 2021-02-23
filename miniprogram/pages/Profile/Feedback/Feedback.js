@@ -61,7 +61,13 @@ Component({
       let text = this.data.text;
       let contact = this.data.contact;
       let that = this;
-      if (title == "") {
+      let day = new Date().getFullYear();
+      let month = new Date().getMonth();
+      let date = new Date().getDate();
+      let hour = new Date().getHours();
+      let minute = new Date().getMinutes();
+      let time = day + "-" + month + "-" + date + " " + hour + ":" + minute;
+      if (title == "小程序使用问题") {
         wx.showModal({
           title: "错误",
           content: "请选择要反馈的项目~",
@@ -99,7 +105,8 @@ Component({
               title,
               textarea: text,
               contact,
-              check: 0,
+              check: false,
+              time: time,
             },
             success: function () {
               that.loading.hideLoading();

@@ -1,97 +1,99 @@
+/* pages/Admin/childCpn/feedback-events/feedback-events.wxss */
+view {
+  box-sizing: border-box;
+}
+
 .comment {
   border-radius: 20rpx;
   color: #fff;
-  margin: 30rpx auto;
-  padding: 45rpx 30rpx 30rpx;
   width: 650rpx;
+  margin: 30rpx 50rpx;
+  padding: 45rpx 20rpx 30rpx;
 }
 
-.comment__title {
-  font-size: 27.17rpx;
-  letter-spacing: 5rpx;
-  margin-bottom: 8rpx;
+.comment__main {
+  padding: 0 10rpx;
 }
 
-.comment__time {
-  font-size: 22.64rpx;
-  letter-spacing: 5.5rpx;
+.comment__main__title,
+.comment__main__time,
+.comment__main__content {
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+}
+
+.comment__main__title {
+  letter-spacing: 3rpx;
+  font-size: 27rpx;
   margin-bottom: 15rpx;
 }
 
-.comment__textarea--display,
-.comment__textarea {
-  border-radius: 20rpx;
+.comment__main__time {
+  letter-spacing: 5rpx;
   font-size: 23rpx;
-  color: #fff;
-  margin-left: -10rpx;
-  padding: 25rpx;
-  width: 610rpx;
+  margin-bottom: 30rpx;
 }
 
-.comment__textarea {
+.comment__main__content {
+  font-size: 27rpx;
+  letter-spacing: 3rpx;
+  line-height: 41rpx;
+  margin-bottom: 30rpx;
+}
+
+.comment__input,
+.comment__input--display {
+  border-radius: 20rpx;
+  font-size: 23rpx;
+  letter-spacing: 3rpx;
+  line-height: 41rpx;
+  min-height: 83rpx;
+  padding: 30rpx;
+}
+
+.comment__input {
+  background-color: #707070;
   display: none;
   margin-bottom: 30rpx;
 }
 
-.comment__textarea--display {
+.comment__input--display {
   background-color: #99CF9C;
 }
 
-.comment__textarea textarea {
-  min-height: 25rpx;
+.comment__input textarea {
+  letter-spacing: 3rpx;
+  width: auto;
 }
 
 .input-placeholder {
   color: lightgray;
 }
 
-.comment__content {
-  font-size: 27rpx;
-  letter-spacing: 3.63rpx;
-  line-height: 40rpx;
-  margin-bottom: 20rpx;
-}
-
 .comment__action {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
-.action__comment image,
-.action__delete image {
-  width: 30rpx;
+.comment__action image {
   height: 30rpx;
+  width: 30rpx;
 }
 
-.action__comment {
-  margin-left: 120rpx;
+.comment__action__submit {
+  display: none;
 }
 
-.action__delete {
-  margin-right: 120rpx;
-}
-
-.action__send image {
-  width: 0;
-  height: 0;
-}
-
-.action__delete,
-.action__send image {
-  transition: all 0.65s ease;
-}
-
-
-
-/*------------下面为动画---------------*/
-
+/*
+* 以下为动画部分
+*/
 .animation--all {
-  animation: shake 0.5s forwards;
+  animation: shake 0.5s;
 }
 
 @keyframes shake {
   0% {
-    transform: translateY(0rpx);
+    transform: translateY(0);
   }
 
   50% {
@@ -117,66 +119,50 @@
 
 @keyframes toleft {
   0% {
-    transform: translateX(0);
+    transform: translateX(60rpx);
   }
 
   40% {
-    transform: translateX(-60rpx) rotate(-8deg);
+    transform: rotate(-8deg);
   }
 
   60% {
-    transform: translateX(-40rpx) rotate(20deg);
+    transform: translateX(40rpx) rotate(20deg);
   }
 
   100% {
-    transform: translateX(-50rpx) rotate(0);
+    transform: translateX(0rpx) rotate(0);
   }
 }
 
 @keyframes toright {
   0% {
-    transform: translateX(0);
+    transform: translateX(-60rpx);
   }
 
   40% {
-    transform: translateX(60rpx) rotate(8deg);
+    transform: rotate(8deg);
   }
 
   60% {
-    transform: translateX(40rpx) rotate(-20deg);
+    transform: translateX(-40rpx) rotate(-20deg);
   }
 
   100% {
-    transform: translateX(50rpx) rotate(0);
+    transform: translateX(0rpx) rotate(0);
   }
 }
 
-.animation--rotatein {
-  animation: rotatein 0.65s forwards;
-}
-
-@keyframes rotatein {
-  0% {
-    transform: rotate(0);
-  }
-
-  100% {
-    width: 30rpx;
-    height: 30rpx;
-    transform: rotate(360deg);
-  }
-}
-
-.animation--jumpin {
+.animation--input {
   display: block;
-  animation: jumpin 0.5s forwards;
+  animation: jumpin 0.75s forwards;
 }
 
 @keyframes jumpin {
   0% {
+    background-color: #535353;
     transform: translateY(0rpx);
     width: 0;
-    background-color: #535353;
   }
 
   50% {
@@ -189,7 +175,27 @@
   }
 
   100% {
-    transform: translateY(0);
     background-color: #707070;
+    transform: translateY(0);
+  }
+
+}
+
+.animation--submit {
+  animation: rotatein 0.65s forwards;
+  display: block;
+}
+
+@keyframes rotatein {
+  0% {
+    transform: rotate(0);
+    width: 0rpx;
+    height: 0rpx;
+  }
+
+  100% {
+    width: 30rpx;
+    height: 30rpx;
+    transform: rotate(360deg);
   }
 }
