@@ -43,6 +43,8 @@ view {
 
 .comment__input,
 .comment__input--display {
+  text-align: justify;
+  text-align-last: left;
   border-radius: 20rpx;
   font-size: 23rpx;
   letter-spacing: 3rpx;
