@@ -43,8 +43,9 @@ function deleteSignUp(event, i) {
   if (i == event.initList.length) {
     return true
   } else {
-    return db.collection('person').where({
-      phone: event.initList[i].phone
+    return new Promise((resolve, reject)=>{
+      db.collection('person').where({
+        phone: event.initList[i].phone
     }).update({
       data:{
         history: _.pull({
@@ -55,10 +56,14 @@ function deleteSignUp(event, i) {
     })
     .then(() => {
       console.log("complete" + i)
-      return deleteSignUp(event, i + 1)
+      resolve(deleteSignUp(event, i + 1)) 
+    })
     })
   }
 }
+      
+
+ 
 
 function addRecord(event) {
   var promiseList = []
@@ -139,34 +144,37 @@ function addDetail(event, inf, detail, duration, score, i, j) {
 }
 
 function confirmUpdate(event) {
-  return db.collection('confirm').where({
-    title: event.title
-  }).get()
-  .then(res => {
-    var historyList = res.data[0].historyList
-    var updateList = []
-    for (let i = 1; i < event.list.length; i++) {
-      var update = event.list[i]
-      update.shift()
-      updateList.push(update)
-    }
-    console.log("event.time=" + event.time)
-    historyList[event.ID].isCheck = 1
-    historyList[event.ID].data = updateList
-    console.log(historyList)
-    return historyList
-  })
-  .then(res => {
-    return db.collection('confirm').where({
+  return new Promise((resolve, reject)=>{
+    db.collection('confirm').where({
       title: event.title
-    }).update({
-      data: {
-        historyList: res
-      }
+    }).get()
+    .then(res=>{
+      var historyList = res.data[0].historyList
+      var updateList = []
+      for (let i = 1; i < event.list.length; i++) {
+        var update = event.list[i]
+        update.shift()
+       updateList.push(update)
+     }
+      console.log("event.time=" + event.time)
+      historyList[event.ID].isCheck = true
+      historyList[event.ID].data = updateList
+      console.log(historyList)
+      return historyList 
     })
+    .then(res => {
+      return db.collection('confirm').where({
+        title: event.title
+      }).update({
+        data: {
+          historyList: res
+        }
+      })
+    })
+    .then(() => {
+      console.log("success")
+      resolve("success") 
+    })    
   })
-  .then(() => {
-    console.log("success")
-    return "success"
-  })
+  
 }
