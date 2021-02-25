@@ -1,31 +1,28 @@
 /* pages/Profile/childCpn/history-card/history-card.wxss */
 .wrapper {
-  border-radius: 5px;
-  height: 250rpx;
-  margin: 30rpx auto;
-  padding: 20rpx 90rpx;
-  width: 75vw;
+  border-radius: 20rpx;
+  margin: 30rpx 50rpx 0;
+  padding: 45rpx 50rpx 45rpx;
 }
 
 .wrapper {
-  align-items: left;
-  box-shadow: 0 2px 12px var(--greyLight);
   background-color: #fff;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: flex-start;
 }
 
 .item {
-  font-weight: bold;
-  font-size: 25rpx;
+  font-family: MicrosoftYaHei;
+  font-weight: normal;
+  font-size: 27rpx;
   letter-spacing: 2rpx;
+  line-height: 64rpx;
 }
 
-.border-bottom {
-  border-bottom: 2px solid var(--oliveLight);
-}
-
-.border-bottom-thin {
-  border-bottom: 1px solid var(--oliveLight);
+.item__detail{
+  color: #F98D24;
+  font-size: 27rpx;
+  font-family: Microsoft YaHei;
+  font-weight: bold;
 }

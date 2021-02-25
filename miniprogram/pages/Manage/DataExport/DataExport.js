@@ -101,6 +101,7 @@ Component({
       });
     },
     download: function (e) {
+      this.loading._showLoading();
       var that = this;
       var DownloadList = [];
       DownloadList.push(that.data.signUpTitle);

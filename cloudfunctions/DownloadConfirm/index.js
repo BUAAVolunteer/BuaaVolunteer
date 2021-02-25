@@ -15,7 +15,6 @@ exports.main = async (event, context) => {
 	try {
     console.log(event)
     return new Promise((resolve, reject) => {
-      resolve()
     })
     .then(() => {
       //在已报名人员中删除记录
@@ -35,7 +34,7 @@ exports.main = async (event, context) => {
     })
   } catch (e) {
     console.error(e)
-    return e
+    resolve(e)
   }
 }
 
@@ -69,7 +68,7 @@ function addRecord(event) {
   var promiseList = []
   for (let i = 2; i < event.list.length; i++) {
     let p = new Promise((resolve, reject) => {
-      resolve()
+    resolve()
     })
     .then(() => {
       console.log(i)
@@ -81,7 +80,7 @@ function addRecord(event) {
       let score = event.list[i][3] * 0.2;
       inf.score = score.toFixed(1);
       console.log("recordAdd" + i)
-      addDetail(event, inf, detail, duration, score, i, 0)
+      resolve(addDetail(event, inf, detail, duration, score, i, 0))
     })
     promiseList.push(p)
   }
@@ -134,7 +133,7 @@ function addDetail(event, inf, detail, duration, score, i, j) {
           })
         })
         .then(() => {
-          console.log("detailAdd" + j)
+          resolve(console.log("detailAdd" + j))
         })
       }
     })
