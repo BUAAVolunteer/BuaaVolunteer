@@ -1,55 +1,23 @@
-<!-- 以下选项 -->
-<view class="swiper-tab">
-    <view class="swiper-tab-item title {{currentTab==0?'active':''}}" data-current="0" bindtap="clickTab">
-        北校区
-    </view>
-    <view class="swiper-tab-item title {{currentTab==1?'active':''}}" data-current="1" bindtap="clickTab">
-        南校区
-    </view>
+<page-meta>
+  <navigation-bar front-color="#fff" background-color="#fff" />
+</page-meta>
+<view class="intro-header">
+  <!-- 搜索 -->
+  <view class="intro-search">
+    <image class="intro-search__icon" src="/assets/icons/introduction/search.png" />
+    <input class="intro-search__input" bindinput="search" placeholder="搜索志愿项目" />
+  </view>
 </view>
-<swiper class="swiper" current="{{currentTab}}" duration="300" bindchange="swiperTab">
-    <view class="p-top">
-        <swiper-item>
-            <scroll-view scroll-y="{{true}}">
-                <view class="video_wrap">
-                    <navigator url="../detail/detail?id={{item.id}}" class="video_item" wx:for="{{videoList}}" wx:key="index">
-                        <view class="video_img padding-xl radius shadow-warp bg-white margin-top">
-                            <image src="{{item.imgSrc}}" />
-                        </view>
-                        <view class="bg-white padding-lr">
-                            <view class="solids-bottom padding-xs flex align-center">
-                                <view class="flex-sub text-center">
-                                    <view class="solid-bottom text-lg padding">
-                                        <text class="text-black">{{item.desc}}</text>
-                                    </view>
-                                </view>
-                            </view>
-                        </view>
-                    </navigator>
-                </view>
-            </scroll-view>
-        </swiper-item>
-    </view>
-    <view>
-        <swiper-item>
-            <scroll-view scroll-y="{{true}}">
-                <view class="video_wrap">
-                    <navigator url="../detail/detail?id={{item.id}}" class="video_item" wx:for="{{videoList1}}" wx:key="index">
-                        <view class="video_img padding-xl radius shadow-warp bg-white margin-top">
-                            <image src="{{item.imgSrc}}" />
-                        </view>
-                        <view class="bg-white padding-lr">
-                            <view class="solids-bottom padding-xs flex align-center">
-                                <view class="flex-sub text-center">
-                                    <view class="solid-bottom text-lg padding">
-                                        <text class="text-black">{{item.desc}}</text>
-                                    </view>
-                                </view>
-                            </view>
-                        </view>
-                    </navigator>
-                </view>
-            </scroll-view>
-        </swiper-item>
-    </view>
-</swiper>
+<!-- 主页面卡片 -->
+<view class="intro-main">
+  <block wx:for="{{volunteerList}}">
+    <navigator
+      wx:if="{{item.onShow}}"
+      class="intro-item"
+      url="./VolunteerMain/VolunteerMain?id={{item.id}}"
+      hover-class="none"
+    >
+      <image class="intro__inner" mode="widthFix" src="{{'/assets/image/project/' + item.desc + '.png'}}" />
+    </navigator>
+  </block>
+</view>

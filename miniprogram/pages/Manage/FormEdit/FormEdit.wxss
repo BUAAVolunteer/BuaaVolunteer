@@ -1,350 +1,128 @@
 /* pages/forms/forms.wxss */
 
 page {
-    background-color: white;
-    height: 80%;
+  background-color: white;
 }
 
-.edit-textarea {
-    height: 300rpx !important;
-    margin-top: 10rpx;
-    background-color: white;
-    margin-right: 2.5%;
-    width: 90%;
+/* 底层按钮父属性 */
+.footer {
+  display: flex;
+  justify-content: space-around;
+  transition: transform 0.3s ease;
+  position: fixed;
+  width: 100vw;  
 }
 
-.edit-checkbox-margin {
-    margin-top: 10rpx;
-    margin-left: 10rpx;
+/* 第一层按钮定位 */
+.button-common {
+  bottom: 10rpx;
 }
 
-.border {
-    border: solid;
-    border-width: thin;
-    border-color: var(--gray);
+/* 第二层按钮定位 */
+.button-hide {
+  bottom: -190rpx;
 }
 
-.edit-form-input {
-    border-bottom: 1px solid rgba(203, 200, 203, 1);
-    border-radius: 5rpx;
-    margin-right: 30rpx;
-    display: flex;
-    align-items: center;
+/* 第一层按钮下移 */
+.button-common-hide {
+  transform: translateY(200rpx);
 }
 
-.edit-title {
-    font-weight: lighter;
+/* 第二层按钮上移 */
+.button-common-show {
+  transform: translateY(-200rpx);
 }
 
-.describe {
-    font-weight: lighter;
-    font-size: smaller;
-    color: var(--red);
+/* 随第二层组件上移而显现的全局遮盖层 */
+.mask-bottom-show {
+  height: 1250rpx;
+  position: fixed;
+  top: 0;
+  width: 100vw;  
+}
+
+/* 上层组件全局高度 */
+.reports-container {
+  height: 100vh;
 }
 
 .addlist {
-    z-index: 5;
+  z-index: 2;
 }
 
 .but-each {
-    margin: 0;
-    padding: 0;
-    font-size: 28rpx;
-    text-align: left;
-    line-height: 1.5;
+  padding: 0;
 }
 
+/* 添加的5个按钮 */
+
+/* 公共样式 */
 .but-font {
-    left: 100rpx;
-    height: 50rpx;
-    width: 170rpx;
-    position: fixed;
-    font-size: 20rpx;
-    font-weight: bold;
-    border: 2px solid #fff;
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
-    border-radius: 0.04%;
-    background-color: white;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+  border: 2px solid #fff;
+  border-radius: 0.04%;
+  font-size: 20rpx;
+  font-weight: bold;
+  height: 50rpx;
+  left: 100rpx;
+  width: 170rpx;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;  
 }
 
+/* 各自定位 */
 .button1 {
-    bottom: 155rpx;
+  bottom: 155rpx;
 }
 
 .button2 {
-    bottom: 215rpx;
+  bottom: 215rpx;
 }
 
 .button3 {
-    bottom:275rpx;
+  bottom: 275rpx;
 }
 
 .button4 {
-    bottom:335rpx;
+  bottom: 335rpx;
 }
 
 .button5 {
-    bottom:395rpx;
+  bottom: 395rpx;
 }
 
-.add-img {
-    width: 100rpx;
-    height: 100rpx;
-    position: fixed;
-    bottom:50rpx;
-    left: 130rpx;
-    z-index: 5;
-    border-radius: 50%;
-    border: 2px solid #fff;
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
-}
-
-.submit-img {
-    width: 85rpx;
-    height: 85rpx;
-    position: fixed;
-    bottom:49rpx;
-    left: 235px;
-    z-index: 5;
-    border-radius: 50%;
-    border: 2px solid #fff;
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
-    padding: 7rpx;
-}
-
-.divLine {
-    background: #E0E3DA;
-    width: 100%;
-    height: 5rpx;
-    margin-top: 20rpx;
-}
-
-.form-describe-middle {
-    display: flex;
-    justify-content: center;
-    margin: 20rpx;
-    font-size: 20rpx;
-    font-weight: lighter;
-    width: 90%;
-}
-
-.form-describe {
-    text-align: left;
-    margin: 0;
-    font-size: 20rpx;
-    font-weight: lighter;
-    width: 90%;
-}
-
-.radio-box {
-    width: 100%;
-    display: block;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    margin: 25rpx 25rpx 25rpx 5rpx;
-    line-height: 10rpx;
-}
-
-.radio-text {
-    display: flex;
-    vertical-align: center;
-    text-align: center;
-    font-weight: bold;
-    margin: 20rpx;
-}
-
-.radio-group {
-    align-items: center;
-    min-height: 100rpx;
-    justify-content: space-between;
-    margin: 10rpx 0rpx 19rpx 0rpx;
-}
-
+/* 页面标题 */
 .reports-header {
-    display: flex;
-    padding: 20rpx 0rpx;
-    align-items: center;
-    justify-content: center;
-    font-size: 34rpx;
-    font-family: PingFang-SC-Bold;
-    font-weight: bold;
-    letter-spacing: 2rpx;
+  align-items: center;
+  display: flex;
+  font-size: 34rpx;
+  font-weight: bold;
+  justify-content: center;
+  letter-spacing: 2rpx;
+  padding: 20rpx 0rpx;
 }
-
-.reports-header-line {
-    width: 10rpx;
-    height: 36rpx;
-    border-radius: 5rpx;
-    background-color: green;
-    margin: 0 14rpx 0rpx 28rpx;
-    min-width: 90%;
-}
-
-.reports-form-btn {
-    width: 694rpx;
-    height: 90rpx;
-    background: green;
-    border-radius: 10rpx;
-    font-size: 36rpx;
-    font-family: PingFang-SC-Bold;
-    font-weight: bold;
-    color: rgba(255, 255, 255, 1);
-    text-align: center;
-    line-height: 90rpx;
-}
-
-.form-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-bottom: 100rpx;
-}
-
-.reports-form-box {
-    display: flex;
-    margin-bottom: 30rpx;
-    margin-left: 28rpx;
-}
-
-.edit-form-box {
-    display: flex;
-    margin-bottom: 30rpx;
-    margin-left: 18rpx;
-}
-
-.reports-form-input {
-    width: 332rpx;
-    height: 60rpx;
-    border: 1px solid rgba(203, 200, 203, 1);
-    border-radius: 5rpx;
-    margin-right: 30rpx;
-    display: flex;
-    align-items: center;
-    margin-top: 10rpx;
-}
-
-.form-inputname {
-    font-size: 28rpx;
-    font-family: PingFang-SC-Bold;
-    font-weight: bold;
-    color: rgba(51, 51, 51, 1);
-    width: 90%;
-}
-
-.form-inputtext {
-    width: 450rpx;
-    height: 30rpx;
-    font-family: PingFang-SC-Bold;
-    font-weight: bold;
-    color: rgba(51, 51, 51, 1);
-    font-size: 28rpx;
-    display: flex;
-    align-items: center;
-    margin-left: 10rpx;
-}
-
-.form-upload {
-    height: 50rpx;
-    opacity: 0;
-}
-
-.form-inputtext>.picker {
-    font-family: PingFang-SC-Bold;
-    font-weight: bold;
-    color: rgba(51, 51, 51, 1);
-    font-size: 28rpx
-}
-
-.form-inner {
-    display: block;
-}
-
-.input-all-width {
-    min-width: 90%;
-}
-
-.input-l-width {
-    width: 260rpx;
-    margin-right: 10rpx;
-}
-
-.force_text {
-    color: rgba(219, 44, 31, 1);
-    padding-left: 10rpx;
-}
-
-.picker {
-    font-size: 24rpx;
-    width: 450rpx;
-    height: 30rpx;
-}
-
 
 /*右侧展示层  */
 
 .page-top {
-    position: relative;
-    top: 0;
-    left: 0;
-    width: 750rpx;
-    height: 1300rpx;
-    background-color: white;
-    transition: All 0.4s ease;
-    -webkit-transition: All 0.4s ease;
-    -moz-transition: All 0.4s ease;
-    -o-transition: All 0.4s ease;
+  width: 750rpx;
+  transition: transform 0.5s ease;
 }
 
 .page-state {
-    transform: rotate(0deg) scale(1) translate(60%, 0%);
-    -webkit-transform: rotate(0deg) scale(1) translate(60%, 0%);
-    -ms-transform: rotate(0deg) scale(1) translate(60%, 0%);
-    -moz-transform: rotate(0deg) scale(1) translate(60%, 0%);
-    -o-transform: rotate(0deg) scale(1) translate(60%, 0%);
-}
-
-.imgw {
-    width: 100%;
-}
-
-
-/*右侧遮罩层  */
-
-.page-mask {
-    position: fixed;
-    width: 100%;
-    height: 2000rpx;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-}
-
-.page-mask-show {
-    display: none;
+  transform: rotate(0deg) scale(1) translate(60%, 0%);
 }
 
 .page-state-hide {
-    display: none;
+  display: none;
 }
 
+/*右侧遮罩层  */
 .open {
-    width: 60%;
-    background-color: var(--greyLight);
-    position: fixed;
-}
-
-
-/*选项*/
-
-.value {
-    width: 70%;
-}
-
-.limit {
-    width: 10%;
-}
-
-.duration {
-    width: 10%;
+  width: 60%;
+  background-color: var(--greyLight);
+  z-index: 5;
+  position: absolute;
 }

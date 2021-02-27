@@ -1,0 +1,6 @@
+<!--components/lx-checkbox-single/lx-checkbox-single.wxml-->
+<checkbox-group class="checkbox" bindchange="enter">
+  <checkbox class="checkbox-item" value="addForce" checked="{{checked}}">
+    <view class="checkbox-item-text">{{content}}</view>
+  </checkbox>
+</checkbox-group>

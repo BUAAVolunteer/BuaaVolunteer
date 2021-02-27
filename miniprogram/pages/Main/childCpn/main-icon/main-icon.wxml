@@ -1,12 +1,24 @@
 <!-- 自带阴影和右边圆角的按钮 其余属性由传入参数确定 -->
-<navigator class="middle-nav" url="{{iconInf.navigateUrl}}">
-    <image class="middle-icon" src="{{iconInf.imgsrc}}" />
-    <view class="inside-box">
-      	<text class="middle-text">{{iconInf.iconText}}</text>
-     		<image class="middle-pics" src="{{iconInf.picsrc}}" />
+<view class="wrapper">
+  <view class="middle-nav" bindtap="volunteer">
+    <!-- background -->
+    <image wx:if="{{iconInf.pre}}" class="middle-icon" src="/assets/image/main/pre.png" />
+    <image wx:elif="{{iconInf.isComplete}}" class="middle-icon--show" src="/assets/image/main/complete.png" />
+    <image wx:else class="middle-icon--show" src="/assets/image/main/show.png" />
+    <view class="box">
+      <view class="box-header">
+        <image
+          class="box-header__pics"
+          src="/assets/image/project/{{iconInf._id}}.jpg"
+        />
+        <view class="box-header__text">{{iconInf.title}}</view>
+      </view>
+      <view class="box-content" wx:if="{{!iconInf.pre || iconInf.isComplete}}">
+        <view>时间:</view>
+        <view class="box-content__inner">{{iconInf.textarea}}</view>
+        <view>地点:</view>
+        <view class="box-content__inner">{{iconInf.place}}</view>
+      </view>
     </view>
-</navigator>
-<lx-hover class="center" id="msg" bindtap="volunteer">
-		<image class="wanted-pics" src="cloud://buaalx-w5aor.6275-buaalx-w5aor-1300053277/main/招募有投影.png" />
-		<text class="top-date">本志愿将于\n{{volunteer_list[id].date}}日{{volunteer_list[id].time}}\n发布招募</text>
-</lx-hover>
+  </view>
+</view>

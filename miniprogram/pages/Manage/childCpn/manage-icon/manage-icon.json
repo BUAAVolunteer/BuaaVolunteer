@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "lx-nav-pt" : "/components/lx-nav-pt/lx-nav-pt"
+  }
+}

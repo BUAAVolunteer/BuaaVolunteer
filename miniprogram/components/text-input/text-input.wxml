@@ -1,15 +1,13 @@
 <!--components/my-form/my-input.wxml-->
-<view class='reports-form-box form-inner'>
-	<view class='form-inputname'>
-		{{forminfo.label}}
-		<text wx:if="{{forminfo.force}}" class="force_text">*</text>
-	</view>
-  <view wx:if="{{forminfo.text.length>0}}" class="form-describe">
-    
-      {{forminfo.text}}
+<view class="reports-form-box">
+  <view class="form-inputname">
+    {{formInfo.label}}
+    <text wx:if="{{formInfo.isForce}}" class="force-text">*</text>
   </view>
-	<view class='reports-form-input input-all-width'>
-		<input bindinput='enterValue' class='form-inputtext' />
-	</view>
+  <view wx:if="{{formInfo.describe.length>0}}" class="form-describe mt-10">
+    {{formInfo.describe}}
+  </view>
+  <view class="form-input" hover-class="none" hover-stop-propagation="false">
+    <input class="form-input-text" bindblur="enterValue" />
+  </view>
 </view>
-

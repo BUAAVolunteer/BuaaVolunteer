@@ -1,49 +1,63 @@
 /* 组件基本样式 */
-.middle-item {
-  margin-left:15rpx;
-  display: flex;
-  align-items: center;
-  position: relative;
-  margin-top:35rpx;
-  width:335rpx;
-}
-.middle-icon{
-  width:370rpx;
-  height:240rpx;
-  margin-left: -25rpx;
-}
-.middle-nav{
-  width:335rpx;
-}
-.inside-box{
-  width:370rpx;
-  height: 120rpx;
-  position: absolute;
-  margin-top: -185rpx;
-  display: flex;
-  align-items: center;
-}
-.middle-pics{
-  width:120rpx;
-  height: 120rpx;
-  position: absolute;
-  border-radius: 150rpx;
-  margin-left: 25rpx;
+.wrapper {
+  box-shadow: 0 0 28px 2px rgba(163, 188, 218, 0.2);
+  display: inline-block;
+  margin-bottom: 30rpx;
+  border-radius: 30rpx;
 }
 
-/* 文本样式 */
-
-.middle-text {
-  font-size: 29rpx;
-  font-family: Microsoft YaHei;
-  color: #5a5d5d;
+.middle-nav {
   position: relative;
-  margin-left: 170rpx;
 }
-.wanted-pics{
-  width:335rpx;
+
+.middle-icon {
+  width: 335rpx;
+  height: 207rpx;
+}
+
+.middle-icon--show {
+  width: 335rpx;
   height: 444rpx;
 }
-.top-date{
-  margin-top: -25rpx;
+
+.box {
+  top: 47rpx;
+  position: absolute;
+  width: 100%;
+}
+
+.box-header {
+  display: flex;
+  align-items: center;
+}
+
+.box-header__pics {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  margin-left: 21rpx;
+}
+
+.box-header__text {
+  font-size: 30rpx;
+  color: #5a5d5d;
+  margin-left: 17rpx;
+  width: 170rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.box-content {
+  color: #5a5d5d;
+  font-size: 25rpx;
+  line-height: 50rpx;
+  padding: 28rpx 0 0 22.5rpx;
+}
+
+.box-content__inner {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
 }

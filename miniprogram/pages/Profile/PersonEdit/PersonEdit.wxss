@@ -1,1 +1,4 @@
 /* pages/person/person.wxss */
+.wrapper {
+  padding: 20rpx;
+}

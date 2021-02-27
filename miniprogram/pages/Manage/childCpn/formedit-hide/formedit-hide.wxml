@@ -1,0 +1,99 @@
+<!-- pages/Manage/childCpn/formedit-hide/formedit-hide.wxml -->
+<!-- 左侧展开层-首页 -->
+<lx-drawer-left open="{{open}}">
+  <!-- 切换组件类型 -->
+  <view wx:if="{{isTypeOne}}" class="header">
+    <view class="header-title">切换组件类型</view>
+    <picker
+      mode="selector"
+      range="{{typePicker}}"
+      range-key="{{'show'}}"
+      value="{{pickerValue}}"
+      bindchange="typeChange"
+    >
+      <view class="header-content">
+        <view class="title">{{typeValue}}</view>
+        <image
+          class="header-content-image"
+          src="/assets/icons/formedit/down.png"
+          mode="widthFix"
+        ></image>
+      </view>
+    </picker>
+  </view>
+  <!-- 输入标题 -->
+  <view wx:if="{{isTypeZero}}" class="edit">
+    <view class="edit-title">标题</view>
+    <view class="edit-content">
+      <input
+        class="edit-content-input"
+        bindinput="enterInfo"
+        id="label"
+        value="{{formItem.label}}"
+      />
+    </view>
+  </view>
+  <!-- 描述 -->
+  <view wx:if="{{isTypeTwo}}" class="edit">
+    <view class="edit-title">描述</view>
+    <view class="edit-content">
+      <input
+        class="edit-content-input"
+        bindinput="enterInfo"
+        id="describe"
+        value="{{formItem.describe}}"
+      />
+    </view>
+  </view>
+  <!-- 组件是否必填 -->
+  <lx-checkbox-single
+    wx:if="{{isTypeTwo}}"
+    checked="{{formItem.isForce}}"
+    content="这是个必填项"
+    bind:checkboxChange="addForce"
+  ></lx-checkbox-single>
+  <!-- 选项编辑 -->
+  <view wx:if="{{isTypeThree}}" class="edit">
+    <view class="edit-title">选项</view>
+    <view class="edit-describe">
+      编辑格式："选项内容 选项限额
+      基础时长"。请确保选项内容与限额间，限额与时长间都只有一个空格，并以换行为两选项之间的分隔，限额与时长均默认为0。
+    </view>
+    <textarea
+      auto-height="{{false}}"
+      class="border edit-textarea block"
+      bindblur="enterOption"
+      value="{{option}}"
+    />
+  </view>
+  <block wx:if="{{isTypeThree}}">
+    <lx-checkbox-single
+      checked="{{formItem.isNumber}}"
+      content="自动加选项编号"
+      bind:checkboxChange="addNumber"
+    ></lx-checkbox-single>
+    <lx-checkbox-single
+      checked="{{formItem.isNote}}"
+      content="该题存在备注"
+      bind:checkboxChange="addNote"
+    ></lx-checkbox-single>
+    <!-- 备注 -->
+    <view class="edit">
+      <view class="edit-describe">
+        备注即现有时长表格式中的备注，选择该选项的志愿者将会获得此备注，为简化流程，建议只标注时间与通用的备注。
+        例：2020-01-01（全天）
+      </view>
+    </view>
+    <view wx:if="{{formItem.isNote}}" class="edit">
+      <view class="edit-title">备注</view>
+      <textarea
+        auto-height="{{false}}"
+        class="edit-textarea"
+        bindinput="enterNote"
+        value="{{note}}"
+      />
+    </view>
+  </block>
+</lx-drawer-left>
+<!-- 右侧阴影 -->
+<view wx:if="{{open}}" class="page-mask" bindtap="offCanvas" />

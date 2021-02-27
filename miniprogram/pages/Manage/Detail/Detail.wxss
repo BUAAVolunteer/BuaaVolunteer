@@ -1,94 +1,41 @@
-page {
-    background-color: var(--greyLight);
-}
-
-.reports-header {
-    display: flex;
-    padding: 20rpx 0rpx;
-    align-items: center;
-    justify-content: left;
-    font-size: 34rpx;
-    font-family: PingFang-SC-Bold;
-    font-weight: bold;
-    letter-spacing: 2rpx;
-}
-
-.reports-header-line {
-    width: 10rpx;
-    height: 36rpx;
-    border-radius: 5rpx;
-    background-color: green;
-    margin: 0 14rpx 0rpx 28rpx;
-}
-
-.reports-header-name {
-    font-size: 34rpx;
-    font-family: PingFang-SC-Bold;
-    font-weight: bold;
-    color: green;
+.wrapper {
+  padding: 20rpx;
 }
 
 .title {
-    font-size: 50rpx;
-    font-weight: bold;
-    justify-content: center;
+  font: var(--title);
+  text-align: center;
 }
 
-.red {
-    color: var(--red);
-    font-weight: bold;
+.header {
+  justify-content: center;
+  font-weight: lighter;
+  margin: 20rpx 0;
 }
 
-.edit-form-input {
-    margin-right: 60rpx;
-    display: flex;
-    align-items: center;
-    background-color: white;
-    margin-left: 10rpx;
-    height: 80rpx;
+.header-text {
+  color: var(--red);
+  font-weight: bold;
 }
 
-.describe {
-    justify-content: center;
-    font-weight: lighter;
-    margin: 20rpx;
+.label {
+  display: flex;
+  align-items: center;
+  font-size: 34rpx;
+  font-weight: bold;
+  letter-spacing: 2rpx;
 }
 
-.edit-textarea {
-    height: 200rpx !important;
-    width: 90%;
-    margin: 10rpx;
-    background-color: white;
-    overflow: hidden;
+.label-line {
+  width: 10rpx;
+  height: 36rpx;
+  border-radius: 5rpx;
+  background-color: green;
+  margin-right: 14rpx;
 }
 
-.edit-picker {
-    width: 90%;
-    margin: 10rpx;
-    background-color: white;
-}
-
-.edit-checkbox-margin {
-    margin-top: 10rpx;
-    margin-left: 10rpx;
-}
-
-.border {
-    border: solid;
-    border-width: thin;
-    border-color: var(--gray);
-}
-
-.edit-title {
-    margin-left: 5rpx;
-    font-weight: bold;
-}
-
-.edit-form-box {
-    margin-bottom: 30rpx;
-    margin-left: 18rpx;
-}
-
-.form-inner {
-    display: block;
+.label-name {
+  color: green;
+  font-size: 34rpx;
+  font-weight: bold;
 }

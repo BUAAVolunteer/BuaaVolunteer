@@ -1,0 +1,4 @@
+<!--components/lx-drawer-left/lx-drawer-left.wxml-->
+<scroll-view class="wrapper {{open ? 'open' : 'hide'}}" style="height:{{scrollHeight}}" scroll-y="{{true}}">
+  <slot></slot>
+</scroll-view>

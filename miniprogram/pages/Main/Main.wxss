@@ -2,40 +2,90 @@ page {
   background-color: white;
 }
 
-/* logo图片定位 */
-.logo {
-  margin-top: -50rpx;
-}
-
-/* 中部按钮相对定位 */
-.middle-icon {
-  margin-top: 35rpx;
-}
-
-/* 蓝小咕定位 */
-
-.gugugu {
-  height: 170rpx;
-  width: 120rpx;
-  max-width: 100%;
-  position: relative;
-  margin-top: 45rpx;
-  left: 510rpx;
-}
-.middle-text{
-  position: absolute;
-  margin-top: 25rpx;
-  font-size: 30rpx;
-  font-family: Microsoft YaHei;
-  font-weight: bold;
-  margin-left: 30rpx;
+.middle-text {
   color: #5a5d5d;
+  font-size: 30rpx;
+  font-weight: bold;
+  margin: 25rpx 0 30rpx 50rpx;
 }
 
-.middle-icon{
-  align-content: flex-start;
+.middle-icon {
+  padding: 40rpx 27.5rpx 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  height: auto;
+}
+
+/* 填充部分 */
+.fill {
+  display: inline-block;
+  margin-bottom: 30rpx;
+  height: 444rpx;
+  width: 335rpx;
+}
+
+.bottom-img {
+  position: relative;
+}
+
+/* 蓝小咕定位 */
+.gugugu {
+  height: 170rpx;
+  width: 120rpx;
+  position: absolute;
+  right: 30rpx;
+  top: -25rpx;
+}
+
+.gugugu--fadein {
+  animation: toleft 1s ease forwards;
+}
+
+@keyframes toleft {
+  0% {
+    right: -120rpx;
+  }
+  100% {
+    right: 30rpx;
+  }
+}
+
+.gugugu--active {
+  transform: translateX(-750rpx);
+  transition: transform 1s;
+}
+
+/* 悬浮窗样式 */
+.header-date {
+  color: #5a5d5d;
+  font-size: 30rpx;
+  line-height: 30rpx;
+  letter-spacing: 3rpx;
+  margin-bottom: 15rpx;
+  text-align: center;
+  padding-left: 3rpx;
+}
+
+.middle {
+  background-color: #bfe6e9;
+  border-radius: 30rpx;
+  color: #5a5d5d;
+  height: 500rpx;
+  line-height: 45rpx;
+  margin: 0 30rpx 5rpx;
+  padding: 10rpx 20rpx;
+  width: 500rpx;
+}
+
+.items-title {
+  font-weight: normal;
+}
+
+.texts {
+  font-weight: normal;
+}
+
+.footer {
+  justify-content: space-around;
+  display: flex;
 }

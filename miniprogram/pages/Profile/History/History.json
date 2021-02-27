@@ -1,4 +1,6 @@
 {
-    "usingComponents": {},
+    "usingComponents": {
+        "history-card":"../childCpn/history-card/history-card"
+    },
     "navigationBarTitleText": ""
 }

@@ -1,4 +1,9 @@
 {
-    "usingComponents": {},
-    "navigationBarTitleText": "负责人入口"
+  "component": true,
+  "navigationBarTitleText": "管理员界面",
+  "usingComponents": {
+    "FeedbackComment": "/pages/Admin/FeedbackComment/FeedbackComment",
+    "Score": "/pages/Admin/Score/Score",
+    "Manage": "/pages/Manage/Manage"
+  }
 }

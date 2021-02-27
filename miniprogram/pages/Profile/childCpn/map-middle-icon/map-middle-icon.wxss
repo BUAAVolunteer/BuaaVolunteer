@@ -1,0 +1,74 @@
+/* pages/Profile/childCpn/map-middle-icon/map-middle-icon.wxss */
+.clock {
+  width: 130rpx;
+}
+
+.center {
+  text-align: center;
+}
+
+.step1 {
+  color: var(--purple);
+  left: 0rpx;
+  position: absolute;
+  top: 890rpx;
+}
+
+.icon1 {
+  width: 100rpx;
+}
+
+.step2 {
+  color: var(--blue);
+  left: 310rpx;
+  position: absolute;
+  top: 930rpx;
+}
+
+.icon2 {
+  width: 250rpx;
+}
+
+.step3 {
+  color: var(--cyan);
+  left: 160rpx;
+  position: absolute;
+  top: 720rpx;
+}
+
+.icon3 {
+  width: 180rpx;
+}
+
+.step4 {
+  color: var(--green);
+  left: 500rpx;
+  position: absolute;
+  top: 700rpx;
+}
+
+.icon4 {
+  width: 120rpx;
+}
+
+.step5 {
+  color: var(--yellow);
+  left: 340rpx;
+  position: absolute;
+  top: 560rpx;
+}
+
+.icon5 {
+  width: 160rpx;
+}
+
+.step6 {
+  color: var(--orange);
+  left: 570rpx;
+  position: absolute;
+  top: 450rpx;
+}
+
+.icon6 {
+  width: 140rpx;
+}

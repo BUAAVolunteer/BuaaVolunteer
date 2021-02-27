@@ -1,7 +1,11 @@
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
 
-cloud.init()
+cloud.init({
+	env: 'volunteer-platform-1v92i',
+  	// env: 'buaalx-w5aor',
+	traceUser: true,
+})
 
 const db = cloud.database();
 const _ = db.command;
@@ -9,24 +13,43 @@ const _ = db.command;
 // 云函数入口函数
 exports.main = async (event, context) => {
 	try {
-		db.collection('project').where({
-			title: event.title
-		}).update({
-			data:{
-				check: 1
-			}
+		return promise = new Promise((resolve,reject) =>{
+			resolve();
 		})
-		return await db.collection('form').where({
+		.then(() =>{
+			return db.collection('project').where({
 				title: event.title
-		}).update({
+			}).update({
+				data:{
+					check: 1
+				}
+			})
+		})
+		.then(() =>{
+			return db.collection('form').where({
+				title: event.title
+			}).update({
 				data:{
 					formInfo: event.formInfo,
 					fieldName: event.fieldName,
-					over: 1
+					isOver: false
 				}
+			})
 		})
-  } catch(e) {
+		.then(() =>{
+			return db.collection('signUp').where({
+				title: event.title
+			}).update({
+				data:{
+					list: event.list
+				}
+			})
+		})
+		.catch(err =>{
+			reject(err)
+		})
+	} catch(e) {
 		console.error(e)
 		return e;
-  }
+	}
 }

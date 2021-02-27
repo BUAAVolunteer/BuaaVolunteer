@@ -1,0 +1,62 @@
+/* components/lx-input/lx-input.wxss */
+.textarea,
+.input {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 0 0 20rpx;
+}
+
+.input {
+  height: 160rpx;
+}
+
+.textarea {
+  height: 280rpx;
+}
+
+.textarea-header,
+.input-header {
+  align-items: center;
+  display: flex;
+}
+
+.textarea-header__title,
+.input-header__title {
+  font-weight: bold;
+}
+
+.textarea-header__force,
+.input-header__force {
+  color: var(--red);
+  margin-left: 20rpx;
+}
+
+.textarea-content,
+.input-content {
+  font-size: 28rpx;
+  position: relative;
+}
+
+.textarea-content__inner,
+.input-content__inner {
+  background-color: #fff;
+  border-radius: 4px;
+  border: 1px solid #dcdfe6;
+  color: #606266;
+  outline: none;
+  text-align: left;
+}
+
+.input-content__inner {
+  padding: 0 15rpx;
+  line-height: 80rpx;
+  height: 80rpx;
+}
+
+.textarea-content__inner {
+  padding: 15rpx;
+  line-height: 40rpx;
+  height: 160rpx;
+  width: 670rpx;
+}

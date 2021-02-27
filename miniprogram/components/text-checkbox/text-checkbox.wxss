@@ -1,1 +1,61 @@
 /* components/text-checkbox/text-checkbox.wxss */
+
+/* 整体容器 */
+.reports-form-box {
+  margin: 30rpx auto 0;
+  width: 90%;
+  font-family: 微软雅黑;
+}
+
+/* 标题 */
+.form-inputname {
+  font-size: 28rpx;
+  font-family: PingFang-SC-Bold;
+  font-weight: bold;
+  color: rgba(51, 51, 51, 1);
+}
+
+.force-text {
+  color: rgba(219, 44, 31, 1);
+  margin-left: 10rpx;
+}
+
+/* 子选项排列 */
+.radio-group {
+  margin: 10rpx 0rpx 19rpx 0rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.radio-wrapper {
+  margin: 10rpx 0;
+}
+
+.radio-item {
+  margin: 0 5rpx;
+}
+
+.radio-item--describe {
+  font-weight: lighter;
+  font-size: 20rpx;
+  line-height: 20rpx;
+}
+
+/* 说明类字体 */
+.form-describe {
+  font-size: 25rpx;
+  font-weight: lighter;
+  line-height: 25rpx;
+}
+
+.mt-10 {
+  margin-top: 10rpx;
+}
+
+.ml-20 {
+  margin-left: 20rpx;
+}
+
+.grey {
+  color: #999;
+}

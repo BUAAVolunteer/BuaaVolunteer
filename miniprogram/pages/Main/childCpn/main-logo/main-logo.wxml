@@ -1,4 +1,23 @@
 <!-- 首页页面logo -->
 <view class="logo-position">
-  <image class="logo-img" mode="widthFix" src="/assests/image/logo.png" />
+  <navigator url="/pages/Main/Bulletin/Bulletin" class="board" open-type="navigate" hover-class="navigator-hover">
+    <view class="outsider"></view>
+    <view class="main-board">
+      <view class="main-board__inner">
+        <text class="board-text">公告：近期活动请查收~</text>
+        <image
+          class="boardpic-left"
+          mode="widthFix"
+          src="/assets/image/main/1.png"/>
+        <image
+          class="boardpic-else1"
+          mode="widthFix"
+          src="/assets/image/main/1.png"/>
+        <image
+          class="boardpic-else2"
+          mode="widthFix"
+          src="/assets/image/main/1.png"
+      /></view>
+    </view>
+  </navigator>
 </view>

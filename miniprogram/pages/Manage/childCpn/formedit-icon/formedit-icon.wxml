@@ -1,0 +1,4 @@
+<!--pages/Manage/childCpn/formedit-icon/formedit-icon.wxml-->
+<view class="icon" hover-class="none">
+  <image class="icon-img" mode="widthFix" src="{{iconSrc}}" />
+</view>

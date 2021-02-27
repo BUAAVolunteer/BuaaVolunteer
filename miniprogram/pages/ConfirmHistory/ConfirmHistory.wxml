@@ -1,0 +1,25 @@
+<!--miniprogram/pages/ConfirmHistory/ConfirmHistory.wxml-->
+<view class="header">
+  <view class="header-title">
+    {{title}}
+  </view>
+</view>
+<scroll-view class="main" scroll-y="{{true}}">
+  <block wx:for="{{ConfirmList}}" wx:key="index">
+    <view
+      bind:tap="openNav"
+      id="{{item.ID}}"
+      class="main-item {{item.isCheck ? 'main-item__check' : ''}}"
+    >
+      <view class="main-item-icon {{item.isCheck ? 'main-item-icon__check' : ''}}">
+        {{item.isCheck ? '确认完毕' : '尚未确认'}}
+      </view>
+      <view class="main-item-content">
+        招募时间：{{item.time}}
+      </view>
+    </view>
+  </block>
+</scroll-view>
+
+<!-- 全局加载组件 -->
+<lx-loading id="loading"></lx-loading>

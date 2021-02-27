@@ -1,0 +1,13 @@
+<!--pages/Profile/childCpn/history-card/history-card.wxml-->
+<view class="wrapper">
+  <view class="item border-bottom">参与时间：{{history.note}}</view>
+  <view class="item border-bottom-thin">项目名称：{{history.title}}</view>
+  <view class="item border-bottom-thin">
+    <text>志愿得分：</text>
+    <text style="color:var(--orange);">{{history.score}}\t分</text>
+  </view>
+  <view class="item border-bottom-thin">
+    <text>志愿时长：</text>
+    <text style="color:var(--orange);">\t{{history.duration}}\th</text>
+  </view>
+</view>

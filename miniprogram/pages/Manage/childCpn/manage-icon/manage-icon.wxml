@@ -1,0 +1,57 @@
+<!--pages/Manage/childCpn/manage-icon/manage-icon.wxml-->
+<view class="wrapper" hover-class="none" hover-stop-propagation="false">
+  <view class="header {{project.open ? 'header-show':''}}">
+    <!--准备发布-->
+    <image wx:if="{{isPreparing}}" class="header-img" src="/assets/icons/manage/yes.png" />
+    <!--正在招募-->
+    <image wx:elif="{{isRecruit}}" class="header-img" src="/assets/icons/manage/working.png" />
+    <!--表单待编辑-->
+    <image
+      wx:elif="{{project.check==0}}"
+      class="header-img"
+      src="/assets/icons/manage/warning.png"
+    />
+    <!--招募结束/为编辑详细信息-->
+    <image wx:else class="header-img" src="/assets/icons/manage/stop.png" />
+    <view class="header-text">
+      {{project.title}}
+    </view>
+    <view class="header-assure" catchtap="openConfirm">
+      时长确认
+    </view>
+  </view>
+  <!-- 下部展开层 -->
+  <view wx:if="{{project.open}}" class="content">
+    <!--不能打开的按钮一-->
+    <lx-nav-pt
+      wx:if="{{!isFinish}}"
+      navImg="/assets/icons/manage/detail.png"
+      navText="详细信息"
+    ></lx-nav-pt>
+    <lx-nav-pt
+      wx:else
+      navUrl="/pages/Manage/Detail/Detail?title={{project.title}}"
+      navImg="/assets/icons/manage/detail.png"
+      navText="详细信息"
+    ></lx-nav-pt>
+    <!--不能打开的按钮二-->
+    <lx-nav-pt
+      wx:if="{{!isFinish}}"
+      navImg="/assets/icons/manage/edit.png"
+      navText="编辑表单"
+    ></lx-nav-pt>
+    <!--按钮二-->
+    <lx-nav-pt
+      wx:else
+      navUrl="/pages/Manage/FormEdit/FormEdit?title={{project.title}}"
+      navImg="/assets/icons/manage/edit.png"
+      navText="编辑表单"
+    ></lx-nav-pt>
+    <!--按钮三-->
+    <lx-nav-pt
+      navUrl="/pages/Manage/DataExport/DataExport?title={{project.title}}&date={{project.date}}"
+      navImg="/assets/icons/manage/down.png"
+      navText="导出数据"
+    ></lx-nav-pt>
+  </view>
+</view>

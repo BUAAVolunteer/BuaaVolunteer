@@ -8,6 +8,7 @@ Component({
       type: Array,
       value: [
         {
+          url: "",
           src: "", // 轮播图图片地址
         },
       ],

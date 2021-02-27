@@ -1,87 +1,54 @@
-// pages/comment/comment.js
-const db = wx.cloud.database()
-const com = db.command
-const app = getApp();
-Page({
+// pages/Admin/FeedbackComment/FeedbackComment.js
+const db = wx.cloud.database();
+Component({
+  /**
+   * 组件的属性列表
+   */
+  properties: {},
 
-    /**
-     * 页面的初始数据
-     */
-    data: {
-        comment_list: [{}],
-        answer: null
+  /**
+   * 组件的初始数据
+   */
+  data: {
+    comment_list: [],
+  },
+
+  /**
+   * 组件的方法列表
+   */
+  methods: {
+    deleteItem(e) {
+      let index = parseInt(e.currentTarget.id);
+      let _id = this.data.comment_list[index]._id;
+      let list = this.data.comment_list;
+      list.splice(index, 1);
+      db.collection("feedback")
+        .doc(_id)
+        .remove()
+        .then(
+          this.setData({
+            comment_list: list,
+          })
+        );
     },
-
-    /**
-     * 生命周期函数--监听页面加载
-     */
-    onLoad: function(options) {
-
+  },
+  /**
+   * 组件的生命周期
+   */
+  lifetimes: {
+    created() {
+      db.collection("feedback")
+        .get()
+        .then((e) => {
+          let comment_list = e.data.map((n) => {
+            n.open = false;
+            return n;
+          });
+        // console.log(comment_list);
+          this.setData({
+            comment_list,
+          });
+        });
     },
-    /*回复触发函数 */
-    answer: function() {
-        this.setData({
-            answer: 1
-        })
-    },
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function() {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function() {
-        wx.showLoading({
-            title: '加载中',
-        })
-        db.collection('question')
-            .get().then(e => {
-                //console.log(e.data.title);
-                this.setData({
-                    comment_list: e.data
-                })
-                wx.hideLoading()
-            })
-    },
-    answer: function() {
-
-    },
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function() {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function() {
-
-    },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function() {
-
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function() {
-
-    },
-
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function() {
-
-    }
-})
+  },
+});

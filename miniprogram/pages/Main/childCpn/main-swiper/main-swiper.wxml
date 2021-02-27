@@ -1,10 +1,23 @@
 <!-- 轮播图  -->
-<swiper class="screen-swiper" circular="{{true}}" autoplay="{{false}}" interval="5000" duration="500" bindchange="currentHandle">
+<swiper
+  class="screen-swiper"
+  circular="{{true}}"
+  autoplay="{{true}}"
+  interval="5000"
+  duration="500"
+  bindchange="currentHandle"
+>
   <swiper-item wx:for="{{imageList}}" wx:key="index">
-    <image src="{{item.src}}" mode="aspectFill" />
+    <navigator hover-class="none" url="/pages/OuterLink/OuterLink?url={{item.url}}">
+      <image src="{{item.src}}" mode="aspectFill" />
+    </navigator>
   </swiper-item>
 </swiper>
 <!-- 指示点 -->
 <view class="dot-display">
-  <view class="{{current === index ? 'dot-active':'dot'}}" wx:for="{{imageList}}" wx:key="index"></view>
+  <view
+    class="{{current === index ? 'dot-active':'dot'}}"
+    wx:for="{{imageList}}"
+    wx:key="index"
+  ></view>
 </view>

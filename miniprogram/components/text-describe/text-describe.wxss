@@ -1,1 +1,9 @@
 /* components/text-describe/text-describe.wxss */
+.form-describe-middle {
+  display: flex;
+  justify-content: center;
+  margin: 20rpx;
+  font-size: 25rpx;
+  font-weight: lighter;
+  font-family: 微软雅黑;
+}

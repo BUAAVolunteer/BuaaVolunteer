@@ -1,0 +1,23 @@
+<!--components/lx-picker/lx-picker.wxml-->
+<view class="picker" style="width:{{width}};">
+  <view class="picker-header">
+    <view class="picker-header__title">
+      {{title}}
+    </view>
+    <view wx:if="{{isForce}}" class="picker-header__force">
+      *
+    </view>
+  </view>
+  <!-- 特殊类型选择器 -->
+  <picker wx:if="{{isSpecial}}" mode="{{mode}}" model:value="{{content}}" class="picker-content">
+    <view class="picker-content__inner">
+      {{content}}
+    </view>
+  </picker>
+  <!-- 普通选择器 -->
+  <picker wx:if="{{isSelector}}" mode="{{mode}}" range="{{range}}" model:value="{{value}}" class="picker-content">
+    <view class="picker-content__inner">
+      {{range[value]}}
+    </view>
+  </picker>
+</view>

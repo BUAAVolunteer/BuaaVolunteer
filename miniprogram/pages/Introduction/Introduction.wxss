@@ -1,123 +1,37 @@
 /*@import "../../wxSearchView/wxSearchView.wxss";*/
-
-.padding-xl {
-    padding-top: 0rpx;
-    padding-left: 0rpx;
-    padding-right: 0rpx;
-    padding-bottom: 0rpx;
-    box-shadow: 0 0rpx 3rpx rgba(0, 0, 0, 0.2);
+page {
+  background-color: #fff;
 }
 
-.kind-list {
-    height: auto;
-    overflow: hidden;
-    justify-content: space-between;
-    align-items: center;
+.intro-header {
+  padding: 0rpx 75rpx;
 }
 
-.my_title {
-    display: flex;
-    align-items: center;
-    padding: 10rpx;
-    background-color: #ffffff;
+.intro-search {
+  align-items: center;
+  background-color: #f4f4f4;
+  border-radius: 40rpx;
+  display: flex;
+  justify-content: center;
+  height: 80rpx;
 }
 
-.logo {
-    flex: 7;
+.intro-search__icon {
+  width: 27rpx;
+  height: 27rpx;
+  margin-right: 18rpx;
 }
 
-.search_img {
-    padding-top: 10rpx;
+.intro-search__input {
+  color: #5a5d5d;
+  font-size: 12.5px;
+  letter-spacing: 3.2px;
+  text-align: center;
+  width: 90px;
 }
 
-.title {
-    color: var(--black);
-    justify-content: center;
-    font-weight: bold;
-}
-
-.search_icon {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.user_icon {
-    flex: 2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.video_wrap {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 10rpx;
-    justify-content: space-between;
-    margin: 5rpx;
-}
-
-.video_item {
-    width: 48%;
-    margin-bottom: 20rpx;
-}
-
-.video_img image {
-    width: 100%;
-    height: 230rpx;
-}
-
-.video_img {
-    position: relative;
-}
-
-.video_title {
-    font-size: 28rpx;
-    display: -webkit-box;
-    white-space: space normal;
-    text-overflow: ellipsis;
-    word-wrap: break-word;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-}
-
-
-/*滑动组件*/
-
-.swiper-tab {
-    width: 100%;
-    border-bottom: 2rpx solid #eeeeee;
-    text-align: center;
-    line-height: 80rpx;
-    height: 88rpx;
-    display: flex;
-    flex-flow: row;
-    justify-content: space-between;
-}
-
-.swiper-tab-item {
-    font-size: 30rpx;
-    display: inline-block;
-    width: 50%;
-    color: #666666;
-}
-
-.active {
-    color: var(--blue);
-    border-bottom: 4rpx solid var(--blue);
-}
-
-.swiper {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    position: fixed;
-    text-align: center;
-    font-weight: bold;
-}
-
-scroll-view {
-    width: 100%;
-    height: 93%;
+.intro__inner {
+  display: block;
+  width: 700rpx;
+  margin: 0 auto;
 }

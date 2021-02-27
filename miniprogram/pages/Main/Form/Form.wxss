@@ -1,0 +1,15 @@
+/* pages/forms/forms.wxss */
+.reports-header {
+  display: flex;
+  padding: 20rpx 0rpx;
+  align-items: center;
+  justify-content: center;
+  font-size: 34rpx;
+  font-family: PingFang-SC-Bold;
+  font-weight: bold;
+  letter-spacing: 2rpx;
+}
+
+.footer {
+  margin: 0 20rpx;
+}

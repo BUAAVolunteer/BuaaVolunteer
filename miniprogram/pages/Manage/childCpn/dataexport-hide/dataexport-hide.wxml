@@ -1,0 +1,25 @@
+<!--pages/Manage/childCpn/dataexport-hide/dataexport-hide.wxml-->
+<lx-drawer-left open="{{open}}">
+  <view style="wrapper">
+    <view wx:for="{{signupItem}}">
+      <view class="title">
+        {{signupTitle[index]}}
+      </view>
+      <view class="text">
+        <view wx:if="{{item}}">
+          {{item}}
+        </view>
+        <view wx:else>
+          此项未提交
+        </view>
+      </view>
+    </view>
+    <view class="footer">
+      <view class="footer-btn bg-blue" bind:tap="next">下一条</view>
+      <view class="footer-btn bg-blue" bindtap="back">上一条</view>
+    </view>
+    <view class="footer">
+      <view class="footer-btn bg-cyan" bind:tap="finish">完成</view>
+    </view>
+  </view>
+</lx-drawer-left>

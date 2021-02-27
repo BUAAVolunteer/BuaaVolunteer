@@ -1,5 +1,7 @@
 {
     "usingComponents": {
+        "formedit-hide": "../childCpn/formedit-hide/formedit-hide",
+        "formedit-icon": "../childCpn/formedit-icon/formedit-icon",
         "text-input": "/components/text-input/text-input",
         "text-radio": "/components/text-radio/text-radio",
         "text-describe": "/components/text-describe/text-describe",

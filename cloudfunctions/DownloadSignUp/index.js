@@ -1,63 +1,69 @@
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
 
-cloud.init()
+cloud.init({
+	env: 'volunteer-platform-1v92i',
+  // env: 'buaalx-w5aor',
+  traceUser: true,
+})
 
 // 云函数入口函数
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
-  const xlsx = require('node-xlsx');
   const db = cloud.database();
   const _ = db.command;
 	try {
-    //删除signup报名数据，转入history待确认数据
+    //将报名数据转入confirm待确认
     let his = {};
     his.time = event.time;
     his.data = event.list;
-    let uphis = db.collection('history').where({
+    his.isCheck = 0;
+    return db.collection('confirm').where({
       title: event.title
     }).update({
       data:{
-        list: _.push(his)
+        historyList: _.push(his)
       }
     })
-    if((await uphis).stats.updated == 0){
-      db.collection('history').add({
+    .then(res => {
+      if (res.stats.updated == 0) {
+        return db.collection('confirm').add({
+          data:{
+            title: event.title,
+            historyList: [his]
+          }
+        })
+      }
+    })
+    .then(() => {
+      /*
+      return db.collection('signUp').where({
+        title: event.title
+      }).update({
         data:{
-          title: event.title,
-          list: [his]
+          list: [event.list[0]]
         }
       })
-    }
-    await db.collection('signUp').where({
-      title: event.title
-    }).update({
-      data:{
-        list: [event.list[0]]
-      }
+      */
     })
-
-    //删除project里面的报名信息
-    db.collection('project').where({
-      title: event.title
-    }).update({
-      data:{
-        signuplist: []
-      }
+    .then(() => {
+      // 清空已报名以及内部名额数据，因此在添加内部名额前要确认已经导出报名表
+      return db.collection('project').where({
+        title: event.title
+      }).update({
+        data:{
+          check: -1,
+          signupList: [],
+          innerList: []
+        }
+      })
     })
-
-    //将数据添加到excel里
-    //1,定义excel表格名
-    let dataCVS = event.title + '.xlsx'
-    //2，把数据保存到excel里
-    var buffer = await xlsx.build([{
-      name: "SignUpDetail",
-      data: event.list
-    }]);
-    //4，把excel文件保存到云存储里
-    return await cloud.uploadFile({
-      cloudPath: dataCVS,
-      fileContent: buffer, //excel二进制文件
+    .then(() => {
+      return "success"
+    })
+    .catch(err => {
+      console.log(err)
+      return err
     })
   } catch (e) {
     console.error(e)

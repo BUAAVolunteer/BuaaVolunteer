@@ -1,0 +1,105 @@
+<view class="title">
+  {{title}}
+</view>
+<view class="instruction">
+  <text class="ins-text">○ 使用说明</text>
+  <text class="ins-text">
+    可以给每个人单独备注，或删除某条记录。替换志愿者时请更改手机号并查找。
+  </text>
+</view>
+<view class="header">
+  <view class="name">
+    姓名
+  </view>
+  <view class="phone">
+    手机
+  </view>
+  <view class="middle-btn"></view>
+  <view class="duration">
+    时长
+  </view>
+  <view class="note">
+    备注
+  </view>
+</view>
+<view class="separate" style="" />
+
+<view class="middle">
+  <block wx:for="{{volunteerList}}" wx:key="index">
+    <view class="wrapper">
+      <view
+        class="{{ index % 2 == 0 ? 'bg-white' : 'bg-cyan' }}"
+        wx:if="{{isDelete}}"
+        id="{{item.ID}}"
+        data-id="{{item.ID}}"
+        bindtap="delete"
+      >
+        <image class="middle-titleimg" src="/assets/icons/delete.png" />
+      </view>
+      <view class="{{ index % 2 == 0 ? 'uneven' : 'even' }} {{isDelete ? 'page-state' : ''}}">
+        <view class="name">
+          <input
+            value="{{item.name}}"
+            data-type="name"
+            data-id="{{item.ID}}"
+            bindinput="input"
+            disabled="{{item.isDisabled}}"
+          />
+        </view>
+        <view class="phone">
+          <input value="{{item.phone}}" data-type="phone" data-id="{{item.ID}}" bindinput="input" />
+        </view>
+        <view class="middle-btn">
+          <image
+            class="middle-searchbot"
+            mode="widthFix"
+            src="/assets/icons/search.png"
+            data-id="{{item.ID}}"
+            bind:tap="search"
+          />
+        </view>
+        <view class="duration">
+          <input
+            type="number"
+            class="duration-input"
+            value="{{item.duration}}"
+            data-type="duration"
+            data-id="{{item.ID}}"
+            bindinput="input"
+          />
+        </view>
+        <view class="note">
+          <input
+            class="note-input"
+            value="{{item.note}}"
+            data-type="note"
+            data-id="{{item.ID}}"
+            bindinput="input"
+          />
+        </view> </view
+    ></view>
+  </block>
+</view>
+<!-- 底部按钮 -->
+<view class="footer">
+  <view class="footer__btn footer__btn--cyan" bindtap="add">
+    添加记录
+  </view>
+  <view wx:if="{{isDelete}}" class="footer__btn footer__btn--orange" bindtap="opendel">
+    退出编辑
+  </view>
+  <view wx:else class="footer__btn footer__btn--red" bindtap="opendel">
+    删除记录
+  </view>
+</view>
+<view class="bottom">
+  <view class="footer__btn footer__btn--cyan" bindtap="save">
+    保存信息
+  </view>
+  <view class="footer__btn footer__btn--cyan" bindtap="download">
+    确认志愿并导出报名表单
+  </view>
+</view>
+
+<!-- 全局加载组件 -->
+<lx-loading id="loading"></lx-loading>

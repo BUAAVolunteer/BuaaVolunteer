@@ -1,0 +1,28 @@
+<!--pages/Profile/ProfilePic/ProfilePic.wxml-->
+<view class="profile-pic">
+  <view class="head">
+    <text class="title">选择头像</text>
+    <image bindtap="closePic" class="cross" src="/assets/image/profilepic/cross.png" />
+  </view>
+
+  <view class="main">
+    <block wx:for="{{headList}}">
+      <!-- 正常状态 -->
+      <view
+        class="wrapper {{curAvatar == item.src ? 'current':''}}"
+        id="{{item.src}}"
+        bindtap="choosePic"
+        wx:if="{{item.isShow}}"
+      >
+        <image mode="widthFix" class="pic" src="{{item.src}}" />
+      </view>
+      <!-- 未解锁状态 -->
+      <view class="wrapper" bindtap="chooseLockedPic" id="{{item.qualification}}" wx:else>
+        <image mode="widthFix" class="pic" src="{{item.src}}" />
+        <view class="lock">
+          <image class="lock__inner" src="/assets/image/profilepic/lock.png" />
+        </view>
+      </view>
+    </block>
+  </view>
+</view>

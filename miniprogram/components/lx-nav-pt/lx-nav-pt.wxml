@@ -1,0 +1,11 @@
+<!--components/lx-nav-pt/lx-nav-pt.wxml-->
+<view bindtap="navUrl" class="item">
+  <!--图片-->
+  <image class="item-img" mode="widthFix" src="{{navImg}}" />
+  <!--文字-->
+  <view class="item-text">
+    {{navText}}
+  </view>
+</view>
+<!-- 悬浮窗 -->
+<lx-hover id="msg"></lx-hover>

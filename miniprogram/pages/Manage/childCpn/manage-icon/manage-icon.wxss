@@ -1,0 +1,67 @@
+/* pages/Manage/childCpn/manage-icon/manage-icon.wxss */
+
+.wrapper {
+  background-color: white;
+  border: 1rpx solid var(--greyLight);
+  height: 120rpx;
+  padding: 10rpx 0;
+  margin: 10rpx 10rpx 0 10rpx;
+  box-shadow: 2rpx 5.5rpx 2rpx rgba(0, 0, 0, 0.2);
+}
+
+/* 基础层 */
+.header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  transform: translateY(30rpx);
+}
+
+.header-show {
+  transform: translateY(10rpx);
+  transition: transform 0.5s ease;
+}
+
+.header-img {
+  width: 40rpx;
+  height: 40rpx;
+  margin-left: 20rpx;
+}
+
+.header-text {
+  font-weight: bold;
+  font-size: 32rpx;
+}
+
+.header-assure {
+  align-items: center;
+  border-radius: 5%;
+  background-color: var(--green);
+  color: white;
+  display: flex;
+  font-size: 20rpx;
+  height: 45rpx;
+  justify-content: center;
+  margin-right: 20rpx;
+  width: 100rpx;
+}
+
+/* 展开层 */
+
+.content {
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 24rpx;
+  animation: content-show 0.5s linear forwards;
+}
+
+@keyframes content-show {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

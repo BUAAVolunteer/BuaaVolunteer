@@ -1,0 +1,89 @@
+/* pages/Manage/childCpn/formedit-hide/formedit-hide.wxss */
+
+/* 全局样式 */
+.wrapper {
+  width: 100%;
+  padding: 30rpx 0;
+}
+
+/* 子组件共同样式 */
+.header,
+.checkbox {
+  width: 100%;
+  display: flex;
+  padding: 10rpx;
+}
+
+/* 选择类型 */
+.header {
+  background-color: #fff;
+  box-shadow: 2rpx 0rpx 2rpx rgba(0, 0, 0, 0.2);
+  align-items: center;
+}
+
+.header-title {
+  font-weight: lighter;
+  font-size: smaller;
+  margin: 0 30rpx;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+}
+
+.header-content .title {
+  font-size: larger;
+  margin-right: 20rpx;
+}
+
+.header-content-image {
+  width: 30rpx;
+  height: 30rpx;
+}
+
+/* 公共组件 */
+.edit {
+  margin: 20rpx 10rpx;
+}
+
+.edit-title {
+  font-weight: lighter;
+}
+
+.edit-content {
+  border-bottom: 1px solid rgba(203, 200, 203, 1);
+  border-radius: 5rpx;
+  margin-right: 30rpx;
+  display: flex;
+  align-items: center;
+}
+
+.edit-content-input {
+  width:90%;
+}
+
+.edit-describe {
+  font-weight: lighter;
+  font-size: 25rpx;
+}
+
+.edit-textarea {
+  height: 200rpx !important;
+  margin-top: 10rpx;
+  background-color: white;
+  margin-right: 2.5%;
+  width: 90%;
+}
+
+/* 阴影 */
+
+.page-mask {
+  z-index: 5;
+  position: fixed;
+  width: 40%;
+  height: 2000rpx;
+  top: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}

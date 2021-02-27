@@ -1,0 +1,7 @@
+.header {
+  width: 100%;
+}
+
+.wrapper {
+  padding: 20rpx;
+}

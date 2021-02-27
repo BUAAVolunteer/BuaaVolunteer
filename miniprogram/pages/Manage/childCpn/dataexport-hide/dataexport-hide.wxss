@@ -1,0 +1,38 @@
+/* pages/Manage/childCpn/dataexport-hide/dataexport-hide.wxss */
+.wrapper {
+  background-color: var(--greyLight);
+}
+
+.title {
+  background-color: var(--blueLight);
+  font-size: 30rpx;
+  margin-bottom: 20rpx;
+  padding: 10rpx 0rpx;
+}
+
+.footer {
+  justify-content: space-around;
+  display: flex;
+}
+
+.footer-btn {
+  align-items: center;
+  color: white;
+  display: flex;
+  justify-content: center;
+  margin-top: 30rpx;
+  width: 150rpx;
+  padding: 10rpx 0;
+}
+
+.bg-blue {
+  background-color: var(--blue);
+}
+
+.bg-red {
+  background-color: var(--red);
+}
+
+.bg-cyan {
+  background-color: var(--cyan);
+}

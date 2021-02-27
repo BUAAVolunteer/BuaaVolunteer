@@ -1,0 +1,17 @@
+/* components/lx-nav-pt/lx-nav-pt.wxss */
+
+.item {
+  align-items: center;
+  display: flex;
+}
+
+.item-img {
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 10rpx;
+}
+
+.item-text {
+  font-size: 26rpx;
+  line-height: 26rpx;
+}

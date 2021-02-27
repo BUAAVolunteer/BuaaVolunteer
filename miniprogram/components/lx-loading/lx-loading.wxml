@@ -1,0 +1,23 @@
+<!--components/lx-loading/lx-loading.wxml-->
+<view class="suspended">
+  <!-- 阴影 -->
+  <view class="{{onShow ? 'mask' : 'hide'}} {{isBig ? 'mask--big' : 'mask--small'}}"></view>
+  <view class="{{onShow ? 'show' : 'hide'}}">
+    <image
+      class="img"
+      src="/assets/image/loading.gif"
+      mode="aspectFill"
+    />
+    <view class="content" wx:if="{{isContent}}">
+      {{content}}
+    </view>
+    <view class="content--loading" wx:else>
+      <view class="loading">
+        loading
+      </view>
+      <view class="nowrap">
+        ...
+      </view>
+    </view>
+  </view>
+</view>

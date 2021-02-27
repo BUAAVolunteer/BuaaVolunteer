@@ -1,1 +1,9 @@
-/* miniprogram/pages/score/score.wxss */
+/* pages/Admin/Score/Score.wxss */
+.inform{
+  text-align: left;
+}
+
+.wrapper{
+  padding: 20rpx;
+  height: 1300rpx;
+}

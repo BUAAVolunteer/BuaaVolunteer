@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "lx-drawer-left": "/components/lx-drawer-left/lx-drawer-left",
+    "lx-checkbox-single": "/components/lx-checkbox-single/lx-checkbox-single"
+  }
+}

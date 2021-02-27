@@ -1,0 +1,9 @@
+/* pages/Manage/childCpn/formedit-icon/formedit-icon.wxss */
+.icon-img {
+  width: 85rpx;
+  border: 2px solid #fff;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+  padding: 7rpx;
+  margin: 7rpx;
+  border-radius: 50%;
+}

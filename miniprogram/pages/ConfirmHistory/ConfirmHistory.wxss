@@ -1,0 +1,54 @@
+/* miniprogram/pages/ConfirmHistory/ConfirmHistory.wxss */
+.header {
+  display: flex;
+  justify-content: center;
+  padding: 20rpx 0;
+}
+
+.header-title {
+  font: var(--title) bold;
+}
+
+.main {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  height: 1340rpx;
+  width: 100vw;
+}
+
+.main-item {
+  align-items: center;
+  border: 1rpx solid currentColor;
+  box-shadow: var(--box-shadow);
+  color: var(--greenLight);
+  background-color: var(--greenLight);
+  display: flex;
+  justify-content: center;
+  margin: 30rpx;
+  padding: 30rpx;
+}
+
+.main-item__check {
+  color: var(--greyLight);
+  background-color: var(--greyLight);
+}
+
+.main-item-icon {
+  border: 1px solid currentColor;
+  color: var(--green);
+  font-size: 25rpx;
+  position: absolute;
+  padding: 10rpx;
+  left: 60rpx;
+}
+
+.main-item-icon__check {
+  color: var(--black);
+}
+
+.main-item-content {
+  align-self: center;
+  color: #000;
+  font-size: 32rpx;
+}

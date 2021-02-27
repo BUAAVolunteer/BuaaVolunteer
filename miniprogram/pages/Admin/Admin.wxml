@@ -1,12 +1,28 @@
-<view class="padding flex flex-direction">
-  <navigator open-type="navigate" hover-class='none' url="../list/list" class="cu-btn bg-blue lg"> 发布志愿招募</navigator>
+<!--pages/Admin/Admin.wxml-->
+<view class="swiper-tab">
+  <view class="swiper-title">
+    <view class="tab-item {{currentTab==0?'active':''}}" data-current="0" bindtap="swichNav">
+      发布招募
+    </view>
+    <view class="tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="swichNav">
+      审核反馈
+    </view>
+    <view class="tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="swichNav">
+      管理积分
+    </view>
+  </view>
 </view>
-<view class="padding flex flex-direction">
-  <navigator open-type="navigate" hover-class='none' url="../comment/comment" class="cu-btn bg-green lg">审核志愿者反馈</navigator>
-</view>
-<view class="padding flex flex-direction">
-  <navigator open-type="navigate" hover-class='none' url="../score/score" class="cu-btn bg-pink lg">管理志愿积分</navigator>
-</view>
-<view class="padding flex flex-direction">
-  <navigator open-type="navigate" hover-class='none' url="../add/add" class="cu-btn bg-cyan lg">处理缺勤者</navigator>
+
+<view class="swiper-content">
+  <swiper class="swiper" current="{{currentTab}}" bindchange="switchTab">
+    <swiper-item>
+      <Manage></Manage>
+    </swiper-item>
+    <swiper-item>
+      <FeedbackComment></FeedbackComment>
+    </swiper-item>
+    <swiper-item>
+      <Score></Score>
+    </swiper-item>
+  </swiper>
 </view>
