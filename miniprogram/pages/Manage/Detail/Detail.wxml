@@ -38,7 +38,11 @@
     placeholder="请在这里填写志愿活动内容，例：回答读者与借还书相关的问题"
   />
 
-  <lx-input title="招募人数" type="textarea" model:content="{{people}}" placeholder="全体新生" />
+  <lx-input title="招募人数" 
+    type="textarea" 
+    model:content="{{people}}" 
+    placeholder="全体新生" 
+  />
 
   <lx-input
     title="志愿者保障"

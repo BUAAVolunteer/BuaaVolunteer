@@ -13,7 +13,7 @@ Component({
     qqNum: "",
     text: "",
     index: 0,
-    campus: ["南校区", "北校区"],
+    campus: ["南校区（学院路校区）", "北校区（沙河校区）"],
   },
 
   /**

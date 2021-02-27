@@ -44,7 +44,7 @@ Component({
             n.open = false;
             return n;
           });
-          console.log(comment_list);
+        // console.log(comment_list);
           this.setData({
             comment_list,
           });

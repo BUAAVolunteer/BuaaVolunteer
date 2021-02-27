@@ -97,7 +97,7 @@ Component({
         })
         .get()
         .then((e) => {
-          console.log(e.data[0].name);
+        //  console.log(e.data[0].name);
           db.collection("feedback").add({
             data: {
               name: e.data[0].name,

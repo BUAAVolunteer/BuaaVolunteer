@@ -173,6 +173,12 @@
         {
           "name": "pages/Admin/Admin",
           "pathName": "pages/Admin/Admin",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/Manage/detail",
+          "pathName": "pages/Manage/Detail/Detail",
           "scene": null
         }
       ]

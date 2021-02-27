@@ -357,7 +357,7 @@ Component({
         success: function (res) {
           if (res.cancel) {
             //点击取消,默认隐藏弹框
-          } else {
+          } else {            
             //点击确定
             that.loading.showLoading({
               isContent: false,

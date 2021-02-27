@@ -107,6 +107,42 @@ Component({
         });
         success = success && false;
       }
+      /*else if (!that.data.detail || that.data.detail === "") {
+        wx.showModal({
+          title: "缺少信息",
+          content: "请填写活动内容",
+          showCancel: false,
+        });
+        success = success && false;
+      }else if (!that.data.people || that.data.people === "") {
+        wx.showModal({
+          title: "缺少信息",
+          content: "请填写招募人数",
+          showCancel: false,
+        });
+        success = success && false;
+      }else if (!that.data.assure || that.data.assure === "") {
+        wx.showModal({
+          title: "缺少信息",
+          content: "请填写志愿者保障",
+          showCancel: false,
+        });
+        success = success && false;
+      }else if (!that.data.require || that.data.require === "") {
+        wx.showModal({
+          title: "缺少信息",
+          content: "请填写特别提醒",
+          showCancel: false,
+        });
+        success = success && false;
+      }else if (!that.data.response || that.data.response === "") {
+        wx.showModal({
+          title: "缺少信息",
+          content: "请填写负责人联系方式",
+          showCancel: false,
+        });
+        success = success && false;
+      }*/
 
       console.log(that.data.date);
       return new Promise((resolve, reject) => {
