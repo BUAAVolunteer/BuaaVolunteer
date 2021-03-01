@@ -31,27 +31,60 @@ page {
   width: 700rpx;
 }
 
-.footer__up,
-.footer__down {
+.footer__left {
+  flex-direction: column;
   display: flex;
-  justify-content: space-between;
-  margin: 0 103rpx;
+  margin-left: 20rpx;
+ 
+  width: 390rpx;
 }
 
-.footer__down {
-  margin-top: 30rpx;
+
+.item2{
+  box-sizing: border-box;
+  border: 1px dashed;
+  border-radius: 50%;
+  border-color: #FFC241;
+  padding: 35rpx 25rpx 35rpx 25rpx;
+  margin-left: 44rpx;
+  margin-right: 190rpx;
+  margin-bottom: -68rpx
+}
+.item1{
+  border: 0.8px dashed;
+  border-radius: 50%;
+  box-sizing: border-box;
+  padding: 29rpx 23rpx 29rpx 23rpx;
+  border-color: #53A0FB;
+  margin-left: 240rpx;
+  margin-right: 10rpx;
+  margin-bottom: -44rpx;
+}
+.item6{
+  box-sizing: border-box;
+  padding: 30rpx 21rpx 28rpx 21rpx;
+  border: 0.6px dashed;
+  border-radius: 50%;
+  border-color: #FF9490;
+  margin-left: 95rpx;
+  margin-right: 155rpx;
 }
 
+.footer{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
 .gugugu {
-  margin: 40rpx auto 0;
-  height: 231rpx;
-  width: 187rpx;
+  margin-top: 135rpx;
+  
   position: relative;
 }
 
 .gugugu image {
-  width: 100%;
-  height: 100%;
+  height: 311rpx;
+  width: 252rpx;
+  
   opacity: 0.6;
 }
 

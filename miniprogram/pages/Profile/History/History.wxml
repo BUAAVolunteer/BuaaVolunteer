@@ -19,8 +19,7 @@
 
 
 
-  <view class="history__blank">
-  </view>
+
   <view class="history__title">● 志愿记录</view> 
   <view class="history__comment" wx:if="{{historyList.length == 0}}">
     您还未参加过志愿，快去志愿招募页看看吧！

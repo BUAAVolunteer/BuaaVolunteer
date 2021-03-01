@@ -41,22 +41,10 @@ class Util {
     };
 
     static exportToExcel (exportInfo) {
-        //将数组信息导出为excel
-        /*
-        return wx.cloud.callFunction({
-            name: 'exportData',
-            data: {
-                title : exportInfo.title,
-                fileName : exportInfo.fileName,
-                exportList : exportInfo.downloadList
-            }
-        })
-        */
-      
             //检查目录是否存在
+        var cachePath = wx.env.USER_DATA_PATH + '/cache';
+        var fm = wx.getFileSystemManager();
          return new Promise(function(resolve, reject){
-            var cachePath = wx.env.USER_DATA_PATH + '/cache';
-            var fm = wx.getFileSystemManager();
             fm.access({
                 path: cachePath,
                 success:function(res){
@@ -93,13 +81,13 @@ class Util {
             console.log("到这里")
             //下载Excel
             return new Promise(function(resolve, reject){
-                var dlF = wx.downloadFile;
-                var sF = wx.saveFile;
+                var dlF = wx.cloud.downloadFile;
+              //  var sF = wx.saveFile;
                 dlF({
                     fileID: res.result.fileID,
                     success:function(res){
                         console.log("halohalohalo")
-                        sF({
+                        fm.saveFile({
                             tempFilePath: res.tempFilePath,
                             FilePath: cachePath + '/' + exportInfo.fileName + ".xlsx",
                             success:function(res){
@@ -117,25 +105,7 @@ class Util {
             })
         })
         
-        /*.then(res => {
-            console.log("helloworld")
-           // console.log(res.tepmFilePath)
-            //保存Excel
-            return new Promise(function(resolve, reject){
-                var sF = wx.saveFile;
-                sF({
-                    tempFilePath: res.tempFilePath,
-                    FilePath: cachePath + '/' + exportInfo.fileName + ".xlsx",
-                    success:function(res){
-                        resolve(res);
-                    },
-                    fail:function(err){
-                        reject(err);
-                    }
-                }) 
-                console.log(res.tepmFilePath)
-            })
-        })*/
+      
         
         .then(res => {
             //console.log(res.savedFilePath)

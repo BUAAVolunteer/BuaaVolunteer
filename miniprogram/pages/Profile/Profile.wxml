@@ -35,23 +35,20 @@
   <view wx:if="{{!isRegister}}" class="noRegister">
     <image class="goRegister" src="/assets/image/profile/register.png" bindtap="toEdit" />
   </view>
-  <view class="footer__up">
-    <profile-footer-icon type="1" content="新手教程" bindtap="forNew"></profile-footer-icon>
-    <profile-footer-icon type="2" content="问题反馈" bindtap="toFeedback"></profile-footer-icon>
-    <profile-footer-icon type="3" content="更新日志" bindtap="toLog"></profile-footer-icon>
-  </view>
-  <view class="footer__down">
-    <profile-footer-icon type="4" content="积分细则" bindtap="toRule"></profile-footer-icon>
-    <profile-footer-icon type="5" content="蓝协介绍" bindtap="toIntroduction"></profile-footer-icon>
-    <profile-footer-icon type="6" content="联系我们" bindtap="contact"></profile-footer-icon>
-  </view>
-  <view class="gugugu">
-    <image
-      class="{{isSurprise?'rotate':''}}"
-      bindtap="surprise"
-      mode="widthFix"
-      src="/assets/image/profile/gu.png"
-    />
+  <view class="footer">
+    <view class="footer__left">
+      <profile-footer-icon class="item2" type="2" content="问题反馈" bindtap="toFeedback"></profile-footer-icon>
+      <profile-footer-icon class="item1" type="1" content="新手秘籍" bindtap="forNew"></profile-footer-icon>
+      <profile-footer-icon class="item6" type="6" content="联系我们" bindtap="contact"></profile-footer-icon>
+    </view>
+    <view class="gugugu">
+      <image
+        class="{{isSurprise?'rotate':''}}"
+        bindtap="surprise"
+        mode="widthFix"
+        src="/assets/image/profile/gu.png"
+      />
+    </view>
   </view>
 </view>
 <!-- 头像组件 -->
