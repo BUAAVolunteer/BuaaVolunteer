@@ -41,35 +41,90 @@ class Util {
     };
 
     static exportToExcel (exportInfo) {
-        //将数组信息导出为excel
-        return wx.cloud.callFunction({
-            name: 'exportData',
-            data: {
-                title : exportInfo.title,
-                fileName : exportInfo.fileName,
-                exportList : exportInfo.downloadList
-            }
+            //检查目录是否存在
+        var cachePath = wx.env.USER_DATA_PATH + '/cache';
+        var fm = wx.getFileSystemManager();
+         return new Promise(function(resolve, reject){
+            fm.access({
+                path: cachePath,
+                success:function(res){
+                    resolve(res)
+                },
+                fail: function(err){
+                        //不存在则创建目录
+                    fm.mkdir({
+                        dirPath:cachePath,
+                        recursive:true,
+                        success:function(res){
+                            resolve(res);
+                        },
+                        fail:function(err){
+                            reject({
+                                checkPath:1
+                            })
+                        }
+                    })
+                }
+            })
+        }).then(res=>{
+            return wx.cloud.callFunction({
+                name: 'exportData',
+                data: {
+                    title : exportInfo.title,
+                    fileName : exportInfo.fileName,
+                    exportList : exportInfo.downloadList
+                }
+               
+            })
         }).then(res => {
             console.log(res)
+            console.log("到这里")
             //下载Excel
-            return wx.cloud.downloadFile({
-                fileID: res.result.fileID
+            return new Promise(function(resolve, reject){
+                var dlF = wx.cloud.downloadFile;
+              //  var sF = wx.saveFile;
+                dlF({
+                    fileID: res.result.fileID,
+                    success:function(res){
+                        console.log("halohalohalo")
+                        fm.saveFile({
+                            tempFilePath: res.tempFilePath,
+                            FilePath: cachePath + '/' + exportInfo.fileName + ".xlsx",
+                            success:function(res){
+                                resolve(res);
+                            },
+                            fail:function(err){
+                                reject(err);
+                            }
+                        }) 
+                    },
+                    fail:function(err){
+                        reject(err);
+                    }
+                }) 
             })
-        }).then(res => {
-            //console.log(res.tempFilePath)
-            //保存Excel
-            return wx.saveFile({
-                tempFilePath: res.tempFilePath,
-                filePath: wx.env.USER_DATA_PATH + '/' + exportInfo.fileName + ".xlsx"
-            })
-        }).then(res => {
+        })
+        
+      
+        
+        .then(res => {
             //console.log(res.savedFilePath)
+            console.log("finally")
             //自动打开Excel
-            return wx.openDocument({
-                filePath: res.savedFilePath,
-                fileType: "xlsx",
-                showMenu: true
-            })
+            return new Promise(function(resolve, reject){
+                var oD = wx.openDocument
+                oD({
+                    filePath: res.savedFilePath,
+                    fileType: "xlsx",
+                    showMenu: true,
+                    success:function(res){
+                        resolve(res);
+                    },
+                    fail:function(err){
+                        reject(err);
+                    }
+                })
+            }) 
         }).then(res => {
             let returnData = {};
             returnData.success = true;

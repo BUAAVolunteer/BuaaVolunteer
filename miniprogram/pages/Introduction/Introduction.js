@@ -8,7 +8,7 @@ Component({
 
   data: {
     baseUrl:
-      "cloud://volunteer-platform-1v92i.766f-volunteer-platform-1v92i-1300053277/志愿项目/",
+      "/assets/image/project/",
     // 页面按钮跳转相关信息存储
     volunteerList: [
       {
