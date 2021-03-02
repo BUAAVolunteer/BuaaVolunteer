@@ -40,7 +40,7 @@ class Util {
         return n[1] ? n : '0' + n;
     };
 
-    static exportToExcel (exportInfo) {
+    static exportToExcel (exportExcelInfo) {
         //检查目录是否存在
         var cachePath = wx.env.USER_DATA_PATH + '/cache';
         var fm = wx.getFileSystemManager();
@@ -70,9 +70,9 @@ class Util {
             return wx.cloud.callFunction({
                 name: 'exportData',
                 data: {
-                    title: exportInfo.title,
-                    fileName: exportInfo.fileName,
-                    exportList: exportInfo.downloadList
+                    title: exportExcelInfo.title,
+                    fileName: exportExcelInfo.fileName,
+                    exportList: exportExcelInfo.downloadList
                 }
 
             })
@@ -89,7 +89,105 @@ class Util {
                         console.log("halohalohalo")
                         fm.saveFile({
                             tempFilePath: res.tempFilePath,
-                            FilePath: cachePath + '/' + exportInfo.fileName + ".xlsx",
+                            FilePath: cachePath + '/' + exportExcelInfo.fileName + ".xlsx",
+                            success: function (res) {
+                                resolve(res);
+                            },
+                            fail: function (err) {
+                                reject(err);
+                            }
+                        })
+                    },
+                    fail: function (err) {
+                        reject(err);
+                    }
+                })
+            })
+        })
+
+
+
+            .then(res => {
+                //console.log(res.savedFilePath)
+                console.log("finally")
+                //自动打开Excel
+                return new Promise(function (resolve, reject) {
+                    var oD = wx.openDocument
+                    oD({
+                        filePath: res.savedFilePath,
+                        fileType: "xlsx",
+                        showMenu: true,
+                        success: function (res) {
+                            resolve(res);
+                        },
+                        fail: function (err) {
+                            reject(err);
+                        }
+                    })
+                })
+            }).then(res => {
+                let returnData = {};
+                returnData.success = true;
+                returnData.res = res;
+                return returnData;
+            }).catch(err => {
+                let returnData = {};
+                returnData.success = false;
+                returnData.res = err;
+                return returnData;
+            })
+    };
+
+    static exportToImage (exportImgInfo) {
+        //检查目录是否存在
+        var cachePath = wx.env.USER_DATA_PATH + '/cache';
+        var im = wx.getFileSystemManager();
+        return new Promise(function (resolve, reject) {
+            im.access({
+                path: cachePath,
+                success: function (res) {
+                    resolve(res)
+                },
+                fail: function (err) {
+                    //不存在则创建目录
+                    fm.mkdir({
+                        dirPath: cachePath,
+                        recursive: true,
+                        success: function (res) {
+                            resolve(res);
+                        },
+                        fail: function (err) {
+                            reject({
+                                checkPath: 1
+                            })
+                        }
+                    })
+                }
+            })
+        }).then(res => {
+            return wx.cloud.callFunction({
+                name: 'exportImgData',
+                data: {
+                    title: exportImgInfo.title,
+                    fileName: exportImgInfo.fileName,
+                    exportList: exportImgInfo.downloadList
+                }
+
+            })
+        }).then(res => {
+            console.log(res)
+            console.log("到这里")
+            //下载Excel
+            return new Promise(function (resolve, reject) {
+                var dlF = wx.cloud.downloadFile;
+                //  var sF = wx.saveFile;
+                dlF({
+                    fileID: res.result.fileID,
+                    success: function (res) {
+                        console.log("halohalohalo")
+                        fm.saveFile({
+                            tempFilePath: res.tempFilePath,
+                            FilePath: cachePath + '/' + exportImgInfo.fileName + ".xlsx",
                             success: function (res) {
                                 resolve(res);
                             },
