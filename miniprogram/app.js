@@ -17,7 +17,7 @@ App({
 
     this.globalData = {
       avatar:
-        "/assets/image/profilepic/common/common-1.png",
+        "common-1.png",
       openid: "",
       name: "",
       phone: "",

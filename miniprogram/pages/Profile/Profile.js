@@ -36,6 +36,7 @@ Component({
     onShow() {
       this.loading.showLoading();
       var that = this;
+
       console.log(app.globalData);
       if (app.globalData.isRegister) {
         var person = {};

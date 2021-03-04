@@ -7,7 +7,7 @@
   <!-- 主要部分 -->
   <view class="main">
     <view class="main--image__wrapper" bindtap="callPic">
-      <image class="main--image__inner" src="{{person.avatar}}" mode="widthFix" />
+      <image class="main--image__inner" src="{{'/assets/image/profilepic/common/' + person.avatar}}" mode="widthFix" />
     </view>
     <view class="main--name">{{person.name}}</view>
     <view class="main--btn" bindtap="toEdit">编辑</view>
