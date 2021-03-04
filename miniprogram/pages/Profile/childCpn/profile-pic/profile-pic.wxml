@@ -18,7 +18,7 @@
       </view>
       <!-- 未解锁状态 -->
       <view class="wrapper" bindtap="chooseLockedPic" id="{{item.qualification}}" wx:else>
-        <image mode="widthFix" class="pic" src="{{item.src}}" />
+        <image mode="widthFix" class="pic" src="{{'/assets/image/profilepic/common/' + item.src}}" />
         <view class="lock">
           <image class="lock__inner" src="/assets/image/profilepic/lock.png" />
         </view>
