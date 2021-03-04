@@ -102,7 +102,8 @@ Component({
             app.globalData.qqNum = res.data[0].qqNum;
             app.globalData.name = res.data[0].name;
             if ("avatar" in res.data[0] || res.data[0].avatar == "") {
-              app.globalData.avatar = res.data[0].avatar;
+              let list = res.data[0].avatar.split('/');
+              app.globalData.avatar = list[list.length-1];
             }
             app.globalData.text = res.data[0].text;
             app.globalData.totalDuration = res.data[0].totalDuration;

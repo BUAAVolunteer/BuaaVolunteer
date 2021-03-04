@@ -17,7 +17,7 @@ App({
 
     this.globalData = {
       avatar:
-        "cloud://volunteer-platform-1v92i.766f-volunteer-platform-1v92i-1300053277/头像照片/common/common-1.png",
+        "common-1.png",
       openid: "",
       name: "",
       phone: "",
@@ -25,7 +25,7 @@ App({
       text: "",
       qqNum: "",
       history: [],
-      campus: "南校区",
+      campus: "南校区（学院路校区）",
       totalDuration: 0,
       totalScore: 0,
       isRegister: false,
