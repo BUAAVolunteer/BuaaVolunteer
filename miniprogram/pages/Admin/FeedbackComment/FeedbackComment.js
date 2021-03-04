@@ -23,11 +23,11 @@ Component({
       db.collection("feedback")
         .doc(_id)
         .remove()
-        .then(
+        .then((e) => {
           this.setData({
             comment_list: this.data.comment_list.splice(index, 1),
-          })
-        );
+          });
+        });
     },
   },
   /**
