@@ -155,6 +155,24 @@
         {
           "name": "FeedbackComment",
           "pathName": "pages/Admin/FeedbackComment/FeedbackComment",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/Admin",
+          "pathName": "pages/Admin/FeedbackComment/FeedbackComment",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/Admin/FeedbackComment/FeedbackComment",
+          "pathName": "pages/Admin",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/Admin/Admin",
+          "pathName": "pages/Admin/Admin",
           "scene": null
         }
       ]

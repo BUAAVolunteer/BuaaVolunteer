@@ -32,6 +32,7 @@ Component({
       .then((res) => {
         console.log(app.globalData.qualification)
         let qualification = app.globalData.qualification;
+        console.log(qualification)
         for (let i = 0; i < res.data[0].head.length; i++) {
           if (res.data[0].head[i].qualification == "") {
             res.data[0].head[i].isShow = true;
