@@ -41,6 +41,8 @@ Component({
       console.log(this.properties);
       //console.log(properties.title, properties.signUpTime)
       qqNum = this.properties.qqNum;
+      console.log("flag");
+      console.log(qqNum);
       //console.log(qqNum)
       let that = this;
       // -----------获取个人信息--------------
@@ -304,19 +306,24 @@ Component({
                   loading: false,
                 });
                 that.loading.hideLoading()
-                isPress = false
+                isPress = false,
                 //成功提示
+                wx.redirectTo({
+                  url: "/pages/Main/Tip/Tip?qqNum=" + qqNum,
+                });
+              /*
                 wx.showModal({
                   title: "提交成功",
                   content:
                     "请留意微信消息，并加入\nqq群:" + qqNum + "\n以便志愿开展",
                   showCancel: false,
+                  
                   success: function () {
-                    wx.switchTab({
-                      url: "/pages/Main/Main",
+                    wx.redirectTo({
+                      url: "/pages/Main/Tip/Tip?qqNum=" + qqNum,
                     });
                   },
-                });
+                });*/
               },
             });
           }

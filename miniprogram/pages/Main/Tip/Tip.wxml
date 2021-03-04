@@ -1,0 +1,8 @@
+<!--miniprogram/pages/Tip.wxml-->
+<view class="status">报名成功</view>
+<view class="main">
+    <image class="main__photo" src="https://766f-volunteer-platform-1v92i-1300053277.tcb.qcloud.la/%E8%A6%81%E6%8A%B1%E6%8A%B1-%E5%B0%8F%E6%9D%8E.png?sign=04828c97e240b13856901d80cb5f36a0&t=1614772539"/>
+</view>    
+<view class="qqNum__tip1">请加入志愿qq群</view>
+<text class="qqNum__content" selectable="{{true}}">{{qqNum}}</text>
+<view class="qqNum__tip2">(长按可复制)</view>
