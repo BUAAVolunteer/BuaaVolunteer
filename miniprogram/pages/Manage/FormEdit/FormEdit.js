@@ -57,6 +57,24 @@ Component({
       this.setData({
         title,
       });
+      db.collection("project").where({
+        title
+      }).get()
+      .then(res => {
+        console.log(res.data)
+        if (res.data[0].check != 0) {
+          wx.showModal({
+            title: '尚未确认详细信息',
+            content: '请先确认详细信息',
+            showCancel: false,
+            success: (result) => {
+              wx.navigateBack({
+                delta: 1
+              });
+            }
+          });
+        }
+      })
       db.collection("form")
         .where(
           _.or([
