@@ -1,36 +1,3 @@
-<<<<<<< HEAD
-/* pages/Profile/childCpn/history-card/history-card.wxss */
-.wrapper {
-  border-radius: 5px;
-  height: 250rpx;
-  margin: 30rpx auto;
-  padding: 20rpx 90rpx;
-  width: 75vw;
-}
-
-.wrapper {
-  align-items: left;
-  box-shadow: 0 2px 12px var(--greyLight);
-  background-color: #fff;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-}
-
-.item {
-  font-weight: bold;
-  font-size: 25rpx;
-  letter-spacing: 2rpx;
-}
-
-.border-bottom {
-  border-bottom: 2px solid var(--oliveLight);
-}
-
-.border-bottom-thin {
-  border-bottom: 1px solid var(--oliveLight);
-}
-=======
 /* pages/Profile/childCpn/history-card/history-card.wxss */
 .wrapper {
   border-radius: 20rpx;
@@ -59,4 +26,3 @@
   font-family: Microsoft YaHei;
   font-weight: bold;
 }
->>>>>>> Xin
