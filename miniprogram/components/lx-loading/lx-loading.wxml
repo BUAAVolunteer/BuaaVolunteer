@@ -5,7 +5,7 @@
   <view class="{{onShow ? 'show' : 'hide'}}">
     <image
       class="img"
-      src="/assets/image/loading.gif"
+      src="http://buaa-volunteer.gitee.io/buaalx/loading.gif"
       mode="aspectFill"
     />
     <view class="content" wx:if="{{isContent}}">

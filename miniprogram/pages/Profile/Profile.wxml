@@ -29,11 +29,11 @@
       bindtap="scoreLevel"
     />
     <!-- 地图 -->
-    <image class="middle--map" src="/assets/image/profile/map.png" bindtap="toMap" />
+    <image class="middle--map" src="http://buaa-volunteer.gitee.io/buaalx/profile/map.png" bindtap="toMap" />
   </view>
   <!--未注册-->
   <view wx:if="{{!isRegister}}" class="noRegister">
-    <image class="goRegister" src="/assets/image/profile/register.png" bindtap="toEdit" />
+    <image class="goRegister" src="http://buaa-volunteer.gitee.io/buaalx/profile/register.png" bindtap="toEdit" />
   </view>
   <view class="footer">
     <view class="footer__left">
@@ -46,7 +46,7 @@
         class="{{isSurprise?'rotate':''}}"
         bindtap="surprise"
         mode="widthFix"
-        src="/assets/image/profile/gu.png"
+        src="http://buaa-volunteer.gitee.io/buaalx/profile/gu.png"
       />
     </view>
   </view>

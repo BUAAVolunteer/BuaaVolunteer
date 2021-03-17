@@ -8,15 +8,15 @@
         <image
           class="boardpic-left"
           mode="widthFix"
-          src="/assets/image/main/1.png"/>
+          src="http://buaa-volunteer.gitee.io/buaalx/main/1.png"/>
         <image
           class="boardpic-else1"
           mode="widthFix"
-          src="/assets/image/main/1.png"/>
+          src="http://buaa-volunteer.gitee.io/buaalx/main/1.png"/>
         <image
           class="boardpic-else2"
           mode="widthFix"
-          src="/assets/image/main/1.png"
+          src="http://buaa-volunteer.gitee.io/buaalx/main/1.png"
       /></view>
     </view>
   </navigator>

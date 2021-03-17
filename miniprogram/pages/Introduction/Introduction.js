@@ -8,7 +8,7 @@ Component({
 
   data: {
     baseUrl:
-      "/assets/image/project/",
+      "http://buaa-volunteer.gitee.io/buaalx/project/",
     // 页面按钮跳转相关信息存储
     volunteerList: [
       {

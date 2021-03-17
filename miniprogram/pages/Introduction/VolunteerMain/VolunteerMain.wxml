@@ -3,7 +3,7 @@
 </view>
 <view class="main">
   <view class="main-upimg">
-    <image class=".main__img--absolute" src="/assets/image/introduction/up.png" mode="widthFix" />
+    <image class=".main__img--absolute" src="http://buaa-volunteer.gitee.io/buaalx/introduction/up.png" mode="widthFix" />
     <view wx:if="{{title.length <= 5}}" class="main-upimg__inner5">
       <block wx:for="{{title}}">
         <view>
@@ -27,7 +27,7 @@
   </view>
 </view>
 <view class="main-downimg">
-  <image class="main__img" src="/assets/image/introduction/down.png" mode="widthFix" />
+  <image class="main__img" src="http://buaa-volunteer.gitee.io/buaalx/introduction/down.png" mode="widthFix" />
 </view>
 
 <!-- 全局加载组件 -->

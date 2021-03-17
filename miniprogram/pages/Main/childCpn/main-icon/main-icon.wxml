@@ -2,14 +2,14 @@
 <view class="wrapper">
   <view class="middle-nav" bindtap="volunteer">
     <!-- background -->
-    <image wx:if="{{iconInf.pre}}" class="middle-icon" src="/assets/image/main/pre.png" />
-    <image wx:elif="{{iconInf.isComplete}}" class="middle-icon--show" src="/assets/image/main/complete.png" />
-    <image wx:else class="middle-icon--show" src="/assets/image/main/show.png" />
+    <image wx:if="{{iconInf.pre}}" class="middle-icon" src="http://buaa-volunteer.gitee.io/buaalx/main/pre.png" />
+    <image wx:elif="{{iconInf.isComplete}}" class="middle-icon--show" src="http://buaa-volunteer.gitee.io/buaalx/main/complete.png" />
+    <image wx:else class="middle-icon--show" src="http://buaa-volunteer.gitee.io/buaalx/main/show.png" />
     <view class="box">
       <view class="box-header">
         <image
           class="box-header__pics"
-          src="/assets/image/projectpic/{{iconInf.title}}.jpg"
+          src="http://buaa-volunteer.gitee.io/buaalx/projectpic/{{iconInf.title}}.jpg"
         />
         <view class="box-header__text">{{iconInf.title}}</view>
       </view>

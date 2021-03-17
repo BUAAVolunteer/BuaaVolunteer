@@ -25,7 +25,7 @@
       bindtap="surprise"
       class="gugugu {{isSurprise?'gugugu--active':'gugugu--fadein'}}"
       mode="aspectFit"
-      src="/assets/image/main/小咕小表情.png"
+      src="http://buaa-volunteer.gitee.io/buaalx/main/小咕小表情.png"
     />
   </view>
 </list>
