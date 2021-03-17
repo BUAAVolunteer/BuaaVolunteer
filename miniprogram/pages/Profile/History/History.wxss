@@ -1,25 +1,34 @@
 page {
-  background-color: var(--oliveLight);
+  background-color: #C8E1FF;
 }
 
-.header {
-  text-align: center;
-  font: var(--title);
-  margin-top: 20rpx;
-}
-
-.main,
-.footer {
+.history__illustation {
+  font-size: 25rpx;
+  font-weight: thin;
   margin: 40rpx;
   text-align: center;
 }
 
-.main {
-  font-size: 35rpx;
-  font-weight: bold;
+.history__blank{
+  width: 750rpx;
+  height: 159rpx;
+  background: #FFFFFF;
 }
-
-.footer {
-  font-size: 25rpx;
-  font-weight: thin;
+.history__title{
+  font-size: 35rpx;
+  font-family: Microsoft YaHei;
+  font-weight: normal;
+  color: #333333;
+  line-height: 41rpx;
+  margin: 30rpx 55rpx 0;
+}
+.history__comment{
+  background-color: #C8E1FF;
+  border-radius: 20rpx;
+  margin: 30rpx 50rpx 0;
+  padding: 45rpx 50rpx 15rpx;
+  font-family: MicrosoftYaHei;
+  font-weight: normal;
+  font-size: 30rpx;
+  letter-spacing: 2rpx;
 }

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* pages/Profile/childCpn/profile-footer-icon/profile-footer-icon.wxss */
 .wrapper {
   align-items: center;
@@ -50,3 +51,47 @@
   letter-spacing: 0.75rpx;
   margin-top: 3rpx;
 }
+=======
+/* pages/Profile/childCpn/profile-footer-icon/profile-footer-icon.wxss */
+.wrapper {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.icon {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  height: 55rpx;
+  
+}
+
+.icon__type2 {
+  height: 62rpx;
+  width: 71rpx;
+
+}
+
+.icon__type6 {
+  height: 73rpx;
+  width: 73rpx;
+  
+}
+
+.icon__type1 {
+  height: 39rpx;
+  width: 31rpx;
+}
+
+
+
+.content {
+  color: #5a5d5d;
+  font-size: 22.64rpx;
+  font-weight: light;
+  letter-spacing: 0.75rpx;
+  margin-top: 3rpx;
+}
+>>>>>>> Xin

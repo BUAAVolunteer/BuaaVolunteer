@@ -15,7 +15,6 @@ exports.main = async (event, context) => {
 	try {
     console.log(event)
     return new Promise((resolve, reject) => {
-      resolve()
     })
     .then(() => {
       //在已报名人员中删除记录
@@ -35,7 +34,7 @@ exports.main = async (event, context) => {
     })
   } catch (e) {
     console.error(e)
-    return e
+    resolve(e)
   }
 }
 
@@ -43,8 +42,9 @@ function deleteSignUp(event, i) {
   if (i == event.initList.length) {
     return true
   } else {
-    return db.collection('person').where({
-      phone: event.initList[i].phone
+    return new Promise((resolve, reject)=>{
+      db.collection('person').where({
+        phone: event.initList[i].phone
     }).update({
       data:{
         history: _.pull({
@@ -55,16 +55,20 @@ function deleteSignUp(event, i) {
     })
     .then(() => {
       console.log("complete" + i)
-      return deleteSignUp(event, i + 1)
+      resolve(deleteSignUp(event, i + 1)) 
+    })
     })
   }
 }
+      
+
+ 
 
 function addRecord(event) {
   var promiseList = []
   for (let i = 2; i < event.list.length; i++) {
     let p = new Promise((resolve, reject) => {
-      resolve()
+    resolve()
     })
     .then(() => {
       console.log(i)
@@ -76,7 +80,7 @@ function addRecord(event) {
       let score = event.list[i][3] * 0.2;
       inf.score = score.toFixed(1);
       console.log("recordAdd" + i)
-      addDetail(event, inf, detail, duration, score, i, 0)
+      resolve(addDetail(event, inf, detail, duration, score, i, 0))
     })
     promiseList.push(p)
   }
@@ -129,7 +133,7 @@ function addDetail(event, inf, detail, duration, score, i, j) {
           })
         })
         .then(() => {
-          console.log("detailAdd" + j)
+          resolve(console.log("detailAdd" + j))
         })
       }
     })
@@ -139,34 +143,37 @@ function addDetail(event, inf, detail, duration, score, i, j) {
 }
 
 function confirmUpdate(event) {
-  return db.collection('confirm').where({
-    title: event.title
-  }).get()
-  .then(res => {
-    var historyList = res.data[0].historyList
-    var updateList = []
-    for (let i = 1; i < event.list.length; i++) {
-      var update = event.list[i]
-      update.shift()
-      updateList.push(update)
-    }
-    console.log("event.time=" + event.time)
-    historyList[event.ID].isCheck = 1
-    historyList[event.ID].data = updateList
-    console.log(historyList)
-    return historyList
-  })
-  .then(res => {
-    return db.collection('confirm').where({
+  return new Promise((resolve, reject)=>{
+    db.collection('confirm').where({
       title: event.title
-    }).update({
-      data: {
-        historyList: res
-      }
+    }).get()
+    .then(res=>{
+      var historyList = res.data[0].historyList
+      var updateList = []
+      for (let i = 1; i < event.list.length; i++) {
+        var update = event.list[i]
+        update.shift()
+       updateList.push(update)
+     }
+      console.log("event.time=" + event.time)
+      historyList[event.ID].isCheck = true
+      historyList[event.ID].data = updateList
+      console.log(historyList)
+      return historyList 
     })
+    .then(res => {
+      return db.collection('confirm').where({
+        title: event.title
+      }).update({
+        data: {
+          historyList: res
+        }
+      })
+    })
+    .then(() => {
+      console.log("success")
+      resolve("success") 
+    })    
   })
-  .then(() => {
-    console.log("success")
-    return "success"
-  })
+  
 }

@@ -1,7 +1,8 @@
+<!--
 <view class="header">
-  志愿记录
+  ● 志愿记录
 </view>
-
+<view class="history__blank"></view>
 <view
   class="main"
   wx:if="{{historyList.length == 0}}"
@@ -14,3 +15,22 @@
 <view class="footer">
   本记录统计开始时间为：2019-10-27
 </view>
+-->
+
+
+
+
+  <view class="history__title">● 志愿记录</view> 
+  <view class="history__comment" wx:if="{{historyList.length == 0}}">
+    您还未参加过志愿，快去志愿招募页看看吧！
+  </view>
+  
+  <view wx:else>
+  <view class="history__item" wx:for="{{historyList}}" wx:key="index">
+    <history-card history="{{item}}"/>
+  </view>
+  <view class="history__illustation">
+    本记录统计开始时间为：2019-10-27
+  </view>
+  </view>
+  

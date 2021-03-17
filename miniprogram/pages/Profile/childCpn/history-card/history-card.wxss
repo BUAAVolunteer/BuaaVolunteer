@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* pages/Profile/childCpn/history-card/history-card.wxss */
 .wrapper {
   border-radius: 5px;
@@ -29,3 +30,33 @@
 .border-bottom-thin {
   border-bottom: 1px solid var(--oliveLight);
 }
+=======
+/* pages/Profile/childCpn/history-card/history-card.wxss */
+.wrapper {
+  border-radius: 20rpx;
+  margin: 30rpx 50rpx 0;
+  padding: 45rpx 50rpx 45rpx;
+}
+
+.wrapper {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.item {
+  font-family: MicrosoftYaHei;
+  font-weight: normal;
+  font-size: 27rpx;
+  letter-spacing: 2rpx;
+  line-height: 64rpx;
+}
+
+.item__detail{
+  color: #F98D24;
+  font-size: 27rpx;
+  font-family: Microsoft YaHei;
+  font-weight: bold;
+}
+>>>>>>> Xin

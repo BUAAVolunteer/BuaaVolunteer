@@ -40,6 +40,7 @@ class Util {
         return n[1] ? n : '0' + n;
     };
 
+<<<<<<< HEAD
     static exportToExcel (exportExcelInfo) {
         //检查目录是否存在
         var cachePath = wx.env.USER_DATA_PATH + '/cache';
@@ -61,11 +62,35 @@ class Util {
                         fail: function (err) {
                             reject({
                                 checkPath: 1
+=======
+    static exportToExcel (exportInfo) {
+            //检查目录是否存在
+        var cachePath = wx.env.USER_DATA_PATH + '/cache';
+        var fm = wx.getFileSystemManager();
+         return new Promise(function(resolve, reject){
+            fm.access({
+                path: cachePath,
+                success:function(res){
+                    resolve(res)
+                },
+                fail: function(err){
+                        //不存在则创建目录
+                    fm.mkdir({
+                        dirPath:cachePath,
+                        recursive:true,
+                        success:function(res){
+                            resolve(res);
+                        },
+                        fail:function(err){
+                            reject({
+                                checkPath:1
+>>>>>>> Xin
                             })
                         }
                     })
                 }
             })
+<<<<<<< HEAD
         }).then(res => {
             return wx.cloud.callFunction({
                 name: 'exportData',
@@ -75,11 +100,23 @@ class Util {
                     exportList: exportExcelInfo.downloadList
                 }
 
+=======
+        }).then(res=>{
+            return wx.cloud.callFunction({
+                name: 'exportData',
+                data: {
+                    title : exportInfo.title,
+                    fileName : exportInfo.fileName,
+                    exportList : exportInfo.downloadList
+                }
+               
+>>>>>>> Xin
             })
         }).then(res => {
             console.log(res)
             console.log("到这里")
             //下载Excel
+<<<<<<< HEAD
             return new Promise(function (resolve, reject) {
                 var dlF = wx.cloud.downloadFile;
                 //  var sF = wx.saveFile;
@@ -174,6 +211,53 @@ class Util {
                 }
 
             })
+=======
+            return new Promise(function(resolve, reject){
+                var dlF = wx.cloud.downloadFile;
+              //  var sF = wx.saveFile;
+                dlF({
+                    fileID: res.result.fileID,
+                    success:function(res){
+                        console.log("halohalohalo")
+                        fm.saveFile({
+                            tempFilePath: res.tempFilePath,
+                            FilePath: cachePath + '/' + exportInfo.fileName + ".xlsx",
+                            success:function(res){
+                                resolve(res);
+                            },
+                            fail:function(err){
+                                reject(err);
+                            }
+                        }) 
+                    },
+                    fail:function(err){
+                        reject(err);
+                    }
+                }) 
+            })
+        })
+        
+      
+        
+        .then(res => {
+            //console.log(res.savedFilePath)
+            console.log("finally")
+            //自动打开Excel
+            return new Promise(function(resolve, reject){
+                var oD = wx.openDocument
+                oD({
+                    filePath: res.savedFilePath,
+                    fileType: "xlsx",
+                    showMenu: true,
+                    success:function(res){
+                        resolve(res);
+                    },
+                    fail:function(err){
+                        reject(err);
+                    }
+                })
+            }) 
+>>>>>>> Xin
         }).then(res => {
             console.log(res)
             console.log("到这里")

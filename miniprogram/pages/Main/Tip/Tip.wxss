@@ -1,0 +1,36 @@
+/* miniprogram/pages/Tip.wxss */
+.status,
+.qqNum__tip1 {
+    font-size: large;
+    margin-top: 100rpx;
+    text-align: center;
+}
+
+.qqNum__tip1 {
+    margin-bottom: 70rpx;
+}
+
+.qqNum__content {
+    display: block;
+    font-weight: bold;
+    font-size: x-large;
+    text-align: center;
+}
+
+.qqNum__tip2 {
+    margin-top: 30rpx;
+    text-align: center;
+}
+
+.main {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-top: 100rpx;
+
+}
+
+.main__photo {
+    height: 370rpx;
+    width: 400rpx;
+}
