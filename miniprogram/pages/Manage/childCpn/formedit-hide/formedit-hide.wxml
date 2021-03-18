@@ -64,6 +64,7 @@
       class="border edit-textarea block"
       bindblur="enterOption"
       value="{{option}}"
+      maxlength="-1"
     />
   </view>
   <block wx:if="{{isTypeThree}}">
