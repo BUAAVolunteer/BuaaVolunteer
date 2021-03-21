@@ -70,9 +70,9 @@ class Util {
             return wx.cloud.callFunction({
                 name: 'exportData',
                 data: {
-                    title: exportExcelInfo.title,
-                    fileName: exportExcelInfo.fileName,
-                    exportList: exportExcelInfo.downloadList
+                    title: exportInfo.title,
+                    fileName: exportInfo.fileName,
+                    exportList: exportInfo.downloadList
                 }
 
             })
