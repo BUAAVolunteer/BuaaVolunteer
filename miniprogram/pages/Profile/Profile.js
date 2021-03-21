@@ -247,5 +247,11 @@ Component({
         });
       }, 700);
     },
+    surprise_No2 (){
+      wx.navigateTo({
+        url:
+        "/pages/Profile/UpdateLog/UpdateLog"
+      })
+    }
   },
 });

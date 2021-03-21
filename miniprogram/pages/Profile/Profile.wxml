@@ -45,6 +45,7 @@
       <image
         class="{{isSurprise?'rotate':''}}"
         bindtap="surprise"
+        bindlongpress="surprise_No2"
         mode="widthFix"
         src="http://buaa-volunteer.gitee.io/buaalx/profile/gu.png"
       />
