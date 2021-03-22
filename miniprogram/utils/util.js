@@ -104,87 +104,35 @@ class Util {
                 }) 
             })
         })
-        
-      
-        
         .then(res => {
             //console.log(res.savedFilePath)
             console.log("finally")
             //自动打开Excel
-            return new Promise(function(resolve, reject){
+            return new Promise(function (resolve, reject) {
                 var oD = wx.openDocument
                 oD({
                     filePath: res.savedFilePath,
                     fileType: "xlsx",
                     showMenu: true,
-                    success:function(res){
-                        resolve(res);
-                    },
-                    fail:function(err){
-                        reject(err);
-                    }
-                })
-            }) 
-        }).then(res => {
-            console.log(res)
-            console.log("到这里")
-            //下载Excel
-            return new Promise(function (resolve, reject) {
-                var dlF = wx.cloud.downloadFile;
-                //  var sF = wx.saveFile;
-                dlF({
-                    fileID: res.result.fileID,
                     success: function (res) {
-                        console.log("halohalohalo")
-                        fm.saveFile({
-                            tempFilePath: res.tempFilePath,
-                            FilePath: cachePath + '/' + exportImgInfo.fileName + ".xlsx",
-                            success: function (res) {
-                                resolve(res);
-                            },
-                            fail: function (err) {
-                                reject(err);
-                            }
-                        })
+                        resolve(res);
                     },
                     fail: function (err) {
                         reject(err);
                     }
                 })
             })
+        }).then(res => {
+            let returnData = {};
+            returnData.success = true;
+            returnData.res = res;
+            return returnData;
+        }).catch(err => {
+            let returnData = {};
+            returnData.success = false;
+            returnData.res = err;
+            return returnData;
         })
-
-
-
-            .then(res => {
-                //console.log(res.savedFilePath)
-                console.log("finally")
-                //自动打开Excel
-                return new Promise(function (resolve, reject) {
-                    var oD = wx.openDocument
-                    oD({
-                        filePath: res.savedFilePath,
-                        fileType: "xlsx",
-                        showMenu: true,
-                        success: function (res) {
-                            resolve(res);
-                        },
-                        fail: function (err) {
-                            reject(err);
-                        }
-                    })
-                })
-            }).then(res => {
-                let returnData = {};
-                returnData.success = true;
-                returnData.res = res;
-                return returnData;
-            }).catch(err => {
-                let returnData = {};
-                returnData.success = false;
-                returnData.res = err;
-                return returnData;
-            })
     };
 
 

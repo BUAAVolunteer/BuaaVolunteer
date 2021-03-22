@@ -17,12 +17,17 @@ exports.main = async (event, context) => {
 			resolve();
 		})
 		.then(() =>{
-			return db.collection('project').where({
-				title: event.title
-			}).update({
-				data:{
-					check: 1
-				}
+			return new Promise((resolve, reject) => {
+				db.collection('project').where({
+					title: event.title
+				}).update({
+					data:{
+						check: 1
+					}
+				})
+				.then(() => {
+					resolve()
+				})
 			})
 		})
 		.then(() =>{

@@ -229,11 +229,12 @@ Component({
             formInfo.title = that.data.title;
             formInfo.fileName = that.data.title + "志愿时长表";
             formInfo.downloadList = v;
+            var confirmList = JSON.parse(that.properties.confirmList);
             return new Promise ((resolve, reject) => {
                 resolve()
             })
             .then(() => {
-                if (that.properties.confirmList.isCheck) {
+                if (confirmList.isCheck) {
                     wx.showToast({
                         title: '由于时长已经确认，此次仅导出时长表',
                         icon: 'none',
@@ -244,13 +245,14 @@ Component({
                     res.result = "success"
                     return res
                 } else {
+                    console.log(confirmList.time)
                     return wx.cloud.callFunction({
                         name: "DownloadConfirm",
                         data: {
                             title: that.data.title,
                             list: v,
                             initList: initList,
-                            time: that.data.confirmList.time,
+                            time: confirmList.time,
                             ID: that.properties.listID,
                         },
                     })

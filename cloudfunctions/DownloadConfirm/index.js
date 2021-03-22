@@ -15,50 +15,53 @@ exports.main = async (event, context) => {
 	try {
     console.log(event)
     return new Promise((resolve, reject) => {
-    })
-    .then(() => {
       //在已报名人员中删除记录
-      return deleteSignUp(event, 0)
+      resolve(deleteSignUp(event))
     })
     .then(() => {
       //在确认名单中加入记录
-      return addRecord(event, 2)
+      return new Promise((resolve, reject) => {
+        resolve(addRecord(event))
+      })
     })
     .then(() => {
       //修改confirm数据库中的记录
-      return confirmUpdate(event)
+      return new Promise((resolve, reject) => {
+        resolve(confirmUpdate(event))
+      })
     })
     .catch(err => {
       console.log(err)
-      return false
+      reject(false)
     })
   } catch (e) {
     console.error(e)
-    resolve(e)
+    return e
   }
 }
 
-function deleteSignUp(event, i) {
-  if (i == event.initList.length) {
-    return true
-  } else {
-    return new Promise((resolve, reject)=>{
+function deleteSignUp(event) {
+  var promiseList = []
+  for (let i = 0; i < event.initList.length; i++){
+    var p = new Promise((resolve, reject)=>{
       db.collection('person').where({
         phone: event.initList[i].phone
-    }).update({
-      data:{
-        history: _.pull({
-          signUpTime: event.time,
-          title: event.title
-        })
-      }
+      }).update({
+        data:{
+          history: _.pull({
+            signUpTime: event.time,
+            title: event.title
+          })
+        }
+      })
+      .then(() => {
+        console.log("complete" + i)
+        resolve()
+      })
     })
-    .then(() => {
-      console.log("complete" + i)
-      resolve(deleteSignUp(event, i + 1)) 
-    })
-    })
+    promiseList.push(p)
   }
+  return Promise.all(promiseList)
 }
       
 
@@ -68,9 +71,6 @@ function addRecord(event) {
   var promiseList = []
   for (let i = 2; i < event.list.length; i++) {
     let p = new Promise((resolve, reject) => {
-    resolve()
-    })
-    .then(() => {
       console.log(i)
       let inf = {};
       let detail = event.list[i][4].split(";");
@@ -80,67 +80,69 @@ function addRecord(event) {
       let score = event.list[i][3] * 0.2;
       inf.score = score.toFixed(1);
       console.log("recordAdd" + i)
-      resolve(addDetail(event, inf, detail, duration, score, i, 0))
+
+      var pList = []
+      for (let j = 0; j < detail.length; j++) {
+        var p = new Promise ((resolve, reject) => {
+          if(detail[j] === ""){
+            resolve(true)
+          }else{
+            inf.note = detail[j]
+            db.collection('person').where({
+              phone: event.list[i][2]
+            }).update({
+              data:{
+                totalDuration: _.inc(duration),
+                history: _.push(inf),
+                totalScore: _.inc(score)
+              }
+            })
+            .then(res => {
+              if (res.stats.updated == 0){
+                return db.collection('person').add({
+                  data:{
+                    name: event.list[i][1],
+                    phone: event.list[i][2],
+                    history: [inf],
+                    totalDuration: duration,
+                    totalScore: score
+                  }
+                })
+              }
+            })
+            .then(() => {
+              return db.collection('list').add({
+                data: {
+                  name: event.list[i][1],
+                  phone: event.list[i][2],
+                  score: score,
+                  duration: duration,
+                  note: inf.note,
+                  title: event.title
+                }
+              })
+            })
+            .then(() => {
+              resolve(console.log("detailAdd" + j))
+            })
+          }
+        })
+        pList.push(p)
+      }
+      Promise.all(pList).then(() => {
+        resolve()
+      })
     })
     promiseList.push(p)
   }
   return Promise.all(promiseList)
 }
 
-function addDetail(event, inf, detail, duration, score, i, j) {
-  var pList = []
-  for (let j = 0; j < detail.length; j++) {
-    var p = new Promise ((resolve, reject) => {
-      resolve()
-    })
-    .then(() => {
-      if(detail[j] === ""){
-        return true
-      }else{
-        inf.note = detail[j]
-        return db.collection('person').where({
-          phone: event.list[i][2]
-        }).update({
-          data:{
-            totalDuration: _.inc(duration),
-            history: _.push(inf),
-            totalScore: _.inc(score)
-          }
-        })
-        .then(res => {
-          if (res.stats.updated == 0){
-            return db.collection('person').add({
-              data:{
-                name: event.list[i][1],
-                phone: event.list[i][2],
-                history: [inf],
-                totalDuration: duration,
-                totalScore: score
-              }
-            })
-          }
-        })
-        .then(() => {
-          return db.collection('list').add({
-            data: {
-              name: event.list[i][1],
-              phone: event.list[i][2],
-              score: score,
-              duration: duration,
-              note: inf.note,
-              title: event.title
-            }
-          })
-        })
-        .then(() => {
-          resolve(console.log("detailAdd" + j))
-        })
-      }
-    })
-    pList.push(p)
-  }
-  return Promise.all(pList)
+/*
+function addDetail(event, inf, detail, duration, score, i) {
+  
 }
+*/
 
 function confirmUpdate(event) {
   return new Promise((resolve, reject)=>{
