@@ -1,1 +1,6 @@
 /* pages/Admin/FeedbackComment/FeedbackComment.wxss */
+.event {
+  height: 90vh;
+  width: 100vw;
+  z-index: 0;
+}
